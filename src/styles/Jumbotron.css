@@ -59,7 +59,7 @@
 }
 
 .jumbotron-right .video-content .bottom {
-    padding: 0px 10px;
+    padding: 15px 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -74,18 +74,20 @@
 }
 
 .jumbotron-right .video-content .bottom .right p {
-    margin-bottom: 3px;
+    margin-top: -10px;
+    padding-bottom: 5px;
     width: 115px;
     height: 17px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 17px;
     color: #ef9c27;
 }
 
 .jumbotron-right .video-content .p1 {
+    margin-bottom: 3px;
     width: 88px;
     height: 17px;
     font-family: Montserrat;
@@ -97,12 +99,13 @@
 }
 
 .jumbotron-right .video-content .p2 {
+    margin-bottom: 3px;
     width: 281px;
     height: 20px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
     color: #000000;
 }
@@ -113,7 +116,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 17px;
     color: #999999;
 }
