@@ -5,9 +5,7 @@ body {
 .login-page {
   background-image: url("../assets/Rectangle4.png");
   width: 100%;
-  height: 550px;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 470px;
   background-size: cover;
   position: absolute;
   display: flex;
@@ -33,16 +31,58 @@ body {
   color: #16213b;
 }
 
+.login-welcome {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.login-yourAccount {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.email,
+.password {
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.email-password-field {
+  border-bottom: 2px rgb(214, 211, 211) solid;
+  padding-top: 8px;
+  padding-bottom: 2px;
+  background: rgba(252, 252, 252, 1);
+}
+
 .login-email,
 .login-password {
   border: none;
-  background: whitesmoke;
+  background: rgba(252, 252, 252, 1);
 }
 
 .login-email:focus,
 .login-password:focus {
-  /* border: none; */
   outline: 0;
+}
+
+span {
+  color: rgb(236, 46, 46);
+}
+
+.forget-pass {
+  text-align: right;
+  padding: 5px 0px 25px 0px;
+}
+
+.register-redirect a {
+  text-decoration: none;
+  color: skyblue;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 15px;
 }
 
 .login-button {
