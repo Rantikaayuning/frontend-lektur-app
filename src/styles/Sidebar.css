@@ -1,3 +1,55 @@
+/* drop down menu button*/
+
+.category {
+    position: relative;
+    right: 5px;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+
+/* Dropdown Button */
+
+.dropbtn {
+    color: black;
+    padding: 5px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* sidebar general*/
+
 .sidebar {
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +58,7 @@
     top: 20px;
     left: 32px;
     bottom: 0px;
-    position: relative;
+    z-index: 1;
 }
 
 .sidebar ul {
@@ -24,9 +76,13 @@
     color: #000000;
 }
 
+.sidebar ul ul li:hover {
+    background-color: blue;
+}
+
 .sidebar ul li button {
     top: 1px;
-    left: 350px;
+    left: 365px;
     position: absolute;
     height: 30px;
     background: #16213b;
@@ -65,6 +121,11 @@
     position: relative;
     margin-right: -150px;
     flex: 3;
+}
+
+.sidebar .right ul li i {
+    width: 3px;
+    cursor: pointer;
 }
 
 .sidebar .center input {
