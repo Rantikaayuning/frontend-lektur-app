@@ -1,22 +1,25 @@
 import React from "react";
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
-import "./styles/styles.css";
+import "./styles.css";
 
 //Components
 
 import SideBar from "./components/Header/SideBar";
 import Jumbo from "./components/Header/Jumbotron";
-import Content from "./components/ContentCard";
+import Footer from "./components/Footer";
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
-    <div>
-      <div className="App flex">
-        <SideBar />
-        <Jumbo />
-      </div>
-      <Content />
-    </div>
+    <BrowserRouter>
+      <SideBar />
+      <Jumbo />
+      <Switch>
+        <Route exact path='/' component={HomePage}/>
+      </Switch>   
+      <Footer />
+    </BrowserRouter>
   );
 }
 
