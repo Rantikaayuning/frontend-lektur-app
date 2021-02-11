@@ -1,8 +1,10 @@
-@import "./styles/App.css";
+@import "./styles/Sidebar.css";
 @import "./styles/Jumbotron.css";
 @import "./styles/Props.css";
 @import "./styles/content.css";
 @import "./styles/footer.css";
+@import "./styles/HomeButton.css";
+@import "./styles/SignUp.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 

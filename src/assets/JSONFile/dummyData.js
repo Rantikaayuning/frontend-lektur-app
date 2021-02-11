@@ -82,3 +82,18 @@ export const staticImage = [
     footer: "Business",
   },
 ];
+
+export const buttonMaterials=[
+  {name: "BUSSINESS"},
+  {name: "TECHNOLOGY"},
+  {name: "BUSSINESS"},
+  {name: "GRAPHIC DESAIN"},
+  {name: "BUSSINESS"},
+  {name: "TECHNOLOGY"},
+  {name: "BUSSINESS"},
+  {name: "GRAPHIC DESAIN"},
+  {name: "BUSSINESS"},
+  {name: "TECHNOLOGY"},
+  {name: "BUSSINESS"},
+  {name: "GRAPHIC DESAIN"},
+]
