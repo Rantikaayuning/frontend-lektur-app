@@ -1,7 +1,6 @@
 import React from "react";
 
-import "./styles/App.css";
-import "./styles/Props.css";
+import "./styles/styles.css";
 
 //Components
 

@@ -6,15 +6,9 @@ import { staticImage } from "../../assets/JSONFile/dummyData";
 function Content() {
   return (
     <div>
-      <Row style={{ margin: "0px 60px 0px 40px" }}>
+      <Row className="content-card-container">
         {staticImage.map((item, index) => (
-          <Col
-            xs="6"
-            sm="6"
-            md="3"
-            key={index}
-            style={{ marginBottom: "36px" }}
-          >
+          <Col xs="6" sm="6" md="3" key={index} className="card-container">
             <ContentCards
               image={item.image}
               text={item.text}
