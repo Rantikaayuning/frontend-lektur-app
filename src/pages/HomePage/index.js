@@ -1,11 +1,13 @@
 import React from 'react';
 import bgcontent from '../../assets/rectangle55.png';
 import { Link } from 'react-router-dom';
-import Content from "../../components/ContentCard";
+import Content from "../../components/ContentCard/index";
+import Jumbo from "../../components/Header/Jumbotron"
 
 const HomePage = () => {
     return(
         <>
+        <Jumbo/>
         <Content />
         <div className='content-register'>
             <img src={bgcontent} alt='background content' />
