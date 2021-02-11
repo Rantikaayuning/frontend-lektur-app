@@ -17,7 +17,9 @@ function Jumbo() {
         div className = "jumbotron-right" > { " " } <
         div className = "video-content" >
         <
-        iframe src = "https://www.youtube.com/embed/lnrpkHbSb_Y?autoplay=1&mute=0" / >
+        iframe src = "https://www.youtube.com/embed/lnrpkHbSb_Y?autoplay=1&mute=0"
+        title = "glints" /
+        >
         <
         div className = "bottom" >
         <
