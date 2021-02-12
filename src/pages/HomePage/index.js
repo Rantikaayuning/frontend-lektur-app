@@ -13,7 +13,7 @@ const HomePage = () => {
             <img src={bgcontent} alt='background content' />
             <div className='register-button'>
                 <h1>Create Your Own Class</h1>
-                <Link to='/register-page'><button>Register now</button></Link>
+                <Link to='/register'><button>Register now</button></Link>
             </div>
         </div>
         </>
