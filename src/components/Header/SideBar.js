@@ -5,7 +5,7 @@ import garis from "../../assets/Rectangle 2.png";
 
 function SideBar() {
     return ( 
-        <div className = "sidebar fixed" >
+        <div className = "sidebar" >
             <div className = "left" >
                 <a href = "/" className = "logo" >
                     <img src = { Logo } alt = "logo" className = "bl"/>

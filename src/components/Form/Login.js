@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {Jumbotron} from "reactstrap"
 
 function Login() {
   return (
+    <Jumbotron className="mb-3 jumbotron">
     <div className="login-page">
       <div className="login-form">
         <div className="login-header">
@@ -42,6 +44,7 @@ function Login() {
         </form>
       </div>
     </div>
+    </Jumbotron>
   );
 }
 

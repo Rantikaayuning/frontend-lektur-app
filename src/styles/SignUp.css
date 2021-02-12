@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap');
 
-/* .home{
-    
-    margin-top: 50px;
-    height: 724px;
-    display: flex;
-    justify-content: center;
-} */
-
 .signup{
     display: flex;
     flex-direction: column;
@@ -72,10 +64,14 @@
     margin-top: 10px;
     padding-left: 10px;
     border-bottom:1px solid rgba(159, 159, 159, 1);
-    width: 445px;
+    width: 430px;
     height: 42px;
     background-color: rgba(252, 252, 252, 1);
 
+}
+
+.form input:focus{
+    outline: 0;
 }
 
 .btn-signup{

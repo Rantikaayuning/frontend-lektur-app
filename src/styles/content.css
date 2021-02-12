@@ -2,12 +2,20 @@
   margin: 0px 60px 0px 40px;
 }
 
+.card-content{
+  padding-right: 50px;
+  padding-left: 50px;
+  margin: 0px auto;
+  width: 100%;
+}
+
 .card-container {
+  padding-left: 58px;
   margin-bottom: 36px;
 }
 
 .card {
-  width: 279px;
+  width: 300px;
 }
 
 .card-title {

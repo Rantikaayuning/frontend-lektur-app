@@ -8,7 +8,7 @@ import SideBar from "./components/Header/SideBar";
 import Footer from "./components/Footer";
 import HomePage from './pages/HomePage/index'
 import SignUp from "./components/Form/SignUp"
-import Login from "./pages/Login";
+import Login from "./components/Form/Login";
 
 function App() {
   return (
