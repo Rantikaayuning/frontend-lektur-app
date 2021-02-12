@@ -18,6 +18,12 @@
   width: 300px;
 }
 
+.card:hover {
+  width: 303px;
+  box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 darkgray;
+  cursor: pointer;
+}
+
 .card-title {
   font-weight: 700;
   font-size: 16px;

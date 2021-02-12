@@ -17,6 +17,8 @@
 .footer-section p{
     line-height: 8px;
     font-size: 12px;
+    text-decoration: none;
+    color: black;
 }
 
 .footer-section h4{
