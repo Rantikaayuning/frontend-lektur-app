@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/LEKTUR.png";
 import {Link} from "react-router-dom"
 import garis from "../../assets/Rectangle 2.png";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 function SideBar() {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
     return ( 
         <div className = "sidebar" >
             <div className = "left" >
@@ -18,8 +22,17 @@ function SideBar() {
             </div>{" "} 
             <div className = "right" >
                 <ul >
-                    <li > 
-                        Category 
+                    <li> 
+                    <Dropdown isOpen={dropdownOpen} toggle={toggle} size='md'  >
+                    <DropdownToggle className='sidebar-dropdown'>
+                        Category
+                        <i className = "fa fa-caret-down fa-lg dropbtn"></i>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>Student</DropdownItem>
+                        <DropdownItem>Teacher</DropdownItem>
+                    </DropdownMenu>
+                    </Dropdown>
                     </li> 
                     <li> 
                         For Teacher 

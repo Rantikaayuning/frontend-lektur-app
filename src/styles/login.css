@@ -12,14 +12,14 @@
 }
 
 .login-form {
-  width: 400px;
-  height: 370px;
+  width: 500px;
+  height: 530px;
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
-  padding: 30px 30px;
+  padding: 42px 42px;
   font-size: 14px;
   font-weight: 400;
 }
@@ -65,6 +65,15 @@
 
 .login-page .login-form span {
   color: rgb(236, 46, 46);
+}
+
+.login-page .login-form .register-redirect span{
+  color: skyblue;
+}
+
+.login-page .login-form .register-redirect span:hover{
+  color: skyblue;
+  text-decoration: underline;
 }
 
 .forget-pass {
