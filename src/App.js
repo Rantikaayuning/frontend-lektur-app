@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import "./styles.css";
 
@@ -10,17 +10,19 @@ import HomePage from './pages/HomePage/index'
 import SignUp from "./components/Form/SignUp"
 import Login from "./components/Form/Login";
 import StudentBoard from "./pages/StudentDashboard"
+import TeacherDashboard from "./pages/TeacherDashboard";
 
 function App() {
   return (
     <BrowserRouter>
       <SideBar />
       <Switch>
-        <Route exact path='/' component={HomePage}/>
-        <Route exact path='/register' component={SignUp}/>
-        <Route exact path='/login' component={Login}/>
-        <Route path='/student' component={StudentBoard}/>
-      </Switch>   
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/register' component={SignUp} />
+        <Route exact path='/login' component={Login} />
+        <Route path='/student' component={StudentBoard} />
+        <Route path='/teacher' component={TeacherDashboard} />
+      </Switch>
       <Footer />
     </BrowserRouter>
   );

@@ -1,0 +1,156 @@
+.teacher-dashboard-container {
+  width: auto;
+  background-color: whitesmoke;
+  background-size: cover;
+  height: 647px; /* 875 */
+  display: flex;
+  font-size: 14px;
+}
+
+.teacher-profile {
+  position: absolute;
+  top: 144px;
+  left: 70px;
+  width: 230px;
+  height: 400px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.teacher-profile img {
+  width: 130px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto 0px auto;
+}
+
+.name-email {
+  padding: 13px 0 20px 0;
+}
+.edit-teacher-profile {
+  cursor: pointer;
+  color: rgba(62, 137, 174, 1);
+}
+
+.teacher-profile-edit input {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  padding-left: 5px;
+}
+
+.teacher-profile-edit p {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.teacher-profile-edit form {
+  padding-top: 25px;
+}
+
+.teacher-profile-edit button {
+  border-radius: 2px;
+  padding: 8px 20px;
+  background: #16213b;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.courses-container {
+  position: absolute;
+  top: 144px;
+  left: 329px; /* 122 + 39 + 230 */
+  width: 679px;
+  height: 549px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  /* padding: 0px 34px 10px 34px; */
+}
+
+.courses-header {
+  padding: 37px 34px 0px 34px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.courses-header button {
+  border-radius: 2px;
+  padding: 8px 20px;
+  background: #16213b;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  transition-duration: 0.3s;
+}
+
+.courses-header a {
+  color: white;
+}
+
+.courses-header a:link {
+  text-decoration: none;
+}
+
+.courses-header button:hover {
+  background-color: #28385c;
+}
+
+.courses-header a:hover {
+  color: white;
+}
+
+.course-dashboard-info {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 0px 0px 34px;
+}
+
+.course-info {
+  margin-right: 50px;
+  margin-left: 12px;
+}
+
+.invite-edit-btn button {
+  border-radius: 2px;
+  padding: 8px 20px;
+  background: #ef9c27;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  transition-duration: 0.3s;
+}
+
+.invite-edit-btn .btn-edit:hover {
+  background-color: #e9a94f;
+}
+
+.invite-edit-btn a {
+  color: white;
+}
+
+.invite-edit-btn a:link {
+  text-decoration: none;
+}
+
+.invite-edit-btn a:hover {
+  color: white;
+}
+
+.invite-edit-btn .btn-invite {
+  border: 2px solid #ef9c27;
+  padding: 6px 18px;
+  color: #ef9c27;
+  background: white;
+  margin-right: 20px;
+}
+
+.invite-edit-btn .btn-invite:hover {
+  color: white;
+  background: #ef9c27;
+}

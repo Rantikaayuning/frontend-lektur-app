@@ -1,4 +1,6 @@
 import Rectangle5 from "../../assets/Rectangle5.png";
+import profilePic from "../../assets/studentpicture.png"
+import reactCourse from "../../assets/reactCourse.png"
 
 export const staticImage = [
   {
@@ -83,17 +85,47 @@ export const staticImage = [
   },
 ];
 
-export const buttonMaterials=[
-  {name: "BUSSINESS"},
-  {name: "TECHNOLOGY"},
-  {name: "BUSSINESS"},
-  {name: "GRAPHIC DESAIN"},
-  {name: "BUSSINESS"},
-  {name: "TECHNOLOGY"},
-  {name: "BUSSINESS"},
-  {name: "GRAPHIC DESAIN"},
-  {name: "BUSSINESS"},
-  {name: "TECHNOLOGY"},
-  {name: "BUSSINESS"},
-  {name: "GRAPHIC DESAIN"},
+export const buttonMaterials = [
+  { name: "BUSSINESS" },
+  { name: "TECHNOLOGY" },
+  { name: "BUSSINESS" },
+  { name: "GRAPHIC DESAIN" },
+  { name: "BUSSINESS" },
+  { name: "TECHNOLOGY" },
+  { name: "BUSSINESS" },
+  { name: "GRAPHIC DESAIN" },
+  { name: "BUSSINESS" },
+  { name: "TECHNOLOGY" },
+  { name: "BUSSINESS" },
+  { name: "GRAPHIC DESAIN" },
+]
+
+export const teacherProfile = {
+  name: "John Doe",
+  email: "john.doe@gmail.com",
+  image: profilePic
+}
+
+export const courseCardJson = [
+  {
+    image: reactCourse,
+    title: "React Crash Course I",
+    videoNums: "10 Videos",
+    lessonNums: "11 Lesson Materials",
+    studentEnrolled: "120 Students enrolled"
+  },
+  {
+    image: reactCourse,
+    title: "React Crash Course II",
+    videoNums: "20 Videos",
+    lessonNums: "10 Lesson Materials",
+    studentEnrolled: "205 Students enrolled"
+  },
+  {
+    image: reactCourse,
+    title: "React Crash Course III",
+    videoNums: "19 Videos",
+    lessonNums: "13 Lesson Materials",
+    studentEnrolled: "120 Students enrolled"
+  }
 ]
