@@ -11,6 +11,7 @@ function Login() {
           <div className="login-welcome">Welcome Back!</div>
           <div className="login-yourAccount">Login to your account</div>
         </div>
+        <br/><br/>
         <form>
           <p className="email">
             Email<span>*</span>
@@ -21,7 +22,7 @@ function Login() {
               placeholder="john@doe.com"
               className="login-email"
             />
-          </div>
+          </div><br/>
           <p className="password">
             Password<span>*</span>
           </p>
