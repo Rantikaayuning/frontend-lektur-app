@@ -3,10 +3,13 @@
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    top: 20px;
-    left: 32px;
-    bottom: 0px;
+    height: 80px;
+    padding: 20px;
+    /* margin:auto; */
+    /* top: 20px; */
+    /* left: 32px; */
     position: relative;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .sidebar ul {
@@ -53,11 +56,17 @@
 
 .sidebar .left {
     flex: 1;
-    padding-right: 0px;
+    margin-right: 450px;
+}
+
+.left{
+    margin-top: 4px;
+    margin-left: 28px;
 }
 
 .sidebar .center {
     flex: 3;
+   
 }
 
 .sidebar .right {
@@ -71,14 +80,15 @@
     position: absolute;
     width: 35%;
     height: 20x;
+    margin-left: 50px;
     padding: 4px;
     text-align: left;
 }
 
 .sidebar .center i {
     position: absolute;
-    top: 8px;
-    margin-left: 400px;
+    margin-top: 11px;
+    margin-left: 133px;
 }
 
 .sidebar ul {
