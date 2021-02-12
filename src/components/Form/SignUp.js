@@ -1,5 +1,6 @@
 import React from 'react'
 import {Jumbotron} from "reactstrap"
+import {Link} from 'react-router-dom'
 
 export default function SignUp() {
     return (
@@ -17,8 +18,13 @@ export default function SignUp() {
                    <div>Password<span>*</span></div>
                    <input type="password" placeholder="******"/>
                </form>
-               <button className="btn-signup">Sign up</button>
-               <div className="signup-login">Already have account?{" "} <span>Login</span></div>
+               <br/>
+               <div className='btn'>
+               <Link to='/student'>
+                    <button className="btn-signup">Sign up</button>
+               </Link>
+               </div>
+               <div className="signup-login">Already have account?{" "} <Link to='/login'><span>Login</span></Link></div>
             </div>
         </Jumbotron>
     )

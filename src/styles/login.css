@@ -67,6 +67,15 @@
   color: rgb(236, 46, 46);
 }
 
+.login-page .login-form .register-redirect span{
+  color: skyblue;
+}
+
+.login-page .login-form .register-redirect span:hover{
+  color: skyblue;
+  text-decoration: underline;
+}
+
 .forget-pass {
   text-align: right;
   padding: 5px 0px 25px 0px;

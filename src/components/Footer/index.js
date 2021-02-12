@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -6,22 +7,25 @@ const Footer = () => {
             <div className='footer-section'>
                 <div className='footer-section course'>
                     <h4>COURSE</h4>
-                    <p>Business</p>
-                    <p>Technology</p>
-                    <p>Graphic Design</p>
-                    <p>Self Development</p>
+                    <br/>
+                    <Link to='/'><p>Business</p></Link>
+                    <Link to='/'><p>Technology</p></Link>
+                    <Link to='/'><p>Graphic Design</p></Link>
+                    <Link to='/'><p>Self Development</p></Link>
                 </div>
                 <div className='footer-section teach'>
                     <h4>TEACH</h4>
-                    <p>Teach at Lektur</p>
-                    <p>For school</p>
-                    <p>FAQ</p>
+                    <br/>
+                    <Link to='/'><p>Teach at Lektur</p></Link>
+                    <Link to='/'><p>For school</p></Link>
+                    <Link to='/'><p>FAQ</p></Link>
                 </div>
                 <div className='footer-section resource'>
                     <h4>RESOURCE</h4>
-                    <p>Contact Us</p>
-                    <p>About</p>
-                    <p>Careers</p>
+                    <br/>
+                    <Link to='/'><p>Contact Us</p></Link>
+                    <Link to='/'><p>About</p></Link>
+                    <Link to='/'><p>Careers</p></Link>
                 </div>
                 <div className='footer-section copyright'>
                     <h4><span>LEKTUR</span></h4><br/>
