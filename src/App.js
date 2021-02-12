@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage/index'
 import SignUp from "./components/Form/SignUp"
 import Login from "./components/Form/Login";
 import StudentBoard from "./pages/StudentDashboard"
+import StudentMaterial from "./pages/StudentMaterial"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/register' component={SignUp}/>
         <Route exact path='/login' component={Login}/>
         <Route path='/student' component={StudentBoard}/>
+        <Route path='/material' component={StudentMaterial}/>
       </Switch>   
       <Footer />
     </BrowserRouter>
