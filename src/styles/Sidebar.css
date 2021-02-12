@@ -15,7 +15,6 @@
 }
 
 .sidebar ul li {
-    font-family: Montserrat;
     margin-top: -20px;
     font-style: normal;
     font-weight: 500;
@@ -24,28 +23,28 @@
     color: #000000;
 }
 
-.sidebar ul li button {
+.right .sidebar-signup-button button {
     top: 1px;
     left: 350px;
     position: absolute;
     height: 30px;
-    background: #16213b;
+    background-color: #16213b;
     border-radius: 2px;
     color: white;
-    font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 10px;
 }
 
-.sidebar ul li span {
-    font-family: Montserrat;
+.right .sidebar-login-button button {
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 10px;
+    border: none;
     color: #000000;
+    background-color: white;
 }
 
 .sidebar .logo img {

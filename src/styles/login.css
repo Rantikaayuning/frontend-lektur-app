@@ -1,13 +1,11 @@
-body {
-  margin: 0px;
-}
-
 .login-page {
   background-image: url("../assets/Rectangle4.png");
   width: 100%;
   height: 470px;
-  background-size: cover;
-  position: absolute;
+  /* background-size: cover; */
+  /* position: absolute; */
+  margin: auto;
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +63,7 @@ body {
   outline: 0;
 }
 
-span {
+.login-page .login-form span {
   color: rgb(236, 46, 46);
 }
 
