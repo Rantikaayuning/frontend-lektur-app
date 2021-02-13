@@ -1,8 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import {Jumbotron} from "reactstrap"
+import { useDispatch } from "react-redux";
+
+import {postLogin} from "../../redux/actions/UserAction"
 
 function Login() {
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useDispatch();
+
+  const handleLogin = e => {
+    setUserLogin({
+      ...userLogin,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const submitLogin = (e) => {
+    const body = {
+      email: userLogin.email,
+      password: userLogin.password,
+    }
+    dispatch(postLogin(body));
+  }
+
   return (
     <Jumbotron className="mb-3 jumbotron">
     <div className="login-page">
@@ -20,7 +45,9 @@ function Login() {
             <input
               type="email"
               placeholder="john@doe.com"
+              name="email"
               className="login-email"
+              onChange={(e) => handleLogin(e)}
             />
           </div><br/>
           <p className="password">
@@ -30,13 +57,15 @@ function Login() {
             <input
               type="password"
               placeholder="********"
+              name="password"
               className="login-password"
+              onChange={(e) => handleLogin(e)}
             />
           </div>
           <div className="forget-pass">Forgot Password</div>
           <div className="btn">
             <Link to='/student'>
-            <button type="submit" className="login-button">
+            <button type="submit" className="login-button" onClick = {submitLogin}>
               Login
             </button>
             </Link>

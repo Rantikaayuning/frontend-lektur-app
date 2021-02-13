@@ -4,22 +4,24 @@ import { Link } from "react-router-dom"
 import garis from "../../assets/Rectangle 2.png";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
+
 function SideBar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
+
     return (
         <div className="sidebar" >
             <div className="left" >
                 <a href="/" className="logo" >
                     <img src={Logo} alt="logo" className="bl" />
-                </a>{" "}
+                </a>
                 <img src={garis} alt="garis" className="bl" />
-            </div>{" "}
+            </div>
             <div className="center" >
                 <input type="text" placeholder="Search Course or Lecturer" />
-                <i className="fa fa-search icon" ></i>{" "}
-            </div>{" "}
+                <i className="fa fa-search icon" ></i>
+            </div>
             <div className="right" >
                 <ul >
                     <li>
@@ -38,23 +40,26 @@ function SideBar() {
                         For Teacher
                     </li >
                     <li >
-                        <div className="vl" ></div>{" "}
-                    </li>{" "}
-                    <li className='sidebar-login-button'> {" "}
-                        <Link to='/login'>
-                            <button > Login </button>{" "}
-                        </Link>
-                    </li>{" "}
-                    <li className='sidebar-signup-button'>
-                        <Link to='/register'>
-                            <button>Sign Up </button>{" "}
-                        </Link>
-                    </li>{" "}
+                        <div className="vl" ></div>
+                    </li>
+                    <li>
+                        <div className='sidebar-login-button'> 
+                            <Link to='/login'>
+                                <button > Login </button>
+                            </Link>
+                        </div>
+                        <div className='sidebar-signup-button'>
+                            <Link to='/register'>
+                                <button>Sign Up </button>
+                            </Link>
+                        </div>
+                    </li>
+                  
                     <li >
                         <Link to='/teacher'>Teacher</Link> {/* only added to check the routes, please move to the correct position later */}
                     </li>
-                </ul>{" "}
-            </div>{" "}
+                </ul>
+            </div>
         </div>
     );
 }

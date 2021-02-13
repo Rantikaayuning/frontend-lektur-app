@@ -12,11 +12,23 @@ export default function SignUp() {
                </div>
                <form className="form">
                    <div>Name<span>*</span></div>
-                   <input type="text" placeholder="John Doe"/>
+                   <input 
+                        type="text" 
+                        placeholder="John Doe" 
+                        name="username"
+                    />
                    <div>Email<span>*</span></div>
-                   <input type="email" placeholder="john@gmail.com"/>
+                   <input 
+                        type="email" 
+                        placeholder="john@gmail.com"
+                        name="email"
+                    />
                    <div>Password<span>*</span></div>
-                   <input type="password" placeholder="******"/>
+                   <input 
+                        type="password" 
+                        placeholder="******"
+                        name="password"
+                    />
                </form>
                <br/>
                <div className='btn'>
