@@ -140,6 +140,8 @@ export const cardMaterial=[
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Business",
+  }
+]
 
 export const teacherProfile = {
   name: "John Doe",

@@ -16,7 +16,7 @@ function TeacherDashboard() {
         <div className="teacher-dashboard-container">
             {isEdit ? (
                 <div className="teacher-profile">
-                    <img src={teacherProfile.image} />
+                    <img src={teacherProfile.image} alt='teacher profile'/>
                     <div className="name-email">
                         <div><b>{teacherProfile.name}</b></div>
                         <div>{teacherProfile.email}</div>

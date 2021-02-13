@@ -6,7 +6,7 @@ function CourseCard(props) {
     return (
         <>
             <div className="course-dashboard-info">
-                <img src={image} />
+                <img src={image} alt='course material'/>
                 <div className="course-info">
                     <div><b>{title}</b></div>
                     <small className="text-muted">{numOfVideos} | {numOfLesson}</small>

@@ -20,9 +20,7 @@ export default function SignUp() {
                </form>
                <br/>
                <div className='btn'>
-               <Link to='/student'>
                     <button className="btn-signup">Sign up</button>
-               </Link>
                </div>
                <div className="signup-login">Already have account?{" "} <Link to='/login'><span>Login</span></Link></div>
             </div>
