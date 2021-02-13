@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage/index'
 import SignUp from "./components/Form/SignUp"
 import Login from "./components/Form/Login";
 import StudentBoard from "./pages/StudentDashboard"
+import StudentMaterial from "./pages/StudentMaterial"
 import TeacherDashboard from "./pages/TeacherDashboard";
 
 function App() {
@@ -17,12 +18,13 @@ function App() {
     <BrowserRouter>
       <SideBar />
       <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/register' component={SignUp} />
-        <Route exact path='/login' component={Login} />
-        <Route path='/student' component={StudentBoard} />
+        <Route exact path='/' component={HomePage}/>
+        <Route exact path='/register' component={SignUp}/>
+        <Route exact path='/login' component={Login}/>
+        <Route path='/student' component={StudentBoard}/>
+        <Route path='/material' component={StudentMaterial}/>
         <Route path='/teacher' component={TeacherDashboard} />
-      </Switch>
+      </Switch>   
       <Footer />
     </BrowserRouter>
   );
