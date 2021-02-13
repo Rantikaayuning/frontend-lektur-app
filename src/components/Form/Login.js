@@ -64,7 +64,6 @@ function Login() {
           </div>
           <div className="forget-pass">Forgot Password</div>
           <div className="btn">
-            <Link to='/student'>
             <button type="submit" className="login-button" onClick = {submitLogin}>
               Login
             </button>
