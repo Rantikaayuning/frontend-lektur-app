@@ -2,7 +2,6 @@ import React from 'react'
 import { Row, Col} from "reactstrap";
 import ContentCards from "../../components/ContentCard/Cards";
 import { cardMaterial } from "../../assets/JSONFile/dummyData";
-import Rectangle5 from "../../assets/Rectangle5.png";
 import image2 from "../../assets/Vector1.png"
 import image3 from "../../assets/Vector2.png"
 import image4 from "../../assets/Ellipse 1.png"
@@ -22,7 +21,7 @@ export default function StudentMaterial() {
                 </div>
                 <div className="image-content">
                     <div>
-                    <iframe src = "https://www.youtube.com/embed/0Rnj4w30Yvo?mute=1" title = "glints" className="image" />
+                    <iframe src = "https://www.youtube.com/embed/0Rnj4w30Yvo?mute=1" title = "glints" className="image"/>
                         {/* <img src={Rectangle5} className="image"/> */}
                     </div>
                     <div className="content-lock-material">
@@ -36,9 +35,9 @@ export default function StudentMaterial() {
                     </div>
                     <div className="next">
                         <div className="title-next">What's Next</div>
-                        <p><img src={image4}/>{" "}Cinematic course material: <span>Cinematic and Open Source.pdf</span></p>
-                        <p><img src={image3}/>{" "}Cinematic course material: <span>Cinematic and Open Source2.pdf</span></p>
-                        <button><img src={image2}/>{" "}Next lesson: What is vidio?</button>
+                        <p><img src={image4} alt='cinematic course'/>{" "}Cinematic course material: <span>Cinematic and Open Source.pdf</span></p>
+                        <p><img src={image3} alt='cinematic course'/>{" "}Cinematic course material: <span>Cinematic and Open Source2.pdf</span></p>
+                        <button><img src={image2} alt='next lesson'/>{" "}Next lesson: What is vidio?</button>
                     </div>
                 </div>
                 <div className="card-content">

@@ -68,7 +68,6 @@ function Login() {
             <button type="submit" className="login-button" onClick = {submitLogin}>
               Login
             </button>
-            </Link>
           </div>
           <div className="register-redirect">
             New user?{' '} <Link to="/register"><span>Create an account</span></Link>

@@ -31,8 +31,9 @@ function SideBar() {
                         <i className="fa fa-caret-down fa-lg dropbtn"></i>
                             </DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem>Student</DropdownItem>
-                                <DropdownItem>Teacher</DropdownItem>
+                                <Link to='student'><DropdownItem>Student</DropdownItem></Link>
+                                <Link to='/teacher'><DropdownItem>Teacher</DropdownItem></Link> 
+                                {/* only added to check the routes, please move to the correct position later */}
                             </DropdownMenu>
                         </Dropdown>
                     </li>
