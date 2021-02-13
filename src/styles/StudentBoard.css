@@ -111,6 +111,11 @@
     color: rgba(62, 137, 174, 1);
 }
 
+.assessment-detail h4:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .student-assess-detail {
     display: flex;
     flex-direction: row;

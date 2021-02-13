@@ -1,0 +1,54 @@
+.student-assessment {
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    background-size: cover;
+    height: 100%;
+    padding-left: 250px;
+    padding-right: 250px;
+    padding-top: 72px;
+    padding-bottom: 174px;
+}
+
+.student-assessment-box {
+    margin: 5px 50px 50px 5px;
+    background-color: white;
+    padding: 30px;
+    width: 90%;
+    height: 100%;
+}
+
+.assessment-title {
+    padding: 5px;
+    line-height: 40px;
+}
+
+.final-assessment-title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 50px;
+    color: #000000;
+}
+
+.student-assessment-box h4{
+    margin: 10px 5px 30px 15px;
+    font-weight: bold;
+}
+
+.assessment-questions {
+    margin: 50px 150px 30px 50px;
+}
+
+.submit-assessment {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 100px;
+}
+
+.submit-assessment button{
+    border: none;
+    background-color: #3E89AE;
+    padding: 12px 50px;
+    color: white;
+}

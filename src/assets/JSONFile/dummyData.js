@@ -172,3 +172,42 @@ export const courseCardJson = [
     studentEnrolled: "120 Students enrolled"
   }
 ]
+
+export const studentAssessment = [
+  {
+    noQuestion: 1,
+    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
+    choiceOne: 'sit amet auctor nulla aliquet eget',
+    choiceTwo: 'sit amet auctor nulla aliquet eget',
+    choiceThree: 'sit amet auctor nulla aliquet eget',
+    choiceFour: 'sit amet auctor nulla aliquet eget',
+    choiceFive: 'sit amet auctor nulla aliquet eget',
+  },
+  {
+    noQuestion: 2,
+    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
+    choiceOne: 'sit amet auctor nulla aliquet eget',
+    choiceTwo: 'sit amet auctor nulla aliquet eget',
+    choiceThree: 'sit amet auctor nulla aliquet eget',
+    choiceFour: 'sit amet auctor nulla aliquet eget',
+    choiceFive: 'sit amet auctor nulla aliquet eget',
+  },
+  {
+    noQuestion: 3,
+    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
+    choiceOne: 'sit amet auctor nulla aliquet eget',
+    choiceTwo: 'sit amet auctor nulla aliquet eget',
+    choiceThree: 'sit amet auctor nulla aliquet eget',
+    choiceFour: 'sit amet auctor nulla aliquet eget',
+    choiceFive: 'sit amet auctor nulla aliquet eget',
+  },
+  {
+    noQuestion: 4,
+    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
+    choiceOne: 'sit amet auctor nulla aliquet eget',
+    choiceTwo: 'sit amet auctor nulla aliquet eget',
+    choiceThree: 'sit amet auctor nulla aliquet eget',
+    choiceFour: 'sit amet auctor nulla aliquet eget',
+    choiceFive: 'sit amet auctor nulla aliquet eget',
+  }
+]

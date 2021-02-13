@@ -12,6 +12,7 @@ import Login from "./components/Form/Login";
 import StudentBoard from "./pages/StudentDashboard"
 import StudentMaterial from "./pages/StudentMaterial"
 import TeacherDashboard from "./pages/TeacherDashboard";
+import StudentAssessment from "./pages/StudentAssessment";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route exact path='/login' component={Login}/>
         <Route path='/student' component={StudentBoard}/>
         <Route path='/material' component={StudentMaterial}/>
+        <Route path='/assessment' component={StudentAssessment} />
         <Route path='/teacher' component={TeacherDashboard} />
       </Switch>   
       <Footer />

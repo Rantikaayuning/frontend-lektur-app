@@ -1,0 +1,19 @@
+.pop-up-course li{
+    list-style-image: url(../assets/radio-button.png);
+    font-size: 14px;
+    padding-left: 15px;
+}
+
+.pop-up-course {
+    padding: 50px 150px 50px 150px;
+}
+
+.pop-up-course p{
+    font-weight: 600;
+}
+
+#modal-course{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px 10px 5px 10px;
+}
