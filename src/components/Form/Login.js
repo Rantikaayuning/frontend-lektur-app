@@ -35,11 +35,9 @@ function Login() {
           </div>
           <div className="forget-pass">Forgot Password</div>
           <div className="btn">
-            <Link to='/student'>
             <button type="submit" className="login-button">
               Login
             </button>
-            </Link>
           </div>
           <div className="register-redirect">
             New user?{' '} <Link to="/register"><span>Create an account</span></Link>

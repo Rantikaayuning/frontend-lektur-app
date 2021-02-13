@@ -19,7 +19,7 @@ const StudentProfile = () => {
                 <h5>John Doe</h5>
                 <p>john.doe@gmail.com</p>
                 <br/>
-                <span><u onClick={handleEdit}> edit profile </u></span>
+                <span><u onClick={handleEdit}> Edit Profile </u></span>
             </div>
             </div>
         ) : (
