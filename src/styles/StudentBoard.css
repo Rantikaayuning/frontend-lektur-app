@@ -72,6 +72,11 @@
 .student-course-assessment p{
     cursor: pointer;
     pointer-events: auto;
+    color: black;
+}
+
+.student-course-assessment :link{
+    text-decoration: none;
 }
 
 .student-course-assessment p:hover{

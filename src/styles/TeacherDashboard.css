@@ -10,7 +10,7 @@
 .teacher-profile {
   position: absolute;
   top: 144px;
-  left: 70px;
+  left: 270px;
   width: 230px;
   height: 400px;
   background: #ffffff;
@@ -63,8 +63,8 @@
 .courses-container {
   position: absolute;
   top: 144px;
-  left: 329px; /* 122 + 39 + 230 */
-  width: 679px;
+  left: 529px; /* 122 + 39 + 230 */
+  width: 50%;
   height: 549px;
   background: #ffffff;
   border: 1px solid #e6e6e6;
@@ -74,7 +74,7 @@
 }
 
 .courses-header {
-  padding: 37px 34px 0px 34px;
+  padding: 30px 34px 10px 34px;
   display: flex;
   justify-content: space-between;
 }
@@ -87,6 +87,7 @@
   color: #ffffff;
   font-weight: bold;
   transition-duration: 0.3s;
+  margin: 0px 10px;
 }
 
 .courses-header a {
@@ -112,8 +113,13 @@
 }
 
 .course-info {
-  margin-right: 50px;
+  margin-right: 10px;
+  width: 30%;
   margin-left: 12px;
+}
+
+.invite-edit-btn {
+  margin-left: 70px;
 }
 
 .invite-edit-btn button {

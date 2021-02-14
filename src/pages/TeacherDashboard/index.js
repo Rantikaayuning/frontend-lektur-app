@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import Avatar from "react-avatar-edit";
 
 import { courseCardJson, teacherProfile } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
@@ -44,8 +43,8 @@ function TeacherDashboard() {
 
             <div className="courses-container">
                 <div className="courses-header">
-                    <b>Courses</b>
-                    <button><Link to="/teacher-new-course">New Course</Link></button>
+                    <h5><b>Courses</b></h5>
+                    <Link to="/teacher-new-course"><button>New Course</button></Link>
                 </div>
                 <hr />
                 {courseCardJson ? courseCardJson.map((item, index) => (

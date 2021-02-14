@@ -223,3 +223,51 @@ export const teacherAssessment = [
     remark: '',
   }
 ]
+
+export const studentEnroll = [
+  {
+    name: 'Justin Junaedi',
+    isCompleted: false,
+    isActive: true,
+    isPending: false,
+    noQuestion: 8,
+    totalQuestion: 15,
+    score: null,
+  },
+  {
+    name: 'Travis Sucipto',
+    isCompleted: true,
+    isActive: false,
+    isPending: false,
+    noQuestion: 15,
+    totalQuestion: 15,
+    score: 73,
+  },
+  {
+    name: 'Travis Sucipto',
+    isCompleted: true,
+    isActive: false,
+    isPending: false,
+    noQuestion: 15,
+    totalQuestion: 15,
+    score: 73,
+  },
+  {
+    name: 'Asahi Muhammad',
+    isCompleted: false,
+    isActive: false,
+    isPending: true,
+    noQuestion: null,
+    totalQuestion: null,
+    score: null,
+  },
+  {
+    name: 'Asahi Muhammad',
+    isCompleted: false,
+    isActive: false,
+    isPending: true,
+    noQuestion: null,
+    totalQuestion: null,
+    score: null,
+  }
+]
