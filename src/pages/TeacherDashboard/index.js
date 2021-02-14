@@ -45,7 +45,7 @@ function TeacherDashboard() {
             <div className="courses-container">
                 <div className="courses-header">
                     <b>Courses</b>
-                    <button><Link to="#">New Course</Link></button>
+                    <button><Link to="/teacher-new-course">New Course</Link></button>
                 </div>
                 <hr />
                 {courseCardJson ? courseCardJson.map((item, index) => (

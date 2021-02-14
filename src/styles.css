@@ -9,8 +9,10 @@
 @import "./styles/StudentBoard.css";
 @import "./styles/StudentMaterial.css";
 @import "./styles/TeacherDashboard.css";
-@import "./styles/StudentAssessment.css";
 @import "./styles/PopUp.css";
+@import "./styles/StudentAssessment.css";
+@import "./styles/TeacherAssessment.css";
+@import "./styles/TeacherCourse.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 

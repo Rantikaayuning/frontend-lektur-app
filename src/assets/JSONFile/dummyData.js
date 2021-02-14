@@ -211,3 +211,15 @@ export const studentAssessment = [
     choiceFive: 'sit amet auctor nulla aliquet eget',
   }
 ]
+
+export const teacherAssessment = [
+  {
+    noQuestion: null,
+    question: '',
+    optionOne: '',
+    optionTwo: '',
+    optionThree: '',
+    optionFour: '',
+    remark: '',
+  }
+]

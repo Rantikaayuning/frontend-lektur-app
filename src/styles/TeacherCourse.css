@@ -1,0 +1,98 @@
+.teacher-new-course-box {
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-top: 72px;
+}
+
+.teacher-new-course-title {
+    display: flex;
+}
+
+.teacher-new-course-title input{
+    border: none;
+    outline: none;
+    background-color: whitesmoke;
+}
+
+.teacher-new-course-overview {
+    display: flex;
+}
+
+.teacher-new-course-overview textarea {
+    border: none;
+    background-color: whitesmoke;
+    overflow: auto;
+    resize: none;
+    outline: none;
+}
+
+.teacher-add-header-image{
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher-add-header-image button {
+    border: 1px solid #EF9C27;
+    background-color: whitesmoke;
+    color: #EF9C27;
+    padding: 10px 24px;
+}
+
+.teacher-add-header-image p{
+    color: #999999;
+}
+
+.teacher-save-new-course {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.teacher-save-new-course button {
+    margin: 30px;
+    color: white;
+    background-color: #16213B;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 2px;
+    margin-right: 40px;
+}
+
+.teacher-add-new-lesson-link h4{
+    font-weight: bold;
+}
+
+.teacher-add-new-lesson-link p{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.teacher-add-new-lesson-link p:hover{
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.publish-and-delete-course {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 200px 40%;
+}
+
+.publish-and-delete-course button{
+    width: max-content;
+    padding: 10px 24px;
+    border: none;
+    background-color: #16213B;
+    color: white;
+    border-radius: 2px;
+}
+
+.publish-and-delete-course .delete{
+    width: max-content;
+    cursor: pointer;
+    text-decoration: underline;
+    margin: 10px 26px;
+}
+
