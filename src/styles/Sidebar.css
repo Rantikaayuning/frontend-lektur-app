@@ -65,12 +65,11 @@
 
 .sidebar .center {
     flex: 3;
-   
 }
 
 .sidebar .right {
     position: relative;
-    flex: 3;
+    flex: 4;
 }
 
 .sidebar .center input {
@@ -117,8 +116,10 @@
     color: black;
 }
 
-.sidebar-dropdown:hover {
-    color: white;
+
+.sidebar-dropdown :hover {
+    color: black;
     border: none;
+    box-shadow: none;
 }
 
