@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const API = Axios.create({
-	baseURL: `https://lekturapp.herokuapp.com`,
+	baseURL: `/api`,
 })
 
 export default API

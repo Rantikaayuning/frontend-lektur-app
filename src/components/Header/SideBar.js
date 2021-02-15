@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import Logo from "../../assets/LEKTUR.png";
 import { Link } from "react-router-dom"
+import {useSelector} from "react-redux"
 import garis from "../../assets/Rectangle 2.png";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+import profile from "../../assets/Ellipse 2.png"
 
 function SideBar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
+
+    const { isAuthentificated, role } = useSelector((state) => state.users); 
+
     return (
         <div className="sidebar" >
             <div className="left" >
@@ -39,17 +45,48 @@ function SideBar() {
                     </li >
                     <li >
                         <div className="vl" ></div>{" "}
-                    </li>{" "}
-                    <li className='sidebar-login-button'> {" "}
-                        <Link to='/login'>
-                            <button > Login </button>{" "}
-                        </Link>
-                    </li>{" "}
-                    <li className='sidebar-signup-button'>
-                        <Link to='/register'>
-                            <button>Sign Up </button>{" "}
-                        </Link>
-                    </li>{" "}
+                    </li>
+                    <li>
+                        <div>
+                        {isAuthentificated ? (
+                            <div className="drop-img">
+                                <Link ><img src={profile} /></Link>
+                                <span>{" "}John Doe</span>
+                                <div className="dropdown-content-img">
+                                    {role ? (
+                                        <Link to="/student" className="drop">Dashboard</Link>
+                                    ) : (
+                                        <Link to="/teacher" className="drop">Dashboard</Link>
+                                    )}
+                                        <Link to='/register-teacher' className="drop">
+                                            <div onClick={() => { localStorage.removeItem("token");
+                                                                    window.open("/", "_self")}}
+                                            >
+                                                Sign Out 
+                                            </div>
+                                        </Link>  
+                                    </div>
+                            </div>
+                            ) : (
+                            <div>
+                                <div className='sidebar-login-button'> 
+                                    <Link to='/login'>
+                                        <button > 
+                                        Login 
+                                        </button>
+                                    </Link>
+                                </div>
+                                <div className='sidebar-signup-button'>
+                                    <button>Sign Up </button>
+                                    <div className="dropdown-content">
+                                        <Link to="/register-teacher" className="drop">Teacher</Link>
+                                        <Link to="/register-student" className="drop">Student</Link>
+                                    </div>
+                                </div>
+                            </div>)
+                            }
+                        </div>
+                    </li>
                 </ul>{" "}
             </div>{" "}
         </div>
