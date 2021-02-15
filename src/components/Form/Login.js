@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {Jumbotron} from "reactstrap"
 import { useDispatch } from "react-redux";
 
@@ -12,6 +12,7 @@ function Login() {
   });
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogin = e => {
     setUserLogin({
@@ -26,6 +27,7 @@ function Login() {
       password: userLogin.password,
     }
     dispatch(postLogin(body));
+    history.push("/")
   }
 
   return (
