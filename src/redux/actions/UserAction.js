@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // import API from "../../api/index";
-import { LOGIN, LOGOUT } from "../types/UserLogin";
+import { LOGIN, LOGOUT, USER_DATA } from "../types/UserLogin";
 
 const baseURL = "https://lekturapp.herokuapp.com/api/";
 
@@ -29,5 +29,16 @@ export const postLogout = () => {
   return (dispatch) => {
     localStorage.removeItem("access_token");
     dispatch({ type: LOGOUT });
+  };
+};
+
+export const getUserData = () => {
+  return (dispatch) => {
+    return axios
+      .get(`${baseURL}users/profile`)
+      .then((response) => {
+        dispatch({ type: USER_DATA, payload: response.data.data });
+      })
+      .catch((error) => console.log(error));
   };
 };

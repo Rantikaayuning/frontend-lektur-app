@@ -51,16 +51,16 @@ function SideBar(props) {
                 <i className="fa fa-caret-down fa-lg dropbtn"></i>
               </DropdownToggle>
               <DropdownMenu>
-                {/* <Link to="student"> */}
-                <DropdownItem onClick={() => setDropDown("For Student")}>
-                  For Student
-                </DropdownItem>
-                {/* </Link> */}
-                {/* <Link to="/teacher"> */}
-                <DropdownItem onClick={() => setDropDown("For Teacher")}>
-                  For Teacher
-                </DropdownItem>
-                {/* </Link> */}
+                <Link to="student">
+                  <DropdownItem onClick={() => setDropDown("For Student")}>
+                    For Student
+                  </DropdownItem>
+                </Link>
+                <Link to="/teacher">
+                  <DropdownItem onClick={() => setDropDown("For Teacher")}>
+                    For Teacher
+                  </DropdownItem>
+                </Link>
                 {/* only added to check the routes, please move to the correct position later */}
               </DropdownMenu>
             </Dropdown>

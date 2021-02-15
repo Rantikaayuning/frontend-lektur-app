@@ -1,7 +1,8 @@
-import { LOGIN, LOGOUT } from "../types/UserLogin";
+import { LOGIN, LOGOUT, USER_DATA } from "../types/UserLogin";
 
 const initialState = {
   token: localStorage.getItem("access_token") || "",
+  userData: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         token: "",
       };
+    case USER_DATA: {
+      return {
+        ...state,
+        userData: payload,
+      };
+    }
     default:
       return { ...state };
   }
