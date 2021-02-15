@@ -7,7 +7,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 
 import profile from "../../assets/Ellipse 2.png"
 
-function SideBar() {
+function SideBarStudent(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -40,9 +40,11 @@ function SideBar() {
                             </DropdownMenu>
                         </Dropdown>
                     </li>
-                    <li>
-                        For Teacher
-                    </li >
+                    <Link to='/'>
+                    <li onClick={props.isClose}>
+                        For Student
+                    </li >    
+                    </Link>
                     <li >
                         <div className="vl" ></div>{" "}
                     </li>
@@ -77,11 +79,9 @@ function SideBar() {
                                     </Link>
                                 </div>
                                 <div className='sidebar-signup-button'>
-                                    <button>Sign Up </button>
-                                    <div className="dropdown-content">
-                                        <Link to="/register-teacher" className="drop">Teacher</Link>
-                                        <Link to="/register-student" className="drop">Student</Link>
-                                    </div>
+                                    <Link to='/register-student'>
+                                        <button>Sign Up </button>
+                                    </Link>
                                 </div>
                             </div>)
                             }
@@ -93,4 +93,4 @@ function SideBar() {
     );
 }
 
-export default SideBar;
+export default SideBarStudent;
