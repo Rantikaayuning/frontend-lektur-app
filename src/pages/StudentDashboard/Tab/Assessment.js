@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-import { staticImage } from "../../../assets/JSONFile/dummyData";
-import { Modal } from 'react-bootstrap';
-import { PopUpMaterial } from '../../../components/PopUp/PopUpMaterial';
+import { studentCourses } from "../../../assets/JSONFile/dummyData";
 
 const StudentBoardAssessment = () => {
-    const [popUpMaterial, setPopUpMaterial] = useState(false);
-    const [isCompleted, setCompleted] = useState(true)
-
     return (
         <>
             <div className="student-board">
@@ -22,41 +17,44 @@ const StudentBoardAssessment = () => {
                     </Link>
                     <p><b>Assesment</b></p>
                 </div>
-                {staticImage.map((item, index) => (
+                {studentCourses.map((item, index) => (
                     <div className='student-course-list'>
+                        {item.isCompleted === true ? (
                         <div className='student-assess-detail'>
                             <div className='assessment-detail'>
-                                <h4 onClick={() => setPopUpMaterial(true)}>{item.title}</h4>
-                                <p className='lecture'>{staticImage[0].lecture}</p>
-                                <p>Completed at: </p>
+                                <h4>{item.title}</h4>
+                                <p className='lecture'>{item.writer}</p>
+                                <p className='complete'>Completed at: {item.completeDate}</p>
                             </div>
-                            { isCompleted ? (
                             <div className='assessment-precentage'>
                                 <div>
-                                    <h4>73%</h4>
-                                    <p>11/15 Question Correct</p>
+                                    <h4>{Math.trunc(item.rightAnswer/item.totalQuestion*100)}%</h4>
+                                    <p>{item.rightAnswer}/{item.totalQuestion} Question Correct</p>
                                 </div>
                             </div>
-                            ) : (
-                            <div>
-                                <div>
-                                    <button>Take Test</button>
-                                    <p>No result yet</p>
-                                </div>
-                            </div>
-                            )}
                         </div>
+                        ) : item.isActive === true ? (
+                        <div className='student-assess-detail'>
+                            <div className='assessment-detail'>
+                                <h4>{item.title}</h4>
+                                <p className='lecture'>{item.writer}</p>
+                                <p className='complete'>Completed at: -</p>
+                            </div>
+                            <div className='assessment-precentage'>
+                                <div>
+                                    <p><i>No result yet</i></p>
+                                    <Link to='/assessment'>
+                                        <button>Take Test</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        ) : (
+                            ''
+                        )}
+                       
                     </div>
                 ))}
-                <Modal
-                show={popUpMaterial}
-                size='lg'
-                onHide={() => setPopUpMaterial(false)}
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
-                >
-                <PopUpMaterial/>
-                </Modal>
                 </div>
             </div>
         </>
