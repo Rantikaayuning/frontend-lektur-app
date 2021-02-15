@@ -2,7 +2,7 @@ import React from 'react'
 import {Jumbotron} from "reactstrap"
 import {Link} from 'react-router-dom'
 
-export default function SignUp() {
+export default function SignUpStudent() {
     return (
         <Jumbotron className="mb-3 jumbotron">
            <div className="signup">

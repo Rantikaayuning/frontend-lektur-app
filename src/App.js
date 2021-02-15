@@ -4,10 +4,12 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./styles.css";
 
 //Components
-import SideBar from "./components/Header/SideBar";
+// import SideBarTeacher from "./components/Header/SideBarTeacher";
+import Header from "./components/Header/Header"
 import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage/index";
-import SignUp from "./components/Form/SignUp";
+import HomePage from './pages/HomePage/index'
+import SignUpStudent from "./components/Form/SignUpStudent"
+import SignUpTeacher from "./components/Form/SignUpTeacher
 import Login from "./components/Form/Login";
 import StudentBoardCourses from "./pages/StudentDashboard/Tab/Courses";
 import StudentMaterial from "./pages/StudentMaterial";
@@ -22,29 +24,22 @@ import CourseDetail from "./pages/CourseDetail/CourseDetail";
 function App() {
   return (
     <BrowserRouter>
-      <SideBar />
+      <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/register" component={SignUp} />
-        <Route exact path="/login" component={Login} />
-        <Route path="/student-courses" component={StudentBoardCourses} />
-        <Route path="/student-assessment" component={StudentBoardAssessment} />
-        <Route path="/material" component={StudentMaterial} />
-        <Route path="/assessment" component={StudentAssessment} />
-        <Route path="/teacher-dashboard" component={TeacherDashboard} />
-        <Route exact path="/teacher-new-course" component={TeacherCourseTab} />
-        <Route
-          exact
-          path="/teacher-new-assessment"
-          component={TeacherAssessmentTab}
-        />
-        <Route
-          exact
-          path="/teacher-new-students"
-          component={TeacherStudentsTab}
-        />
+        <Route exact path='/' component={HomePage}/>
+        <Route exact path='/register-student' component={SignUpStudent}/>
+        <Route exact path='/register-teacher' component={SignUpTeacher}/>
+        <Route exact path='/login' component={Login}/>
+        <Route path='/student-courses' component={StudentBoardCourses}/>
+        <Route path='/student-assessment' component={StudentBoardAssessment}/>
+        <Route path='/material' component={StudentMaterial}/>
+        <Route path='/assessment' component={StudentAssessment} />
+        <Route path='/teacher-dashboard' component={TeacherDashboard} />
+        <Route exact path='/teacher-new-course' component={TeacherCourseTab} />
+        <Route exact path='/teacher-new-assessment' component={TeacherAssessmentTab} />
+        <Route exact path='/teacher-new-students' component={TeacherStudentsTab} />
         <Route exact path="/course-detail" component={CourseDetail} />
-      </Switch>
+      </Switch>   
       <Footer />
     </BrowserRouter>
   );
