@@ -91,11 +91,22 @@
 
 .student-course-detail img{
     padding: 32px;
+    width: 50%;
 }
 
 .course-detail-first {
     width: 50%;
-    padding: 32px;
+    padding: 35px 10px;
+    line-height: 10px;
+}
+
+.course-detail-first .title{
+    color: #999999;
+    cursor: pointer;
+}
+
+.course-detail-second .title {
+    color: #999999;
 }
 
 .course-detail-second {
@@ -110,6 +121,7 @@
     width: 100%;
     height: 38px;
     color: white;
+    margin-top: 20px;
 }
 
 .assessment-detail {
@@ -122,13 +134,16 @@
 
 .assessment-detail h4:hover{
     cursor: pointer;
-    text-decoration: underline;
 }
 
 .student-assess-detail {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.student-assess-detail .complete {
+    color: #999;
 }
 
 .assessment-precentage h4{
@@ -149,6 +164,15 @@
     color: #EF9C27;
     border: 2px solid #EF9C27;
     background-color: white;
+    padding: 10px 24px;
+    border-radius: 2px;
+}
+
+.assessment-precentage button:hover{
+    color: white;
+    border: 2px solid #EF9C27;
+    background-color: #EF9C27;
+    padding: 10px 24px;
 }
 
 .student-profile-edit input {

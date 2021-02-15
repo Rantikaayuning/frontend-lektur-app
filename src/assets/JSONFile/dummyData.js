@@ -1,6 +1,7 @@
 import Rectangle5 from "../../assets/Rectangle5.png";
 import profilePic from "../../assets/studentpicture.png"
 import reactCourse from "../../assets/reactCourse.png"
+import imgCourse from "../course-image.png"
 
 export const staticImage = [
   {
@@ -270,4 +271,59 @@ export const studentEnroll = [
     totalQuestion: null,
     score: null,
   }
+]
+
+export const studentCourses = [
+  {
+    title: 'React Crash Course',
+    writer: 'Travery Media',
+    totalCourse: 15,
+    courseDone: 8,
+    image: imgCourse,
+    isCompleted: false,
+    isPending: false,
+    isActive: true,
+    completeDate: null,
+    rightAnswer: null,
+    totalQuestion: null,
+  },
+  {
+    title: 'Build Web Game Using React',
+    writer: 'Travery Media',
+    totalCourse: 15,
+    courseDone: 8,
+    image: imgCourse,
+    isCompleted: false,
+    isPending: true,
+    isActive: false,
+    completeDate: null,
+    rightAnswer: null,
+    totalQuestion: null,
+  },
+  {
+    title: 'Create Cinematic Music Video',
+    writer: 'John Doe',
+    totalCourse: 15,
+    courseDone: 8,
+    image: imgCourse,
+    isCompleted: true,
+    isPending: false,
+    isActive: false,
+    completeDate: '28 January 2021 08:00pm',
+    rightAnswer: 11,
+    totalQuestion: 15,
+  },
+  {
+    title: 'Create Cinematic Music Video',
+    writer: 'John Doe',
+    totalCourse: 15,
+    courseDone: 8,
+    image: imgCourse,
+    isCompleted: true,
+    isPending: false,
+    isActive: false,
+    completeDate: '28 January 2021 08:00pm',
+    rightAnswer: 11,
+    totalQuestion: 15,
+  },
 ]
