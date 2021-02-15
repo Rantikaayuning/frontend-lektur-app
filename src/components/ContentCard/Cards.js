@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import {
   Card,
   CardImg,
@@ -18,8 +19,13 @@ function Cards(props) {
     text,
     footer,
   } = props;
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/course-detail");
+  }
   return (
-    <div>
+    <div onClick={handleClick}>
       <Card className="card">
         <CardImg top width="100%" src={image} alt={title} />
         <CardBody className="p-2">

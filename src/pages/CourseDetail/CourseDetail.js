@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Row, Col } from "reactstrap";
+import { Modal } from "react-bootstrap";
 
 // import { Link } from 'react-router-dom'
 import ContentCards from "../../components/ContentCard/Cards";
 import { cardMaterial } from "../../assets/JSONFile/dummyData";
 
 function CourseDetail() {
+  const [PopUpCourseDetail, setPopUpCourseDetail] = useState(false);
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/course-detail");
+  }
   return (
     <div className="main-course">
       <div className="course-detail">
@@ -13,7 +21,7 @@ function CourseDetail() {
           <p className="p1">Art & Humanity</p>
           <p className="p2">Create Cinematic Music Video</p>
           <p className="p3">By Justin Junaedi </p>
-          <button> Enroll Now </button>
+          <button onClick={() => setPopUpCourseDetail(true)}>Enroll Now</button>
         </div>
         <div className="course-detail-right flex">
           <div>
@@ -61,8 +69,24 @@ function CourseDetail() {
           </div>
         </div>
       </div>
-      <div className="center"></div>
-      <div className="card-content">
+      <div className="center">
+        <div className="course-center">
+          <h5>Description</h5>
+          <p>
+            Nascetur consequat quam tellus sed convallis amet, nunc. Venenatis,
+            eget faucibus iaculis facilisi pellentesque eleifend mattis vel.
+            Nunc euismod morbi lectus aliquam pretium, pharetra, tellus orci.
+            Lobortis at nulla dictum risus amet. Nunc dolor sit vitae arcu
+            facilisis eu. Tortor, turpis arcu in est. Ullamcorper fringilla ut
+            tempus nulla dolor lorem proin porta neque. Neque eu lorem ultrices
+            id. Et mattis lacus fermentum id nec, aenean enim, curabitur. Enim,
+            donec quis odio ut enim scelerisque id erat laoreet. Vitae sodales
+            rhoncus, et ut ut. Amet, porttitor adipiscing nullam mauris.
+            Lobortis interdum imperdiet mauris pharetra risus proin etiam est.
+          </p>
+        </div>
+      </div>
+      <div className="card-content" onClick={handleClick}>
         <div className="card-text-course">Related Course</div>
         <Row className="content-card-container">
           {cardMaterial.map((item, index) => (
@@ -80,6 +104,27 @@ function CourseDetail() {
           ))}
         </Row>
       </div>
+      <Modal
+        show={PopUpCourseDetail}
+        size="lg"
+        onHide={() => setPopUpCourseDetail(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header closeButton>
+          <div className="modal-central" closeButton>
+            <div className="modal-central-image"></div>
+            <div className="modal-central-content">
+              <p className="p1">Successfully enrolled!</p>
+              <p className="p2">Create Cinematic Music Video</p>
+              <p className="p3">By John Doe</p>
+            </div>
+          </div>
+        </Modal.Header>
+        <div className="modal-central-body">
+          <p>Please wait coresponding teacher approve you!</p>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -2,18 +2,20 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import ContentCards from "./Cards";
 import { staticImage, buttonMaterials } from "../../assets/JSONFile/dummyData";
+import { Link } from "react-router-dom";
 
 function Content() {
   return (
     <div className="content">
       <div className="material">
         <div className="home">What to learn next</div>
-          <div className="btn-material">
-            {buttonMaterials.map((material) =>
-                <button className="btn-home-detail">{material.name}</button>
-            )}
-          </div>
+        <div className="btn-material">
+          {buttonMaterials.map(material => (
+            <button className="btn-home-detail">{material.name}</button>
+          ))}
+        </div>
       </div>
+
       <div className="card-content">
         <Row className="content-card-container">
           {staticImage.map((item, index) => (
@@ -30,7 +32,7 @@ function Content() {
             </Col>
           ))}
         </Row>
-     </div>
+      </div>
     </div>
   );
 }
