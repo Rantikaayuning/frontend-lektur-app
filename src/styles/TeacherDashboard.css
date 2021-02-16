@@ -2,7 +2,7 @@
   width: auto;
   background-color: whitesmoke;
   background-size: cover;
-  height: 647px; /* 875 */
+  height: 875px;
   display: flex;
   font-size: 14px;
 }
@@ -10,9 +10,9 @@
 .teacher-profile {
   position: absolute;
   top: 144px;
-  left: 270px;
-  width: 230px;
-  height: 400px;
+  left: 122px;
+  width: 279px;
+  height: 400px; /* 322 */
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -21,7 +21,10 @@
 }
 
 .teacher-profile img {
-  width: 130px;
+  width: 140px;
+  height: 140;
+  top: 165px;
+  left: 192px;
   border-radius: 50%;
   display: block;
   margin: 15px auto 0px auto;
@@ -39,7 +42,7 @@
   border: none;
   border-bottom: 1px solid black;
   outline: none;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .teacher-profile-edit p {
@@ -63,14 +66,16 @@
 .courses-container {
   position: absolute;
   top: 144px;
-  left: 529px; /* 122 + 39 + 230 */
-  width: 50%;
-  height: 549px;
+  left: 440px; /* 122 + 39 + 230 */
+  width: 893px; /* 50% */
+  height: 629px;
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   /* padding: 0px 34px 10px 34px; */
+  width: 50%; /* check */
+  margin: 0 auto;
 }
 
 .courses-header {
@@ -109,11 +114,11 @@
 .course-dashboard-info {
   display: flex;
   flex-direction: row;
-  padding: 0px 0px 0px 34px;
+  padding: 12px 0px 12px 34px;
 }
 
 .course-info {
-  margin-right: 10px;
+  margin-right: 58px;
   width: 30%;
   margin-left: 12px;
 }
