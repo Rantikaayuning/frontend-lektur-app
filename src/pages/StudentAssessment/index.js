@@ -1,5 +1,6 @@
 import React from 'react';
-import { studentAssessment as assessment } from '../../assets/JSONFile/dummyData'
+import { studentAssessment as assessment } from '../../assets/JSONFile/dummyData';
+import { Link } from 'react-router-dom'
 
 const StudentAssessment = () => {
 
@@ -8,8 +9,8 @@ const StudentAssessment = () => {
             <div className='student-assessment'>
                 <div className="assessment-title">
                     <div>
-                    <span className="bread-crumb">Create Cinematic Music Video</span> /  {" "}
-                    <span className="link">Final Assessment</span>
+                        <span className="bread-crumb">Create Cinematic Music Video</span> /  {" "}
+                        <span className="link">Final Assessment</span>
                     </div>
                     <div className="final-assessment-title">Final Assessment</div>
                 </div>
@@ -40,7 +41,9 @@ const StudentAssessment = () => {
                     ))}
                 </div>
                 <div className='submit-assessment'>
-                    <p><button>Submit Assessment</button></p>
+                    <Link to='/assessment-result'>
+                        <p><button>Submit Assessment</button></p>
+                    </Link>
                 </div>
             </div>
         </>
