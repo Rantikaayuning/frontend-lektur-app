@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SideBarStudent from './SideBarStudent';
+import SideBarStudent from './SideBar';
 import SideBarTeacher from './SideBarTeacher';
 
 function Header() {

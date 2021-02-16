@@ -7,12 +7,19 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 
 import profile from "../../assets/Ellipse 2.png"
 
-function SideBarStudent(props) {
+function SideBar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
-    const { isAuthentificated, role } = useSelector((state) => state.users); 
+    const { isAuthentificated, status } = useSelector((state) => state.users); 
+
+    const [isStatus, setIsStatus] = useState(true)
+
+    const changeStatus = () => {
+        setIsStatus(!isStatus);
+      }; 
+
 
     return (
         <div className="sidebar" >
@@ -34,31 +41,23 @@ function SideBarStudent(props) {
                                 <span>Category{' '}<i className="fa fa-caret-down fa-lg dropbtn"></i></span>
                             </DropdownToggle>
                             <DropdownMenu className='sidebar-dropdown-menu-item'>
-                                <Link to='/student-courses' className='dropdown-item'><DropdownItem>Student</DropdownItem></Link>
-                                <Link to='/teacher-dashboard' className='dropdown-item'><DropdownItem>Teacher</DropdownItem></Link> 
-                                {/* only added to check the routes, please move to the correct position later */}
-                            </DropdownMenu>
+                                <Link to='' className='dropdown-item'><DropdownItem>Student</DropdownItem></Link>
+                                <Link to='' className='dropdown-item'><DropdownItem>Teacher</DropdownItem></Link> 
+                             </DropdownMenu>
                         </Dropdown>
-                    </li>
-                    <Link to='/'>
-                    <li onClick={props.isClose}>
-                        For Student
-                    </li >    
-                    </Link>
-                    <li >
-                        <div className="vl" ></div>{" "}
                     </li>
                     <li>
                         <div>
                         {isAuthentificated ? (
                             <div className="drop-img">
-                                <Link ><img src={profile} /></Link>
+                                 <div className="vl" ></div>
+                                <Link ><img src={profile} alt="profile" className="profile-img"/></Link>
                                 <span>{" "}John Doe</span>
                                 <div className="dropdown-content-img">
-                                    {role ? (
-                                        <Link to="/student" className="drop">Dashboard</Link>
+                                    {status === 0 ? (
+                                        <Link to="/student-courses" className="drop">Dashboard</Link>
                                     ) : (
-                                        <Link to="/teacher" className="drop">Dashboard</Link>
+                                        <Link to="/teacher-dashboard" className="drop">Dashboard</Link>
                                     )}
                                         <Link to='/register-teacher' className="drop">
                                             <div onClick={() => { localStorage.removeItem("token");
@@ -70,7 +69,21 @@ function SideBarStudent(props) {
                                     </div>
                             </div>
                             ) : (
-                            <div>
+                            <div className="form-navbar">
+                                {isStatus === true ? (
+                                <div className="for">
+                                    <Link to='/' isTeacher={changeStatus}>
+                                      For Teacher
+                                    </Link>
+                                </div>
+                                ) : (
+                                <div className="for">
+                                    <Link to='/' isStudent={changeStatus}>
+                                    For Student
+                                    </Link>
+                                </div>
+                            )}
+                                <div className="vl" ></div>
                                 <div className='sidebar-login-button'> 
                                     <Link to='/login'>
                                         <button > 
@@ -79,7 +92,7 @@ function SideBarStudent(props) {
                                     </Link>
                                 </div>
                                 <div className='sidebar-signup-button'>
-                                    <Link to='/register-student'>
+                                    <Link to='/register'>
                                         <button>Sign Up </button>
                                     </Link>
                                 </div>
@@ -93,4 +106,4 @@ function SideBarStudent(props) {
     );
 }
 
-export default SideBarStudent;
+export default SideBar;
