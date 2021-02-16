@@ -1,27 +1,40 @@
-import React, { useState } from 'react';
-import imgStudent from '../../../assets/studentpicture.png'
+import React, { useState, useEffect } from 'react';
+import imgStudent from '../../../assets/studentpicture.png';
+import { getUserProfile } from "../../../redux/actions/UserAction";
+import { connect } from "react-redux";
 
-const StudentProfile = () => {
+const StudentProfile = (props) => {
     const [isEdit, setEdit] = useState(true)
 
     const handleEdit = () => {
         setEdit(!isEdit)
     }
 
+    useEffect(() => {
+        props.getUserProfile();
+    }, []);
+    
+
     return (
         <>
         { isEdit ? (
-            <div className='student-profile-box'>
-            <div className='student-profile'>
-                <div className='student-profile-image'>
-                    <img src={imgStudent} alt='student'/>
-                </div>
-                <h5>John Doe</h5>
-                <p>john.doe@gmail.com</p>
-                <br/>
-                <span><u onClick={handleEdit}> Edit Profile </u></span>
-            </div>
-            </div>
+            <>
+            {props.userProfile ? (
+              <div className='student-profile-box'>
+              <div className='student-profile'>
+                  <div className='student-profile-image'>
+                      <img src={imgStudent} alt='student'/>
+                  </div>
+                  <h5>{props.userProfile.fullname}</h5>
+                  <p>{props.userProfile.email}</p>
+                  <br/>
+                  <span><u onClick={handleEdit}> Edit Profile </u></span>
+              </div>
+              </div>
+            ) : (
+              <div>Loading...</div>
+            )}
+          </>
         ) : (
             <div className='student-profile-box'>
             <div className='student-profile-edit'>
@@ -49,4 +62,10 @@ const StudentProfile = () => {
     )
 }
 
-export default StudentProfile;
+const mapStateToProps = (state) => {
+    return {
+      userProfile: state.users.userProfile,
+    };
+  };
+
+export default connect(mapStateToProps, { getUserProfile })(StudentProfile);
