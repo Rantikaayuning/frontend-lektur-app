@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import {
   courseCardJson,
@@ -7,28 +8,42 @@ import {
 } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
 
-function TeacherDashboard() {
+import { getUserProfile } from "../../redux/actions/UserAction";
+
+function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
 
   const handleEdit = () => {
     setEdit(!isEdit);
   };
 
+  useEffect(() => {
+    props.getUserProfile();
+  }, []);
+
+  // console.log(props.userProfile);
+
   return (
     <div className="teacher-dashboard-container">
       {isEdit ? (
-        <div className="teacher-profile">
-          <img src={teacherProfile.image} alt="teacher profile" />
-          <div className="name-email">
-            <div>
-              <b>{teacherProfile.name}</b>
+        <>
+          {props.userProfile ? (
+            <div className="teacher-profile">
+              <img src={teacherProfile.image} alt="teacher profile" />
+              <div className="name-email">
+                <div>
+                  <b>{props.userProfile.fullname}</b>
+                </div>
+                <div>{props.userProfile.email}</div>
+              </div>
+              <span className="edit-teacher-profile">
+                <u onClick={handleEdit}> Edit Profile </u>
+              </span>
             </div>
-            <div>{teacherProfile.email}</div>
-          </div>
-          <span className="edit-teacher-profile">
-            <u onClick={handleEdit}> Edit Profile </u>
-          </span>
-        </div>
+          ) : (
+            <div>Loading...</div>
+          )}
+        </>
       ) : (
         <div className="teacher-profile">
           <div className="teacher-profile-edit">
@@ -81,4 +96,10 @@ function TeacherDashboard() {
   );
 }
 
-export default TeacherDashboard;
+const mapStateToProps = (state) => {
+  return {
+    userProfile: state.users.userProfile,
+  };
+};
+
+export default connect(mapStateToProps, { getUserProfile })(TeacherDashboard);

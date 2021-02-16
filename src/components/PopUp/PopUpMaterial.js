@@ -11,7 +11,7 @@ export const PopUpMaterial = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className='modal-course'>
-              <div className="pop-up-course">
+              <div className="pop-up-course-material">
                 <p>Lesson #1 : What is Cinematic?</p>
                 <li>
                   <label>Read course material: <Link to='/material'><span>Cinematic and Open Source.pdf</span></Link></label>
