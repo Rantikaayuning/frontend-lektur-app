@@ -1,5 +1,9 @@
 import API from "../../api/index";
-import { LOGIN, GET_USER_PROFILE } from "../types/UserLogin";
+import {
+  LOGIN,
+  GET_USER_PROFILE,
+  UPDATE_USER_PROFILE,
+} from "../types/UserLogin";
 
 export const postLogin = (body) => (dispatch) => {
   API.post("/users/login", body).then((response) => {
@@ -25,4 +29,18 @@ export const getUserProfile = () => (dispatch) => {
       }
     })
     .catch((error) => console.log(error));
+};
+
+export const updateUserProfile = (fullname, email) => (dispatch) => {
+  API.put("/users/update", {
+    fullname,
+    email,
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch({
+        type: UPDATE_USER_PROFILE,
+        payload: response.data.data,
+      });
+    }
+  });
 };

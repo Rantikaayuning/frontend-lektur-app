@@ -1,9 +1,14 @@
-import { GET_TOKEN, GET_USER_PROFILE, LOGIN } from "../types/UserLogin";
+import {
+  GET_USER_PROFILE,
+  LOGIN,
+  UPDATE_USER_PROFILE,
+} from "../types/UserLogin";
 
 const initialState = {
   login: null,
   isAuthentificated: localStorage.getItem("token") ? true : false,
   userProfile: null,
+  updateUser: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -19,6 +24,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userProfile: payload,
+      };
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        updateUser: payload,
       };
   }
   return state;
