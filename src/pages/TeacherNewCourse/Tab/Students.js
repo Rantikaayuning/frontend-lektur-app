@@ -6,13 +6,16 @@ import {studentEnroll} from '../../../assets/JSONFile/dummyData';
 import checklistOne from '../../../assets/checklist1.png'
 import checklistTwo from '../../../assets/checklist2.png'
 import checklistThree from '../../../assets/checklist3.png'
+import { PopUpInvite } from '../../../components/PopUp/PopUpInvite'
 
 const TeacherStudentsTab = () => {
     const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
     const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
+    const [isPopUpOpen, setPopUpOpen] = useState(false)
 
     const toggleSort = () => setDropdownSortOpen(before => !before);
     const toggleFilter = () => setDropdownFilterOpen(prevState => !prevState);
+    const handlePopUp = () => setPopUpOpen(!isPopUpOpen)
 
     return (
         <>
@@ -65,7 +68,8 @@ const TeacherStudentsTab = () => {
                     <div className='student-list-box'>
                         <div className='student-list-header'>
                             <h5><b>Students</b></h5>
-                            <p><button>Invite</button></p>
+                            <p><button onClick={handlePopUp}>Invite</button></p>
+                            <PopUpInvite show={isPopUpOpen} onHide={() => setPopUpOpen(false)} togglePopUp={handlePopUp}/>
                         </div>
                         {studentEnroll.map((item) => (
                         <div className='student-list-name'>
