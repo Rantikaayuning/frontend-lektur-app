@@ -183,6 +183,8 @@ export const studentAssessment = [
     choiceThree: 'sit amet auctor nulla aliquet eget',
     choiceFour: 'sit amet auctor nulla aliquet eget',
     choiceFive: 'sit amet auctor nulla aliquet eget',
+    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
+    isCorrect: true
   },
   {
     noQuestion: 2,
@@ -192,6 +194,8 @@ export const studentAssessment = [
     choiceThree: 'sit amet auctor nulla aliquet eget',
     choiceFour: 'sit amet auctor nulla aliquet eget',
     choiceFive: 'sit amet auctor nulla aliquet eget',
+    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
+    isCorrect: true
   },
   {
     noQuestion: 3,
@@ -201,6 +205,8 @@ export const studentAssessment = [
     choiceThree: 'sit amet auctor nulla aliquet eget',
     choiceFour: 'sit amet auctor nulla aliquet eget',
     choiceFive: 'sit amet auctor nulla aliquet eget',
+    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
+    isCorrect: true
   },
   {
     noQuestion: 4,
@@ -210,6 +216,8 @@ export const studentAssessment = [
     choiceThree: 'sit amet auctor nulla aliquet eget',
     choiceFour: 'sit amet auctor nulla aliquet eget',
     choiceFive: 'sit amet auctor nulla aliquet eget',
+    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
+    isCorrect: false
   }
 ]
 
@@ -277,8 +285,8 @@ export const studentCourses = [
   {
     title: 'React Crash Course',
     writer: 'Travery Media',
-    totalCourse: 15,
-    courseDone: 8,
+    totalCourse: 8,
+    courseDone: 2,
     image: imgCourse,
     isCompleted: false,
     isPending: false,
@@ -286,6 +294,17 @@ export const studentCourses = [
     completeDate: null,
     rightAnswer: null,
     totalQuestion: null,
+    id: 1,
+    lesson: 
+      {
+        1: 'What is React Course?',
+        2: 'How is React Course?',
+        3: 'Why is React Course?',
+        4: 'Loreum Ipsum',
+        5: 'Loreum Ipsum',
+        6: 'Loreum Ipsum',
+        7: 'Loreum Ipsum',
+      }
   },
   {
     title: 'Build Web Game Using React',
@@ -299,6 +318,7 @@ export const studentCourses = [
     completeDate: null,
     rightAnswer: null,
     totalQuestion: null,
+    id: 2
   },
   {
     title: 'Create Cinematic Music Video',
@@ -312,6 +332,7 @@ export const studentCourses = [
     completeDate: '28 January 2021 08:00pm',
     rightAnswer: 11,
     totalQuestion: 15,
+    id: 3
   },
   {
     title: 'Create Cinematic Music Video',
@@ -325,5 +346,6 @@ export const studentCourses = [
     completeDate: '28 January 2021 08:00pm',
     rightAnswer: 11,
     totalQuestion: 15,
+    id: 4
   },
 ]

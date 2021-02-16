@@ -19,6 +19,7 @@ import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
 import StudentBoardAssessment from "./pages/StudentDashboard/Tab/Assessment";
 import CourseDetail from "./pages/CourseDetail/CourseDetail";
+import StudentAssessmentResult from "./pages/StudentAssessment/Result";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='/student-assessment' component={StudentBoardAssessment}/>
         <Route path='/material' component={StudentMaterial}/>
         <Route path='/assessment' component={StudentAssessment} />
+        <Route path='/assessment-result' component={StudentAssessmentResult} />
         <Route path='/teacher-dashboard' component={TeacherDashboard} />
         <Route path='/teacher-new-course' component={TeacherCourseTab} />
         <Route path='/teacher-new-assessment' component={TeacherAssessmentTab} />
