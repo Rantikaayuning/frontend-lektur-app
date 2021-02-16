@@ -8,6 +8,10 @@
   padding: 50px 150px 50px 150px;
 }
 
+.pop-up-course-material {
+  padding: 50px 50px 50px 80px;
+}
+
 .pop-up-course p {
   font-weight: 600;
 }
