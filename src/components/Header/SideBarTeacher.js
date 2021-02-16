@@ -12,7 +12,7 @@ function SideBarStudent(props) {
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
-    const { isAuthentificated, role } = useSelector((state) => state.users); 
+    const { isAuthentificated} = useSelector((state) => state.users); 
 
     return (
         <div className="sidebar" >
@@ -34,32 +34,20 @@ function SideBarStudent(props) {
                                 <span>Category{' '}<i className="fa fa-caret-down fa-lg dropbtn"></i></span>
                             </DropdownToggle>
                             <DropdownMenu className='sidebar-dropdown-menu-item'>
-                                <Link to='/student-courses' className='dropdown-item'><DropdownItem>Student</DropdownItem></Link>
-                                <Link to='/teacher-dashboard' className='dropdown-item'><DropdownItem>Teacher</DropdownItem></Link> 
-                                {/* only added to check the routes, please move to the correct position later */}
+                                <Link to='' className='dropdown-item'><DropdownItem>Student</DropdownItem></Link>
+                                <Link to='' className='dropdown-item'><DropdownItem>Teacher</DropdownItem></Link> 
                             </DropdownMenu>
                         </Dropdown>
-                    </li>
-                    <Link to='/'>
-                    <li onClick={props.isOpen}>
-                        For Teacher
-                    </li >    
-                    </Link>
-                    <li >
-                        <div className="vl" ></div>{" "}
                     </li>
                     <li>
                         <div>
                         {isAuthentificated ? (
                             <div className="drop-img">
-                                <Link ><img src={profile} /></Link>
+                                <div className="vl" ></div>
+                                <Link ><img src={profile} alt="profile" className="profile-img"/></Link>
                                 <span>{" "}John Doe</span>
                                 <div className="dropdown-content-img">
-                                    {role ? (
-                                        <Link to="/student" className="drop">Dashboard</Link>
-                                    ) : (
-                                        <Link to="/teacher" className="drop">Dashboard</Link>
-                                    )}
+                                        <Link to="/teacher-dashboard" className="drop">Dashboard</Link>
                                         <Link to='/register-teacher' className="drop">
                                             <div onClick={() => { localStorage.removeItem("token");
                                                                     window.open("/", "_self")}}
@@ -70,7 +58,13 @@ function SideBarStudent(props) {
                                     </div>
                             </div>
                             ) : (
-                            <div>
+                            <div className="form-navbar"> 
+                                <div className="for">
+                                    <Link to='/' onClick={props.isOpen}>
+                                    For Teacher 
+                                    </Link>
+                                </div>
+                                <div className="vl" ></div>
                                 <div className='sidebar-login-button'> 
                                     <Link to='/login'>
                                         <button > 

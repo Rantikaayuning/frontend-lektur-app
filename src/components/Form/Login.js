@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import {Jumbotron} from "reactstrap"
 import { useDispatch } from "react-redux";
 
-import {postLogin} from "../../redux/actions/UserAction"
+import {postLogin, getProfile} from "../../redux/actions/UserAction"
 
 function Login() {
   const [userLogin, setUserLogin] = useState({

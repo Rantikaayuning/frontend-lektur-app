@@ -2,7 +2,8 @@ import React from 'react';
 import bgcontent from '../../assets/rectangle55.png';
 import { Link } from 'react-router-dom';
 import Content from "../../components/ContentCard/index";
-import Jumbo from "../../components/Header/Jumbotron"
+import Jumbo from "../../components/Header/Jumbotron";
+
 
 const HomePage = () => {
     return(
