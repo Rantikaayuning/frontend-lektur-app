@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../../assets/LEKTUR.png";
 import { Link } from "react-router-dom"
 import {useSelector} from "react-redux"
 import garis from "../../assets/Rectangle 2.png";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { getUserProfile } from "../../redux/actions/UserAction";
+import { connect } from "react-redux";
 
 import profile from "../../assets/Ellipse 2.png"
 
-function SideBar() {
+function SideBar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
-    const { isAuthentificated, status } = useSelector((state) => state.users); 
+    const {  status } = useSelector((state) => state.users); 
 
     const [isStatus, setIsStatus] = useState(true)
 
@@ -20,6 +22,9 @@ function SideBar() {
         setIsStatus(!isStatus);
       }; 
 
+    useEffect(() => {
+        props.getUserProfile();
+    }, []);
 
     return (
         <div className="sidebar" >
@@ -48,11 +53,11 @@ function SideBar() {
                     </li>
                     <li>
                         <div>
-                        {isAuthentificated ? (
+                        {props.userProfile ? (
                             <div className="drop-img">
                                  <div className="vl" ></div>
                                 <Link ><img src={profile} alt="profile" className="profile-img"/></Link>
-                                <span>{" "}John Doe</span>
+                                <span>{" "}{props.userProfile.fullname}</span>
                                 <div className="dropdown-content-img">
                                     {status === 0 ? (
                                         <Link to="/student-courses" className="drop">Dashboard</Link>
@@ -106,4 +111,10 @@ function SideBar() {
     );
 }
 
-export default SideBar;
+const mapStateToProps = (state) => {
+    return {
+        userProfile: state.users.userProfile,
+    };
+};
+
+export default connect(mapStateToProps, { getUserProfile })(SideBar);
