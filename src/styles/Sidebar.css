@@ -48,6 +48,7 @@
     color: #000000;
     background-color: white;
     border: none;
+    margin-left: 30px;
 }
 
 .sidebar .logo img {
@@ -86,7 +87,7 @@
 .sidebar .center i {
     position: absolute;
     margin-top: 11px;
-    margin-left: 133px;
+    margin-left: 200px;
 }
 
 .sidebar ul {
@@ -106,9 +107,12 @@
 .vl {
     top: -2px;
     position: absolute;
+    margin: auto 10px;
+    left: 240px;
     border-left: 2px solid black;
     height: 30px;
 }
+
 
 .sidebar-dropdown {
     background-color: white;
@@ -179,4 +183,22 @@
     background-color: #16213b;
     text-decoration: none;
     color: #f1f1f1;
+}
+
+.form-navbar{
+    display: flex;
+}
+
+.for a{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #000000;
+}
+
+.profile-img{
+    margin-left: 150px;
 }

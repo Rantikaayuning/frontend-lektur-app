@@ -4,11 +4,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./styles.css";
 
 //Components
-import Header from "./components/Header/Header"
+import Header from "./components/Header/SideBar"
 import Footer from "./components/Footer";
 import HomePage from './pages/HomePage/index'
-import SignUpStudent from "./components/Form/SignUpStudent"
-import SignUpTeacher from "./components/Form/SignUpTeacher"
+import SignUp from "./components/Form/SignUp"
 import Login from "./components/Form/Login";
 import StudentBoardCourses from "./pages/StudentDashboard/Tab/Courses";
 import StudentMaterial from "./pages/StudentMaterial";
@@ -27,8 +26,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path='/' component={HomePage}/>
-        <Route path='/register-student' component={SignUpStudent}/>
-        <Route path='/register-teacher' component={SignUpTeacher}/>
+        <Route path='/register' component={SignUp}/>
         <Route path='/login' component={Login}/>
         <Route path='/student-courses' component={StudentBoardCourses}/>
         <Route path='/student-assessment' component={StudentBoardAssessment}/>
