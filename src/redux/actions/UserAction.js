@@ -6,8 +6,9 @@ import {
   UPDATE_USER_PROFILE,
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
+import Cookies from "js-cookie";
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("token"); //   const token = Cookies.get("token");
 
 export const postLogin = (body) => (dispatch) => {
   API.post("/users/login", body).then((response) => {
@@ -19,10 +20,10 @@ export const postLogin = (body) => (dispatch) => {
         role: jwt_decode(localStorage.getItem("token")).status,
       });
 
-      // localStorage.setItem("token", response.data.data.token);
-      // Cookies.set("token", response.data.data.token);
+      localStorage.setItem("token", response.data.data.token);
+      Cookies.set("token", response.data.data.token); // currently not used
 
-      getUserProfile(); // please check more here
+      getUserProfile();
     }
   });
 };
@@ -79,6 +80,7 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
         type: UPDATE_USER_PROFILE,
         payload: response.data.data,
       });
+      getUserProfile();
     }
   });
 };

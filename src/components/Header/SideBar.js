@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/LEKTUR.png";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import garis from "../../assets/Rectangle 2.png";
 import {
   Dropdown,
@@ -28,6 +27,8 @@ function SideBar(props) {
   useEffect(() => {
     props.getUserProfile();
   }, []);
+
+  console.log(props.userProfile);
 
   return (
     <div className="sidebar">
@@ -64,7 +65,11 @@ function SideBar(props) {
             <div>
               {props.userProfile ? (
                 <>
-                  {/* <div>For Teacher / For Student made later</div> */}
+                  {props.userProfile.status === 0 ? (
+                    <li>For Student</li>
+                  ) : (
+                    <li>For Teacher</li>
+                  )}
                   <div className="drop-img">
                     <div className="vl"></div>
                     <Link>
