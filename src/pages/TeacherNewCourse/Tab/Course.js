@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
 
 const TeacherCourseTab = () => {
+    const [isAdd, setAdd] = useState(false)
 
+    const handleAdd = () => {
+        setAdd(true)
+    }
     return (
         <>
             <div className='teacher-assessment'>
@@ -34,9 +38,35 @@ const TeacherCourseTab = () => {
                     <div>
                         <p><hr type="solid"/></p>
                     </div>
-                    <div className='teacher-add-new-lesson-link'>
+                    <div className='teacher-add-new-lesson-content'>
                         <h4>Content*</h4>
-                        <p>Add new lesson</p>
+                    </div>
+                    {isAdd === true ? (
+                    <div className='add-new-lesson-box'>
+                        <div className='add-new-lesson-input'>
+                            <h4><b>Lesson #1</b></h4>
+                            <div className='add-new-lesson-title'>
+                                <p><input type="text" placeholder="     Title*"/></p>
+                                <p><hr type="solid"/></p>
+                            </div>
+                            <div className='add-new-lesson-description'>
+                                <p><textarea type="text" placeholder="      Description*" cols='45' rows='5'/></p>
+                                <p><hr type="solid"/></p>
+                            </div>
+                        </div>
+                        <div className='upload-new-lesson'>
+                            <p><button className='video-lesson'>Upload Video</button></p>
+                            <p>Required. Max. size 200 MB. Supported format .mp4</p>
+                            <p><button className='material-lesson'>Add Lesson Material</button></p>
+                            <p>Max. size 20MB. Supported format .pdf</p>
+                            <p className='save'><button>save</button></p>
+                        </div>
+                    </div>
+                    ) : (
+                        <div></div>
+                    ) }
+                    <div className='teacher-add-new-lesson-button'>
+                        <p onClick={handleAdd}>Add new lesson</p>
                     </div>
                     <div className='publish-and-delete-course'>
                         <p><button>Publish Course</button></p>

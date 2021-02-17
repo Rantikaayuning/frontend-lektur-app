@@ -1,8 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-// import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
+import { studentAssessment as assessment } from '../../../assets/JSONFile/dummyData'
+import imgEdit from '../../../assets/editicon.png'
+import imgDropdown from '../../../assets/dropdownsymbol.png'
 
 const TeacherAssessmentTab = () => {
+    const [isSave, setSave] = useState(false)
+    const [isDropdownOpen, setDropDownOpen] = useState(false)
+
+    const handleSave = () => {
+        setSave(!isSave)
+    }
+
+    const handleDropDown = () => {
+        setDropDownOpen(!isDropdownOpen)
+    }
 
     return (
         <>
@@ -16,6 +28,58 @@ const TeacherAssessmentTab = () => {
                         <p>Students</p>
                     </Link>
                 </div>
+            {isSave ? (
+                <div className='teacher-save-question-box'>
+                    <div className='teacher-question-title'>
+                        <h4>Questions</h4>
+                    </div>
+                <div className='teacher-new-question-save'>
+                    <div className='teacher-option-save'>
+                        <h4>
+                            {assessment.length} Questions{' '}
+                            <span><img src={imgEdit} alt='edit' onClick={handleSave}/></span>
+                        </h4><br/>
+                    </div>
+                    <div className='save-question-box'>
+                        {assessment.map(item => (
+                            <div className='questions-answer-box-save'>
+                                <div className='question-dropdown'>
+                                    <p>{item.noQuestion}. {item.question}</p>
+                                    <p><img src={imgDropdown} alt='symbol' onClick={handleDropDown}/></p>
+                                </div>
+                            {isDropdownOpen === false ? (
+                                <>
+                                <label class="container">
+                                <p className='answer'>Answer</p>
+                                <input type="radio" name="radio"/>{' '}
+                                <span>{item.choiceOne}</span>
+                                </label>
+                                <label class="container">
+                                    <input type="radio" name="radio"/>{' '}
+                                    <span>{item.choiceTwo}</span>
+                                </label>
+                                <label class="container">
+                                    <input type="radio" name="radio"/>{' '}
+                                    <span>{item.choiceThree}</span>
+                                </label>
+                                <label class="container">
+                                    <input type="radio" name="radio"/>{' '}
+                                    <span>{item.choiceFour}</span>
+                                </label>
+                                <label class="container">
+                                    <input type="radio" name="radio"/>{' '}
+                                    <span>{item.choiceFive}</span>
+                                </label>
+                                </>
+                            ) : ''}
+                            <br/><br/>
+                            </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <>
                 <div className='teacher-question-title'>
                     <h4>Questions</h4>
                 </div>
@@ -67,9 +131,12 @@ const TeacherAssessmentTab = () => {
                     <p>Add New Question</p>
                 </div>
                 <div className='save-exam-question'>
-                    <button>Save Exam</button>
+                    <button onClick={handleSave}>Save Exam</button>
                 </div>
+                </>
+            )}
             </div>
+
         </>
     )
 }
