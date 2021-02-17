@@ -4,6 +4,7 @@ import {
   GET_USER_PROFILE,
   UPDATE_USER_PROFILE,
 } from "../types/UserLogin";
+import Cookies from "js-cookie";
 
 export const postLogin = (body) => (dispatch) => {
   API.post("/users/login", body).then((response) => {
@@ -11,14 +12,24 @@ export const postLogin = (body) => (dispatch) => {
       dispatch({
         type: LOGIN,
         payload: response.data.message,
-        token: localStorage.setItem("token", response.data.data.token),
+        token: response.data.data.token,
       });
+      localStorage.setItem("token", response.data.data.token);
+      Cookies.set("token", response.data.data.token);
+
+      getUserProfile();
     }
   });
 };
 
 export const getUserProfile = () => (dispatch) => {
-  API.get("/users/profile")
+  const token = Cookies.get("token");
+
+  API.get("/users/profile", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
     .then((response) => {
       if (response.status === 200) {
         console.log(response.data.data);
