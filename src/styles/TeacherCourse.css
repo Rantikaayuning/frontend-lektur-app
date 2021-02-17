@@ -38,6 +38,13 @@
     padding: 10px 24px;
 }
 
+.teacher-add-header-image button:hover {
+    border: 1px solid #EF9C27;
+    background-color: #EF9C27;
+    color: white;
+    padding: 10px 24px;
+}
+
 .teacher-add-header-image p{
     color: #999999;
 }
@@ -58,16 +65,17 @@
     margin-right: 40px;
 }
 
-.teacher-add-new-lesson-link h4{
+.teacher-add-new-lesson-content h4{
     font-weight: bold;
 }
 
-.teacher-add-new-lesson-link p{
+.teacher-add-new-lesson-button{
     text-decoration: underline;
     cursor: pointer;
+    color: #3E89AE;
 }
 
-.teacher-add-new-lesson-link p:hover{
+.teacher-add-new-lesson-button p:hover{
     text-decoration: underline;
     font-weight: bold;
     cursor: pointer;
@@ -96,3 +104,93 @@
     margin: 10px 26px;
 }
 
+.add-new-lesson-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 32px;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 42px 0 24px 0;
+}
+
+.add-new-lesson-box h4{
+    font-size: 16px;
+}
+
+.add-new-lesson-title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.add-new-lesson-title input{
+    border: none;
+    outline: none;
+    background-color: white;
+}
+
+.add-new-lesson-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-new-lesson-description textarea {
+    border: none;
+    background-color: white;
+    overflow: auto;
+    resize: none;
+    outline: none;
+}
+
+.upload-new-lesson .video-lesson{
+    border: 1px solid #EF9C27;
+    background-color: #EF9C27;
+    color: white;
+    padding: 10px 24px;
+    font-size: 14px;
+}
+
+.upload-new-lesson .material-lesson{
+    border: 1px solid #EF9C27;
+    background-color: white;
+    color: #EF9C27;
+    padding: 10px 24px;
+    font-size: 14px;
+}
+
+.upload-new-lesson .material-lesson:hover {
+    border: 1px solid #EF9C27;
+    background-color: #EF9C27;
+    color: white;
+    padding: 10px 24px;
+    font-size: 14px;
+}
+
+.upload-new-lesson p{
+    color: #999;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.upload-new-lesson .save{
+    text-align: end;
+    margin-top: 100px;
+}
+
+.upload-new-lesson .save button{
+    background-color: #16213B;
+    color: white;
+    border: 1px solid #16213B;
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 10px 24px;
+}
+
+.upload-new-lesson {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin-top: 60px;
+    margin-left: 18%;
+}
