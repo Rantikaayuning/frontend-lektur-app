@@ -135,3 +135,48 @@
     color: white;
     padding: 10px 24px;
 }
+
+.save-question-box {
+    padding: 20px;
+}
+
+.teacher-option-save h4{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 22px 0 0 22px;
+}
+
+.teacher-option-save img:hover{
+    cursor: pointer;
+}
+
+.save-question-box {
+    width: 100%;
+}
+
+.teacher-save-question-box {
+    width: 100%;
+    margin-bottom: 174px;
+    padding-left: 100px;
+}
+
+.teacher-new-question-save {
+    margin: 20px 280px 10px 250px;
+    background-color: white;
+    padding: 25px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.questions-answer-box-save {
+    width: 100%;
+}
+
+.questions-answer-box-save .question-dropdown{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.question-dropdown img{
+    cursor: pointer;
+}
