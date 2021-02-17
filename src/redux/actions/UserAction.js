@@ -80,6 +80,7 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
         type: UPDATE_USER_PROFILE,
         payload: response.data.data,
       });
+
       getUserProfile();
     }
   });

@@ -33,6 +33,7 @@ function TeacherDashboard(props) {
     console.log(fullname, email);
 
     props.updateUserProfile(fullname, email);
+    // props.getUserProfile();
   };
 
   return (
@@ -83,9 +84,7 @@ function TeacherDashboard(props) {
               />
               <br />
               <br />
-              <button onClick={() => props.history.push("/teacher-dashboard")}>
-                Save Changes
-              </button>
+              <button>Save Changes</button>
             </form>
           </div>
         </div>
