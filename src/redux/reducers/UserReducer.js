@@ -1,11 +1,17 @@
-import { GET_USER_PROFILE, LOGIN, SIGN_UP } from "../types/UserLogin";
+import {
+  GET_USER_PROFILE,
+  LOGIN,
+  SIGN_UP,
+  UPDATE_USER_PROFILE,
+} from "../types/UserLogin";
 
 const initialState = {
   login: null,
   signup: null,
-  status: '',
+  status: "",
   isAuthentificated: localStorage.getItem("token") ? true : false,
   userProfile: null,
+  updateUser: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -18,16 +24,21 @@ const userReducer = (state = initialState, action) => {
         status: role,
         isAuthentificated: true,
       };
-    case SIGN_UP :
-        return {
-           ...state,
-           signup : payload,
-      }
+    case SIGN_UP:
+      return {
+        ...state,
+        signup: payload,
+      };
 
     case GET_USER_PROFILE:
       return {
         ...state,
         userProfile: payload,
+      };
+    case UPDATE_USER_PROFILE:
+      return {
+        ...state,
+        updateUser: payload,
       };
   }
   return state;

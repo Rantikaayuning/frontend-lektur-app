@@ -8,10 +8,15 @@ import {
 } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
 
-import { getUserProfile } from "../../redux/actions/UserAction";
+import {
+  getUserProfile,
+  updateUserProfile,
+} from "../../redux/actions/UserAction";
 
 function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleEdit = () => {
     setEdit(!isEdit);
@@ -21,7 +26,15 @@ function TeacherDashboard(props) {
     props.getUserProfile();
   }, []);
 
-  // console.log(props.userProfile);
+  console.log(props.userProfile);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(fullname, email);
+
+    props.updateUserProfile(fullname, email);
+    // props.getUserProfile();
+  };
 
   return (
     <div className="teacher-dashboard-container">
@@ -48,20 +61,30 @@ function TeacherDashboard(props) {
         <div className="teacher-profile">
           <div className="teacher-profile-edit">
             <img src={teacherProfile.image} alt="student" />
-            <form>
+            <form onSubmit={handleSubmit}>
               <p>
                 Name<span>*</span>
               </p>
-              <input type="text" placeholder="John Doe" />
+              <input
+                type="text"
+                placeholder="John Doe"
+                onChange={(e) => setFullname(e.target.value)}
+                value={fullname}
+              />
               <br />
               <br />
               <p>
                 Email<span>*</span>
               </p>
-              <input type="email" placeholder="john@gmail.com" />
+              <input
+                type="email"
+                placeholder="john@gmail.com"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
               <br />
               <br />
-              <button onClick={handleEdit}>Save Changes</button>
+              <button>Save Changes</button>
             </form>
           </div>
         </div>
@@ -99,7 +122,10 @@ function TeacherDashboard(props) {
 const mapStateToProps = (state) => {
   return {
     userProfile: state.users.userProfile,
+    updateUser: state.users.updateUser,
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile })(TeacherDashboard);
+export default connect(mapStateToProps, { getUserProfile, updateUserProfile })(
+  TeacherDashboard
+);
