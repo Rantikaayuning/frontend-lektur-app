@@ -27,6 +27,7 @@ function Login() {
       password: userLogin.password,
     };
     dispatch(postLogin(body));
+    // if account doesnt exist?
     history.push("/");
   };
 

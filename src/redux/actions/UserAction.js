@@ -11,21 +11,25 @@ import Cookies from "js-cookie";
 const token = localStorage.getItem("token"); //   const token = Cookies.get("token");
 
 export const postLogin = (body) => (dispatch) => {
-  API.post("/users/login", body).then((response) => {
-    if (response.status === 200) {
-      dispatch({
-        type: LOGIN,
-        payload: response.data.message,
-        token: localStorage.setItem("token", response.data.data.token), // this can be deleted and replaced by token: response.data.data.token
-        role: jwt_decode(localStorage.getItem("token")).status,
-      });
+  API.post("/users/login", body)
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: LOGIN,
+          payload: response.data.message,
+          token: localStorage.setItem("token", response.data.data.token), // this can be deleted and replaced by token: response.data.data.token
+          role: jwt_decode(localStorage.getItem("token")).status,
+        });
 
-      localStorage.setItem("token", response.data.data.token);
-      Cookies.set("token", response.data.data.token); // currently not used
+        localStorage.setItem("token", response.data.data.token);
+        Cookies.set("token", response.data.data.token); // currently not used
 
-      getUserProfile();
-    }
-  });
+        getUserProfile();
+      }
+    })
+    .catch((payload) => {
+      alert(payload.response.data.msg);
+    });
 };
 
 export const signup = (role, payload) => (dispatch) => {
@@ -36,7 +40,7 @@ export const signup = (role, payload) => (dispatch) => {
           type: SIGN_UP,
           payload: response.data.msg,
         });
-        alert("Sign up is successful, please continue to login");
+        alert(`${response.data.msg}fully registered, please continue to login`);
       }
     })
     .catch((payload) => {
@@ -45,6 +49,8 @@ export const signup = (role, payload) => (dispatch) => {
 };
 
 export const getUserProfile = () => (dispatch) => {
+  // const token = Cookies.get("token");
+
   API.get("/users/profile", {
     headers: {
       Authorization: `Bearer ${token}`,
