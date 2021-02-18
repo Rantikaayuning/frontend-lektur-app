@@ -50,10 +50,12 @@ const StudentAssessmentResult = () => {
                                 <input type="radio" name="radio"/>{' '}
                                 <span>{item.choiceFive}</span>
                             <br/><br/>
+                            {item.isCorrect === true ? '' : (
                             <p>
                                 <p className='remark'>Remark</p>
                                 <p>{item.remark}</p>
                             </p>
+                            )}
                             </label>
                             </div>
                             <div className='assessment-correct'>

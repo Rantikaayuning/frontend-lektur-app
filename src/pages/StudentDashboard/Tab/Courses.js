@@ -37,7 +37,7 @@ const StudentBoardCourses = () => {
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={item.courseDone/item.totalCourse*100} /></p>
                             <p className='title'>{item.courseDone}/{item.totalCourse} Course Complete</p>
-                            <p><button onClick={() => setPopUpCourse(true)}>Lesson #{item.courseDone + 1} Lorem Ipsum</button></p>
+                            <p><button onClick={() => setPopUpCourse(true)}>Lesson #{item.courseDone + 1} {item.lesson[3]}</button></p>
                         </div>
                     </div>          
                     ) : item.isPending === true ? (

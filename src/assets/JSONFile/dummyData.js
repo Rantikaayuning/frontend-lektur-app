@@ -1,13 +1,78 @@
 import Rectangle5 from "../../assets/Rectangle5.png";
 import profilePic from "../../assets/studentpicture.png"
 import reactCourse from "../../assets/reactCourse.png"
-import imgCourse from "../course-image.png"
+import imgCourse from "../course-image.png";
+import imgCourse2 from "../RectangleSquare.png"
 
 export const staticImage = [
   {
+    image: imgCourse2,
+    text:
+      "A cinematic video is a video that resembles a film. Over the years, the movie industry changed quite a lot in terms of aspect ratio, color, and lighting styles. When we use the term cinematic, this means it looks like an actual film we see in theaters. By the end of the course, you should be able to make cinematic video by yourself.",
+    title: "Create Cinematic Music Video",
+    lecture: "By Justin Junaedi",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Art & Humanity",
+    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+  },
+  {
+    image: imgCourse2,
+    text:
+      "A cinematic video is a video that resembles a film. Over the years, the movie industry changed quite a lot in terms of aspect ratio, color, and lighting styles. When we use the term cinematic, this means it looks like an actual film we see in theaters. By the end of the course, you should be able to make cinematic video by yourself.",
+    title: "Create Cinematic Music Video",
+    lecture: "By Justin Junaedi",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Art & Humanity",
+    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+  },
+  {
     image: Rectangle5,
     text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
+      "We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop movement and gestures. The speech model that we’ll practice is useful and even as a structure for hour-long presentations.",
+    title: "Public Speaking Like a Pro",
+    lecture: "By John Doe",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Business",
+  },
+  {
+    image: Rectangle5,
+    text:
+      "We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop movement and gestures. The speech model that we’ll practice is useful and even as a structure for hour-long presentations.",
+    title: "Public Speaking Like a Pro",
+    lecture: "By John Doe",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Business",
+  },
+  {
+    image: imgCourse2,
+    text:
+      "A cinematic video is a video that resembles a film. Over the years, the movie industry changed quite a lot in terms of aspect ratio, color, and lighting styles. When we use the term cinematic, this means it looks like an actual film we see in theaters. By the end of the course, you should be able to make cinematic video by yourself.",
+    title: "Create Cinematic Music Video",
+    lecture: "By Justin Junaedi",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Art & Humanity",
+    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+  },
+  {
+    image: imgCourse2,
+    text:
+      "A cinematic video is a video that resembles a film. Over the years, the movie industry changed quite a lot in terms of aspect ratio, color, and lighting styles. When we use the term cinematic, this means it looks like an actual film we see in theaters. By the end of the course, you should be able to make cinematic video by yourself.",
+    title: "Create Cinematic Music Video",
+    lecture: "By Justin Junaedi",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Art & Humanity",
+    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+  },
+  {
+    image: Rectangle5,
+    text:
+      "We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop movement and gestures. The speech model that we’ll practice is useful and even as a structure for hour-long presentations.",
     title: "Create Cinematic Music Video",
     lecture: "By John Doe",
     video_numbers: "15 Videos",
@@ -17,67 +82,7 @@ export const staticImage = [
   {
     image: Rectangle5,
     text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
+      "We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop movement and gestures. The speech model that we’ll practice is useful and even as a structure for hour-long presentations.",
     title: "Create Cinematic Music Video",
     lecture: "By John Doe",
     video_numbers: "15 Videos",
@@ -103,10 +108,32 @@ export const buttonMaterials=[
 
 export const cardMaterial=[
   {
+    image: imgCourse2,
+    text:
+      "A cinematic video is a video that resembles a film. Over the years, the movie industry changed quite a lot in terms of aspect ratio, color, and lighting styles. When we use the term cinematic, this means it looks like an actual film we see in theaters. By the end of the course, you should be able to make cinematic video by yourself.",
+    title: "Create Cinematic Music Video",
+    lecture: "By Justin Junaedi",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Art & Humanity",
+    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+  },
+  {
+    image: imgCourse2,
+    text:
+      "A cinematic video is a video that resembles a film. Over the years, the movie industry changed quite a lot in terms of aspect ratio, color, and lighting styles. When we use the term cinematic, this means it looks like an actual film we see in theaters. By the end of the course, you should be able to make cinematic video by yourself.",
+    title: "Create Cinematic Music Video",
+    lecture: "By Justin Junaedi",
+    video_numbers: "15 Videos",
+    material_numbers: "3 Learning Material",
+    footer: "Art & Humanity",
+    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+  },
+  {
     image: Rectangle5,
     text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
+      "We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop movement and gestures. The speech model that we’ll practice is useful and even as a structure for hour-long presentations.",
+    title: "Public Speaking Like a Pro",
     lecture: "By John Doe",
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
@@ -115,33 +142,13 @@ export const cardMaterial=[
   {
     image: Rectangle5,
     text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
+      "We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop movement and gestures. The speech model that we’ll practice is useful and even as a structure for hour-long presentations.",
+    title: "Public Speaking Like a Pro",
     lecture: "By John Doe",
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Business",
   },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  },
-  {
-    image: Rectangle5,
-    text:
-      "Vestibulum fusce parturient urna a molestie orci. Lectus id quisque amet et vel elementum morbi cursus. Amet sagittis semper mauris diam orci facilisis...",
-    title: "Create Cinematic Music Video",
-    lecture: "By John Doe",
-    video_numbers: "15 Videos",
-    material_numbers: "3 Learning Material",
-    footer: "Business",
-  }
 ]
 
 export const teacherProfile = {
@@ -177,46 +184,46 @@ export const courseCardJson = [
 export const studentAssessment = [
   {
     noQuestion: 1,
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
-    choiceOne: 'sit amet auctor nulla aliquet eget',
-    choiceTwo: 'sit amet auctor nulla aliquet eget',
-    choiceThree: 'sit amet auctor nulla aliquet eget',
-    choiceFour: 'sit amet auctor nulla aliquet eget',
-    choiceFive: 'sit amet auctor nulla aliquet eget',
+    question: 'What’s the virtual DOM?',
+    choiceOne: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
+    choiceTwo: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
+    choiceThree: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
+    choiceFour: 'data that are passed into a component from its parent.',
+    choiceFive: 'a third-party state management library for React, created before the context API existed',
     remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
     isCorrect: true
   },
   {
     noQuestion: 2,
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
-    choiceOne: 'sit amet auctor nulla aliquet eget',
-    choiceTwo: 'sit amet auctor nulla aliquet eget',
-    choiceThree: 'sit amet auctor nulla aliquet eget',
-    choiceFour: 'sit amet auctor nulla aliquet eget',
-    choiceFive: 'sit amet auctor nulla aliquet eget',
+    question: 'What’s JSX?',
+    choiceOne: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
+    choiceTwo: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
+    choiceThree: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
+    choiceFour: 'data that are passed into a component from its parent.',
+    choiceFive: 'a third-party state management library for React, created before the context API existed',
     remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
     isCorrect: true
   },
   {
     noQuestion: 3,
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
-    choiceOne: 'sit amet auctor nulla aliquet eget',
-    choiceTwo: 'sit amet auctor nulla aliquet eget',
-    choiceThree: 'sit amet auctor nulla aliquet eget',
-    choiceFour: 'sit amet auctor nulla aliquet eget',
-    choiceFive: 'sit amet auctor nulla aliquet eget',
+    question: 'What’s the difference between a class component and a functional one?',
+    choiceOne: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
+    choiceTwo: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
+    choiceThree: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
+    choiceFour: 'data that are passed into a component from its parent.',
+    choiceFive: 'a third-party state management library for React, created before the context API existed',
     remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
     isCorrect: true
   },
   {
     noQuestion: 4,
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?',
-    choiceOne: 'sit amet auctor nulla aliquet eget',
-    choiceTwo: 'sit amet auctor nulla aliquet eget',
-    choiceThree: 'sit amet auctor nulla aliquet eget',
-    choiceFour: 'sit amet auctor nulla aliquet eget',
-    choiceFive: 'sit amet auctor nulla aliquet eget',
-    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
+    question: 'What’s the difference between state and props?',
+    choiceOne: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
+    choiceTwo: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
+    choiceThree: 'data that are passed into a component from its parent.',
+    choiceFour: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
+    choiceFive: 'a third-party state management library for React, created before the context API existed',
+    remark: 'State is a component’s internal data that can be modified during the lifetime of the component.',
     isCorrect: false
   }
 ]
@@ -300,10 +307,10 @@ export const studentCourses = [
         1: 'What is React Course?',
         2: 'How is React Course?',
         3: 'Why is React Course?',
-        4: 'Loreum Ipsum',
-        5: 'Loreum Ipsum',
-        6: 'Loreum Ipsum',
-        7: 'Loreum Ipsum',
+        4: 'How to apply React?',
+        5: 'How to apply React?',
+        6: 'How to apply React?',
+        7: 'How to apply React?',
       }
   },
   {

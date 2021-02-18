@@ -1,25 +1,25 @@
 .content-card-container {
-  margin: 0px 60px 0px 40px;
+  margin: 0px 127px 0px 127px;
 }
 
 .card-content{
-  padding-right: 50px;
-  padding-left: 50px;
+  /* padding-right: 50px;
+  padding-left: 50px; */
   margin: 0px auto;
   width: 100%;
 }
 
 .card-container {
-  padding-left: 58px;
+  /* padding-left: 58px; */
   margin-bottom: 36px;
 }
 
 .card {
-  width: 300px;
+  width: 100%;
 }
 
 .card:hover {
-  width: 303px;
+  /* width: 101%; */
   box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 darkgray;
   cursor: pointer;
 }
