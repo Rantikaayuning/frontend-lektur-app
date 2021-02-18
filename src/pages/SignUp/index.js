@@ -32,16 +32,6 @@ export default function SignUp(props) {
         <div>
           <div className="form-select">
             <div className="signup-title">Start Learning!</div>
-            <select
-              name="status"
-              onChange={(event) => setRole(event.target.value)}
-            >
-              <option value={null} className="option">
-                Select Role
-              </option>
-              <option value={1}>Teacher</option>
-              <option value={0}>Student</option>
-            </select>
           </div>
           <p className="signup-account">Create your account</p>
         </div>
@@ -74,6 +64,18 @@ export default function SignUp(props) {
             onChange={(e) => handleSignUp(e)}
           />
         </form>
+        <div className="form-select">
+          <select
+            name="status"
+            onChange={(event) => setRole(event.target.value)}
+          >
+            <option value={null} className="option">
+              Select Role
+            </option>
+            <option value={1}>Teacher</option>
+            <option value={0}>Student</option>
+          </select>
+        </div>
         <br />
         <div className="btn">
           <button
