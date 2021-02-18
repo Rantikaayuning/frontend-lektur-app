@@ -28,7 +28,7 @@ export const postLogin = (body) => (dispatch) => {
   });
 };
 
-export const signup = (role, payload) => (dispatch) => {
+export const postSignup = (role, payload) => (dispatch) => {
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
@@ -36,7 +36,7 @@ export const signup = (role, payload) => (dispatch) => {
           type: SIGN_UP,
           payload: response.data.message,
         });
-        alert("Sign up is successful, please continue to login");
+        alert(`${response.data.message}, please continue to login`);
       }
     })
     .catch((payload) => {
