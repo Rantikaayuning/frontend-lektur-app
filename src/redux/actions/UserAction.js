@@ -21,7 +21,7 @@ export const postLogin = (body) => (dispatch) => {
       });
 
       localStorage.setItem("token", response.data.token);
-      Cookies.set("token", response.data.token); // currently not used
+      // Cookies.set("token", response.data.token); // currently not used
 
       getUserProfile();
     }

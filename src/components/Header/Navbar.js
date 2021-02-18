@@ -79,7 +79,7 @@ function Navbar(props) {
                         <Link to="/student-courses" className="drop">
                           Dashboard
                         </Link>
-                        <Link to="/register-teacher" className="drop">
+                        <Link to="/" className="drop">
                           <div
                             onClick={() => {
                               localStorage.removeItem("token");
@@ -95,7 +95,7 @@ function Navbar(props) {
                         <Link to="/teacher-dashboard" className="drop">
                           Dashboard
                         </Link>
-                        <Link to="/register-teacher" className="drop">
+                        <Link to="/" className="drop">
                           <div
                             onClick={() => {
                               localStorage.removeItem("token");
