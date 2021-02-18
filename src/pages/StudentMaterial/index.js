@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col} from "reactstrap";
 import { Link } from 'react-router-dom'
 import ContentCards from "../../components/ContentCard/Cards";
-import { cardMaterial } from "../../assets/JSONFile/dummyData";
+import { cardMaterial, studentCourses } from "../../assets/JSONFile/dummyData";
 import image2 from "../../assets/Vector1.png"
 import image3 from "../../assets/Vector2.png"
 import image4 from "../../assets/radio-button.png"
@@ -15,10 +15,10 @@ export default function StudentMaterial() {
             <div className="content-material">
                 <div className="text">
                     <div>
-                    <span className="bread-crumb">Create Cinematic Music Video /</span>  {" "}
-                    <span className="link">Lesson #1 : What is Cinematic?</span>
+                    <span className="bread-crumb">{studentCourses[0].title} /</span>  {" "}
+                    <span className="link">Lesson #3 : {studentCourses[0].lesson[3]}</span>
                     </div>
-                    <div className="text-title">Lesson #1 : What is Cinematic?</div>
+                    <div className="text-title">Lesson #3 : {studentCourses[0].lesson[3]}</div>
                 </div>
                 <div className="image-content">
                     <div>
@@ -31,12 +31,12 @@ export default function StudentMaterial() {
                 <div className="description">
                     <div className="description-text">
                         <div className="title-des">Description</div>
-                        <p>Nascetur consequat quam tellus sed convallis amet, nunc. Venenatis, eget faucibus iaculis facilisi pellentesque eleifend mattis vel. Nunc euismod morbi lectus aliquam pretium, pharetra, tellus orci. Lobortis at nulla dictum risus amet. Nunc dolor sit vitae arcu facilisis eu. Tortor, turpis arcu in est. Ullamcorper fringilla ut tempus nulla dolor lorem proin porta neque. Neque eu lorem ultrices id. Et mattis lacus fermentum id nec, aenean enim, curabitur. Enim, donec quis odio ut enim scelerisque id erat laoreet. Vitae sodales rhoncus, et ut ut. Amet, porttitor adipiscing nullam mauris. Lobortis interdum imperdiet mauris pharetra risus proin etiam est.</p> 
+                        <p>{studentCourses[0].description}</p> 
                     </div>
                     <div className="next">
                         <div className="title-next">What's Next</div>
-                        <p><img src={image4} alt='cinematic course'/>{" "}Cinematic course material: <span>Cinematic and Open Source.pdf</span></p>
-                        <p><img src={image3} alt='cinematic course'/>{" "}Cinematic course material: <span>Cinematic and Open Source2.pdf</span></p>
+                        <p><img src={image4} alt='cinematic course'/>{" "}{studentCourses[0].title}: <span>{studentCourses[0].title}.pdf</span></p>
+                        <p><img src={image3} alt='cinematic course'/>{" "}{studentCourses[0].title}l: <span>{studentCourses[0].title}.pdf</span></p>
                         <Link to='/assessment'><button><img src={image2} alt='next lesson'/>{" "}Next lesson: What is vidio?</button></Link>
                     </div>
                 </div>

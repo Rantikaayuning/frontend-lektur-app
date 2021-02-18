@@ -311,7 +311,8 @@ export const studentCourses = [
         5: 'How to apply React?',
         6: 'How to apply React?',
         7: 'How to apply React?',
-      }
+      },
+    description: 'At Lektur, our curriculum team defines React JS as a JavaScript library and not a framework. This is an important distinction. Finding success in web development means using the right tools to make your code as effective and efficient as possible. And when it comes to building user interfaces React JS is a tool you need to know how to take advantage of. If you’re ready to React (plus other crucial web developer skills like JavaScript, HTML, and CSS), you can sign up today for our React Crash Course.'
   },
   {
     title: 'Build Web Game Using React',
