@@ -13,16 +13,10 @@ import { connect } from "react-redux";
 
 import profile from "../../assets/Ellipse 2.png";
 
-function SideBar(props) {
+function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-
-  //   const [isStatus, setIsStatus] = useState(true);
-
-  //   const changeStatus = () => {
-  //     setIsStatus(!isStatus);
-  //   };
 
   useEffect(() => {
     props.getUserProfile();
@@ -65,11 +59,11 @@ function SideBar(props) {
             <div>
               {props.userProfile ? (
                 <>
-                  {props.userProfile.status === 0 ? (
+                  {/* {props.userProfile.status === 0 ? (
                     <li>For Student</li>
                   ) : (
                     <li>For Teacher</li>
-                  )}
+                  )} */}
                   <div className="drop-img">
                     <div className="vl"></div>
                     <Link>
@@ -85,7 +79,7 @@ function SideBar(props) {
                         <Link to="/student-courses" className="drop">
                           Dashboard
                         </Link>
-                        <Link to="/register-teacher" className="drop">
+                        <Link to="/" className="drop">
                           <div
                             onClick={() => {
                               localStorage.removeItem("token");
@@ -101,7 +95,7 @@ function SideBar(props) {
                         <Link to="/teacher-dashboard" className="drop">
                           Dashboard
                         </Link>
-                        <Link to="/register-teacher" className="drop">
+                        <Link to="/" className="drop">
                           <div
                             onClick={() => {
                               localStorage.removeItem("token");
@@ -161,4 +155,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile })(SideBar);
+export default connect(mapStateToProps, { getUserProfile })(Navbar);
