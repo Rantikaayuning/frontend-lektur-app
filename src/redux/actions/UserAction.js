@@ -16,12 +16,12 @@ export const postLogin = (body) => (dispatch) => {
       dispatch({
         type: LOGIN,
         payload: response.data.message,
-        token: localStorage.setItem("token", response.data.data.token), // this can be deleted and replaced by token: response.data.data.token
+        token: localStorage.setItem("token", response.data.token), // this can be deleted and replaced by token: response.data.data.token
         role: jwt_decode(localStorage.getItem("token")).status,
       });
 
-      localStorage.setItem("token", response.data.data.token);
-      Cookies.set("token", response.data.data.token); // currently not used
+      localStorage.setItem("token", response.data.token);
+      Cookies.set("token", response.data.token); // currently not used
 
       getUserProfile();
     }
@@ -31,16 +31,16 @@ export const postLogin = (body) => (dispatch) => {
 export const signup = (role, payload) => (dispatch) => {
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         dispatch({
           type: SIGN_UP,
-          payload: response.data.msg,
+          payload: response.data.message,
         });
         alert("Sign up is successful, please continue to login");
       }
     })
     .catch((payload) => {
-      alert(payload.response.data.msg);
+      alert(payload.response.data.message);
     });
 };
 
@@ -52,10 +52,10 @@ export const getUserProfile = () => (dispatch) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.data);
+        console.log(response.data.result);
         dispatch({
           type: GET_USER_PROFILE,
-          payload: response.data.data,
+          payload: response.data.result,
         });
       }
     })
