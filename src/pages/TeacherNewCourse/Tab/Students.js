@@ -35,33 +35,33 @@ const TeacherStudentsTab = () => {
                         <p><b>Filter</b></p>
                         <p>
                         <Dropdown isOpen={dropdownFilterOpen} toggle={toggleFilter} size='md'  >
-                            <DropdownToggle className='dropdown-menu' color='none'>
+                            <DropdownToggle className='dropdown-menu-filter' color='none'>
                                 <div className='sidebar-dropdown-choose'>
                                     <p>Choose one</p>
                                     <p><i className="fa fa-caret-down fa-lg dropbtn"></i></p>
                                 </div>
                             </DropdownToggle>
                             <DropdownMenu className='sidebar-dropdown-item'>
-                                <DropdownItem>1.</DropdownItem>
-                                <DropdownItem>2.</DropdownItem>
-                                <DropdownItem>3.</DropdownItem>
+                                <DropdownItem>Completed</DropdownItem>
+                                <DropdownItem>Active</DropdownItem>
+                                <DropdownItem>Pending</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                         </p>
-                        <br/><br/>
+                        {/* <br/><br/> */}
                         <p><b>Sort</b></p>
                         <p>
                         <Dropdown isOpen={dropdownSortOpen} toggle={toggleSort} size='md'  >
-                            <DropdownToggle className='dropdown-menu' color='none'>
+                            <DropdownToggle className='dropdown-menu-filter' color='none'>
                                 <div className='sidebar-dropdown-choose'>
                                     <p>Choose one</p>
                                     <p><i className="fa fa-caret-down fa-lg dropbtn"></i></p>
                                 </div>
                             </DropdownToggle>
                             <DropdownMenu className='sidebar-dropdown-item'>
-                                <DropdownItem>1.</DropdownItem>
-                                <DropdownItem>2.</DropdownItem>
-                                <DropdownItem>3.</DropdownItem>
+                                <DropdownItem>Date</DropdownItem>
+                                <DropdownItem>Name</DropdownItem>
+                                <DropdownItem>Score</DropdownItem>
                             </DropdownMenu>
                         </Dropdown></p>
                     </div>

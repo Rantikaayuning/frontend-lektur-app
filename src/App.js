@@ -3,50 +3,23 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./styles.css";
 
-//Components
-import Header from "./components/Header/SideBar";
+import Header from "./components/Header/Navbar";
 import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage/index";
-import SignUp from "./components/Form/SignUp";
-import Login from "./components/Form/Login";
-import StudentBoardCourses from "./pages/StudentDashboard/Tab/Courses";
-import StudentMaterial from "./pages/StudentMaterial";
-import TeacherDashboard from "./pages/TeacherDashboard";
-import StudentAssessment from "./pages/StudentAssessment";
-import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
-import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
-import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
-import CourseFilled from "./pages/TeacherNewCourse/Tab/DashBoardCourse/CourseFilled";
-import CourseAssesment from "./pages/TeacherNewCourse/Tab/DashBoardCourse/CourseAssesment";
-import CourseAssesment2 from "./pages/TeacherNewCourse/Tab/DashBoardCourse/CourseAssesment2";
-import StudentBoardAssessment from "./pages/StudentDashboard/Tab/Assessment";
-import CourseDetail from "./pages/CourseDetail/CourseDetail";
-import StudentAssessmentResult from "./pages/StudentAssessment/Result";
+import { publicRoutes } from "./Routes";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/register" component={SignUp} />
-        <Route path="/login" component={Login} />
-        <Route path="/student-courses" component={StudentBoardCourses} />
-        <Route path="/student-assessment" component={StudentBoardAssessment} />
-        <Route path="/material" component={StudentMaterial} />
-        <Route path="/assessment" component={StudentAssessment} />
-        <Route path="/assessment-result" component={StudentAssessmentResult} />
-        <Route path="/teacher-dashboard" component={TeacherDashboard} />
-        <Route path="/teacher-new-course" component={TeacherCourseTab} />
-        <Route
-          path="/teacher-new-assessment"
-          component={TeacherAssessmentTab}
-        />
-        <Route path="/teacher-new-students" component={TeacherStudentsTab} />
-        <Route path="/course-detail" component={CourseDetail} />
-        <Route path="/course-filled-teacher" component={CourseFilled} />
-        <Route path="/course-assesment-teacher1" component={CourseAssesment} />
-        <Route path="/course-assesment-teacher2" component={CourseAssesment2} />
+        {publicRoutes.map((route, index) => (
+          <Route
+            exact={route.exact}
+            path={route.path}
+            component={route.component}
+            key={index}
+          />
+        ))}
       </Switch>
       <Footer />
     </BrowserRouter>

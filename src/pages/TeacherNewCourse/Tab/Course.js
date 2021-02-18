@@ -69,7 +69,9 @@ const TeacherCourseTab = () => {
                         <p onClick={handleAdd}>Add new lesson</p>
                     </div>
                     <div className='publish-and-delete-course'>
-                        <p><button>Publish Course</button></p>
+                        <Link to='/course-filled-teacher'>
+                            <p><button>Publish Course</button></p>
+                        </Link>
                         <p className='delete'>Delete Course</p>
                     </div>
                 </div>

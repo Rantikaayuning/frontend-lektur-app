@@ -6,41 +6,45 @@ import {
   UPDATE_USER_PROFILE,
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const token = localStorage.getItem("token"); //   const token = Cookies.get("token");
 
 export const postLogin = (body) => (dispatch) => {
-  API.post("/users/login", body).then((response) => {
-    if (response.status === 200) {
-      dispatch({
-        type: LOGIN,
-        payload: response.data.message,
-        token: localStorage.setItem("token", response.data.data.token), // this can be deleted and replaced by token: response.data.data.token
-        role: jwt_decode(localStorage.getItem("token")).status,
-      });
-
-      localStorage.setItem("token", response.data.data.token);
-      Cookies.set("token", response.data.data.token); // currently not used
-
-      getUserProfile();
-    }
-  });
-};
-
-export const signup = (role, payload) => (dispatch) => {
-  API.post(`/users/register?status=${role}`, payload)
+  API.post("/users/login", body)
     .then((response) => {
       if (response.status === 200) {
         dispatch({
-          type: SIGN_UP,
-          payload: response.data.msg,
+          type: LOGIN,
+          payload: response.data.message,
+          token: localStorage.setItem("token", response.data.token), // this can be deleted and replaced by token: response.data.data.token
+          role: jwt_decode(localStorage.getItem("token")).status,
         });
-        alert("Sign up is successful, please continue to login");
+
+        localStorage.setItem("token", response.data.token);
+        // Cookies.set("token", response.data.token); // currently not used
+
+        getUserProfile();
       }
     })
     .catch((payload) => {
-      alert(payload.response.data.msg);
+      alert(payload.response.data.message);
+    });
+};
+
+export const postSignup = (role, payload) => (dispatch) => {
+  API.post(`/users/register?status=${role}`, payload)
+    .then((response) => {
+      if (response.status === 201) {
+        dispatch({
+          type: SIGN_UP,
+          payload: response.data.message,
+        });
+        alert(`${response.data.message}, please continue to login`);
+      }
+    })
+    .catch((payload) => {
+      alert(payload.response.data.message);
     });
 };
 
@@ -52,14 +56,14 @@ export const getUserProfile = () => (dispatch) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.data);
+        console.log(response.data.result);
         dispatch({
           type: GET_USER_PROFILE,
-          payload: response.data.data,
+          payload: response.data.result,
         });
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log("USER PROFILE ERROR:", error));
 };
 
 export const updateUserProfile = (fullname, email) => (dispatch) => {
@@ -78,7 +82,7 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
     if (response.status === 200) {
       dispatch({
         type: UPDATE_USER_PROFILE,
-        payload: response.data.data,
+        payload: response.data.result,
       });
 
       getUserProfile();
