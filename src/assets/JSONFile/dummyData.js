@@ -1,14 +1,8 @@
 import Rectangle5 from "../../assets/Rectangle5.png";
-<<<<<<< HEAD
 import profilePic from "../../assets/studentpicture.png";
 import reactCourse from "../../assets/reactCourse.png";
 import imgCourse from "../course-image.png";
-=======
-import profilePic from "../../assets/studentpicture.png"
-import reactCourse from "../../assets/reactCourse.png"
-import imgCourse from "../course-image.png";
-import imgCourse2 from "../RectangleSquare.png"
->>>>>>> 5ff70f6aa3bb2d6c10f91e76b23847b2629c7594
+import imgCourse2 from "../RectangleSquare.png";
 
 export const staticImage = [
   {
@@ -20,7 +14,8 @@ export const staticImage = [
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Art & Humanity",
-    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+    description:
+      "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations.",
   },
   {
     image: imgCourse2,
@@ -31,7 +26,8 @@ export const staticImage = [
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Art & Humanity",
-    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+    description:
+      "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations.",
   },
   {
     image: Rectangle5,
@@ -62,7 +58,8 @@ export const staticImage = [
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Art & Humanity",
-    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+    description:
+      "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations.",
   },
   {
     image: imgCourse2,
@@ -73,7 +70,8 @@ export const staticImage = [
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Art & Humanity",
-    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+    description:
+      "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations.",
   },
   {
     image: Rectangle5,
@@ -122,7 +120,8 @@ export const cardMaterial = [
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Art & Humanity",
-    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+    description:
+      "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations.",
   },
   {
     image: imgCourse2,
@@ -133,7 +132,8 @@ export const cardMaterial = [
     video_numbers: "15 Videos",
     material_numbers: "3 Learning Material",
     footer: "Art & Humanity",
-    description: "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations."
+    description:
+      "This course is designed to help you shine where others falter. We’ll learn how organize talks clearly, write them memorably, and deliver them confidently. By the end of the course, you should be able to significantly reduce your fear of public speaking, use rehearsal techniques to develop a strong, vibrant speaking voice, and perform speeches with dynamic movement and gestures. The speech model that we’ll practice is useful for briefings, elevator talks, interviews, and even as a structure for hour-long presentations.",
   },
   {
     image: Rectangle5,
@@ -155,11 +155,7 @@ export const cardMaterial = [
     material_numbers: "3 Learning Material",
     footer: "Business",
   },
-<<<<<<< HEAD
 ];
-=======
-]
->>>>>>> 5ff70f6aa3bb2d6c10f91e76b23847b2629c7594
 
 export const teacherProfile = {
   name: "John Doe",
@@ -194,14 +190,16 @@ export const courseCardJson = [
 export const studentAssessment = [
   {
     noQuestion: 1,
-<<<<<<< HEAD
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?",
-    choiceOne: "sit amet auctor nulla aliquet eget",
-    choiceTwo: "sit amet auctor nulla aliquet eget",
-    choiceThree: "sit amet auctor nulla aliquet eget",
-    choiceFour: "sit amet auctor nulla aliquet eget",
-    choiceFive: "sit amet auctor nulla aliquet eget",
+    question: "What’s the virtual DOM?",
+    choiceOne:
+      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    choiceTwo:
+      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    choiceThree:
+      "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    choiceFour: "data that are passed into a component from its parent.",
+    choiceFive:
+      "a third-party state management library for React, created before the context API existed",
     remark:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
     isCorrect: true,
@@ -209,13 +207,16 @@ export const studentAssessment = [
   },
   {
     noQuestion: 2,
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?",
-    choiceOne: "sit amet auctor nulla aliquet eget",
-    choiceTwo: "sit amet auctor nulla aliquet eget",
-    choiceThree: "sit amet auctor nulla aliquet eget",
-    choiceFour: "sit amet auctor nulla aliquet eget",
-    choiceFive: "sit amet auctor nulla aliquet eget",
+    question: "What’s JSX?",
+    choiceOne:
+      "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    choiceTwo:
+      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    choiceThree:
+      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    choiceFour: "data that are passed into a component from its parent.",
+    choiceFive:
+      "a third-party state management library for React, created before the context API existed",
     remark:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
     isCorrect: true,
@@ -224,12 +225,16 @@ export const studentAssessment = [
   {
     noQuestion: 3,
     question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?",
-    choiceOne: "sit amet auctor nulla aliquet eget",
-    choiceTwo: "sit amet auctor nulla aliquet eget",
-    choiceThree: "sit amet auctor nulla aliquet eget",
-    choiceFour: "sit amet auctor nulla aliquet eget",
-    choiceFive: "sit amet auctor nulla aliquet eget",
+      "What’s the difference between a class component and a functional one?",
+    choiceOne:
+      "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    choiceTwo:
+      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    choiceThree:
+      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    choiceFour: "data that are passed into a component from its parent.",
+    choiceFive:
+      "a third-party state management library for React, created before the context API existed",
     remark:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
     isCorrect: true,
@@ -237,64 +242,22 @@ export const studentAssessment = [
   },
   {
     noQuestion: 4,
-    question:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mollis pretium cursus. Nullam tristique laoreet aliquam. Maecenas tempor lacinia magna?",
-    choiceOne: "sit amet auctor nulla aliquet eget",
-    choiceTwo: "sit amet auctor nulla aliquet eget",
-    choiceThree: "sit amet auctor nulla aliquet eget",
-    choiceFour: "sit amet auctor nulla aliquet eget",
-    choiceFive: "sit amet auctor nulla aliquet eget",
+    question: "What’s the difference between state and props?",
+    choiceOne:
+      "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    choiceTwo:
+      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    choiceThree: "data that are passed into a component from its parent.",
+    choiceFour:
+      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    choiceFive:
+      "a third-party state management library for React, created before the context API existed",
     remark:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+      "State is a component’s internal data that can be modified during the lifetime of the component.",
     isCorrect: false,
     isChosen: false,
   },
 ];
-=======
-    question: 'What’s the virtual DOM?',
-    choiceOne: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
-    choiceTwo: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
-    choiceThree: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
-    choiceFour: 'data that are passed into a component from its parent.',
-    choiceFive: 'a third-party state management library for React, created before the context API existed',
-    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
-    isCorrect: true
-  },
-  {
-    noQuestion: 2,
-    question: 'What’s JSX?',
-    choiceOne: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
-    choiceTwo: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
-    choiceThree: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
-    choiceFour: 'data that are passed into a component from its parent.',
-    choiceFive: 'a third-party state management library for React, created before the context API existed',
-    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
-    isCorrect: true
-  },
-  {
-    noQuestion: 3,
-    question: 'What’s the difference between a class component and a functional one?',
-    choiceOne: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
-    choiceTwo: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
-    choiceThree: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
-    choiceFour: 'data that are passed into a component from its parent.',
-    choiceFive: 'a third-party state management library for React, created before the context API existed',
-    remark: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
-    isCorrect: true
-  },
-  {
-    noQuestion: 4,
-    question: 'What’s the difference between state and props?',
-    choiceOne: 'an in-memory representation of the actual HTML elements that make up your application’s UI',
-    choiceTwo: 'an extension to JavaScript syntax that allows for writing code that looks like HTML',
-    choiceThree: 'data that are passed into a component from its parent.',
-    choiceFour: 'an ES6 class that extends React’s Component class and, at minimum, implements a render() method',
-    choiceFive: 'a third-party state management library for React, created before the context API existed',
-    remark: 'State is a component’s internal data that can be modified during the lifetime of the component.',
-    isCorrect: false
-  }
-]
->>>>>>> 5ff70f6aa3bb2d6c10f91e76b23847b2629c7594
 
 export const teacherAssessment = [
   {
@@ -370,29 +333,17 @@ export const studentCourses = [
     rightAnswer: null,
     totalQuestion: null,
     id: 1,
-<<<<<<< HEAD
     lesson: {
       1: "What is React Course?",
       2: "How is React Course?",
       3: "Why is React Course?",
-      4: "Loreum Ipsum",
-      5: "Loreum Ipsum",
-      6: "Loreum Ipsum",
-      7: "Loreum Ipsum",
+      4: "How to apply React?",
+      5: "How to apply React?",
+      6: "How to apply React?",
+      7: "How to apply React?",
     },
-=======
-    lesson: 
-      {
-        1: 'What is React Course?',
-        2: 'How is React Course?',
-        3: 'Why is React Course?',
-        4: 'How to apply React?',
-        5: 'How to apply React?',
-        6: 'How to apply React?',
-        7: 'How to apply React?',
-      },
-    description: 'At Lektur, our curriculum team defines React JS as a JavaScript library and not a framework. This is an important distinction. Finding success in web development means using the right tools to make your code as effective and efficient as possible. And when it comes to building user interfaces React JS is a tool you need to know how to take advantage of. If you’re ready to React (plus other crucial web developer skills like JavaScript, HTML, and CSS), you can sign up today for our React Crash Course.'
->>>>>>> 5ff70f6aa3bb2d6c10f91e76b23847b2629c7594
+    description:
+      "At Lektur, our curriculum team defines React JS as a JavaScript library and not a framework. This is an important distinction. Finding success in web development means using the right tools to make your code as effective and efficient as possible. And when it comes to building user interfaces React JS is a tool you need to know how to take advantage of. If you’re ready to React (plus other crucial web developer skills like JavaScript, HTML, and CSS), you can sign up today for our React Crash Course.",
   },
   {
     title: "Build Web Game Using React",

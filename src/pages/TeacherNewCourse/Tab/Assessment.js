@@ -65,7 +65,9 @@ const TeacherAssessmentTab = () => {
                         <img
                           src={imgDropdown}
                           alt="symbol"
-                          onClick={handleDropDown}
+                          onClick={() => {
+                            handleDropDown(index);
+                          }}
                         />
                       </p>
                     </div>

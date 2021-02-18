@@ -8,10 +8,11 @@ function CourseAssesment() {
     data: [...assessment],
   });
   function handleDropDown(index) {
+    let arrayCopy = [...isPicked.data];
     isPicked.data[index].isChosen
       ? (isPicked.data[index].isChosen = false)
       : (isPicked.data[index].isChosen = true);
-    setPicked({ ...isPicked });
+    setPicked({ ...isPicked, data: arrayCopy });
   }
   function handleDropDownActive(index) {
     if (isPicked.data[index].isChosen) {
