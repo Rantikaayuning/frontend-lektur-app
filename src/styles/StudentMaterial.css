@@ -40,6 +40,13 @@
     color: #000000;
 }
 
+.content-header{
+    display: flex;
+    width: 93%;
+    margin: 5px auto;
+}
+
+
 .image {
     width: 900px;
     height: 500px;
@@ -48,27 +55,27 @@
 
 .image-content{
     display: flex;
+    flex-direction: column;
     width: 93%;
     margin: 0px auto;
 }
 
 .content-lock-material{
-    margin-left: auto;
+  
 }
 
-.description{
-    width: 100%;
-    height: 363px;
-    margin-top: 20px;
+.content-lock{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
     background-color:  white;
+    margin-right: 30px;
 }
 
 .description-text{
     width: 900px;
     height: 221px;
-    margin: 50px 10px 0px 20px;
+    margin: 50px 10px 0px 0px;
     padding: 30px;
     background: #FFFFFF;
 
@@ -98,7 +105,7 @@
 }
 
 .next{
-    width: 550px;
+    width: 474px;
     height: 204px;
     padding: 30px;
     margin-top: 50px;
@@ -138,7 +145,7 @@
 }
 
 .next button{
-    width: 490px;
+    width: 410px;
     height: 51px;
     border: none;
     margin: 10px auto;
@@ -154,7 +161,7 @@
 }
 
 .card-text-course{
-    margin: 50px;
+    margin: 60px;
     margin-left: 100px;
     font-style: normal;
     font-weight: bold;
@@ -255,4 +262,362 @@
     line-height: 17px;
 
     color: #999999;
+}
+
+/* -------------------TABLET------------------------*/
+
+@media screen and (max-width:680px){ 
+    
+    .bread-crumb{
+        font-size: 12px;
+    }
+    
+    .link{
+        font-size: 12px;
+        line-height: 12px;
+    }
+    
+    .text-title{
+        font-size: 18px;
+    }
+    
+    .content-header{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image {
+        width: 600px;
+        height: 330px;
+    }
+    
+    .image-content{
+        display: flex;
+        width: 93%;
+        margin: 0px auto;
+    }
+
+    .content-lock-material{
+        margin: 10px auto;
+    }
+    
+    .description-text{
+        width: 600px;
+        height: 221px;
+        margin: 20px auto;
+    }
+    
+    .description-text p{
+        font-size: 12px;
+    }
+    
+    .next{
+        width: 360px;
+        height: 204px;
+        margin-top: 40px;
+    }
+    
+    .next p{
+       font-size: 12px;
+    }
+    
+    .next button{
+        width: 300px;
+        height: 40px;
+        font-size: 13px;
+    }
+    
+    .card-text-course{
+        margin: 50px;
+    }
+    
+    .empty{
+        width: 100%;
+        height: 86px;
+        background-color:white ;
+    }
+    
+    /*ContentMaterial*/
+    
+    .material-lock{
+        width: 320px;
+        height: 380px;
+        margin-top: 40px;
+      }
+    
+    .lock-content{
+        width: 270px;
+    }
+    
+    .unlock{
+        width: 270px;
+        height: 40px;
+        font-size: 12px;
+        padding-top: 10px;
+    }
+    
+    .unlocked{
+        width: 270px;
+        height: 40px;
+        font-size: 12px;
+        padding-top: 10px;
+    }
+    
+    .locked{
+        width: 270px;
+        height: 40px;
+        font-size: 12px;
+        padding-top: 10px;       
+    }
+
+    .card-text-course{
+        margin: 45px;
+        margin-top: 80px;
+    }
+}
+
+/*---------------------PONSEL-----------------------*/
+
+@media screen and (max-width:480px){
+    .text{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 93%;
+        margin: 0px auto;
+        height: 100px;
+    }
+    
+    .bread-crumb{
+        font-size: 10px;
+    }
+    
+    .link{
+        font-size: 10px; 
+    }
+    
+    .text-title{
+        font-size: 16px;
+    }
+    
+    .content-header{
+        display: flex;
+        flex-direction: column;
+        width: 93%;
+        margin: 5px auto;
+    }
+    
+    
+    .image {
+        width: 400px;
+        height: 200px;
+        background: Black rgba(0, 0, 0, 1);
+    }
+    
+    .image-content{
+        display: flex;
+        flex-direction: column;
+        width: 93%;
+        margin: 0px auto;
+    }
+    
+    .content-lock{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color:  white;
+        margin-right: 30px;
+    }
+    
+    .description-text{
+        width: 900px;
+        height: 221px;
+        margin: 50px 10px 0px 0px;
+        padding: 30px;
+        background: #FFFFFF;
+    
+        border: 1px solid #E6E6E6;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .description-text p{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+    
+        color: #000000;
+    }
+    
+    .title-des{
+        width: 86px;
+        height: 17px;
+        margin-bottom: 10px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 17px;
+        color: #000000;
+    }
+    
+    .next{
+        width: 474px;
+        height: 204px;
+        padding: 30px;
+        margin-top: 50px;
+        background: #FFFFFF;
+    
+        border: 1px solid #E6E6E6;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .title-next{
+        margin-bottom: 10px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+    
+        color: #000000;
+    }
+    
+    .next p{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+    
+        color: #000000;
+    }
+    
+    .next img{
+        margin-right: 10px;
+    }
+    
+    .next span{
+        text-decoration-line: underline;
+        color:skyblue ;
+    }
+    
+    .next button{
+        width: 410px;
+        height: 51px;
+        border: none;
+        margin: 10px auto;
+        background: #3E89AE;
+        border-radius: 2px;
+    
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 17px;
+    
+        color: #FFFFFF;
+    }
+    
+    .card-text-course{
+        margin: 60px;
+        margin-left: 100px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+    
+        color: #000000;
+    }
+    
+    .empty{
+        width: 100%;
+        height: 86px;
+        background-color:white ;
+    }
+    
+    /*ContentMaterial*/
+    
+    .material-lock{
+        width: 474px;
+        height: 500px;
+        background: #FFFFFF;
+        border: 1px solid #E6E6E6;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .lock-text{
+        margin-top: 30px;
+        margin-left: 25px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 17px;
+    
+        color: #000000;
+    }
+    
+    .material-lock li{
+        list-style: none;
+    }
+    
+    .lock-content{
+        width: 421px;
+        margin: 10px auto;
+    }
+    
+    .lock-content img{
+        margin-right: 15px;
+    }
+    
+    .unlock{
+        width: 421px;
+        height: 54px;
+        padding-top: 15px;
+        padding-left: 15px;
+        background-color: rgba(234, 247, 254, 1);
+        border-bottom: 1px solid white;
+    
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+    
+        color: #000000;
+    
+        cursor: pointer;
+    }
+    
+    .unlocked{
+        width: 421px;
+        height: 54px;
+        padding-top: 15px;
+        padding-left: 15px;
+        background: #FFFFFF;
+        border-bottom: 1px solid #E6E6E6;
+    
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+    
+        color: #000000;
+    
+        cursor: pointer;
+    }
+    
+    .locked{
+        width: 421px;
+        height: 54px;
+        padding-top: 15px;
+        padding-left: 15px;
+        background: rgba(245, 245, 245, 1);
+        border-bottom: 1px solid #E6E6E6;
+    
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+    
+        color: #999999;
+    }
 }
