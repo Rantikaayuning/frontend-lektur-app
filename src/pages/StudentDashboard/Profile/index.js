@@ -27,28 +27,12 @@ const StudentProfile = (props) => {
 
     props.updateUserProfile(fullname, email);
     // props.getUserProfile();
+    alert(
+      `your new updates are email: ${email} and fullname: ${fullname}. Please do signout and login back to see changes`
+    );
+    // localStorage.removeItem("token");
 
-    // const newProfile = () => {
-    //   props.getUserProfile();
-    //   return props.userProfile ? (
-    //     <div className="student-profile-box">
-    //       <div className="student-profile">
-    //         <div className="student-profile-image">
-    //           <img src={imgStudent} alt="student" />
-    //         </div>
-    //         <h5>{props.userProfile.fullname}</h5>
-    //         <p>{props.userProfile.email}</p>
-    //         <br />
-    //         <span>
-    //           <u onClick={handleEdit}> Edit Profile </u>
-    //         </span>
-    //       </div>
-    //     </div>
-    //   ) : (
-    //     <div>Loading...</div>
-    //   );
-    // };
-    // newProfile();
+    props.history.push("/");
   };
 
   return (
