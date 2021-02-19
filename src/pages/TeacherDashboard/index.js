@@ -34,6 +34,12 @@ function TeacherDashboard(props) {
 
     props.updateUserProfile(fullname, email);
     // props.getUserProfile();
+    alert(
+      `your new updates are email: ${email} and fullname: ${fullname}. Please do signout and login back to see changes`
+    );
+    // localStorage.removeItem("token");
+
+    props.history.push("/");
   };
 
   return (
