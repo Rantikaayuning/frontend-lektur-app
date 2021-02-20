@@ -22,7 +22,7 @@ const TeacherCourseTab = () => {
                 </div>
                 <div className='teacher-new-course-box'>
                     <div className='teacher-new-course-title'>
-                        <p><input type="text" placeholder="Question"/><hr type="solid"/></p>
+                        <p><input type="text" placeholder="Title"/><hr type="solid"/></p>
                     </div>
                     <div className='teacher-new-course-overview'>
                         <p><textarea type="text" placeholder="Overview*" cols='45' rows='5'/><hr type="solid"/></p>
@@ -50,7 +50,7 @@ const TeacherCourseTab = () => {
                                 <p><hr type="solid"/></p>
                             </div>
                             <div className='add-new-lesson-description'>
-                                <p><textarea type="text" placeholder="      Description*" cols='45' rows='5'/></p>
+                                <p><textarea type="text" placeholder="      Description*" /></p>
                                 <p><hr type="solid"/></p>
                             </div>
                         </div>

@@ -58,6 +58,7 @@ const StudentBoardCourses = () => {
                 show={popUpCourse}
                 size='lg'
                 onHide={() => setPopUpCourse(false)}
+                className='pop-up-course-box'
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
                 >
@@ -68,6 +69,7 @@ const StudentBoardCourses = () => {
                 size='lg'
                 onHide={() => setPopUpMaterial(false)}
                 dialogClassName="modal-90w"
+                className='pop-up-material-box'
                 aria-labelledby="example-custom-modal-styling-title"
                 >
                 <PopUpMaterial/>
