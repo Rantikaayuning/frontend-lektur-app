@@ -11,7 +11,7 @@ import ContentMaterial from "./content/index"
 export default function StudentMaterial() {
     return (
         <>
-        <div>
+        
             <div className="content-material">
                     <div className="text">
                         <div>
@@ -22,7 +22,7 @@ export default function StudentMaterial() {
                     </div>
                 <div className="content-header">
                     <div className="image-content">
-                        <div>
+                        <div className="inframe">
                         <iframe src = "https://www.youtube.com/embed/0Rnj4w30Yvo?mute=1" title = "glints" className="image"/>
                         </div>
                         <div className="description-text">
@@ -46,7 +46,7 @@ export default function StudentMaterial() {
                     <div className="card-text-course">Related Course</div>
                     <Row className="content-card-container">
                         {cardMaterial.map((item, index) => (
-                        <Col xs="12" sm="6" md="3" key={index} className="card-container">
+                        <Col xs="12" sm="6" md="4" lg="3" key={index} className="card-container">
                         <ContentCards
                             image={item.image}
                             text={item.text}
@@ -62,7 +62,7 @@ export default function StudentMaterial() {
                 </div>
                 <div className="empty"></div>
             </div>
-        </div>
+       
         </>
     )
 }
