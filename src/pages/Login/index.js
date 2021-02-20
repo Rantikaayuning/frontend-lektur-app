@@ -31,7 +31,7 @@ function Login() {
   };
 
   return (
-    <Jumbotron className="mb-3 jumbotron">
+    <Jumbotron className="jumbotron">
       <div className="login-page">
         <div className="login-form">
           <div className="login-header">
