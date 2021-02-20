@@ -1,6 +1,6 @@
 .teacher-new-course-box {
-    margin-left: 250px;
-    margin-right: 250px;
+    margin-left: 20%;
+    margin-right: 20%;
     margin-top: 72px;
 }
 
@@ -112,6 +112,10 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     margin: 42px 0 24px 0;
 }
+ 
+.add-new-lesson-input {
+    width: 50%;
+}
 
 .add-new-lesson-box h4{
     font-size: 16px;
@@ -121,12 +125,14 @@
     display: flex;
     flex-direction: column;
     margin-top: 16px;
+    width: 80%;
 }
 
 .add-new-lesson-title input{
     border: none;
     outline: none;
     background-color: white;
+    
 }
 
 .add-new-lesson-description {
@@ -140,6 +146,8 @@
     overflow: auto;
     resize: none;
     outline: none;
+    height: 150px;
+    width: 100%;
 }
 
 .upload-new-lesson .video-lesson{
@@ -193,4 +201,57 @@
     width: 50%;
     margin-top: 60px;
     margin-left: 18%;
+}
+
+@media screen and (max-width: 1024px) {
+    .teacher-new-course-box {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 72px;
+    }
+    .teacher-save-new-course button {
+        margin: 30px;
+        color: white;
+        background-color: #16213B;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 2px;
+        margin-right: 40px;
+    }
+    .teacher-save-new-course {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .add-new-lesson-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 32px;
+        background-color: white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 42px 0 24px 0;
+    }
+    .add-new-lesson-description{
+        border: none;
+        background-color: white;
+        overflow: auto;
+        resize: none;
+        outline: none;
+    }
+    .add-new-lesson-input {
+        width: 100%;
+    }
+    .upload-new-lesson .save{
+        text-align: center;
+        margin-top: 80px;
+    }
+    .upload-new-lesson {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        margin-top: 60px;
+        margin-left: 25%;
+    }    
 }
