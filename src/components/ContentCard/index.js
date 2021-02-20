@@ -19,7 +19,7 @@ function Content() {
       <div className="card-content">
         <Row className="content-card-container">
           {staticImage.map((item, index) => (
-            <Col xl="3" key={index} className="card-container">
+            <Col xl="3" md='6' sm='12' key={index} className="card-container">
               <ContentCards
                 image={item.image}
                 text={item.text}

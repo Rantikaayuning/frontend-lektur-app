@@ -43,25 +43,9 @@
 
 .card-footer {
   margin: 0px;
+  width: 100%;
   background: #eaf7fe;
   padding: 10px 14px 10px 15px;
 }
 
-@media screen and (max-width:820px){
-  
-  .card-title {
-    font-size: 14px;
-  }
-
-  .card-subtitle {
-    font-size: 14px;
-  }
-
-  .card-text {
-    font-size: 12px;
-  }
-  .content-card-container {
-    margin: 0px 25px 0px 25px;
-  }
-}
 
