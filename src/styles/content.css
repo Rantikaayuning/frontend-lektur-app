@@ -1,16 +1,13 @@
 .content-card-container {
-  margin: 0px 127px 0px 127px;
+  margin: 0px 127px;
 }
 
 .card-content {
-  /* padding-right: 50px;
-  padding-left: 50px; */
   margin: 0px auto;
   width: 100%;
 }
 
 .card-container {
-  /* padding-left: 58px; */
   margin-bottom: 36px;
 }
 
@@ -19,7 +16,6 @@
 }
 
 .card:hover {
-  /* width: 101%; */
   box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 darkgray;
   cursor: pointer;
 }
@@ -47,21 +43,9 @@
   padding: 10px 14px 10px 15px;
 }
 
-@media screen and (max-width:820px){
-  
-  .card-title {
-    font-size: 14px;
-  }
-
-  .card-subtitle {
-    font-size: 14px;
-  }
-
-  .card-text {
-    font-size: 12px;
-  }
+@media screen and (max-width: 1024px){
   .content-card-container {
-    margin: 0px 25px 0px 25px;
+    margin: 0px 10%;
   }
 }
 
