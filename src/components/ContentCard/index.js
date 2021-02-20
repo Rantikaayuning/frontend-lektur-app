@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col } from "reactstrap";
 import ContentCards from "./Cards";
 import { staticImage, buttonMaterials } from "../../assets/JSONFile/dummyData";
-// import { Link } from "react-router-dom";
 
 function Content() {
   return (
@@ -19,7 +18,7 @@ function Content() {
       <div className="card-content">
         <Row className="content-card-container">
           {staticImage.map((item, index) => (
-            <Col xl="3" md='6' sm='12' key={index} className="card-container">
+            <Col xl="3" md="6" sm="12" key={index} className="card-container">
               <ContentCards
                 image={item.image}
                 text={item.text}

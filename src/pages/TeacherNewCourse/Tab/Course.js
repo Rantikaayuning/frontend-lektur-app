@@ -29,7 +29,6 @@ const TeacherCourseTab = () => {
                     </div>
                     <div className='teacher-add-header-image'>
                         <p><button>Add header image</button></p> 
-                        {/* <p><button><input type='file'/></button></p> */}
                         <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
                     </div>
                     <div className='teacher-save-new-course'>
