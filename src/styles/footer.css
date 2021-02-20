@@ -85,7 +85,8 @@
   color: white;
 }
 
-@media only screen and (max-width: 768px) {
+/* For mobile phones: */
+@media only screen and (max-width: 1024px) {
   .footer-section {
     margin-top: 28px;
   }
@@ -95,7 +96,8 @@
   }
 
   .footer-section .course {
-    padding-left: 25px;
+    padding-left: 50px;
+    /* padding-left: 25px; */
   }
 
   .footer-section h4 {
@@ -112,7 +114,8 @@
   }
 
   .footer-section .copyright {
-    padding-right: 25px;
+    padding-right: 50px;
+    /* padding-right: 25px; */
     padding-bottom: 70px;
   }
   .footer-section .copyright .all-rights {
@@ -122,8 +125,6 @@
 
   /* content */
   .content-register {
-    display: flex;
-    flex-direction: row-reverse;
     background-image: url(../assets/rectanglebackground.png);
     position: relative;
   }
@@ -132,7 +133,7 @@
     text-align: left;
     position: absolute;
     top: 40%;
-    left: 14%;
+    left: 23%;
     transform: translate(-50%, -50%);
   }
 
@@ -140,29 +141,27 @@
     font-size: 30px;
     padding-bottom: 5px;
   }
+}
+
+@media only screen and (max-width: 768px) {
+  .footer-section .course {
+    padding-left: 25px;
+  }
+
+  .footer-section .copyright {
+    padding-right: 25px;
+  }
+
+  /* content  */
+  .content-register {
+    background-image: url(../assets/rectanglebackground.png);
+    position: relative;
+  }
+
+  .register-button {
+    left: 15%;
+  }
   .register-button .own-class {
     display: block;
   }
 }
-
-/* @media only screen and (max-width: 360px) {
-  .footer {
-    width: 100%;
-  }
-  .footer-section .copyright h4 span {
-    font-size: 10px;
-  }
-  .footer-section .course {
-    padding-left: 0px;
-  }
-  .footer-section .teach {
-    padding-left: 10px;
-  }
-  .footer-section .resource {
-    padding-left: 10px;
-  }
-  .footer-section .copyright {
-    padding-right: 0px;
-    padding-bottom: 70px;
-  }
-} */

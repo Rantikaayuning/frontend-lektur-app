@@ -176,7 +176,8 @@
   background: #ef9c27;
 }
 
-@media only screen and (max-width: 768px) {
+/* For mobile phones: */
+@media only screen and (max-width: 1024px) {
   .teacher-dashboard-container {
     display: flex;
     flex-direction: column;
@@ -200,9 +201,8 @@
   }
 
   .course-info {
-    margin-left: 5px;
+    margin-right: 200px;
     font-size: large;
-
     padding: 0 10px 0 0px;
   }
 
@@ -221,6 +221,13 @@
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .course-info {
+    margin-right: 20px;
+  }
+}
+
+/* please ignore this at the moment */
 @media only screen and (max-width: 360px) {
   .teacher-dashboard-container {
     width: 100%;
