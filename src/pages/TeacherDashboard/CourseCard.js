@@ -11,11 +11,11 @@ function CourseCard(props) {
           <div>
             <b>{title}</b>
           </div>
-          <small className="text-muted">
+          <small className="text-muted small-text">
             {numOfVideos} | {numOfLesson}
           </small>
           <div>
-            <small className="text-muted">{enrolledStudents}</small>
+            <small className="text-muted small-text">{enrolledStudents}</small>
           </div>
         </div>
         <div className="invite-edit-btn">

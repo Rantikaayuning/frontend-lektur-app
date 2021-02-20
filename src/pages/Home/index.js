@@ -12,7 +12,9 @@ const Home = () => {
       <div className="content-register">
         <img src={bgcontent} alt="background content" />
         <div className="register-button">
-          <h1>Create Your Own Class</h1>
+          <h1>
+            Create Your <span className="own-class">Own Class</span>
+          </h1>
           <Link to="/register">
             <button>Register now</button>
           </Link>
