@@ -96,8 +96,7 @@
   }
 
   .footer-section .course {
-    padding-left: 50px;
-    /* padding-left: 25px; */
+    padding-left: 25px;
   }
 
   .footer-section h4 {
@@ -114,8 +113,7 @@
   }
 
   .footer-section .copyright {
-    padding-right: 50px;
-    /* padding-right: 25px; */
+    padding-right: 25px;
     padding-bottom: 70px;
   }
   .footer-section .copyright .all-rights {
