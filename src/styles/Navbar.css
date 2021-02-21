@@ -241,11 +241,7 @@
   }
   .sidebar .right {
     position: relative;
-<<<<<<< HEAD
     width: 100%;
-=======
-    /* left: 100px; */
->>>>>>> f1c6c120fac37d69cd1f16b53a364fe01c193233
   }
   ul {
     align-items: center;
