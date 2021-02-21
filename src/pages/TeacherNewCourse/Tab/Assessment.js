@@ -176,7 +176,7 @@ const TeacherAssessmentTab = () => {
               </div>
               <br />
               <div className="teacher-add-more">
-                <button>Add More Option</button>
+                <button>Add More Options</button>
               </div>
             </div>
             <div className="add-new-question">

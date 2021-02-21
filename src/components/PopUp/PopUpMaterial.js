@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const PopUpMaterial = () => {
     return (
       <> 
-          <Modal.Header closeButton>
+          <Modal.Header className='pop-up-material-header' closeButton>
             <Modal.Title id="modal-course">
               Create Cinematic Music Video: Study Material
             </Modal.Title>

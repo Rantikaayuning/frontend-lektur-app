@@ -45,7 +45,7 @@ function TeacherDashboard(props) {
   return (
     <div className="teacher-dashboard-container">
       {isEdit ? (
-        <>
+        <div>
           {props.userProfile ? (
             <div className="teacher-profile">
               <img src={teacherProfile.image} alt="teacher profile" />
@@ -62,7 +62,7 @@ function TeacherDashboard(props) {
           ) : (
             <div>Loading...</div>
           )}
-        </>
+        </div>
       ) : (
         <div className="teacher-profile">
           <div className="teacher-profile-edit">

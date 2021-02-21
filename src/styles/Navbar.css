@@ -241,7 +241,11 @@
   }
   .sidebar .right {
     position: relative;
+<<<<<<< HEAD
     width: 100%;
+=======
+    /* left: 100px; */
+>>>>>>> f1c6c120fac37d69cd1f16b53a364fe01c193233
   }
   ul {
     align-items: center;
@@ -251,5 +255,11 @@
   ul li {
     display: inline;
     text-align: center;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .sidebar .center input {
+    width: 50%;
   }
 }

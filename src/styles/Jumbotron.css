@@ -44,7 +44,7 @@
 /* jumbotron right*/
 
 .jumbotron-right {
-    width: 50%;
+    width: 55%;
 }
 
 .jumbotron-right .video-content {
@@ -119,4 +119,24 @@
     font-size: 13px;
     line-height: 17px;
     color: #999999;
+}
+
+@media screen and (max-width: 1024px) {
+    .jumbotron {
+        display: flex;
+        flex-direction: column;
+    }
+    .jumbotron-left {
+        width: 100%;
+    }
+    .jumbotron-right {
+        width: 105%;
+    }
+    .video-content .buttom .left{
+        width: 50%;
+    }
+    .video-content .buttom .right{
+        width: 50%;
+    }
+
 }

@@ -27,7 +27,8 @@ export default function SignUp(props) {
   };
 
   return (
-    <Jumbotron className="mb-3 jumbotron">
+    <Jumbotron className="jumbotron">
+      <div className="signup-page">
       <div className="signup">
         <div>
           <div className="form-select">
@@ -97,6 +98,7 @@ export default function SignUp(props) {
             <span>Login</span>
           </Link>
         </div>
+      </div>
       </div>
     </Jumbotron>
   );

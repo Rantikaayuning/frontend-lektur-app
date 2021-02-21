@@ -9,7 +9,7 @@ import {studentCourses} from '../../assets/JSONFile/dummyData'
 export const PopUpCourse = () => {
     return (
       <>  
-          <Modal.Header closeButton>
+          <Modal.Header className='pop-up-course-header' closeButton>
             <Modal.Title id="modal-course">
               {studentCourses[0].title}: Content
             </Modal.Title>
