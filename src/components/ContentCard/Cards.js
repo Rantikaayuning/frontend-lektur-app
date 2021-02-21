@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardImg,
@@ -19,13 +19,13 @@ function Cards(props) {
     text,
     footer,
   } = props;
-  let history = useHistory();
+  // let history = useHistory();
 
-  function handleClick() {
-    history.push("/course-detail");
-  }
+  // function handleClick() {
+  //   history.push("/course-detail");
+  // }
   return (
-    <div onClick={handleClick}>
+    <div>
       <Card className="card">
         <CardImg top width="100%" src={image} alt={title} />
         <CardBody className="p-2">
@@ -33,12 +33,12 @@ function Cards(props) {
             {title}
           </CardTitle>
           <CardSubtitle tag="p" className="text-muted card-subtitle">
-            {lecture}
+            By {lecture}
           </CardSubtitle>
           <span>
-            <small className="text-muted">{video_numbers}</small>{" "}
+            <small className="text-muted">{video_numbers} Videos</small>{" "}
             <small className="text-muted material-numbers">
-              {material_numbers}
+              {material_numbers} Learning Material
             </small>{" "}
           </span>
           <CardText className="mt-3 card-text">{text}</CardText>

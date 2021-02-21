@@ -76,7 +76,7 @@ export const publicRoutes = [
   },
   {
     component: CourseDetail,
-    path: "/course-detail",
+    path: "/course-detail/:id",
     exact: true,
   },
   {

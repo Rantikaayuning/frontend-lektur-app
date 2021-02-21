@@ -42,8 +42,9 @@ const userReducer = (state = initialState, action) => {
         ...state,
         updateUser: payload,
       };
+    default :
+    return state;
   }
-  return state;
 };
 
 export default userReducer;

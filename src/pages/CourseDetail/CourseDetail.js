@@ -1,45 +1,58 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link} from "react-router-dom";
+import { Link, useParams } from "react-router-dom"
 import { Row, Col } from "reactstrap";
 import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
+import {useDispatch, useSelector} from "react-redux"
+import {getCourseDetail, getCourses} from "../../redux/actions/CoursesAction"
 
 import ContentCards from "../../components/ContentCard/Cards";
-import { cardMaterial, staticImage } from "../../assets/JSONFile/dummyData";
+import { staticImage } from "../../assets/JSONFile/dummyData";
+import defaultImg from "../../assets/RectangleSquare.png"
 
-function CourseDetail(props) {
+function CourseDetail() {
   const [PopUpCourseDetail, setPopUpCourseDetail] = useState(false);
-  let history = useHistory();
 
-  function handleClick() {
-    history.push("/course-detail");
-  }
+  const {id} = useParams();
+  const dispatch = useDispatch();
 
-  console.log(props.userProfile);
+  const courseDetail = useSelector(state => state.courses.courseDetail)
+  const courses = useSelector(state => state.courses.courses)
+
+  const userProfile = useSelector(state => state.users.userProfile)
+  const auth = useSelector(state => state.users.isAuthentificated)
+
+  useEffect(() => {
+    dispatch(getCourseDetail(id));
+    dispatch(getCourses())
+  }, []);
+
+  // console.log(courseDetail)
+
   return (
     <div className="main-course">
       <div className="course-detail">
         <div className="course-detail-left">
-          <p className="p1">{staticImage[0].footer}</p>
-          <p className="p2">{staticImage[0].title}</p>
-          <p className="p3">{staticImage[0].lecture}</p>
-          {props.userProfile ? (
+          <p className="p1">Business</p>
+          <p className="p2">{courseDetail.title}</p>
+          {/* <p className="p3">By {courseDetail.teacherId.fullname}</p> */}
+          {userProfile ? (
               <div> 
-                {props.userProfile.status === 0 ? (
+                {userProfile.status === 0 ? (
                 <button onClick={() => setPopUpCourseDetail(true)}>Enroll Now</button>
                 ) : null }
               </div>
             ) : (
               <button onClick={() => setPopUpCourseDetail(true)}>Enroll Now</button>
             )}
+
         </div>
         <div className="course-detail-right flex">
           <div>
-            <p className="p1">14</p>
+            <p className="p1">{courseDetail.totalVideo}</p>
             <p className="p2">Learning Videos</p>
           </div>
           <div>
-            <p className="p1">12</p>
+            <p className="p1">{courseDetail.totalMaterial}</p>
             <p className="p2">Study Material</p>
           </div>
           <div className="course-detail-right-material">
@@ -47,32 +60,32 @@ function CourseDetail(props) {
             <ul>
               <li>
                 <div className="rectangle">
-                  <p>Lesson #1: What is {staticImage[0].title}?</p>
+                  <p>Lesson #1: </p>
                 </div>
               </li>
               <li>
                 <div className="rectangle">
-                  <p>Lesson #2: How to make {staticImage[0].title}?</p>
+                  <p>Lesson #2: </p>
                 </div>
               </li>
               <li>
                 <div className="rectangle">
-                  <p>Lesson #3: Why {staticImage[0].title}?</p>
+                  <p>Lesson #3: </p>
                 </div>
               </li>
               <li>
                 <div className="rectangle">
-                  <p>Lesson #4: About {staticImage[0].title}</p>
+                  <p>Lesson #4: </p>
                 </div>
               </li>
               <li>
                 <div className="rectangle">
-                  <p>Lesson #5: About {staticImage[0].title}</p>
+                  <p>Lesson #5: </p>
                 </div>
               </li>
               <li>
                 <div className="rectangle">
-                  <p>Lesson #6: About {staticImage[0].title}</p>
+                  <p>Lesson #6: </p>
                 </div>
               </li>
             </ul>
@@ -82,23 +95,28 @@ function CourseDetail(props) {
       <div className="center">
         <div className="course-center">
           <h5>Description</h5>
-          <p>{staticImage[0].description}</p>
+          <p>{courseDetail.overview}</p>
         </div>
       </div>
-      <div className="card-content" onClick={handleClick}>
+      <div className="card-content">
         <div className="card-text-course">Related Course</div>
         <Row className="content-card-container">
-          {cardMaterial.map((item, index) => (
+          {courses.map((item, index) => (
             <Col xl="3" key={index} className="card-container">
+              <Link 
+                to={`/course-detail/${item._id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
               <ContentCards
-                image={item.image}
-                text={item.text}
+                image={defaultImg}
+                text={item.overview}
                 title={item.title}
-                lecture={item.lecture}
-                video_numbers={item.video_numbers}
-                material_numbers={item.material_numbers}
-                footer={item.footer}
+                lecture={item.teacherId.fullname}
+                video_numbers={item.totalVideo}
+                material_numbers={item.totalMaterial}
+                footer="Business"
               />
+              </Link>
             </Col>
           ))}
         </Row>
@@ -110,15 +128,16 @@ function CourseDetail(props) {
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
-        {props.auth ? (  
+        
+        {auth ? (  
         <>
           <Modal.Header closeButton>
             <div className="modal-central" closeButton>
               <div className="modal-central-image"></div>
               <div className="modal-central-content">
                 <p className="p1">Successfully enrolled!</p>
-                <p className="p2">{staticImage[0].title}</p>
-                <p className="p3">{staticImage[0].lecture}</p>
+                <p className="p2">{courseDetail.title}</p>
+                {/* <p className="p3">{courseDetail.teacherId.fullname}</p> */}
               </div>
             </div>
           </Modal.Header>
@@ -138,17 +157,10 @@ function CourseDetail(props) {
             </div>
           </Modal.Header>
         )}
-      
+
       </Modal>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userProfile: state.users.userProfile,
-    auth: state.users.isAuthentificated,
-  };
-};
-
-export default connect(mapStateToProps)(CourseDetail);
+export default CourseDetail;
