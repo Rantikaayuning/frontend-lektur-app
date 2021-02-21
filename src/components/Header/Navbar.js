@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import { getUserProfile } from "../../redux/actions/UserAction";
 import { connect } from "react-redux";
+import Cookies from "js-cookie";
 
 import profile from "../../assets/Ellipse 2.png";
 
@@ -82,7 +83,8 @@ function Navbar(props) {
                         <Link to="/" className="drop">
                           <div
                             onClick={() => {
-                              localStorage.removeItem("token");
+                              // localStorage.removeItem("token");
+                              Cookies.remove("token");
                               window.open("/", "_self");
                             }}
                           >
@@ -99,6 +101,7 @@ function Navbar(props) {
                           <div
                             onClick={() => {
                               localStorage.removeItem("token");
+                              Cookies.remove("token");
                               window.open("/", "_self");
                             }}
                           >

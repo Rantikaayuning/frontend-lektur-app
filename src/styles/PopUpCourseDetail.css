@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .modal-central-image {
   width: 239px;
   height: 133px;
@@ -73,6 +74,29 @@
 
   color: #999999;
 }
+
+.modal-central-login{
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+}
+
+.modal-central-content-login{
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+.modal-central-body-login{
+  font-size: 18px;
+  padding: 10px 0px;
+  cursor: pointer;
+}
+
+
+
+
 
 @media only screen and (max-width: 1024px) {
   .modal-content {

@@ -4,12 +4,14 @@ import {
   SIGN_UP,
   UPDATE_USER_PROFILE,
 } from "../types/UserLogin";
+import Cookies from "js-cookie";
 
 const initialState = {
   login: null,
   signup: null,
   status: "",
-  isAuthentificated: localStorage.getItem("token") ? true : false,
+  // isAuthentificated: localStorage.getItem("token") ? true : false,
+  isAuthentificated: Cookies.get("token") ? true : false,
   userProfile: null,
   updateUser: null,
 };
