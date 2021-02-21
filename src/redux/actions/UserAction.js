@@ -6,9 +6,10 @@ import {
   UPDATE_USER_PROFILE,
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
-const token = localStorage.getItem("token"); //   const token = Cookies.get("token");
+// const token = localStorage.getItem("token"); 
+const token = Cookies.get("token");
 
 export const postLogin = (body) => (dispatch) => {
   API.post("/users/login", body)
@@ -17,12 +18,13 @@ export const postLogin = (body) => (dispatch) => {
         dispatch({
           type: LOGIN,
           payload: response.data.message,
-          token: localStorage.setItem("token", response.data.token), // this can be deleted and replaced by token: response.data.data.token
-          role: jwt_decode(localStorage.getItem("token")).status,
+          // token: localStorage.setItem("token", response.data.token), // this can be deleted and replaced by token: response.data.data.token
+          token: Cookies.set("token", response.data.token),
+          role: jwt_decode(response.data.token).status,
         });
 
-        localStorage.setItem("token", response.data.token);
-        // Cookies.set("token", response.data.token); // currently not used
+        // localStorage.setItem("token", response.data.token);
+        Cookies.set("token", response.data.token); // currently not used
 
         getUserProfile();
       }
