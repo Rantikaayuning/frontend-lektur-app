@@ -157,15 +157,13 @@
   }
   .course-filled-content-card {
     display: flex;
-    flex-direction: column;
     text-align: center;
     background: chartreuse;
-    flex-direction: column;
     height: 700px;
   }
   .course-filled-content-card .span-paragraph {
-    overflow-wrap: anywhere;
-    color: chocolate;
-    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }

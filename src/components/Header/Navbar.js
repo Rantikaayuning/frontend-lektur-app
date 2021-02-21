@@ -16,7 +16,7 @@ import profile from "../../assets/Ellipse 2.png";
 function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggle = () => setDropdownOpen(prevState => !prevState);
 
   useEffect(() => {
     props.getUserProfile();
@@ -38,7 +38,7 @@ function Navbar(props) {
       </div>{" "}
       <div className="right">
         <ul>
-          <li>
+          <li className="li-1">
             <Dropdown isOpen={dropdownOpen} toggle={toggle} size="md">
               <DropdownToggle className="sidebar-dropdown" color="none">
                 <span>
@@ -149,7 +149,7 @@ function Navbar(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userProfile: state.users.userProfile,
   };
