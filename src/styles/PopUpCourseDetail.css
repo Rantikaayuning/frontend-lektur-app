@@ -13,14 +13,15 @@
 }
 
 .modal-central-image {
-  width: 239px;
+  width: 50%;
   height: 133px;
 
-  background: url(../assets/RectangleSquare.png);
+  /* background: url(../assets/RectangleSquare.png); */
 }
 .modal-central-content {
   position: relative;
-  right: 90px;
+  /* right: 90px; */
+  width: 50%;
 }
 .modal-central-body {
   padding: 0;

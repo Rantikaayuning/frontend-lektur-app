@@ -35,10 +35,10 @@ const StudentAssessment = () => {
                             <p>{item.number}. {item.question}</p>
                             <p>Answer</p>
                             <>
-                            {item.options.map((a, b) => (
+                            {item.options.map((item, id) => (
                                 <label class="container">
-                                    <input type="radio" name="radio" value={a.value}/>{' '}
-                                    <span>{a.text}</span>
+                                    <input type="radio" name="radio" value={item.value}/>{' '}
+                                    <span>{item.text}</span>
                                 </label>
                             ))}
                             </>

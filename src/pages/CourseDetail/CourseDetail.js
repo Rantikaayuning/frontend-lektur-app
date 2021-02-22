@@ -33,8 +33,8 @@ function CourseDetail() {
           <div className="course-detail" id="myDiv">
             <div className="course-detail-left">
               <p className="p1">Business</p>
-              <p className="p2">{courseDetail.title}</p>
-              <p className="p3">By {courseDetail.teacherId.fullname}</p>
+              <p className="p2">{courseDetail.course.title}</p>
+              <p className="p3">By {courseDetail.course.teacherId.fullname}</p>
               {userProfile ? (
                 <div>
                   {userProfile.status === 0 ? (
@@ -51,22 +51,24 @@ function CourseDetail() {
             </div>
             <div className="course-detail-right flex">
               <div>
-                <p className="p1">{courseDetail.totalVideo}</p>
+                <p className="p1">{courseDetail.course.totalVideo}</p>
                 <p className="p2">Learning Videos</p>
               </div>
               <div>
-                <p className="p1">{courseDetail.totalMaterial}</p>
+                <p className="p1">{courseDetail.course.totalMaterial}</p>
                 <p className="p2">Study Material</p>
               </div>
               <div className="course-detail-right-material">
                 <p>Content</p>
                 <ul>
                   <li>
+                    {courseDetail.content.map((item, index) => (
                     <div className="rectangle">
-                      <p>Lesson #1: </p>
+                      <p>Lesson #{item.number + 1}: {item.title}</p>
                     </div>
+                    ))}
                   </li>
-                  <li>
+                  {/* <li>
                     <div className="rectangle">
                       <p>Lesson #2: </p>
                     </div>
@@ -90,7 +92,7 @@ function CourseDetail() {
                     <div className="rectangle">
                       <p>Lesson #6: </p>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -98,7 +100,7 @@ function CourseDetail() {
           <div className="center">
             <div className="course-center">
               <h5>Description</h5>
-              <p>{courseDetail.overview}</p>
+              <p>{courseDetail.course.overview}</p>
             </div>
           </div>
           <div className="card-content">
@@ -135,11 +137,11 @@ function CourseDetail() {
               <>
                 <Modal.Header closeButton>
                   <div className="modal-central" closeButton>
-                    <div className="modal-central-image"></div>
+                    <div className="modal-central-image"><img src={defaultImg} alt='default'/></div>
                     <div className="modal-central-content">
                       <p className="p1">Successfully enrolled!</p>
-                      <p className="p2">{courseDetail.title}</p>
-                      {/* <p className="p3">{courseDetail.teacherId.fullname}</p> */}
+                      <p className="p2">{courseDetail.course.title}</p>
+                      <p className="p3">{courseDetail.course.teacherId.fullname}</p>
                     </div>
                   </div>
                 </Modal.Header>
