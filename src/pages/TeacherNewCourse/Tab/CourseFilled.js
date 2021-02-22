@@ -2,8 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Comp1 from "../../../assets/RectangleComputer.png";
 import Comp2 from "../../../assets/RectangleCom2.png";
+import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 
-function CourseFilled() {
+import {getTeacherProfile} from "../../../redux/actions/TeacherAction"
+
+function CourseFilled(props) {
+
+  const dispatch = useDispatch();
+
+  console.log(props.getCourses);
+
   return (
     <div className="main-course-filled">
       <div className="teacher-dashboard-list">
@@ -73,4 +82,12 @@ function CourseFilled() {
   );
 }
 
-export default CourseFilled;
+const mapStateToProps = state => {
+  return {
+    getCourses: state.teachers.getCourses
+  };
+};
+
+export default connect(mapStateToProps)(CourseFilled);
+
+

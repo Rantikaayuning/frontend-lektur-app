@@ -26,7 +26,7 @@ function CourseDetail() {
     dispatch(getCourses())
   }, []);
 
-  // console.log(courseDetail)
+  console.log(courseDetail)
 
   return (
     <div className="main-course">
