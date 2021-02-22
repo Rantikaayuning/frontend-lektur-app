@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCourseDetail, getCourses } from "../../redux/actions/CoursesAction";
 
 import ContentCards from "../../components/ContentCard/Cards";
-import { staticImage } from "../../assets/JSONFile/dummyData";
 import defaultImg from "../../assets/RectangleSquare.png";
 
 function CourseDetail() {
@@ -15,16 +14,13 @@ function CourseDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const courseDetail = useSelector((state) => state.courses.courseDetail);
-  const courses = useSelector((state) => state.courses.courses);
-
-  const userProfile = useSelector((state) => state.users.userProfile);
-  const auth = useSelector((state) => state.users.isAuthentificated);
+  const {courseDetail, courses} = useSelector(state => state.courses);
+  const {userProfile, isAuthentificated} = useSelector(state => state.users);
 
   useEffect(() => {
     dispatch(getCourseDetail(id));
     dispatch(getCourses());
-  }, []);
+  }, [dispatch, id]);
 
   // console.log(courseDetail)
 
@@ -135,7 +131,7 @@ function CourseDetail() {
             dialogClassName="modal-90w"
             aria-labelledby="example-custom-modal-styling-title"
           >
-            {auth ? (
+            {isAuthentificated ? (
               <>
                 <Modal.Header closeButton>
                   <div className="modal-central" closeButton>
