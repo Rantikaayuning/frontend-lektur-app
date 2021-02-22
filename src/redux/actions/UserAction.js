@@ -56,7 +56,7 @@ export const getUserProfile = () => (dispatch) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result);
+        // console.log(response.data.result);
         dispatch({
           type: GET_USER_PROFILE,
           payload: response.data.result,

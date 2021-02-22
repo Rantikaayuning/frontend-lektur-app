@@ -1,12 +1,25 @@
-import React from 'react';
-import { studentAssessment as assessment } from '../../assets/JSONFile/dummyData';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import { getQuestions } from '../../redux/actions/AssessmentAction'
 
 const StudentAssessment = () => {
+    // const {id} = useParams();
+    const dispatch = useDispatch();
+
+    const assessment = useSelector(state => state.assessment.assessment)
+
+    useEffect(() => {
+        dispatch(getQuestions());
+      }, [dispatch]);
+
+    // console.log(assessment)
 
     return (
         <>
             <div className='student-assessment'>
+        {assessment !== null ? (
+            <>
                 <div className="assessment-title">
                     <div>
                         <span className="bread-crumb">Create Cinematic Music Video</span> /  {" "}
@@ -18,28 +31,25 @@ const StudentAssessment = () => {
                     <h4>{assessment.length} Questions</h4>
                     <hr class="solid"></hr>
                     {assessment.map((item, index) => (
-                        <div className='assessment-questions'>
-                            <p>{item.noQuestion}. {item.question}</p>
+                        <div className='assessment-questions' key={index}>
+                            <p>{item.number}. {item.question}</p>
                             <p>Answer</p>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceOne}</span>
-                            </label>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceTwo}</span>
-                            </label>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceThree}</span>
-                            </label>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceFour}</span>
-                            </label>
+                            <>
+                            {item.options.map((a, b) => (
+                                <label class="container">
+                                    <input type="radio" name="radio" value={a.value}/>{' '}
+                                    <span>{a.text}</span>
+                                </label>
+                            ))}
+                            </>
                         </div>
-                    ))}
-                </div>
+                            ))}
+                    </div>
+                </>
+        ) : (
+            <div id="loader"></div>
+        )}
+                
                 <div className='submit-assessment'>
                     <Link to='/assessment-result'>
                         <p><button>Submit Assessment</button></p>

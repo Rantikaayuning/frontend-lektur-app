@@ -19,7 +19,7 @@ const StudentProfile = (props) => {
     props.getUserProfile();
   }, []);
 
-  console.log(props.userProfile);
+  // console.log(props.userProfile);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ const StudentProfile = (props) => {
               </div>
             </div>
           ) : (
-            <div>Loading...</div>
+            <div id="regular-loader"></div>
           )}
         </>
       ) : (
