@@ -8,7 +8,7 @@ import {
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 
-// const token = localStorage.getItem("token"); 
+// const token = localStorage.getItem("token");
 const token = Cookies.get("token");
 
 export const postLogin = (body) => (dispatch) => {
@@ -18,14 +18,12 @@ export const postLogin = (body) => (dispatch) => {
         dispatch({
           type: LOGIN,
           payload: response.data.message,
-          // token: localStorage.setItem("token", response.data.token), // this can be deleted and replaced by token: response.data.data.token
-          token: Cookies.set("token", response.data.token),
+          token: response.data.token, // token: Cookies.set("token", response.data.token), // token: localStorage.setItem("token", response.data.token)
           role: jwt_decode(response.data.token).status,
         });
 
         // localStorage.setItem("token", response.data.token);
-        Cookies.set("token", response.data.token); // currently not used
-
+        Cookies.set("token", response.data.token);
         getUserProfile();
       }
     })
@@ -62,6 +60,7 @@ export const getUserProfile = () => (dispatch) => {
         dispatch({
           type: GET_USER_PROFILE,
           payload: response.data.result,
+          // role: jwt_decode(response.data.token).status, // try here
         });
       }
     })
