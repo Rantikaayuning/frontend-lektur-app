@@ -26,7 +26,7 @@ function TeacherDashboard(props) {
     props.getUserProfile();
   }, []);
 
-  console.log(props.userProfile);
+  // console.log(props.userProfile);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -118,7 +118,7 @@ function TeacherDashboard(props) {
             />
           ))
         ) : (
-          <div>Loading...</div>
+          <div id="regular-loader"></div>
         )}
       </div>
     </div>

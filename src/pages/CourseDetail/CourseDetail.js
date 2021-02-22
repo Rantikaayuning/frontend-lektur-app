@@ -27,10 +27,10 @@ function CourseDetail() {
   return (
     <div className="main-course">
       {courseDetail === null ? (
-        <div>Loading...</div>
+        <div id="loader"></div>
       ) : (
         <>
-          <div className="course-detail">
+          <div className="course-detail" id="myDiv">
             <div className="course-detail-left">
               <p className="p1">Business</p>
               <p className="p2">{courseDetail.title}</p>

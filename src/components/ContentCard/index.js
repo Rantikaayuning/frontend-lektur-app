@@ -11,10 +11,9 @@ function Content() {
   const dispatch = useDispatch();
   const courses = useSelector(state => state.courses.courses)
 
-  
   useEffect(() => {
     dispatch(getCourses())
-  }, []);
+  }, [dispatch]);
 
   console.log(courses)
 
@@ -28,7 +27,6 @@ function Content() {
           ))}
         </div>
       </div>
-
       <div className="card-content">
         <Row className="content-card-container">
           {courses.map((item, index) => (

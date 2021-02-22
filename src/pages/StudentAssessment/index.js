@@ -13,7 +13,7 @@ const StudentAssessment = () => {
         dispatch(getQuestions());
       }, [dispatch]);
 
-    console.log(assessment)
+    // console.log(assessment)
 
     return (
         <>
@@ -47,7 +47,7 @@ const StudentAssessment = () => {
                     </div>
                 </>
         ) : (
-            <div>Loading</div>
+            <div id="loader"></div>
         )}
                 
                 <div className='submit-assessment'>

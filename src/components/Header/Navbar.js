@@ -23,7 +23,7 @@ function Navbar(props) {
     props.getUserProfile();
   }, []);
 
-  console.log(props.userProfile);
+  // console.log(props.userProfile);
 
   return (
     <div className="sidebar">

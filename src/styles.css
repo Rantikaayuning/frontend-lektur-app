@@ -18,6 +18,7 @@
 @import "./styles/PopUpCourseDetail.css";
 @import "./styles/PopUpInvite.css";
 @import "./styles/CourseFilled.css";
+@import "./styles/Loading.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 * {
