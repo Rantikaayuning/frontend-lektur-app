@@ -209,4 +209,9 @@
   .teacher-save-question-box .teacher-question-title {
     margin-left: 0px;
   }
+  .teacher-dashboard-list p {
+    left: 50px;
+    position: relative;
+    margin-right: 5rem;
+  }
 }

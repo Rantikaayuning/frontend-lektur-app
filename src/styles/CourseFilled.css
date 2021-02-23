@@ -15,11 +15,18 @@
   margin-top: 40px;
   margin-bottom: 40px;
 }
+
+.course-filled-content-box {
+  display: flex;
+  flex-direction: column;
+}
 .course-filled-content-card {
   margin-bottom: 40px;
   display: flex;
+  flex-direction: row;
+  height: max-content;
   width: 1000px;
-  height: 300px;
+  /* height: 300px; */
   left: 220px;
   top: 638px;
   background: #ffffff;
@@ -111,17 +118,17 @@
   color: #ef9c27;
 }
 .image-computer1 {
-  position: relative;
-  top: 40px;
-  left: 20px;
+  /* position: relative; */
+  /* top: 40px;
+  left: 20px; */
   width: 100%;
   height: 200px;
 }
 .image-computer1 img {
-  position: relative;
+  /* position: relative; */
   right: 0px;
-  width: 369px;
-  height: 202px;
+  width: 300px;
+  height: 150px;
 }
 .add-new-lesson {
   position: relative;
@@ -150,20 +157,37 @@
   font-size: 16px;
   line-height: 17px;
 }
-@media screen and (max-width: 1100px) and (min-width: 300px) {
-  .main-course-filled {
-    text-overflow: clip;
-    text-align: center;
-  }
+@media screen and (max-width: 768px) {
   .course-filled-content-card {
+    width: 500px;
     display: flex;
-    text-align: center;
-    background: chartreuse;
-    height: 700px;
+    flex-direction: column;
+    height: 40rem;
   }
-  .course-filled-content-card .span-paragraph {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
+
+  .course-detail-filled {
+    position: relative;
+    left: 57px;
+    top: 20px;
+  }
+  .course-detail-filled p {
+    width: 500px;
+  }
+  .span-paragraph {
+    padding-inline-end: 55rem;
+  }
+  .image-computer1 img {
+    top: 20px;
+    left: 2rem;
+  }
+  .course-filled-content p {
+    position: relative;
+    left: 255px;
+  }
+  .add-new-lesson {
+    left: 0px;
+  }
+  .delete-course {
+    margin-bottom: 70px;
   }
 }

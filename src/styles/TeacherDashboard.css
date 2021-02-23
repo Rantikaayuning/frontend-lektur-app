@@ -68,7 +68,7 @@
   top: 144px;
   left: 440px; /* 122 + 39 + 230 */
   width: 893px; /* 50% */
-  height: 545px;
+  height: max-content;
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -134,7 +134,7 @@
 }
 
 .invite-edit-btn {
-  margin-left: 70px;
+  width: 25%;
 }
 
 .invite-edit-btn button {

@@ -82,7 +82,7 @@ export const publicRoutes = [
   },
   {
     component: CourseFilled,
-    path: "/course-filled-teacher",
+    path: "/course-filled-teacher/:id",
     exact: true,
   },
   {

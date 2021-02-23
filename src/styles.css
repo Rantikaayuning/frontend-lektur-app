@@ -19,13 +19,16 @@
 @import "./styles/PopUpInvite.css";
 @import "./styles/CourseFilled.css";
 @import "./styles/CourseUpdate.css";
+@import "./styles/Loading.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 * {
   font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }

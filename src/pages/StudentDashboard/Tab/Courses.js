@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-import { studentCourses } from "../../../assets/JSONFile/dummyData";
-import {Progress} from 'reactstrap'
+// import { studentCourses } from "../../../assets/JSONFile/dummyData";
+// import {Progress} from 'reactstrap'
 import { Modal } from 'react-bootstrap';
 import { PopUpCourse } from '../../../components/PopUp/PopUpCourse';
 import { PopUpMaterial } from '../../../components/PopUp/PopUpMaterial';
+import { useDispatch, useSelector } from "react-redux";
+import { getStudentCourses } from "../../../redux/actions/CoursesAction";
+import defaultImg from "../../../assets/RectangleSquare.png";
 
 const StudentBoardCourses = () => {
     const [popUpCourse, setPopUpCourse] = useState(false);
     const [popUpMaterial, setPopUpMaterial] = useState(false);
 
+    const dispatch = useDispatch();
+
+    const studentCourses = useSelector(state => state.courses.studentCourses);
+
+    useEffect(() => {
+        dispatch(getStudentCourses());
+    }, [dispatch]);
+
+    console.log(studentCourses)
     return (
         <>
             <div className="student-board">
@@ -24,7 +36,7 @@ const StudentBoardCourses = () => {
                         <p>Assesment</p>
                     </Link>
                 </div>
-                {studentCourses.map((item, index) => (
+                {/* {studentCourses.map((item, index) => (
                 <div className='student-course-list'>
                     {item.isActive === true ? (
                     <div className='student-course-detail' key={index}>
@@ -51,9 +63,21 @@ const StudentBoardCourses = () => {
                             <p className='title'>Waiting Approval</p>
                         </div>
                     </div>  
-                    ) : ''}
-                    </div>
+                    ) : ''} */}
+                <div className='student-course-list'>
+                {studentCourses.map((item, index) => (
+                    <div className='student-course-detail' key={index} >
+                        <img src={defaultImg} alt='courses'/>
+                        <div className='course-detail-first'>
+                            <p><b>{item.courseId.title}</b></p>
+                            <p className='title'>By {item.courseId.teacherId.fullname}</p>
+                        </div>
+                        <div className='course-detail-second'>
+                            <p className='title'>Waiting Approval</p>
+                        </div>
+                    </div>  
                 ))}
+                    </div>
                 <Modal
                 show={popUpCourse}
                 size='lg'
