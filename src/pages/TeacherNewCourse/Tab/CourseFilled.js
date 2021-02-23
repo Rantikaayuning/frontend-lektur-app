@@ -50,7 +50,7 @@ function CourseFilled() {
               {/* {courseDetail.content.map((item, index) => ( */}
                 <>
             <div className="course-filled-content-card-left">
-              <span className="span">Lesson #{courseDetail.content[0].number} : {courseDetail.content[0].title} </span>
+              {/* <span className="span">Lesson #{courseDetail.content[0].number} : {courseDetail.content[0].title} </span> */}
               <Link to='/teacher-new-course'>
               <i className="fa fa-pencil "></i>
               </Link>
