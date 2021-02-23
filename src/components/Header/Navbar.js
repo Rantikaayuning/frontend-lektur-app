@@ -100,7 +100,7 @@ function Navbar(props) {
                         <Link to="/" className="drop">
                           <div
                             onClick={() => {
-                              localStorage.removeItem("token");
+                              // localStorage.removeItem("token");
                               Cookies.remove("token");
                               window.open("/", "_self");
                             }}

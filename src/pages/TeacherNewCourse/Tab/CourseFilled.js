@@ -35,7 +35,7 @@ function CourseFilled() {
         <div className="course-detail">
           <div className="course-detail-filled">
             <span>{courseDetail.course.title}</span>
-            <Link to='/teacher-new-course'>
+            <Link to={`/course-update-teacher/${id}`}>
               <i class="fa fa-pencil "></i>
             </Link>
             <p>
@@ -99,4 +99,8 @@ function CourseFilled() {
   );
 }
 
+
+
 export default CourseFilled;
+
+

@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 // const token = localStorage.getItem("token");
 const token = Cookies.get("token");
 
-export const postLogin = (body) => (dispatch) => {
+export const postLogin = (body) => async (dispatch) => {
   API.post("/users/login", body)
     .then((response) => {
       if (response.status === 200) {
@@ -32,7 +32,7 @@ export const postLogin = (body) => (dispatch) => {
     });
 };
 
-export const postSignup = (role, payload) => (dispatch) => {
+export const postSignup = (role, payload) => async (dispatch) => { // add async
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {

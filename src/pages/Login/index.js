@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Jumbotron } from "reactstrap";
 import { useDispatch } from "react-redux";
 
-import { postLogin} from "../../redux/actions/UserAction";
+import { postLogin } from "../../redux/actions/UserAction";
 
 function Login(props) {
   const [userLogin, setUserLogin] = useState({
@@ -26,8 +26,8 @@ function Login(props) {
       email: userLogin.email,
       password: userLogin.password,
     };
-    dispatch(postLogin(body));
-    history.push("/");
+    dispatch(postLogin(body))
+    .then(history.push("/"));
   };
 
   return (
