@@ -34,7 +34,7 @@ function CourseUpdate() {
             <div className='teacher-update-box'>
          
             <div className="course-detail-update">
-                    {/* <span>{courseDetail[1].title}</span> */}
+                    {/* <span>{courseDetail.course.title}</span> */}
                     <Link to='/teacher-new-course'>
                         <i class="fa fa-pencil "></i>
                     </Link>

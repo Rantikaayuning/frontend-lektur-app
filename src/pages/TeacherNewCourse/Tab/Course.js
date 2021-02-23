@@ -3,8 +3,8 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
-import {getCourses} from "../../../redux/actions/CoursesAction"
-import {createCourse} from "../../../redux/actions/TeacherAction"
+import {getCourses, getCourseDetail} from "../../../redux/actions/CoursesAction"
+import {createCourse, getTeacherProfile} from "../../../redux/actions/TeacherAction"
 
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
 
@@ -21,6 +21,7 @@ const TeacherCourseTab = (props) => {
         setAdd(true)
     }
     const courses = useSelector(state => state.courses.courses)
+    const {getCourses} = useSelector(state => state.teachers)
 
     // const courseDetail = useSelector((state) => state.teachers.courseDetail)
     const [title, setTitle] = useState ("")
@@ -30,14 +31,16 @@ const TeacherCourseTab = (props) => {
     const submitCourse = (e) => {
         e.preventDefault();
         dispatch(createCourse(title, overview, category));
-        history.push(`/course-update-teacher/${courses._id}`)
+        history.push(`/course-update-teacher/${getCourses[getCourses.length-1]._id}`)
     }
 
    useEffect(() => {
-       dispatch(getCourses(id))
+       dispatch(getTeacherProfile())
+    // dispatch(getCourseDetail(id));
+    //    dispatch(getCourses(id))
    }, [])
 
-    console.log(courses);
+    console.log(getCourses[getCourses.length-1]);
 
     return (
         <>
