@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getQuestions } from "../../redux/actions/AssessmentAction";
 
 const StudentAssessment = () => {
+  // const [userAnswer, setUserAnswer] = useState()
+
   // const {id} = useParams();
   const dispatch = useDispatch();
 

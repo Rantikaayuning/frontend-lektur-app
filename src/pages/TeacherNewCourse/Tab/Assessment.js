@@ -9,6 +9,11 @@ const TeacherAssessmentTab = () => {
   const [isPicked, setPicked] = useState({
     data: [...assessment],
   });
+  // add assesemnt
+  const [question, setQuestion] = useState({
+    number: null,
+  });
+
   function handleDropDown(index) {
     isPicked.data[index].isChosen
       ? (isPicked.data[index].isChosen = false)

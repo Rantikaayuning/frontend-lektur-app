@@ -1,7 +1,8 @@
-import { GET_QUESTIONS } from "../types/AssessmentTypes";
+import { GET_QUESTIONS, POST_QUESTIONS } from "../types/AssessmentTypes";
 
 const initialState = {
   assessment: null,
+  addAssessment: null,
 };
 
 const assessmentReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const assessmentReducer = (state = initialState, action) => {
       return {
         ...state,
         assessment: payload,
+      };
+    case POST_QUESTIONS:
+      return {
+        ...state,
+        addAssessment: payload,
       };
     default:
       return state;
