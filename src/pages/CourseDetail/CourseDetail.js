@@ -3,13 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourseDetail, getCourses } from "../../redux/actions/CoursesAction";
+import { getCourseDetail, getCourses, postEnrollCourse } from "../../redux/actions/CoursesAction";
 
 import ContentCards from "../../components/ContentCard/Cards";
 import defaultImg from "../../assets/RectangleSquare.png";
 
 function CourseDetail() {
   const [PopUpCourseDetail, setPopUpCourseDetail] = useState(false);
+  // const [isEnroll, setEnroll] = useState(false)
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -21,6 +22,12 @@ function CourseDetail() {
     dispatch(getCourseDetail(id));
     dispatch(getCourses());
   }, [dispatch, id]);
+
+  const handleEnroll = () => {
+    dispatch(postEnrollCourse(id))
+    // setEnroll(true)
+    setPopUpCourseDetail(true)
+  }
 
   // console.log(courseDetail)
 
@@ -38,13 +45,13 @@ function CourseDetail() {
               {userProfile ? (
                 <div>
                   {userProfile.status === 0 ? (
-                    <button onClick={() => setPopUpCourseDetail(true)}>
+                    <button onClick={handleEnroll}>
                       Enroll Now
                     </button>
                   ) : null}
                 </div>
               ) : (
-                <button onClick={() => setPopUpCourseDetail(true)}>
+                <button onClick={handleEnroll}>
                   Enroll Now
                 </button>
               )}
@@ -107,7 +114,7 @@ function CourseDetail() {
             <div className="card-text-course">Related Course</div>
             <Row className="content-card-container">
               {courses.map((item, index) => (
-                <Col xl="3" key={index} className="card-container">
+                <Col xl="3" md="6" sm="12" key={index} className="card-container">
                   <Link
                     to={`/course-detail/${item._id}`}
                     style={{ textDecoration: "none", color: "black" }}

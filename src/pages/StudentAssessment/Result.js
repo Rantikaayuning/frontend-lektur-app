@@ -1,8 +1,19 @@
-import React from 'react';
-import { studentAssessment as assessment } from '../../assets/JSONFile/dummyData';
+import React, { useEffect } from 'react';
 import checklist from '../../assets/Vector2.png';
+import { useDispatch, useSelector } from "react-redux"
+import { getQuestions } from '../../redux/actions/AssessmentAction'
 
 const StudentAssessmentResult = () => {
+
+    const dispatch = useDispatch();
+
+    const assessment = useSelector(state => state.assessment.assessment)
+
+    useEffect(() => {
+        dispatch(getQuestions());
+      }, [dispatch]);
+
+    // console.log(assessment[0].answer)
 
     return (
         <>
@@ -24,42 +35,43 @@ const StudentAssessmentResult = () => {
                 <div className='student-assessment-box'>
                     <h4>{assessment.length} Questions</h4>
                     <hr class="solid"></hr>
+                    
                     {assessment.map((item, index) => (
                         <div className='assessment-questions-result'>
                             <div className='questions-answer-box'>
-                            <p>{item.noQuestion}. {item.question}</p>
-                            
-                            <label class="container">
-                                <p className='answer'>Answer</p>
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceOne}</span>
-                            </label>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceTwo}</span>
-                            </label>
-                            <label class="container">
-                                <img src={checklist} alt='right answer'/>{' '}
-                                <span>{item.choiceThree}</span>
-                            </label>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceFour}</span>
-                            </label>
-                            <label class="container">
-                                <input type="radio" name="radio"/>{' '}
-                                <span>{item.choiceFive}</span>
+                            <p>{item.number}. {item.question}</p>
+                            <>
+                            {item.options.map((item, id) => (
+                                <>
+                                    {item.value === assessment.answer ? (
+                                    <label class="container">
+                                        <span>
+                                            <img src={checklist} alt='answer'/> {' '}
+                                        </span>
+                                        <span>{item.text}</span>
+                                    </label>
+                                    ) : (
+                                    <label class="container">
+                                        <span>
+                                            <input type="radio" name="radio" value={item.value} /> {' '}
+                                        </span>
+                                        <span>{item.text}</span>
+                                    </label>
+                                    )}
+                                </>
+                            ))}
+                            </>
                             <br/><br/>
-                            {item.isCorrect === true ? '' : (
+                            {/* {item.isCorrect === true ? '' : (
                             <p>
                                 <p className='remark'>Remark</p>
                                 <p>{item.remark}</p>
                             </p>
-                            )}
-                            </label>
+                            )} */}
+                            {/* </label> */}
                             </div>
                             <div className='assessment-correct'>
-                                {item.isCorrect === true ? (
+                                {item.answer === 3 ? (
                                     <p className='correct'>Correct</p>
                                 ) : (
                                     <p className='wrong'>Wrong</p>

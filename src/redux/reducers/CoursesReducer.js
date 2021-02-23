@@ -1,10 +1,19 @@
-import { GET_ALL_COURSES, GET_COURSE_DETAIL, GET_COURSE_STUDENT , POST_ENROLL_COURSE } from "../types/CoursesTypes";
+import {
+  GET_ALL_COURSES,
+  GET_COURSE_DETAIL,
+  GET_COURSE_STUDENT,
+  POST_ENROLL_COURSE,
+  GET_STUDENT_ENROLL,
+  GET_TEACHER_COURSES 
+} from "../types/CoursesTypes";
 
 const initialState = {
   courses: [],
   courseDetail: null,
   enrollCourse: null,
-  studentCourses: []
+  studentCourses: [],
+  studentEnrollList: [],
+  teacherCourses: []
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -29,6 +38,16 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         studentCourses: payload,
+      };
+    case GET_STUDENT_ENROLL:
+      return {
+        ...state,
+        studentEnrollList: payload,
+      };
+    case GET_TEACHER_COURSES:
+      return {
+        ...state,
+        teacherCourses: payload,
       };
     default:
       return state;

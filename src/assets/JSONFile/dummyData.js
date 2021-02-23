@@ -189,79 +189,127 @@ export const courseCardJson = [
 
 export const studentAssessment = [
   {
-    noQuestion: 1,
-    question: "What’s the virtual DOM?",
-    choiceOne:
-      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
-    choiceTwo:
-      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
-    choiceThree:
-      "an in-memory representation of the actual HTML elements that make up your application’s UI",
-    choiceFour: "data that are passed into a component from its parent.",
-    choiceFive:
-      "a third-party state management library for React, created before the context API existed",
-    remark:
+    "number": 1,
+    "question": "What’s the virtual DOM?",
+    "answer": 3,
+    "options": [
+    {
+      "value": 1,
+      "text":
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    }, {
+      "value": 2,
+      "text":
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    }, {
+      "value": 3,
+      "text":
+        "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    }, {
+      "value": 4,
+      "text": "data that are passed into a component from its parent.",
+    }, {
+      "value": 5,
+      "text":
+        "a third-party state management library for React, created before the context API existed",
+    }
+    ],
+    "remarks":
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-    isCorrect: true,
-    isChosen: false,
   },
   {
-    noQuestion: 2,
-    question: "What’s JSX?",
-    choiceOne:
-      "an in-memory representation of the actual HTML elements that make up your application’s UI",
-    choiceTwo:
-      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
-    choiceThree:
-      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
-    choiceFour: "data that are passed into a component from its parent.",
-    choiceFive:
-      "a third-party state management library for React, created before the context API existed",
-    remark:
+    "number": 2,
+    "question": "What’s JSX?",
+    "answer": 3,
+    "options": [
+    {
+      "value": 1,
+      "text":
+        "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    }, {
+      "value": 2,
+      "text":
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    }, {
+      "value": 3,
+      "text":
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    }, {
+      "value": 4,
+      "text": "data that are passed into a component from its parent.",
+    }, {
+      "value": 5,
+      "text":
+        "a third-party state management library for React, created before the context API existed",
+    }
+    ],
+    "remarks":
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-    isCorrect: true,
-    isChosen: false,
   },
   {
-    noQuestion: 3,
-    question:
+    "number": 3,
+    "question":
       "What’s the difference between a class component and a functional one?",
-    choiceOne:
+    "answer": 3,
+    "options": [
+    {
+      "value": 1,
+      "text":
       "an in-memory representation of the actual HTML elements that make up your application’s UI",
-    choiceTwo:
-      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
-    choiceThree:
-      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
-    choiceFour: "data that are passed into a component from its parent.",
-    choiceFive:
-      "a third-party state management library for React, created before the context API existed",
-    remark:
+    }, {
+      "value": 2,
+      "text":
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    }, {
+      "value": 3,
+      "text":
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    }, {
+      "value": 4,
+      "text": "data that are passed into a component from its parent.",
+    }, {
+      "value": 5,
+      "text":
+        "a third-party state management library for React, created before the context API existed",
+    }
+    ],
+    "remarks":
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-    isCorrect: true,
-    isChosen: false,
   },
   {
-    noQuestion: 4,
-    question: "What’s the difference between state and props?",
-    choiceOne:
-      "an in-memory representation of the actual HTML elements that make up your application’s UI",
-    choiceTwo:
-      "an extension to JavaScript syntax that allows for writing code that looks like HTML",
-    choiceThree: "data that are passed into a component from its parent.",
-    choiceFour:
-      "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
-    choiceFive:
-      "a third-party state management library for React, created before the context API existed",
-    remark:
+    "number": 4,
+    "question": "What’s the difference between state and props?",
+    "answer": 3,
+    "options": [
+    {
+      "value": 1,
+      "text":
+        "an in-memory representation of the actual HTML elements that make up your application’s UI",
+    }, {
+      "value": 2,
+      "text":
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+    }, {
+      "value": 3,
+      "text": "data that are passed into a component from its parent.",
+    }, {
+      "value": 4,
+      "text":
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+    }, {
+      "value": 5,
+      "text":
+        "a third-party state management library for React, created before the context API existed",
+    }
+    ],
+    "remarks":
       "State is a component’s internal data that can be modified during the lifetime of the component.",
-    isCorrect: false,
-    isChosen: false,
   },
 ];
 
 export const teacherAssessment = [
   {
-    noQuestion: null,
+    number: null,
     question: "",
     optionOne: "",
     optionTwo: "",

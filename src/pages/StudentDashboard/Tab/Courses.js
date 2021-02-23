@@ -16,12 +16,13 @@ const StudentBoardCourses = () => {
 
     const dispatch = useDispatch();
 
-    const {studentCourses} = useSelector(state => state.courses);
+    const studentCourses = useSelector(state => state.courses.studentCourses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
     }, [dispatch]);
 
+    console.log(studentCourses)
     return (
         <>
             <div className="student-board">
@@ -63,20 +64,20 @@ const StudentBoardCourses = () => {
                         </div>
                     </div>  
                     ) : ''} */}
-                {studentCourses.map((item, index) => (
                 <div className='student-course-list'>
-                    <div className='student-course-detail' key={index}>
+                {studentCourses.map((item, index) => (
+                    <div className='student-course-detail' key={index} >
                         <img src={defaultImg} alt='courses'/>
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
-                            {/* <p className='title'>By {item.courseId.teacherId}</p> */}
+                            <p className='title'>By {item.courseId.teacherId.fullname}</p>
                         </div>
                         <div className='course-detail-second'>
                             <p className='title'>Waiting Approval</p>
                         </div>
                     </div>  
-                    </div>
                 ))}
+                    </div>
                 <Modal
                 show={popUpCourse}
                 size='lg'
