@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Comp1 from "../../../assets/RectangleComputer.png";
-import Comp2 from "../../../assets/RectangleCom2.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseDetail } from "../../../redux/actions/CoursesAction"
 
@@ -35,7 +34,7 @@ function CourseFilled() {
         <div className="course-detail">
           <div className="course-detail-filled">
             <span>{courseDetail.course.title}</span>
-            <Link to='/teacher-new-course'>
+            <Link to={`/course-change-teacher/${id}`}>
               <i class="fa fa-pencil "></i>
             </Link>
             <p>
@@ -51,18 +50,18 @@ function CourseFilled() {
                 <>
             <div className="course-filled-content-card-left">
               {/* <span className="span">Lesson #{courseDetail.content[0].number} : {courseDetail.content[0].title} </span> */}
-              <Link to='/teacher-new-course'>
+              <Link to={`/course-change-teacher/${id}`}>
               <i className="fa fa-pencil "></i>
               </Link>
               <span className="span-paragraph">
               Create React App is a comfortable environment for learning React.
               </span>
-              <Link to='/teacher-new-course'>
+              <Link to={`/course-change-teacher/${id}`}>
               <i class="fa fa-file files"></i>
               </Link>
               <span className="span-detail">React and Open Source.pdf</span>
               <br />
-              <Link to='/teacher-new-course'>
+              <Link to={`/course-change-teacher/${id}`}>
               <i className="fa fa-file files"></i>
               </Link>
               <span>Just Javascript.pdf</span>
@@ -77,7 +76,7 @@ function CourseFilled() {
           {/* <div className="course-filled-content-card">
             <div className="course-filled-content-card-left">
               <span className="span">Lesson #2 : Create React App </span>
-              <Link to='/teacher-new-course'>
+              <Link to={`/course-change-teacher/${id}`}>
               <i className="fa fa-pencil "></i>
               </Link>
               <span className="span-paragraph">
@@ -99,4 +98,8 @@ function CourseFilled() {
   );
 }
 
+
+
 export default CourseFilled;
+
+

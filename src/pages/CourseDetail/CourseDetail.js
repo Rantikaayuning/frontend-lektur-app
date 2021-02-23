@@ -29,7 +29,7 @@ function CourseDetail() {
     setPopUpCourseDetail(true)
   }
 
-  // console.log(courseDetail)
+  console.log(courseDetail)
 
   return (
     <div className="main-course">

@@ -8,21 +8,19 @@ import {
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 
-// const token = localStorage.getItem("token");
 const token = Cookies.get("token");
 
-export const postLogin = (body) => (dispatch) => {
+export const postLogin = (body) => async (dispatch) => {
   API.post("/users/login", body)
     .then((response) => {
       if (response.status === 200) {
         dispatch({
           type: LOGIN,
           payload: response.data.message,
-          token: response.data.token, // token: Cookies.set("token", response.data.token), // token: localStorage.setItem("token", response.data.token)
+          token: response.data.token, 
           role: jwt_decode(response.data.token).status,
         });
 
-        // localStorage.setItem("token", response.data.token);
         Cookies.set("token", response.data.token);
         getUserProfile();
       }
@@ -32,7 +30,7 @@ export const postLogin = (body) => (dispatch) => {
     });
 };
 
-export const postSignup = (role, payload) => (dispatch) => {
+export const postSignup = (role, payload) => async (dispatch) => { // add async
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
@@ -56,7 +54,6 @@ export const getUserProfile = () => (dispatch) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        // console.log(response.data.result);
         dispatch({
           type: GET_USER_PROFILE,
           payload: response.data.result,

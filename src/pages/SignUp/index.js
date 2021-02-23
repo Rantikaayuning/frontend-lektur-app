@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Jumbotron } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { postSignup } from "../../redux/actions/UserAction";
+import { postSignup, postLogin } from "../../redux/actions/UserAction";
 
 export default function SignUp(props) {
   const [role, setRole] = useState(null);
@@ -13,6 +13,7 @@ export default function SignUp(props) {
     password: "",
   });
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSignUp = (e) => {
@@ -23,7 +24,7 @@ export default function SignUp(props) {
   };
 
   const submitTeacher = () => {
-    dispatch(postSignup(role, signupData));
+    dispatch(postSignup(role, signupData))
   };
 
   return (

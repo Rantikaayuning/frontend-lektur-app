@@ -18,6 +18,7 @@ function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
+  const {id} = useParams()
 
   const handleEdit = () => {
     setEdit(!isEdit);
@@ -25,7 +26,7 @@ function TeacherDashboard(props) {
 
   useEffect(() => {
     props.getUserProfile();
-    props.getTeacherCourses()
+    props.getTeacherCourses(id)
   }, []);
 
   // console.log(props.userProfile);
@@ -99,7 +100,7 @@ function TeacherDashboard(props) {
         </div>
       )}
 
-        {props.teacherCourses !== null ? (
+        {props.teacherCourses !== [] ? (
           props.teacherCourses.map((item, index) => (
         <div className="courses-container">
           <div className="courses-header">

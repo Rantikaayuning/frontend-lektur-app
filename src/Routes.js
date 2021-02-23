@@ -10,7 +10,9 @@ import StudentMaterial from "./pages/StudentMaterial";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
+import CourseChange from "./pages/TeacherNewCourse/Tab/CourseChange";
 import CourseFilled from "./pages/TeacherNewCourse/Tab/CourseFilled";
+import CourseUpdate from "./pages/TeacherNewCourse/Tab/CourseUpdate";
 import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
 
 export const publicRoutes = [
@@ -82,6 +84,16 @@ export const publicRoutes = [
   {
     component: CourseFilled,
     path: "/course-filled-teacher/:id",
+    exact: true,
+  },
+  {
+    component: CourseUpdate,
+    path: "/course-update-teacher/:id",
+    exact: true,
+  },
+  {
+    component: CourseChange,
+    path: "/course-change-teacher/:id",
     exact: true,
   },
 ];
