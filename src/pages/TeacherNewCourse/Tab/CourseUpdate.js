@@ -5,16 +5,16 @@ import {useSelector, useDispatch} from "react-redux"
 import {getCourses, getCourseDetail} from "../../../redux/actions/CoursesAction"
 
 
-function CourseUpdate(props) {
+function CourseUpdate() {
     const dispatch = useDispatch();
 
     const {id} = useParams();
 
-    const courseDetail = useSelector(state => state.courses.courseDetail)
+    const {courseDetail} = useSelector(state => state.courses)
 
     useEffect(() => {
         dispatch(getCourseDetail(id))
-    }, [])
+    }, [dispatch, id])
 
     console.log(courseDetail);
 
@@ -34,12 +34,12 @@ function CourseUpdate(props) {
             <div className='teacher-update-box'>
          
             <div className="course-detail-update">
-                    {/* <span>{getCourses.title}</span> */}
+                    {/* <span>{courseDetail[1].title}</span> */}
                     <Link to='/teacher-new-course'>
                         <i class="fa fa-pencil "></i>
                     </Link>
                     <p>
-                        {/* {getCourses.overview} */}
+                        {/* {courseDetail.course.overview} */}
                         {/* React is a JavaScript library created for building fast and interactive user interfaces for web and mobile applications. It is an open-source, component-based, front-end library responsible only for the application’s view layer. In Model View Controller (MVC) architecture, the view layer is responsible for how the app looks and feels. React was created by Jordan Walke, a software engineer at Facebook. The create react app package can help you to set up your basic environment to start a new single page application. It makes using third party libraries, live-editing CSS and JSS in development and scaling to many files and components easier for you, by combining React, React-Dom with many other dependencies. */}
                     </p>
                 </div>
