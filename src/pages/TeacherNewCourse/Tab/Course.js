@@ -3,7 +3,6 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
-import {getCourses, getCourseDetail} from "../../../redux/actions/CoursesAction"
 import {createCourse, getTeacherProfile} from "../../../redux/actions/TeacherAction"
 
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'

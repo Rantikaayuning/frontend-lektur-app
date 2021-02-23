@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import { Link,useHistory,useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux"
 
-import {getCourses, getCourseDetail} from "../../../redux/actions/CoursesAction"
+import {getCourseDetail} from "../../../redux/actions/CoursesAction"
 
 
 function CourseUpdate() {
