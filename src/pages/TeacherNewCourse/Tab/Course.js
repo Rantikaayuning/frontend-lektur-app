@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import {getCourses} from "../../../redux/actions/CoursesAction"
 import {createCourse} from "../../../redux/actions/TeacherAction"
+
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
 
 const TeacherCourseTab = (props) => {
+ 
+    const {id} = useParams();
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -15,17 +20,24 @@ const TeacherCourseTab = (props) => {
     const handleAdd = () => {
         setAdd(true)
     }
+    const courses = useSelector(state => state.courses.courses)
 
+    // const courseDetail = useSelector((state) => state.teachers.courseDetail)
     const [title, setTitle] = useState ("")
     const [overview, setOverview] = useState ("")
     const [category, setCategory] = useState("")
 
-    const submitCourse = () => {
-        dispatch(createCourse(title, overview, category))
-        alert("hai")
+    const submitCourse = (e) => {
+        e.preventDefault();
+        dispatch(createCourse(title, overview, category));
+        history.push(`/course-update-teacher/${courses._id}`)
     }
 
-    console.log(props.createCourses);
+   useEffect(() => {
+       dispatch(getCourses(id))
+   }, [])
+
+    console.log(courses);
 
     return (
         <>
@@ -46,14 +58,18 @@ const TeacherCourseTab = (props) => {
                     <div className='teacher-new-course-overview'>
                         <p><textarea type="text" placeholder="Overview*" cols='45' rows='5'onChange={(e) => setOverview (e.target.value)} value={overview}/><hr type="solid"/></p>
                     </div>
+                    <div className='teacher-new-course-title'>
+                    <p><input type="text" placeholder="Category"  onChange={(e) => setCategory (e.target.value)} value={category}/><hr type="solid"/></p>
+                    </div>
                     <div className='teacher-add-header-image'>
                         <p><button>Add header image</button></p> 
                         <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
                     </div>
+                   
                     <div className='teacher-save-new-course'>
-                    {/* <p><input type="text" placeholder="Title"  onChange={(e) => setCategory (e.target.value)} value={category}/><hr type="solid"/></p> */}
                         <p><button onClick = {submitCourse} >Save</button></p>
                     </div>
+                   
                     <div>
                         <p><hr type="solid"/></p>
                     </div>

@@ -2,7 +2,7 @@ import {GET_PROFILE_TEACHER, CREATE_COURSE} from "../types/TeacherTypes";
 
 const initialState = {
      getCourses : [],
-     createCourses : [],
+     createCourses : null,
 }
 
 const teacherReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const teacherReducer = (state = initialState, action) => {
         case CREATE_COURSE:
             return{
                 ...state,
-                createCourses: payload,
+                createCourses: payload, 
             }   
          default :
             return state;

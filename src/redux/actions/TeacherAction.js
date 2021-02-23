@@ -14,7 +14,7 @@ export const getTeacherProfile = () => (dispatch) =>{
         if(response.status === 200){
             dispatch({
                 type: GET_PROFILE_TEACHER,
-                payload: response.data.result,
+                payload: response.data.result[1][1],
             })
         }
     })
