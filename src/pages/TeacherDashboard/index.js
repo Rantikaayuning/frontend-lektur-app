@@ -26,11 +26,11 @@ function TeacherDashboard(props) {
 
   useEffect(() => {
     props.getUserProfile();
-    props.getTeacherCourses()
+    props.getTeacherCourses(id)
   }, []);
 
   // console.log(props.userProfile);
-  // console.log(props.teacherCourses)
+  console.log(props.teacherCourses)
 
   const handleSubmit = (e) => {
     e.preventDefault();

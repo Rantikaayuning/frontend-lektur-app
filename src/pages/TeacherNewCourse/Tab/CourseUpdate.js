@@ -20,7 +20,14 @@ function CourseUpdate() {
 
     return (
         <div className='teacher-assessment'>
+<<<<<<< HEAD
             
+=======
+            {courseDetail === null ? (
+                <div id='loader'></div>
+            ) : (
+            <>
+>>>>>>> feature/teacher-dashboard-integration
             <div className="teacher-dashboard-list">
                 <p className='open'>Course</p>
                 <Link to='/teacher-new-assessment'>
@@ -34,6 +41,7 @@ function CourseUpdate() {
             <div className='teacher-update-box'>
          
             <div className="course-detail-update">
+<<<<<<< HEAD
                     {/* <span>{courseDetail.course.title}</span> */}
                     <Link to='/teacher-new-course'>
                         <i class="fa fa-pencil "></i>
@@ -41,6 +49,14 @@ function CourseUpdate() {
                     <p>
                         {/* {courseDetail.course.overview} */}
                         {/* React is a JavaScript library created for building fast and interactive user interfaces for web and mobile applications. It is an open-source, component-based, front-end library responsible only for the application’s view layer. In Model View Controller (MVC) architecture, the view layer is responsible for how the app looks and feels. React was created by Jordan Walke, a software engineer at Facebook. The create react app package can help you to set up your basic environment to start a new single page application. It makes using third party libraries, live-editing CSS and JSS in development and scaling to many files and components easier for you, by combining React, React-Dom with many other dependencies. */}
+=======
+                    <span>{courseDetail.course.title}</span>
+                    {/* <Link to={`/course-change-teacher/${courseDetail.course.id}`}> */}
+                        <i class="fa fa-pencil "></i>
+                    {/* </Link> */}
+                    <p>
+                        {courseDetail.course.overview}
+>>>>>>> feature/teacher-dashboard-integration
                     </p>
                 </div>
                
@@ -80,6 +96,11 @@ function CourseUpdate() {
                         <p className='delete'>Delete Course</p>
                     </div>
             </div>  
+<<<<<<< HEAD
+=======
+            </>
+            )}
+>>>>>>> feature/teacher-dashboard-integration
         </div>
     )
 }

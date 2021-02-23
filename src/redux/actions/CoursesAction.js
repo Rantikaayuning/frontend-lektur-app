@@ -104,7 +104,7 @@ export const getTeacherCourses = () => (dispatch) => {
     }})
     .then((response) => {
       if (response.status === 200) {
-        // console.log(response.data.result[1])
+        console.log(response.data.result[1])
         dispatch({
           type: GET_TEACHER_COURSES,
           payload: response.data.result[1],
