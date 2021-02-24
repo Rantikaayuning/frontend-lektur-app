@@ -148,7 +148,8 @@ const TeacherAssessmentTab = () => {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
+          // <form onSubmit={handleSubmit}>
+          <form>
             <div className="teacher-question-title">
               <h4>Questions</h4>
             </div>
@@ -177,7 +178,7 @@ const TeacherAssessmentTab = () => {
                 <div className="teacher-answer-option">
                   <h5>Answer</h5>
                   <br />
-                  <p>
+                  {/* <p>
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
@@ -190,8 +191,8 @@ const TeacherAssessmentTab = () => {
                         <hr type="solid" />
                       </span>
                     </label>
-                  </p>
-                  <p>
+                  </p> */}
+                  {/* <p>
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
@@ -204,8 +205,8 @@ const TeacherAssessmentTab = () => {
                         <hr type="solid" />
                       </span>
                     </label>
-                  </p>
-                  <p>
+                  </p> */}
+                  {/* <p>
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
@@ -218,8 +219,8 @@ const TeacherAssessmentTab = () => {
                         <hr type="solid" />
                       </span>
                     </label>
-                  </p>
-                  <p>
+                  </p> */}
+                  {/* <p>
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
@@ -232,8 +233,8 @@ const TeacherAssessmentTab = () => {
                         <hr type="solid" />
                       </span>
                     </label>
-                  </p>
-                  <p>
+                  </p> */}
+                  {/* <p>
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
@@ -246,7 +247,53 @@ const TeacherAssessmentTab = () => {
                         <hr type="solid" />
                       </span>
                     </label>
-                  </p>
+                  </p> */}
+                  <table>
+                    <tr>
+                      {/* <th>Radio</th>
+                      <th>Options</th> */}
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="radio" name="radio" />
+                      </td>
+                      <td>
+                        <input type="text" name="" placeholder="Option" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="radio" name="radio" />
+                      </td>
+                      <td>
+                        <input type="text" name="" placeholder="Option" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="radio" name="radio" />
+                      </td>
+                      <td>
+                        <input type="text" name="" placeholder="Option" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="radio" name="radio" />
+                      </td>
+                      <td>
+                        <input type="text" name="" placeholder="Option" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="radio" name="radio" />
+                      </td>
+                      <td>
+                        <input type="text" name="" placeholder="Option" />
+                      </td>
+                    </tr>
+                  </table>
                 </div>
                 <div className="teacher-answer-remark">
                   <h5>Remark</h5>
@@ -283,7 +330,9 @@ const TeacherAssessmentTab = () => {
               <p>Add New Question</p>
             </div>
             <div className="save-exam-question">
-              <button type="submit">Save Exam</button>
+              <button type="submit" onClick={handleSubmit}>
+                Save Exam
+              </button>
               {/* <button onClick={handleSave}>Save Exam</button> */}
             </div>
           </form>
