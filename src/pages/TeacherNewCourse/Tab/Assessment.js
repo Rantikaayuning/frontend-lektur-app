@@ -28,6 +28,15 @@ const TeacherAssessmentTab = () => {
     remarks: "",
   });
 
+  const [answer, setAnswer] = useState(null);
+  const [options, setOptions] = useState([
+    { value: 1, text: "" },
+    { value: 2, text: "" },
+    { value: 3, text: "" },
+    { value: 4, text: "" },
+    { value: 5, text: "" },
+  ]);
+
   const handleChange = (e) => {
     setQuestion({
       ...question,
@@ -43,9 +52,7 @@ const TeacherAssessmentTab = () => {
       answer: question.answer,
       value: question.options.length + 1,
       // text: question.options.text,
-      options: [
-        { value: question.options.length + 1, text: question.options.text },
-      ],
+      options: options,
     };
     dispatch(postAssessment(body));
     console.log(question);
@@ -69,6 +76,13 @@ const TeacherAssessmentTab = () => {
 
   const handleSave = () => {
     setSave(!isSave);
+  };
+
+  const handleOption = (value, text) => {
+    let temp = options;
+    temp[value - 1].text = text;
+    console.log(temp);
+    setOptions(temp);
   };
 
   return (
@@ -255,42 +269,112 @@ const TeacherAssessmentTab = () => {
                     </tr>
                     <tr>
                       <td>
-                        <input type="radio" name="radio" />
+                        <input
+                          type="radio"
+                          name="answer"
+                          value={1}
+                          onChange={(e) => setAnswer(e.target.value)}
+                        />
                       </td>
                       <td>
-                        <input type="text" name="" placeholder="Option" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input type="radio" name="radio" />
-                      </td>
-                      <td>
-                        <input type="text" name="" placeholder="Option" />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input type="radio" name="radio" />
-                      </td>
-                      <td>
-                        <input type="text" name="" placeholder="Option" />
+                        <input
+                          type="text"
+                          name="options"
+                          placeholder="Option"
+                          onChange={(e) => handleOption(1, e.target.value)}
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="radio" name="radio" />
+                        <input
+                          type="radio"
+                          name="answer"
+                          value={2}
+                          onChange={(e) => setAnswer(e.target.value)}
+                        />
                       </td>
                       <td>
-                        <input type="text" name="" placeholder="Option" />
+                        <input
+                          type="text"
+                          name="options"
+                          placeholder="Option"
+                          onChange={(e) =>
+                            setOptions([
+                              ...options,
+                              { value: 2, text: e.target.value },
+                            ])
+                          }
+                        />
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="radio" name="radio" />
+                        <input
+                          type="radio"
+                          name="answer"
+                          value={3}
+                          onChange={(e) => setAnswer(e.target.value)}
+                        />
                       </td>
                       <td>
-                        <input type="text" name="" placeholder="Option" />
+                        <input
+                          type="text"
+                          name="options"
+                          placeholder="Option"
+                          onChange={(e) =>
+                            setOptions([
+                              ...options,
+                              { value: 3, text: e.target.value },
+                            ])
+                          }
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="radio"
+                          name="answer"
+                          value={4}
+                          onChange={(e) => setAnswer(e.target.value)}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="options"
+                          placeholder="Option"
+                          onChange={(e) =>
+                            setOptions([
+                              ...options,
+                              { value: 4, text: e.target.value },
+                            ])
+                          }
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="radio"
+                          name="answer"
+                          value={5}
+                          onChange={(e) => setAnswer(e.target.value)}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="options"
+                          placeholder="Option"
+                          onChange={(e) =>
+                            setOptions([
+                              ...options,
+                              { value: 5, text: e.target.value },
+                            ])
+                          }
+                        />
                       </td>
                     </tr>
                   </table>
@@ -309,7 +393,7 @@ const TeacherAssessmentTab = () => {
                   <span>
                     <hr type="solid" />
                   </span>
-                  <label>
+                  {/* <label>
                     Correct Answer:
                     <br />
                     <input
@@ -318,7 +402,7 @@ const TeacherAssessmentTab = () => {
                       name="answer"
                       onChange={(e) => handleChange(e)}
                     />
-                  </label>
+                  </label> */}
                 </div>
               </div>
               <br />
