@@ -23,21 +23,29 @@ export const getQuestions = () => (dispatch) => {
     .catch(() => console.log("error"));
 };
 
-export const postAssessment = (id, body) => (dispatch) => {
-  API.post(`/assessment/create?courseId=${id}`, JSON.stringify(body), {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+// 602e06cc34a3a426b0311c94
+
+export const postAssessment = (body) => (dispatch) => {
+  alert("dispatched assesment");
+
+  API.post(
+    `/assessment/create?courseId=602e06cc34a3a426b0311c94`,
+    JSON.stringify(body),
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    }
+  )
     .then((response) => {
       if (response.status === 201) {
+        console.log(body);
         dispatch({
           type: POST_QUESTIONS,
           payload: response.data.result,
         });
       }
     })
-    .catch((error) => {
-      alert(error.data.message);
-    });
+    .catch((error) => console.log(error));
 };

@@ -1,18 +1,57 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
+import { postAssessment } from "../../../redux/actions/AssessmentAction";
+
+import { useDispatch } from "react-redux";
+
+// const options = {
+//   value: null,
+//   text: "",
+// };
 
 const TeacherAssessmentTab = () => {
+  const history = useHistory();
+
   const [isSave, setSave] = useState(false);
   const [isPicked, setPicked] = useState({
     data: [...assessment],
   });
   // add assesemnt
   const [question, setQuestion] = useState({
-    number: null,
+    number: 1,
+    question: "",
+    answer: null,
+    options: [{ value: 0, text: "" }],
+    remarks: "",
   });
+
+  const handleChange = (e) => {
+    setQuestion({
+      ...question,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      number: question.number,
+      question: question.question,
+      answer: question.answer,
+      value: question.options.length + 1,
+      // text: question.options.text,
+      options: [
+        { value: question.options.length + 1, text: question.options.text },
+      ],
+    };
+    dispatch(postAssessment(body));
+    console.log(question);
+  };
+
+  const dispatch = useDispatch();
 
   function handleDropDown(index) {
     isPicked.data[index].isChosen
@@ -109,16 +148,26 @@ const TeacherAssessmentTab = () => {
             </div>
           </div>
         ) : (
-          <>
+          <form onSubmit={handleSubmit}>
             <div className="teacher-question-title">
               <h4>Questions</h4>
             </div>
             <div className="teacher-new-question">
               <div className="teacher-option-title">
                 <h4>
-                  #1{" "}
+                  #{" "}
+                  <input
+                    type="text"
+                    name="number"
+                    onChange={(e) => handleChange(e)}
+                  />
                   <span>
-                    <input type="text" placeholder="Question" />
+                    <input
+                      type="text"
+                      placeholder="Question"
+                      name="question"
+                      onChange={(e) => handleChange(e)}
+                    />
                     <hr type="solid" />
                   </span>
                 </h4>
@@ -132,7 +181,12 @@ const TeacherAssessmentTab = () => {
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
-                        <input type="text" placeholder="Option" />
+                        <input
+                          type="text"
+                          placeholder="Option"
+                          name="text"
+                          onChange={(e) => handleChange(e)}
+                        />
                         <hr type="solid" />
                       </span>
                     </label>
@@ -141,7 +195,12 @@ const TeacherAssessmentTab = () => {
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
-                        <input type="text" placeholder="Option" />
+                        <input
+                          type="text"
+                          placeholder="Option"
+                          name="text"
+                          onChange={(e) => handleChange(e)}
+                        />
                         <hr type="solid" />
                       </span>
                     </label>
@@ -150,7 +209,12 @@ const TeacherAssessmentTab = () => {
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
-                        <input type="text" placeholder="Option" />
+                        <input
+                          type="text"
+                          placeholder="Option"
+                          name="text"
+                          onChange={(e) => handleChange(e)}
+                        />
                         <hr type="solid" />
                       </span>
                     </label>
@@ -159,7 +223,26 @@ const TeacherAssessmentTab = () => {
                     <label class="container">
                       <input type="radio" name="radio" />{" "}
                       <span>
-                        <input type="text" placeholder="Option" />
+                        <input
+                          type="text"
+                          placeholder="Option"
+                          name="text"
+                          onChange={(e) => handleChange(e)}
+                        />
+                        <hr type="solid" />
+                      </span>
+                    </label>
+                  </p>
+                  <p>
+                    <label class="container">
+                      <input type="radio" name="radio" />{" "}
+                      <span>
+                        <input
+                          type="text"
+                          placeholder="Option"
+                          name="text"
+                          onChange={(e) => handleChange(e)}
+                        />
                         <hr type="solid" />
                       </span>
                     </label>
@@ -173,10 +256,22 @@ const TeacherAssessmentTab = () => {
                     placeholder="Explain here..."
                     cols="45"
                     rows="5"
+                    name="remarks"
+                    onChange={(e) => handleChange(e)}
                   />
                   <span>
                     <hr type="solid" />
                   </span>
+                  <label>
+                    Correct Answer:
+                    <br />
+                    <input
+                      type="text"
+                      placeholder="Correct Answer"
+                      name="answer"
+                      onChange={(e) => handleChange(e)}
+                    />
+                  </label>
                 </div>
               </div>
               <br />
@@ -188,9 +283,10 @@ const TeacherAssessmentTab = () => {
               <p>Add New Question</p>
             </div>
             <div className="save-exam-question">
-              <button onClick={handleSave}>Save Exam</button>
+              <button type="submit">Save Exam</button>
+              {/* <button onClick={handleSave}>Save Exam</button> */}
             </div>
-          </>
+          </form>
         )}
       </div>
     </>
