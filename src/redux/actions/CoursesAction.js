@@ -1,5 +1,12 @@
 import API from "../../api/index";
-import { GET_ALL_COURSES, GET_COURSE_DETAIL, POST_ENROLL_COURSE, GET_COURSE_STUDENT } from '../types/CoursesTypes'
+import {
+  GET_ALL_COURSES,
+  GET_COURSE_DETAIL,
+  POST_ENROLL_COURSE,
+  GET_COURSE_STUDENT,
+  GET_STUDENT_ENROLL,
+  GET_TEACHER_COURSES 
+} from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
@@ -49,8 +56,8 @@ export const postEnrollCourse = (id) => (dispatch) => {
           });
         }
       })
-      .catch((error) => {
-        alert(error.data.message)
+      .catch(() => {
+        alert('error')
       });
   };
 
@@ -61,7 +68,6 @@ export const getStudentCourses = (payload) => (dispatch) => {
     }}, payload)
     .then((response) => {
       if (response.status === 200) {
-        // console.log(response.data.result)
         dispatch({
           type: GET_COURSE_STUDENT,
           payload: response.data.result,
@@ -72,3 +78,58 @@ export const getStudentCourses = (payload) => (dispatch) => {
       alert('error');
     });
   };
+
+export const getStudentEnroll = () => (dispatch) => {
+  API.get(`teacher/courses/student?courseId=603374310c6cc70022058d88`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: GET_STUDENT_ENROLL,
+          payload: response.data.result,
+        });
+      }
+    })
+    .catch(() => {
+      alert('error');
+    });
+  };
+
+export const getTeacherCourses = () => (dispatch) => {
+  API.get(`teacher/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      if (response.status === 200) {
+        console.log(response.data.result[1])
+        dispatch({
+          type: GET_TEACHER_COURSES,
+          payload: response.data.result[1],
+        });
+      }
+    })
+    .catch(() => {
+      alert('error');
+    });
+  };
+
+// export const getStudentCourses = (payload) => (dispatch) => {
+//   API.get("/student/profile", {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     }}, payload)
+//     .then((response) => {
+//       if (response.status === 200) {
+//         dispatch({
+//           type: GET_COURSE_STUDENT,
+//           payload: response.data.result.content,
+//         });
+//       }
+//     })
+//     .catch(() => {
+//       alert('error');
+//     });
+//   };
