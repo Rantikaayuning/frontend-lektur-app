@@ -91,12 +91,9 @@ export const publicRoutes = [
     path: "/course-update-teacher/:id",
     exact: true,
   },
-<<<<<<< HEAD
-=======
   {
     component: CourseChange,
     path: "/course-change-teacher/:id",
     exact: true,
   },
->>>>>>> feature/teacher-dashboard-integration
 ];
