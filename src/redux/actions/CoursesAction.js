@@ -106,7 +106,6 @@ export const getTeacherCourses = () => (dispatch) => {
     }})
     .then((response) => {
       if (response.status === 200) {
-        // console.log(response.data.result[1])
         dispatch({
           type: GET_TEACHER_COURSES,
           payload: response.data.result[1],
@@ -118,8 +117,8 @@ export const getTeacherCourses = () => (dispatch) => {
     });
   };
 
-export const getCourseFilled = (_id) => (dispatch) => {
-  API.get(`/courses/filled?courseId=${_id}`, {
+export const getCourseFilled = (id) => async (dispatch) => {
+  API.get(`/courses/filled?courseId=${id}`, {
   headers: {
     Authorization: `Bearer ${token}`,
   }})
@@ -127,11 +126,11 @@ export const getCourseFilled = (_id) => (dispatch) => {
     if (response.status === 200) {
       dispatch({
         type:   GET_COURSE_FILLED,
-        payload: response.data.result.course,
+        payload: response.data.result,
+        title: response.data.result.course.title,
+        overview: response.data.result.course.overview,
       })
     }
   })
-  .catch(() => {
-    alert('error');
-  });
+  .catch((error) => console.log(error))
 }

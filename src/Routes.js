@@ -12,7 +12,7 @@ import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
 import CourseFilled from "./pages/TeacherNewCourse/Tab/CourseFilled";
 import CourseUpdate from "./pages/TeacherNewCourse/Tab/CourseUpdate";
-import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
+import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";  
 
 export const publicRoutes = [
   {
@@ -87,7 +87,7 @@ export const publicRoutes = [
   },
   {
     component: CourseUpdate,
-    path: "/course-update-teacher/:id",
+    path: "/create-course-teacher/:id",
     exact: true,
   },
 ];

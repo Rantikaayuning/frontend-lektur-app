@@ -21,12 +21,10 @@ export const getTeacherProfile = () => (dispatch) =>{
     .catch((error) => console.log(error))
 };
 
-export const createCourse = ( title, overview, category) => (dispatch) => {
+export const postCourse = ( title, overview, category) => async (dispatch) => {
     API.post("/courses/create", 
     {
-        title,
-        overview,
-        category,
+        title, overview, category
       },
     {
         headers: {
@@ -35,11 +33,13 @@ export const createCourse = ( title, overview, category) => (dispatch) => {
     })
     .then((response) => {
         if(response.status === 201){
+            console.log(response.data.result._id);
             dispatch({
                 type: CREATE_COURSE,
                 payload: response.data.result,
-            })
+                id: response.data.result._id,
+            })  
         } 
     })
-    .catch(() => alert("hai"))
+    .catch((error) => console.log(error))
 }

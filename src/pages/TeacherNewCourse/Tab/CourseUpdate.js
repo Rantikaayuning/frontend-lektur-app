@@ -1,26 +1,28 @@
 import React, {useEffect} from 'react';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux"
 
-import {getCourseFilled} from "../../../redux/actions/CoursesAction"
-
+import {getCourseFilled} from "../../../redux/actions/CoursesAction";
 
 function CourseUpdate() {
     const dispatch = useDispatch();
 
-    const {id} = useParams();
-
-    const {coursefilled} = useSelector(state => state.courses)
+    const id = useSelector(state => state.teachers.id)
 
     useEffect(() => {
-        dispatch(getCourseFilled(id))
-    }, [dispatch, id])
+        dispatch(getCourseFilled(id));
+    }, [])
 
-    console.log(coursefilled);
+    const {coursefilled, getTitle, getOverview} = useSelector(state => state.courses)
+
+    console.log(id);
 
     return (
+        <>
+        {coursefilled === null ? (
+        <div id='loader'></div>
+        ) : (
         <div className='teacher-assessment'>
-            
             <div className="teacher-dashboard-list">
                 <p className='open'>Course</p>
                 <Link to='/teacher-new-assessment'>
@@ -34,12 +36,12 @@ function CourseUpdate() {
             <div className='teacher-update-box'>
          
             <div className="course-detail-update">
-                    {/* <span>{coursefilled.title}</span> */}
+                   { getTitle}
                     <Link to='/teacher-new-course'>
                         <i class="fa fa-pencil "></i>
                     </Link>
                     <p>
-                        {/* {coursefilled.overview} */}
+                        {getOverview}
                     </p>
                 </div>
                
@@ -73,13 +75,15 @@ function CourseUpdate() {
                         <p>Add new lesson</p>
                     </div>
                     <div className='publish-and-delete-course'>
-                        <Link to='/course-filled-teacher'>
+                        <Link to={`/course-filled-teacher/${id}`}>
                             <p><button>Publish Course</button></p>
                         </Link>
                         <p className='delete'>Delete Course</p>
                     </div>
             </div>  
         </div>
+        )}
+        </>
     )
 }
 

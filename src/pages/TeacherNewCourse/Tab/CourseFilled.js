@@ -35,7 +35,7 @@ function CourseFilled() {
         <div className="course-detail">
           <div className="course-detail-filled">
             <span>{courseDetail.course.title}</span>
-            <Link to={`/course-update-teacher/${id}`}>
+            <Link to={"/teacher-new-course"}>
               <i class="fa fa-pencil "></i>
             </Link>
             <p>

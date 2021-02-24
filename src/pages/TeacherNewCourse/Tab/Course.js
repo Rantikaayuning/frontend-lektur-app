@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
-import {createCourse, getTeacherProfile} from "../../../redux/actions/TeacherAction"
-import {getCourseFilled} from "../../../redux/actions/CoursesAction"
-
-// import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
+import {postCourse} from "../../../redux/actions/TeacherAction"
+import {getCourseFilled} from "../../../redux/actions/CoursesAction";
 
 const TeacherCourseTab = () => {
  
@@ -19,7 +16,7 @@ const TeacherCourseTab = () => {
     const handleAdd = () => {
         setAdd(true)
     }
-    const {getTeacher} = useSelector(state => state.teachers)
+    const id = useSelector(state => state.teachers.id)
 
     const [title, setTitle] = useState ("")
     const [overview, setOverview] = useState ("")
@@ -27,18 +24,13 @@ const TeacherCourseTab = () => {
 
     const submitCourse = (e) => {
         e.preventDefault();
-        dispatch(createCourse(title, overview, category));
-        // history.push(`/course-update-teacher/${getTeacher[getTeacher.length-1]._id}`)
+        dispatch(postCourse(title, overview, category))
+        .then(dispatch(getCourseFilled(id)))
+        .then(() => history.push(`/create-course-teacher/${id}`))
     }
 
-   useEffect(() => {
-       dispatch(getTeacherProfile())
-       
-   }, [])
-
-//    console.log(getTeacher[getTeacher.length-1]);
+   console.log(id);
   
-
     return (
         <>
             <div className='teacher-assessment'>
@@ -115,10 +107,4 @@ const TeacherCourseTab = () => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        createCourses: state.teachers.createCourses
-    };
-  };
-  
-  export default connect(mapStateToProps)(TeacherCourseTab);
+export default TeacherCourseTab;

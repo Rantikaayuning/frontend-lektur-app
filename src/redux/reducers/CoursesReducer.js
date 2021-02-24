@@ -16,10 +16,12 @@ const initialState = {
   studentEnrollList: [],
   teacherCourses: [],
   coursefilled: null,
+  getTitle: '',
+  getOverview:'',
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, title, overview } = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
@@ -55,6 +57,8 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         coursefilled: payload,
+        getTitle: title,
+        getOverview: overview,
       }
     default:
       return state;
