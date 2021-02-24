@@ -11,7 +11,7 @@ import {
 import { getUserProfile } from "../../redux/actions/UserAction";
 import { getMovieSearch } from "../../redux/actions/CoursesAction";
 import { connect } from "react-redux";
-import Cookies, { get } from "js-cookie";
+import Cookies from "js-cookie";
 
 import profile from "../../assets/Ellipse 2.png";
 
