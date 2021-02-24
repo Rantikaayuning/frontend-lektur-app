@@ -4,8 +4,10 @@ import {
   GET_COURSE_STUDENT,
   POST_ENROLL_COURSE,
   GET_STUDENT_ENROLL,
-  GET_TEACHER_COURSES 
+  GET_TEACHER_COURSES,
+  GET_STUDENT_ASSESSMENT
 } from "../types/CoursesTypes";
+import Cookies from "js-cookie";
 
 const initialState = {
   courses: [],
@@ -13,7 +15,9 @@ const initialState = {
   enrollCourse: null,
   studentCourses: [],
   studentEnrollList: [],
-  teacherCourses: []
+  teacherCourses: [],
+  studentAssessment: [],
+  isAuthentificated: Cookies.get("token") ? true : false,
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -33,6 +37,7 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         enrollCourse: payload,
+        isAuthentificated: true,
       };
     case GET_COURSE_STUDENT:
       return {
@@ -48,6 +53,11 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         teacherCourses: payload,
+      };
+    case GET_STUDENT_ASSESSMENT:
+      return {
+        ...state,
+        studentAssessment: payload,
       };
     default:
       return state;

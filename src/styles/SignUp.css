@@ -29,14 +29,18 @@
 }
 
 .form-select select {
-  margin-top: 1px;
-  padding: 0px 5px;
+  margin-top: 10px;
+  padding: 5px 8px;
   margin-bottom: 14px;
   border: 1px solid #16213b;
   background-color: #00030a;
   font-family: Montserrat;
   color: rgba(255, 255, 255, 1);
   border-radius: 5px;
+}
+
+select:hover {
+  cursor: pointer;
 }
 
 .option {

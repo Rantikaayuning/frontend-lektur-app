@@ -5,8 +5,8 @@ import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
 
-export const getQuestions = () => (dispatch) => {
-    API.get(`/assessment/?courseId=602e06cc34a3a426b0311c94`, {
+export const getQuestions = (id) => (dispatch) => {
+    API.get(`/assessment/?courseId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

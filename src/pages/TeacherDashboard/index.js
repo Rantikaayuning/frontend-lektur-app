@@ -100,8 +100,7 @@ function TeacherDashboard(props) {
         </div>
       )}
 
-        {props.teacherCourses !== [] ? (
-          props.teacherCourses.map((item, index) => (
+        {props.teacherCourses !== 0 ? (
         <div className="courses-container">
           <div className="courses-header">
             <h5>
@@ -112,6 +111,7 @@ function TeacherDashboard(props) {
             </Link>
           </div>
           <hr />
+          {props.teacherCourses.map((item, index) => (
               <CourseCard
                 key={index}
                 image={defaultImg}
@@ -121,8 +121,8 @@ function TeacherDashboard(props) {
                 enrolledStudents={item.totalEnrolled}
                 edit={`/course-filled-teacher/${item._id}`}
               />
+          ))}
         </div>
-          ))
         ) : (
           <div id="loader"></div>
         )}

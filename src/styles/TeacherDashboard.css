@@ -119,6 +119,7 @@
 
 .course-image {
   padding-bottom: 10px;
+  width: 30%;
 }
 
 .course-info {
@@ -127,6 +128,7 @@
 }
 
 .course-all {
+  height: max-content;
   display: flex;
   justify-content: space-between;
   margin: 20px 40px 20px 34px;

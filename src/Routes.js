@@ -48,12 +48,12 @@ export const publicRoutes = [
   },
   {
     component: StudentAssessment,
-    path: "/assessment",
+    path: "/assessment/:id",
     exact: true,
   },
   {
     component: StudentAssessmentResult,
-    path: "/assessment-result",
+    path: "/assessment/result/:id",
     exact: true,
   },
   {

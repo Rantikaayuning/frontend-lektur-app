@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-import { studentCourses } from "../../../assets/JSONFile/dummyData";
+import { getStudentCourses } from "../../../redux/actions/CoursesAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const StudentBoardAssessment = () => {
+    const dispatch = useDispatch()
+    const {studentCourses} = useSelector(state => state.courses);
+
+    useEffect(() => {
+        dispatch(getStudentCourses());
+    }, [dispatch]);
+
+    console.log(studentCourses.course)
     return (
         <>
+        {studentCourses.course === null || studentCourses.course === undefined ? (
+            <div id='loader'></div>
+        ) : (
             <div className="student-board">
             <div>
                 <StudentProfile />
@@ -17,46 +29,48 @@ const StudentBoardAssessment = () => {
                     </Link>
                     <p><b>Assesment</b></p>
                 </div>
-                {studentCourses.map((item, index) => (
+                {studentCourses.course.map((item, index) => (
                     <div className='student-course-list'>
-                        {item.isCompleted === true ? (
+                        {item.status === 0 ? (
+                        <div className='student-assess-detail'></div>
+                        ) : item.status === 1 ? (
                         <div className='student-assess-detail'>
                             <div className='assessment-detail'>
-                                <h4>{item.title}</h4>
-                                <p className='lecture'>{item.writer}</p>
-                                <p className='complete'>Completed at: {item.completeDate}</p>
-                            </div>
-                            <div className='assessment-precentage'>
-                                <div>
-                                    <h4>{Math.trunc(item.rightAnswer/item.totalQuestion*100)}%</h4>
-                                    <p>{item.rightAnswer}/{item.totalQuestion} Question Correct</p>
-                                </div>
-                            </div>
-                        </div>
-                        ) : item.isActive === true ? (
-                        <div className='student-assess-detail'>
-                            <div className='assessment-detail'>
-                                <h4>{item.title}</h4>
-                                <p className='lecture'>{item.writer}</p>
+                                <h4>{item.courseId.title}</h4>
+                                <p className='lecture'>{item.courseId.teacherId.fullname}</p>
                                 <p className='complete'>Completed at: -</p>
                             </div>
                             <div className='assessment-precentage'>
                                 <div>
                                     <p><i>No result yet</i></p>
-                                    <Link to='/assessment'>
+                                    <Link to={`/assessment/${item.courseId._id}`}>
                                         <button>Take Test</button>
                                     </Link>
                                 </div>
                             </div>
                         </div>
                         ) : (
-                            ''
+                            <div className='student-assess-detail'>
+                            <div className='assessment-detail'>
+                                <h4>{item.courseId.title}</h4>
+                                <p className='lecture'>{item.courseId.teacherId.fullname}</p>
+                                <p className='complete'>Completed at: -</p>
+                            </div>
+                            <div className='assessment-precentage'>
+                                <div>
+                                    <p><i>No result yet</i></p>
+                                    <Link to={`/assessment/${item.courseId._id}`}>
+                                        <button>Take Test</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                         )}
-                       
                     </div>
                 ))}
                 </div>
             </div>
+        )}
         </>
     )
 }

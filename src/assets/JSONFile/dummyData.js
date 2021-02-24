@@ -369,8 +369,8 @@ export const studentEnroll = [
 
 export const studentCourses = [
   {
-    title: "React Crash Course",
-    writer: "Travery Media",
+    title: "React the complete Guide",
+    writer: "Maximilian",
     totalCourse: 8,
     courseDone: 2,
     image: imgCourse,

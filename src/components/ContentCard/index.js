@@ -36,7 +36,7 @@ function Content() {
                 style={{ textDecoration: "none", color: "black" }}
               >
               <ContentCards
-                image={defaultImg}
+                image={item.image === null ? defaultImg : item.image}
                 text={item.overview}
                 title={item.title}
                 lecture={item.teacherId.fullname}

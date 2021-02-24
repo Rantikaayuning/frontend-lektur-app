@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import bgcontent from "../../assets/rectangle55.png";
 import { Link } from "react-router-dom";
 import Content from "../../components/ContentCard/index";
 import Jumbo from "../../components/Header/Jumbotron";
+import {getUserProfile} from "../../redux/actions/UserAction"
+import { useDispatch } from "react-redux";
 
 const Home = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserProfile())
+  }, []);
+
   return (
     <>
       <Jumbo />

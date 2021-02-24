@@ -169,6 +169,7 @@
   top: 377px;
   background: #ef9c27;
   border-radius: 2px;
+  border: none;
 }
 .flex {
   display: flex;
@@ -176,4 +177,5 @@
   text-align: center;
   padding-top: 20px;
   flex-wrap: wrap;
+  overflow: hidden;
 }

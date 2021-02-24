@@ -5,7 +5,8 @@ import {
   POST_ENROLL_COURSE,
   GET_COURSE_STUDENT,
   GET_STUDENT_ENROLL,
-  GET_TEACHER_COURSES 
+  GET_TEACHER_COURSES,
+  // GET_STUDENT_ASSESSMENT 
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 
@@ -116,20 +117,3 @@ export const getTeacherCourses = () => (dispatch) => {
     });
   };
 
-// export const getStudentCourses = (payload) => (dispatch) => {
-//   API.get("/student/profile", {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     }}, payload)
-//     .then((response) => {
-//       if (response.status === 200) {
-//         dispatch({
-//           type: GET_COURSE_STUDENT,
-//           payload: response.data.result.content,
-//         });
-//       }
-//     })
-//     .catch(() => {
-//       alert('error');
-//     });
-//   };

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-// import { studentCourses } from "../../../assets/JSONFile/dummyData";
 import {Progress} from 'reactstrap'
 import { Modal } from 'react-bootstrap';
 import { PopUpCourse } from '../../../components/PopUp/PopUpCourse';
@@ -15,12 +14,16 @@ const StudentBoardCourses = () => {
     const [popUpMaterial, setPopUpMaterial] = useState(false);
 
     const dispatch = useDispatch();
-
-    const studentCourses = useSelector(state => state.courses.studentCourses);
+    const {studentCourses } = useSelector(state => state.courses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
-    }, [dispatch]);
+    }, []);
+    
+    // const handlePopupCourse = (id) => {
+    //     dispatch(getCourseDetail(id));
+    //     setPopUpCourse(true)
+    // }
 
     console.log(studentCourses)
     return (
@@ -28,7 +31,6 @@ const StudentBoardCourses = () => {
         {studentCourses.course === null || studentCourses.course === undefined ? (
             <div id='loader'></div>
         ) : (
-
             <div className="student-board">
             <div>
                 <StudentProfile />
@@ -82,21 +84,29 @@ const StudentBoardCourses = () => {
                             <p className='title'>Waiting Approval</p>
                         </div>
                     </div>  
-
                     ) }                  
                 </div>
                 ))}
                 
-                <Modal
-                show={popUpCourse}
-                size='lg'
-                onHide={() => setPopUpCourse(false)}
-                className='pop-up-course-box'
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
-                >
-                <PopUpCourse/>
-                </Modal>
+                {/* {studentCourses.course === null ? (
+                    <div id='laoder'></div>
+                ) : ( */}
+                    <Modal
+                    show={popUpCourse}
+                    size='lg'
+                    onHide={() => setPopUpCourse(false)}
+                    className='pop-up-course-box'
+                    dialogClassName="modal-90w"
+                    aria-labelledby="example-custom-modal-styling-title"
+                    >
+                    <PopUpCourse
+                    title={studentCourses.course[1].courseId.title}
+                    firstLesson='What is React?'
+                    nextLesson={2}
+                    lessonLocked='Intro to React'
+                    />
+                    </Modal>
+                {/* )} */}
                 <Modal
                 show={popUpMaterial}
                 size='lg'
@@ -105,7 +115,13 @@ const StudentBoardCourses = () => {
                 className='pop-up-material-box'
                 aria-labelledby="example-custom-modal-styling-title"
                 >
-                <PopUpMaterial/>
+                <PopUpMaterial
+                title={studentCourses.course[1].courseId.title}
+                firstLesson="what is React"
+                secondLesson="Intro to React"
+                firstMaterial={studentCourses.course[1].courseId.title}
+                secondMaterial={studentCourses.course[1].courseId.title}
+                />
                 </Modal>
                 </div>
             </div>
