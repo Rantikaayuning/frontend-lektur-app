@@ -5,9 +5,11 @@ import {
   POST_ENROLL_COURSE,
   GET_COURSE_STUDENT,
   GET_STUDENT_ENROLL,
-  GET_TEACHER_COURSES 
+  GET_TEACHER_COURSES,
+  GET_COURSE_FILLED
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
+import { GET_PROFILE_TEACHER } from "../types/TeacherTypes";
 
 const token = Cookies.get("token");
 
@@ -115,3 +117,21 @@ export const getTeacherCourses = () => (dispatch) => {
       alert('error');
     });
   };
+
+export const getCourseFilled = (_id) => (dispatch) => {
+  API.get(`/courses/filled?courseId=${_id}`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  }})
+  .then((response) => {
+    if (response.status === 200) {
+      dispatch({
+        type:   GET_COURSE_FILLED,
+        payload: response.data.result.course,
+      })
+    }
+  })
+  .catch(() => {
+    alert('error');
+  });
+}

@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
 import {createCourse, getTeacherProfile} from "../../../redux/actions/TeacherAction"
+import {getCourseFilled} from "../../../redux/actions/CoursesAction"
 
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
 
-const TeacherCourseTab = (props) => {
+const TeacherCourseTab = () => {
  
-    const {id} = useParams();
     const history = useHistory();
 
     const dispatch = useDispatch();
@@ -19,10 +19,8 @@ const TeacherCourseTab = (props) => {
     const handleAdd = () => {
         setAdd(true)
     }
-    const courses = useSelector(state => state.courses.courses)
-    const {getCourses} = useSelector(state => state.teachers)
+    const {getTeacher} = useSelector(state => state.teachers)
 
-    // const courseDetail = useSelector((state) => state.teachers.courseDetail)
     const [title, setTitle] = useState ("")
     const [overview, setOverview] = useState ("")
     const [category, setCategory] = useState("")
@@ -30,16 +28,16 @@ const TeacherCourseTab = (props) => {
     const submitCourse = (e) => {
         e.preventDefault();
         dispatch(createCourse(title, overview, category));
-        history.push(`/course-update-teacher/${getCourses[getCourses.length-1]._id}`)
+        // history.push(`/course-update-teacher/${getTeacher[getTeacher.length-1]._id}`)
     }
 
    useEffect(() => {
        dispatch(getTeacherProfile())
-    // dispatch(getCourseDetail(id));
-    //    dispatch(getCourses(id))
+       
    }, [])
 
-    console.log(getCourses[getCourses.length-1]);
+//    console.log(getTeacher[getTeacher.length-1]);
+  
 
     return (
         <>
@@ -69,7 +67,7 @@ const TeacherCourseTab = (props) => {
                     </div>
                    
                     <div className='teacher-save-new-course'>
-                        <p><button onClick = {submitCourse} >Save</button></p>
+                        <p><button onClick = {submitCourse}  >Save</button></p>
                     </div>
                    
                     <div>

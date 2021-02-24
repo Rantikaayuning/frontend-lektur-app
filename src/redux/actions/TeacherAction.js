@@ -39,7 +39,7 @@ export const createCourse = ( title, overview, category) => (dispatch) => {
                 type: CREATE_COURSE,
                 payload: response.data.result,
             })
-        }
+        } 
     })
-    .catch((error) => console.log(error))
+    .catch(() => alert("hai"))
 }

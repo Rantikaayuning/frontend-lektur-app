@@ -4,7 +4,8 @@ import {
   GET_COURSE_STUDENT,
   POST_ENROLL_COURSE,
   GET_STUDENT_ENROLL,
-  GET_TEACHER_COURSES 
+  GET_TEACHER_COURSES,
+  GET_COURSE_FILLED
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
   enrollCourse: null,
   studentCourses: [],
   studentEnrollList: [],
-  teacherCourses: []
+  teacherCourses: [],
+  coursefilled: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -49,6 +51,11 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         teacherCourses: payload,
       };
+    case GET_COURSE_FILLED:
+      return {
+        ...state,
+        coursefilled: payload,
+      }
     default:
       return state;
   }
