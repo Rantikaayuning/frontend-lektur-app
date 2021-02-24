@@ -5,7 +5,8 @@ import {
   POST_ENROLL_COURSE,
   GET_COURSE_STUDENT,
   GET_STUDENT_ENROLL,
-  GET_TEACHER_COURSES 
+  GET_TEACHER_COURSES ,
+  SEARCH_COURSE,
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 
@@ -71,6 +72,34 @@ export const getStudentCourses = (payload) => (dispatch) => {
         dispatch({
           type: GET_COURSE_STUDENT,
           payload: response.data.result,
+  
+        }
+      }
+    }
+  
+      
+export const getCourses = payload => dispatch => {
+  API.get("/courses/all", payload)
+    .then(response => {
+      if (response.status === 200) {
+        dispatch({
+          type: GET_ALL_COURSES,
+          payload: response.data.result.result,
+        });
+      }
+    })
+    .catch(() => {
+      alert("try again");
+    });
+};
+
+export const getCourseDetail = id => dispatch => {
+  API.get(`/courses/detail?courseId=${id}`)
+    .then(response => {
+      if (response.status === 200) {
+        dispatch({
+          type: GET_COURSE_DETAIL,
+          payload: response.data.result[0],
         });
       }
     })
@@ -88,6 +117,15 @@ export const getStudentEnroll = () => (dispatch) => {
       if (response.status === 200) {
         dispatch({
           type: GET_STUDENT_ENROLL,
+      
+    });
+};
+export const getMovieSearch = input => dispatch => {
+  API.get(`/courses/search?search=${input}`)
+    .then(response => {
+      if (response.status === 200) {
+        dispatch({
+          type: SEARCH_COURSE,
           payload: response.data.result,
         });
       }
@@ -114,8 +152,11 @@ export const getTeacherCourses = () => (dispatch) => {
     .catch(() => {
       alert('error');
     });
-  };
+  
 
+
+    
+};
 // export const getStudentCourses = (payload) => (dispatch) => {
 //   API.get("/student/profile", {
 //     headers: {
@@ -132,4 +173,4 @@ export const getTeacherCourses = () => (dispatch) => {
 //     .catch(() => {
 //       alert('error');
 //     });
-//   };
+

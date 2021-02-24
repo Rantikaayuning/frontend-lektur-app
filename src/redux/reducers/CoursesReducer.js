@@ -1,10 +1,14 @@
 import {
   GET_ALL_COURSES,
   GET_COURSE_DETAIL,
+<<<<<<< HEAD
   GET_COURSE_STUDENT,
   POST_ENROLL_COURSE,
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES 
+=======
+  SEARCH_COURSE,
+>>>>>>> feature/fetchingApIEthan
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -14,6 +18,7 @@ const initialState = {
   studentCourses: [],
   studentEnrollList: [],
   teacherCourses: []
+  searchCourse: "server",
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -48,6 +53,10 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         teacherCourses: payload,
+    case SEARCH_COURSE:
+      return {
+        ...state,
+        searchCourse: payload,
       };
     default:
       return state;
