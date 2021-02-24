@@ -70,7 +70,7 @@ export const getStudentCourses = (payload) => (dispatch) => {
       if (response.status === 200) {
         dispatch({
           type: GET_COURSE_STUDENT,
-          payload: response.data.result.course,
+          payload: response.data.result,
         });
       }
     })
@@ -115,3 +115,21 @@ export const getTeacherCourses = () => (dispatch) => {
       alert('error');
     });
   };
+
+// export const getStudentCourses = (payload) => (dispatch) => {
+//   API.get("/student/profile", {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     }}, payload)
+//     .then((response) => {
+//       if (response.status === 200) {
+//         dispatch({
+//           type: GET_COURSE_STUDENT,
+//           payload: response.data.result.content,
+//         });
+//       }
+//     })
+//     .catch(() => {
+//       alert('error');
+//     });
+//   };

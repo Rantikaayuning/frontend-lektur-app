@@ -34,11 +34,7 @@ function CourseFilled() {
         <div className="course-detail">
           <div className="course-detail-filled">
             <span>{courseDetail.course.title}</span>
-<<<<<<< HEAD
-            <Link to={`/course-update-teacher/${id}`}>
-=======
             <Link to={`/course-change-teacher/${id}`}>
->>>>>>> feature/teacher-dashboard-integration
               <i class="fa fa-pencil "></i>
             </Link>
             <p>
