@@ -9,13 +9,15 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { getUserProfile } from "../../redux/actions/UserAction";
-import { getMovieSearch } from "../../redux/actions/CoursesAction";
-import { connect } from "react-redux";
+import { getCourseSearch } from "../../redux/actions/CoursesAction";
+import { connect, useDispatch } from "react-redux";
 import Cookies, { get } from "js-cookie";
 
 import profile from "../../assets/Ellipse 2.png";
 
 function Navbar(props) {
+  const dispatch = useDispatch();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -27,7 +29,12 @@ function Navbar(props) {
   const handleChange = e => {
     setSearch(e.target.value);
   };
+  const handleSubmitSearch = e => {
+    e.preventDefault();
+    dispatch(getCourseSearch(search));
+  };
 
+  console.log("props", props);
   return (
     <div className="sidebar">
       <div className="left">
@@ -37,18 +44,18 @@ function Navbar(props) {
         <img src={garis} alt="garis" className="bl" />
       </div>
       <div className="center">
-        <input
-          type="text"
-          placeholder="Search Course or Lecturer"
-          onChange={handleChange}
-        />
-        <i
-          className="fa fa-search icon"
-          onClick={() => {
-            console.log(props.searchCourse);
-            getMovieSearch(search);
-          }}
-        ></i>
+        <form>
+          <input
+            type="text"
+            placeholder="Search Course or Lecturer"
+            onChange={handleChange}
+          />
+          <i
+            className="fa fa-search icon"
+            type="submit"
+            onClick={handleSubmitSearch}
+          ></i>
+        </form>
       </div>
       <div className="right">
         <ul>
@@ -148,10 +155,7 @@ function Navbar(props) {
 const mapStateToProps = state => {
   return {
     userProfile: state.users.userProfile,
-    searchCourse: state.courses.searchCourse,
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile, getMovieSearch })(
-  Navbar
-);
+export default connect(mapStateToProps, { getUserProfile })(Navbar);

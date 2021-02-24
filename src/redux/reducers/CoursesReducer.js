@@ -7,7 +7,7 @@ import {
 const initialState = {
   courses: [],
   courseDetail: null,
-  searchCourse: "server",
+  searchCourse: [],
 };
 
 const coursesReducer = (state = initialState, action) => {

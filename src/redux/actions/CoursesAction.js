@@ -34,17 +34,20 @@ export const getCourseDetail = id => dispatch => {
       alert("try again");
     });
 };
-export const getMovieSearch = input => dispatch => {
+const courseSearch = payload => {
+  return {
+    type: SEARCH_COURSE,
+    payload,
+  };
+};
+export const getCourseSearch = input => dispatch => {
   API.get(`/courses/search?search=${input}`)
     .then(response => {
-      if (response.status === 200) {
-        dispatch({
-          type: SEARCH_COURSE,
-          payload: response.data.result,
-        });
-      }
+      // if (response.status === 200) {
+      dispatch(courseSearch(response.data.result));
+      // }
     })
     .catch(() => {
-      alert("the course that you search isnt available");
+      alert("no course of it");
     });
 };
