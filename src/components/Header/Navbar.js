@@ -34,7 +34,6 @@ function Navbar(props) {
     dispatch(getCourseSearch(search));
   };
 
-  console.log("props", props);
   return (
     <div className="sidebar">
       <div className="left">
