@@ -9,34 +9,47 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { getUserProfile } from "../../redux/actions/UserAction";
+import { getMovieSearch } from "../../redux/actions/CoursesAction";
 import { connect } from "react-redux";
-import Cookies from "js-cookie";
+import Cookies, { get } from "js-cookie";
 
 import profile from "../../assets/Ellipse 2.png";
 
 function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   useEffect(() => {
-    props.getUserProfile();
+    getUserProfile();
   }, []);
-
-  // console.log(props.userProfile);
+  const handleChange = e => {
+    setSearch(e.target.value);
+  };
 
   return (
     <div className="sidebar">
       <div className="left">
         <a href="/" className="logo">
           <img src={Logo} alt="logo" className="bl" />
-        </a>{" "}
+        </a>
         <img src={garis} alt="garis" className="bl" />
-      </div>{" "}
+      </div>
       <div className="center">
-        <input type="text" placeholder="Search Course or Lecturer" />
-        <i className="fa fa-search icon"></i>{" "}
-      </div>{" "}
+        <input
+          type="text"
+          placeholder="Search Course or Lecturer"
+          onChange={handleChange}
+        />
+        <i
+          className="fa fa-search icon"
+          onClick={() => {
+            console.log(props.searchCourse);
+            getMovieSearch(search);
+          }}
+        ></i>
+      </div>
       <div className="right">
         <ul>
           <li className="li-1">
@@ -60,11 +73,6 @@ function Navbar(props) {
             <div>
               {props.userProfile ? (
                 <>
-                  {/* {props.userProfile.status === 0 ? (
-                    <li>For Student</li>
-                  ) : (
-                    <li>For Teacher</li>
-                  )} */}
                   <div className="drop-img">
                     <div className="vl"></div>
                     <Link>
@@ -83,7 +91,6 @@ function Navbar(props) {
                         <Link to="/" className="drop">
                           <div
                             onClick={() => {
-                              // localStorage.removeItem("token");
                               Cookies.remove("token");
                               window.open("/", "_self");
                             }}
@@ -114,20 +121,6 @@ function Navbar(props) {
                 </>
               ) : (
                 <div className="form-navbar">
-                  {/* this form bellow can be changed as the homepage can be accessed for both teacher and student */}
-                  {/* {isStatus ? (
-                    <div className="for">
-                      <Link to="/" isTeacher={changeStatus}>
-                        For Teacher
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="for">
-                      <Link to="/" isStudent={changeStatus}>
-                        For Student
-                      </Link>
-                    </div>
-                  )} */}
                   <div className="for">
                     <Link to="/register">Select Role</Link>
                   </div>
@@ -146,8 +139,8 @@ function Navbar(props) {
               )}
             </div>
           </li>
-        </ul>{" "}
-      </div>{" "}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -155,7 +148,10 @@ function Navbar(props) {
 const mapStateToProps = state => {
   return {
     userProfile: state.users.userProfile,
+    searchCourse: state.courses.searchCourse,
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile })(Navbar);
+export default connect(mapStateToProps, { getUserProfile, getMovieSearch })(
+  Navbar
+);

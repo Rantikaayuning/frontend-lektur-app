@@ -1,8 +1,13 @@
-import { GET_ALL_COURSES, GET_COURSE_DETAIL } from "../types/CoursesTypes";
+import {
+  GET_ALL_COURSES,
+  GET_COURSE_DETAIL,
+  SEARCH_COURSE,
+} from "../types/CoursesTypes";
 
 const initialState = {
   courses: [],
   courseDetail: null,
+  searchCourse: "server",
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -17,6 +22,11 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         courseDetail: payload,
+      };
+    case SEARCH_COURSE:
+      return {
+        ...state,
+        searchCourse: payload,
       };
     default:
       return state;
