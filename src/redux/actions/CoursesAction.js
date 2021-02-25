@@ -43,7 +43,7 @@ export const getCourseDetail = (id) => (dispatch) => {
   };
 
 export const postEnrollCourse = (id) => (dispatch) => {
-    API.post(`/student/course/enroll?courseId=${id}`, {
+    API.post(`/student/course/enroll?courseId=${id}`, null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
