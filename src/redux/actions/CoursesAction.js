@@ -23,7 +23,7 @@ export const getCourses = (payload) => (dispatch) => {
         }
       })
       .catch(() => {
-        alert('error');
+        console.log('error');
       });
   };
 
@@ -38,7 +38,7 @@ export const getCourseDetail = (id) => (dispatch) => {
         }
       })
       .catch(() => {
-        alert('error');
+        console.log('error');
       });
   };
 
@@ -58,7 +58,7 @@ export const postEnrollCourse = (id) => (dispatch) => {
         }
       })
       .catch(() => {
-        alert('error')
+        console.log('error')
       });
   };
 
@@ -75,7 +75,7 @@ export const getStudentCourses = (payload) => (dispatch) => {
         })
       }})
       .catch(() => {
-        alert('error')
+        console.log('error')
       });
     }
   
@@ -91,7 +91,7 @@ export const getStudentEnroll = (id) => (dispatch) => {
         });
       }})
       .catch(() => {
-        alert('error')
+        console.log('error')
       });
     };
 
@@ -99,6 +99,7 @@ export const getCourseSearch = input => dispatch => {
   API.get(`/courses/search?search=${input}`)
     .then(response => {
       if (response.status === 200) {
+        console.log("response", response.data.result)
         dispatch({
           type: SEARCH_COURSE,
           payload: response.data.result,
@@ -106,7 +107,7 @@ export const getCourseSearch = input => dispatch => {
       }
     })
     .catch(() => {
-      alert('error');
+      console.log('error');
     });
   };
 
@@ -125,7 +126,7 @@ export const getTeacherCourses = () => (dispatch) => {
       }
     })
     .catch(() => {
-      alert('error');
+      console.log('error');
     });
   }
   

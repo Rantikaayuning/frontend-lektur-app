@@ -9,7 +9,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { getUserProfile } from "../../redux/actions/UserAction";
-import { getMovieSearch } from "../../redux/actions/CoursesAction";
+import { getCourseSearch } from "../../redux/actions/CoursesAction";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 
@@ -24,10 +24,18 @@ function Navbar(props) {
   useEffect(() => {
     getUserProfile();
   }, []);
+
   const handleChange = e => {
+    e.preventDefault()
     setSearch(e.target.value);
   };
-
+  const submitSearch = (e) => {
+    e.preventDefault()
+    getCourseSearch(search)
+  }
+  
+  console.log("search", search)
+  console.log("input search", props.searchCourse);
   return (
     <div className="sidebar">
       <div className="left">
@@ -37,17 +45,16 @@ function Navbar(props) {
         <img src={garis} alt="garis" className="bl" />
       </div>
       <div className="center">
+        <form onSubmit={submitSearch}>
         <input
           type="text"
           placeholder="Search Course or Lecturer"
           onChange={handleChange}
         />
+        </form>
         <i
           className="fa fa-search icon"
-          onClick={() => {
-            console.log(props.searchCourse);
-            getMovieSearch(search);
-          }}
+          onClick={submitSearch}
         ></i>
       </div>
       <div className="right">
@@ -152,6 +159,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile, getMovieSearch })(
+export default connect(mapStateToProps, { getUserProfile, getCourseSearch })(
   Navbar
 );

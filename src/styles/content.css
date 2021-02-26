@@ -50,6 +50,17 @@
   padding: 10px 14px 10px 15px;
 }
 
+.card-search {
+  display: flex;
+  justify-content: center;
+  color: darkgray;
+}
+
+.card-search h3 {
+  border-bottom: 1px solid darkgray;
+  padding: 10px 24px;
+}
+
 @media screen and (max-width: 1024px){
   .content-card-container {
     margin: 0px 10%;
