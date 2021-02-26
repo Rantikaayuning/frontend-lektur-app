@@ -8,6 +8,7 @@ import StudentBoardAssessment from "./pages/StudentDashboard/Tab/Assessment";
 import StudentBoardCourses from "./pages/StudentDashboard/Tab/Courses";
 import StudentMaterial from "./pages/StudentMaterial";
 import TeacherDashboard from "./pages/TeacherDashboard";
+import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
 import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
 import CourseChange from "./pages/TeacherNewCourse/Tab/CourseChange";
@@ -94,6 +95,16 @@ export const publicRoutes = [
   {
     component: CourseChange,
     path: "/course-change-teacher/:id",
+    exact: true,
+  },
+  {
+    component: CourseChange,
+    path: "/course-change-teacher/:id",
+    exact: true,
+  },
+  {
+    component: CreatedQuestions,
+    path: "/created-questions", // nanti tambah id jadi /created-questions/:id
     exact: true,
   },
 ];

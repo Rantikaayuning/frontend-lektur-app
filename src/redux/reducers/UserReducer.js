@@ -38,12 +38,13 @@ const userReducer = (state = initialState, action) => {
         userProfile: payload,
       };
     case UPDATE_USER_PROFILE:
+      console.log(state.userProfile, payload);
       return {
         ...state,
-        updateUser: payload,
+        userProfile: { ...state.userProfile, ...payload },
       };
-    default :
-    return state;
+    default:
+      return state;
   }
 };
 

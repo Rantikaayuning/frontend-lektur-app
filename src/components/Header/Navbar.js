@@ -17,13 +17,13 @@ import profile from "../../assets/Ellipse 2.png";
 function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggle = () => setDropdownOpen(prevState => !prevState);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
-    props.getUserProfile();
+    props.isAuthentificated && props.getUserProfile();
   }, []);
 
-  // console.log(props.userProfile);
+  console.log(props.userProfile, props.isAuthentificated);
 
   return (
     <div className="sidebar">
@@ -152,9 +152,10 @@ function Navbar(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userProfile: state.users.userProfile,
+    isAuthentificated: state.users.isAuthentificated,
   };
 };
 

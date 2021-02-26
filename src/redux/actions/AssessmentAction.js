@@ -20,14 +20,10 @@ export const getQuestions = () => (dispatch) => {
         });
       }
     })
-    .catch(() => console.log("error"));
+    .catch((err) => alert(err));
 };
 
-// 602e06cc34a3a426b0311c94
-
 export const postAssessment = (body) => (dispatch) => {
-  alert("dispatched assesment");
-
   API.post(
     `/assessment/create?courseId=602e06cc34a3a426b0311c94`,
     JSON.stringify(body),
@@ -45,7 +41,8 @@ export const postAssessment = (body) => (dispatch) => {
           type: POST_QUESTIONS,
           payload: response.data.result,
         });
+        alert("question created successfully");
       }
     })
-    .catch((error) => console.log(error));
+    .catch((payload) => alert(payload.response.data.message));
 };

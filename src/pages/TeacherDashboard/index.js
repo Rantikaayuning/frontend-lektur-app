@@ -2,35 +2,33 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {
-  teacherProfile,
-} from "../../assets/JSONFile/dummyData";
+import { teacherProfile } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
 
 import {
   getUserProfile,
   updateUserProfile,
 } from "../../redux/actions/UserAction";
-import {getTeacherCourses} from "../../redux/actions/CoursesAction"
+import { getTeacherCourses } from "../../redux/actions/CoursesAction";
 import defaultImg from "../../assets/RectangleSquare.png";
 
 function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
-  const {id} = useParams()
+  const { id } = useParams();
 
   const handleEdit = () => {
     setEdit(!isEdit);
   };
 
   useEffect(() => {
-    props.getUserProfile();
-    props.getTeacherCourses(id)
+    props.isAuthentificated && props.getUserProfile();
+    props.isAuthentificated && props.getTeacherCourses(id);
   }, []);
 
   // console.log(props.userProfile);
-  console.log(props.teacherCourses)
+  console.log(props.teacherCourses);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,12 +36,12 @@ function TeacherDashboard(props) {
 
     props.updateUserProfile(fullname, email);
     // props.getUserProfile();
-    alert(
-      `your new updates are email: ${email} and fullname: ${fullname}. Please do signout and login back to see changes`
-    );
+    // alert(
+    //   `your new updates are email: ${email} and fullname: ${fullname}. Please do signout and login back to see changes`
+    // );
     // localStorage.removeItem("token");
 
-    props.history.push("/");
+    // props.history.push("/");
   };
 
   return (
@@ -64,7 +62,7 @@ function TeacherDashboard(props) {
               </span>
             </div>
           ) : (
-            <div id='regular-loader'></div>
+            <div id="regular-loader"></div>
           )}
         </div>
       ) : (
@@ -100,32 +98,32 @@ function TeacherDashboard(props) {
         </div>
       )}
 
-        {props.teacherCourses !== [] ? (
-          props.teacherCourses.map((item, index) => (
-        <div className="courses-container">
-          <div className="courses-header">
-            <h5>
-              <b>Courses</b>
-            </h5>
-            <Link to="/teacher-new-course">
-              <button>New Course</button>
-            </Link>
+      {props.teacherCourses !== [] ? (
+        props.teacherCourses.map((item, index) => (
+          <div className="courses-container">
+            <div className="courses-header">
+              <h5>
+                <b>Courses</b>
+              </h5>
+              <Link to="/teacher-new-course">
+                <button>New Course</button>
+              </Link>
+            </div>
+            <hr />
+            <CourseCard
+              key={index}
+              image={defaultImg}
+              title={item.title}
+              numOfVideos={item.totalVideo}
+              numOfLesson={item.totalMaterial}
+              enrolledStudents={item.totalEnrolled}
+              edit={`/course-filled-teacher/${item._id}`}
+            />
           </div>
-          <hr />
-              <CourseCard
-                key={index}
-                image={defaultImg}
-                title={item.title}
-                numOfVideos={item.totalVideo}
-                numOfLesson={item.totalMaterial}
-                enrolledStudents={item.totalEnrolled}
-                edit={`/course-filled-teacher/${item._id}`}
-              />
-        </div>
-          ))
-        ) : (
-          <div id="loader"></div>
-        )}
+        ))
+      ) : (
+        <div id="loader"></div>
+      )}
     </div>
   );
 }
@@ -134,10 +132,13 @@ const mapStateToProps = (state) => {
   return {
     userProfile: state.users.userProfile,
     updateUser: state.users.updateUser,
-    teacherCourses: state.courses.teacherCourses
+    teacherCourses: state.courses.teacherCourses,
+    isAuthentificated: state.users.isAuthentificated,
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile, updateUserProfile, getTeacherCourses })(
-  TeacherDashboard
-);
+export default connect(mapStateToProps, {
+  getUserProfile,
+  updateUserProfile,
+  getTeacherCourses,
+})(TeacherDashboard);
