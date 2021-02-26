@@ -10,7 +10,6 @@ import defaultImg from "../../assets/RectangleSquare.png";
 
 function CourseDetail() {
   const [PopUpCourseDetail, setPopUpCourseDetail] = useState(false);
-  // const [isEnroll, setEnroll] = useState(false)
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -25,11 +24,10 @@ function CourseDetail() {
 
   const handleEnroll = () => {
     dispatch(postEnrollCourse(id))
-    // setEnroll(true)
     setPopUpCourseDetail(true)
   }
 
-  console.log(courseDetail)
+  // console.log(courseDetail)
 
   return (
     <div className="main-course">
@@ -71,35 +69,10 @@ function CourseDetail() {
                   <li>
                     {courseDetail.content.map((item, index) => (
                     <div className="rectangle">
-                      <p>Lesson #{item.number + 1}: {item.title}</p>
+                      <p>Lesson #{item.number}: {item.title}</p>
                     </div>
                     ))}
                   </li>
-                  {/* <li>
-                    <div className="rectangle">
-                      <p>Lesson #2: </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="rectangle">
-                      <p>Lesson #3: </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="rectangle">
-                      <p>Lesson #4: </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="rectangle">
-                      <p>Lesson #5: </p>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="rectangle">
-                      <p>Lesson #6: </p>
-                    </div>
-                  </li> */}
                 </ul>
               </div>
             </div>
@@ -120,7 +93,7 @@ function CourseDetail() {
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <ContentCards
-                      image={defaultImg}
+                      image={item.image === null ? defaultImg : item.image}
                       text={item.overview}
                       title={item.title}
                       lecture={item.teacherId.fullname}

@@ -18,15 +18,11 @@ function Cards(props) {
     text,
     footer,
   } = props;
-  // let history = useHistory();
-
-  // function handleClick() {
-  //   history.push("/course-detail");
-  // }
+  
   return (
     <div>
       <Card className="card">
-        <CardImg top width="100%" src={image} alt={title} />
+        <CardImg top width="100%" src={image} alt={title} className='card-image'/>
         <CardBody className="p-2">
           <CardTitle tag="p" className="card-title">
             {title}

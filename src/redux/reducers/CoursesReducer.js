@@ -5,7 +5,7 @@ import {
   POST_ENROLL_COURSE,
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES,
-  SEARCH_COURSE,
+  SEARCH_COURSE
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -15,7 +15,8 @@ const initialState = {
   studentCourses: [],
   studentEnrollList: [],
   teacherCourses: [],
-  searchCourse: "server",
+  studentAssessment: [],
+  searchCourse: '',
 };
 
 const coursesReducer = (state = initialState, action) => {

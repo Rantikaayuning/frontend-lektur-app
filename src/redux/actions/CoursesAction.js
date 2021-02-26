@@ -43,7 +43,7 @@ export const getCourseDetail = (id) => (dispatch) => {
   };
 
 export const postEnrollCourse = (id) => (dispatch) => {
-    API.post(`/student/course/enroll?courseId=${id}`, {
+    API.post(`/student/course/enroll?courseId=${id}`, null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -72,44 +72,15 @@ export const getStudentCourses = (payload) => (dispatch) => {
         dispatch({
           type: GET_COURSE_STUDENT,
           payload: response.data.result,
-  
-        }
-      }
+        })
+      }})
+      .catch(() => {
+        alert('error')
+      });
     }
   
-      
-export const getCourses = payload => dispatch => {
-  API.get("/courses/all", payload)
-    .then(response => {
-      if (response.status === 200) {
-        dispatch({
-          type: GET_ALL_COURSES,
-          payload: response.data.result.result,
-        });
-      }
-    })
-    .catch(() => {
-      alert("try again");
-    });
-};
-
-export const getCourseDetail = id => dispatch => {
-  API.get(`/courses/detail?courseId=${id}`)
-    .then(response => {
-      if (response.status === 200) {
-        dispatch({
-          type: GET_COURSE_DETAIL,
-          payload: response.data.result[0],
-        });
-      }
-    })
-    .catch(() => {
-      alert('error');
-    });
-  };
-
-export const getStudentEnroll = () => (dispatch) => {
-  API.get(`teacher/courses/student?courseId=603374310c6cc70022058d88`, {
+export const getStudentEnroll = (id) => (dispatch) => {
+  API.get(`teacher/courses/student?${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     }})
@@ -117,10 +88,14 @@ export const getStudentEnroll = () => (dispatch) => {
       if (response.status === 200) {
         dispatch({
           type: GET_STUDENT_ENROLL,
-      
-    });
-};
-export const getMovieSearch = input => dispatch => {
+        });
+      }})
+      .catch(() => {
+        alert('error')
+      });
+    };
+
+export const getCourseSearch = input => dispatch => {
   API.get(`/courses/search?search=${input}`)
     .then(response => {
       if (response.status === 200) {
@@ -152,25 +127,6 @@ export const getTeacherCourses = () => (dispatch) => {
     .catch(() => {
       alert('error');
     });
+  }
   
-
-
-    
-};
-// export const getStudentCourses = (payload) => (dispatch) => {
-//   API.get("/student/profile", {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     }}, payload)
-//     .then((response) => {
-//       if (response.status === 200) {
-//         dispatch({
-//           type: GET_COURSE_STUDENT,
-//           payload: response.data.result.content,
-//         });
-//       }
-//     })
-//     .catch(() => {
-//       alert('error');
-//     });
 

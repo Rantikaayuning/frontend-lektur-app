@@ -39,6 +39,10 @@
   font-size: 13px;
 }
 
+.card-image {
+  height: 155px; 
+}
+
 .card-footer {
   margin: 0px;
   width: 100%;

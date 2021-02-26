@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-// import { studentCourses } from "../../../assets/JSONFile/dummyData";
 import {Progress} from 'reactstrap'
 import { Modal } from 'react-bootstrap';
 import { PopUpCourse } from '../../../components/PopUp/PopUpCourse';
@@ -15,12 +14,16 @@ const StudentBoardCourses = () => {
     const [popUpMaterial, setPopUpMaterial] = useState(false);
 
     const dispatch = useDispatch();
-
-    const studentCourses = useSelector(state => state.courses.studentCourses);
+    const {studentCourses } = useSelector(state => state.courses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
-    }, [dispatch]);
+    }, []);
+    
+    // const handlePopupCourse = (id) => {
+    //     dispatch(getCourseDetail(id));
+    //     setPopUpCourse(true)
+    // }
 
     console.log(studentCourses)
     return (
@@ -28,7 +31,6 @@ const StudentBoardCourses = () => {
         {studentCourses.course === null || studentCourses.course === undefined ? (
             <div id='loader'></div>
         ) : (
-
             <div className="student-board">
             <div>
                 <StudentProfile />
@@ -41,6 +43,21 @@ const StudentBoardCourses = () => {
                     </Link>
                 </div>
                 
+                {studentCourses === null ? (
+                <>
+                <div className='student-course-list'>
+                    <div className='student-course-detail'>
+                        <div className='course-detail-first'>
+                            <p>Enroll now</p>
+                        </div>
+                        <div className='course-detail-second'>
+                            <p>Enroll Now</p>
+                        </div>
+                    </div> 
+                </div>  
+                </>
+                ) : (
+                <>
                 {studentCourses.course.map((item, index) => (
                 <div className='student-course-list'>
                     {item.status === 2 ? (
@@ -82,11 +99,12 @@ const StudentBoardCourses = () => {
                             <p className='title'>Waiting Approval</p>
                         </div>
                     </div>  
-
                     ) }                  
                 </div>
                 ))}
-                
+                </>
+                )}
+
                 <Modal
                 show={popUpCourse}
                 size='lg'
@@ -95,7 +113,12 @@ const StudentBoardCourses = () => {
                 dialogClassName="modal-90w"
                 aria-labelledby="example-custom-modal-styling-title"
                 >
-                <PopUpCourse/>
+                <PopUpCourse
+                title="React the New Guide"
+                firstLesson='What is React?'
+                nextLesson={2}
+                lessonLocked='Intro to React'
+                />
                 </Modal>
                 <Modal
                 show={popUpMaterial}
@@ -105,7 +128,13 @@ const StudentBoardCourses = () => {
                 className='pop-up-material-box'
                 aria-labelledby="example-custom-modal-styling-title"
                 >
-                <PopUpMaterial/>
+                <PopUpMaterial
+                title="React the New Guide"
+                firstLesson="what is React"
+                secondLesson="Intro to React"
+                firstMaterial="React the New Guide"
+                secondMaterial="React the New Guide"
+                />
                 </Modal>
                 </div>
             </div>
