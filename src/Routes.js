@@ -10,10 +10,14 @@ import StudentMaterial from "./pages/StudentMaterial";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
-import CourseChange from "./pages/TeacherNewCourse/Tab/CourseChange";
 import CourseFilled from "./pages/TeacherNewCourse/Tab/CourseFilled";
 import CourseUpdate from "./pages/TeacherNewCourse/Tab/CourseUpdate";
 import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
+import CourseChange from "./pages/TeacherEditCourse/Tab/CourseChange";
+import CourseNextChange from "./pages/TeacherEditCourse/Tab/CourseNextChange";
+import CourseFilledEdit from "./pages/TeacherEditCourse/Tab/CourseFilled";
+import TeacherAssessmentUpdate from "./pages/TeacherEditCourse/Tab/Assessment";
+import TeacherStudentsUpdate from "./pages/TeacherEditCourse/Tab/Students";
 
 export const publicRoutes = [
   {
@@ -93,7 +97,27 @@ export const publicRoutes = [
   },
   {
     component: CourseChange,
-    path: "/course-change-teacher/:id",
+    path: "/course-teacher/course/:id",
+    exact: true,
+  },
+  {
+    component: CourseNextChange,
+    path: "/course-teacher/lessons/:id",
+    exact: true,
+  },
+  {
+    component: CourseFilledEdit,
+    path: "/course-teacher/edit/:id",
+    exact: true,
+  },
+  {
+    component: TeacherStudentsUpdate,
+    path: "/course-teacher/students/:id",
+    exact: true,
+  },
+  {
+    component: TeacherAssessmentUpdate,
+    path: "/course-teacher/assessments/:id",
     exact: true,
   },
 ];

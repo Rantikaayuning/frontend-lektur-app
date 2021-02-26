@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {getCourseDetail} from '../../../redux/actions/CoursesAction'
 
-const TeacherCourseTab = () => {
+const TeacherCourseUpdate = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
     const {courseDetail} = useSelector(state => state.courses)
@@ -19,7 +19,7 @@ const TeacherCourseTab = () => {
          dispatch(getCourseDetail(id));
     }, [dispatch, id])
 
-    console.log(courseDetail)
+    // console.log(courseDetail)
 
     return (
         <>
@@ -27,10 +27,10 @@ const TeacherCourseTab = () => {
             <div className='teacher-assessment'>
                 <div className='teacher-dashboard-list'>
                     <p className='open'>Course</p>
-                    <Link to='/teacher-new-assessment'>
+                    <Link to={`/course-teacher/assessments/${id}`}>
                         <p>Assessment</p>
                     </Link>
-                    <Link to='/teacher-new-students'>
+                    <Link to={`/course-teacher/students/${id}`}>
                         <p>Students</p>
                     </Link>
                 </div>
@@ -68,7 +68,11 @@ const TeacherCourseTab = () => {
                         <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
                     </div>
                     <div className='teacher-save-new-course'>
-                        <p><button>Save</button></p>
+                        <p>
+                        <Link to={`/course-teacher/lessons/${id}`}>
+                            <button>save</button>
+                        </Link>
+                        </p>
                     </div>
                     <div>
                         <p><hr type="solid"/></p>
@@ -94,7 +98,9 @@ const TeacherCourseTab = () => {
                                 <p>Required. Max. size 200 MB. Supported format .mp4</p>
                                 <p><button className='material-lesson'>Add Lesson Material</button></p>
                                 <p>Max. size 20MB. Supported format .pdf</p>
-                                <p className='save'><button>save</button></p>
+                                <p className='save'>
+                                    <button>save</button>
+                                </p>
                             </div>
                         </div> 
                     ) : (
@@ -117,7 +123,9 @@ const TeacherCourseTab = () => {
                                     <p>Required. Max. size 200 MB. Supported format .mp4</p>
                                     <p><button className='material-lesson'>Add Lesson Material</button></p>
                                     <p>Max. size 20MB. Supported format .pdf</p>
-                                    <p className='save'><button>save</button></p>
+                                    <p className='save'>
+                                        <button>save</button>
+                                    </p>
                                 </div>
                                 </>
                             {/* })} */}
@@ -127,7 +135,7 @@ const TeacherCourseTab = () => {
                         <p onClick={handleAdd}>Add new lesson</p>
                     </div>
                     <div className='publish-and-delete-course'>
-                        <Link to='/course-filled-teacher'>
+                        <Link to={`/course-teacher/edit/${id}`}>
                             <p><button>Publish Course</button></p>
                         </Link>
                         <p className='delete'>Delete Course</p>
@@ -141,4 +149,4 @@ const TeacherCourseTab = () => {
     )
 }
 
-export default TeacherCourseTab;
+export default TeacherCourseUpdate;

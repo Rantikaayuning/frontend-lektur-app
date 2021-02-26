@@ -119,7 +119,7 @@ function TeacherDashboard(props) {
                 numOfVideos={item.totalVideo}
                 numOfLesson={item.totalMaterial}
                 enrolledStudents={item.totalEnrolled}
-                edit={`/course-filled-teacher/${item._id}`}
+                edit={`/course-teacher/edit/${item._id}`}
               />
           ))}
         </div>
