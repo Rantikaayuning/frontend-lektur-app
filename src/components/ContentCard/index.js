@@ -52,7 +52,7 @@ function Content() {
                 image={item.image === null ? defaultImg : item.image}
                 text={item.overview}
                 title={item.title}
-                lecture={item.teacherId.fullname}
+                lecture={item.fullname[0].fullname}
                 video_numbers={item.totalVideo}
                 material_numbers={item.totalMaterial}
                 footer="Business"
