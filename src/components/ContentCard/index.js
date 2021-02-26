@@ -9,13 +9,13 @@ import defaultImg from "../../assets/RectangleSquare.png"
 
 function Content() {
   const dispatch = useDispatch();
-  const courses = useSelector(state => state.courses.courses)
+  const { courses, searchCourse } = useSelector(state => state.courses)
 
   useEffect(() => {
     dispatch(getCourses())
   }, [dispatch]);
 
-  // console.log(courses)
+  console.log("result", searchCourse)
 
   return (
     <>
@@ -23,16 +23,46 @@ function Content() {
       <div id='loader'></div>
     ) : (
       <div className="content">
-      <div className="material">
-        <div className="home">What to learn next</div>
-        <div className="btn-material">
-          {buttonMaterials.map(material => (
-            <button className="btn-home-detail">{material.name}</button>
-          ))}
+      {searchCourse !== '' ? (
+        <div className="material">
+          <div className="card-search">
+              <h3>"Search Result"</h3>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="material">
+          <div className="home">What to learn next</div>
+          <div className="btn-material">
+            {buttonMaterials.map(material => (
+              <button className="btn-home-detail">{material.name}</button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="card-content">
-        <Row className="content-card-container">
+        {searchCourse !== '' ? (
+          <Row className="content-card-container">
+          {searchCourse.map((item, index) => (
+            <Col xl="3" md="6" sm="12" key={index} className="card-container">
+              <Link 
+                to={`/course-detail/${item._id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+              <ContentCards
+                image={item.image === null ? defaultImg : item.image}
+                text={item.overview}
+                title={item.title}
+                lecture={item.teacherId.fullname}
+                video_numbers={item.totalVideo}
+                material_numbers={item.totalMaterial}
+                footer="Business"
+              />
+              </Link>
+            </Col>
+          ))}
+        </Row>
+        ) : (
+          <Row className="content-card-container">
           {courses.map((item, index) => (
             <Col xl="3" md="6" sm="12" key={index} className="card-container">
               <Link 
@@ -52,6 +82,7 @@ function Content() {
             </Col>
           ))}
         </Row>
+        )}
       </div>
     </div>
     )}
