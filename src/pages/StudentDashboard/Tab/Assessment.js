@@ -12,7 +12,7 @@ const StudentBoardAssessment = () => {
         dispatch(getStudentCourses());
     }, [dispatch]);
 
-    console.log(studentCourses.course)
+    // console.log(studentCourses.course)
     return (
         <>
         {studentCourses.course === null || studentCourses.course === undefined ? (

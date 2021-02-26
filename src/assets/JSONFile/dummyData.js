@@ -196,26 +196,24 @@ export const studentAssessment = [
     {
       "value": 1,
       "text":
-        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML"
     }, {
       "value": 2,
       "text":
-        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method"
     }, {
       "value": 3,
       "text":
-        "an in-memory representation of the actual HTML elements that make up your application’s UI",
+        "an in-memory representation of the actual HTML elements that make up your application’s UI"
     }, {
       "value": 4,
-      "text": "data that are passed into a component from its parent.",
+      "text": "data that are passed into a component from its parent."
     }, {
       "value": 5,
       "text":
-        "a third-party state management library for React, created before the context API existed",
+        "a third-party state management library for React, created before the context API existed"
     }
-    ],
-    "remarks":
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    ]
   },
   {
     "number": 2,
@@ -225,26 +223,24 @@ export const studentAssessment = [
     {
       "value": 1,
       "text":
-        "an in-memory representation of the actual HTML elements that make up your application’s UI",
+        "an in-memory representation of the actual HTML elements that make up your application’s UI"
     }, {
       "value": 2,
       "text":
-        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method"
     }, {
       "value": 3,
       "text":
-        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML"
     }, {
       "value": 4,
-      "text": "data that are passed into a component from its parent.",
+      "text": "data that are passed into a component from its parent."
     }, {
       "value": 5,
       "text":
-        "a third-party state management library for React, created before the context API existed",
+        "a third-party state management library for React, created before the context API existed"
     }
-    ],
-    "remarks":
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    ]
   },
   {
     "number": 3,
@@ -255,26 +251,24 @@ export const studentAssessment = [
     {
       "value": 1,
       "text":
-      "an in-memory representation of the actual HTML elements that make up your application’s UI",
+      "an in-memory representation of the actual HTML elements that make up your application’s UI"
     }, {
       "value": 2,
       "text":
-        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML"
     }, {
       "value": 3,
       "text":
-        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method"
     }, {
       "value": 4,
-      "text": "data that are passed into a component from its parent.",
+      "text": "data that are passed into a component from its parent."
     }, {
       "value": 5,
       "text":
-        "a third-party state management library for React, created before the context API existed",
+        "a third-party state management library for React, created before the context API existed"
     }
-    ],
-    "remarks":
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    ]
   },
   {
     "number": 4,
@@ -284,26 +278,24 @@ export const studentAssessment = [
     {
       "value": 1,
       "text":
-        "an in-memory representation of the actual HTML elements that make up your application’s UI",
+        "an in-memory representation of the actual HTML elements that make up your application’s UI"
     }, {
       "value": 2,
       "text":
-        "an extension to JavaScript syntax that allows for writing code that looks like HTML",
+        "an extension to JavaScript syntax that allows for writing code that looks like HTML"
     }, {
       "value": 3,
-      "text": "data that are passed into a component from its parent.",
+      "text": "data that are passed into a component from its parent."
     }, {
       "value": 4,
       "text":
-        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method",
+        "an ES6 class that extends React’s Component class and, at minimum, implements a render() method"
     }, {
       "value": 5,
       "text":
-        "a third-party state management library for React, created before the context API existed",
+        "a third-party state management library for React, created before the context API existed"
     }
-    ],
-    "remarks":
-      "State is a component’s internal data that can be modified during the lifetime of the component.",
+    ]
   },
 ];
 
