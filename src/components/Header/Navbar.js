@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/LEKTUR.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import garis from "../../assets/Rectangle 2.png";
 import {
   Dropdown,
@@ -20,6 +20,7 @@ function Navbar(props) {
   const [search, setSearch] = useState("");
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
+  const history = useHistory()
 
   useEffect(() => {
     props.getUserProfile();
@@ -31,11 +32,10 @@ function Navbar(props) {
   };
   const submitSearch = (e) => {
     e.preventDefault()
-   props.getCourseSearch(search)
+    props.getCourseSearch(search)
+    history.push('/')
   }
   
-  console.log("search", search)
-  console.log("input search", props.searchCourse);
   return (
     <div className="sidebar">
       <div className="left">
