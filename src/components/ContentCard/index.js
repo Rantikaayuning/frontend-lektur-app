@@ -15,7 +15,7 @@ function Content() {
     dispatch(getCourses())
   }, [dispatch]);
 
-  console.log("result", searchCourse)
+  // console.log("result", searchCourse)
 
   return (
     <>

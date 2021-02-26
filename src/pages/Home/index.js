@@ -3,12 +3,18 @@ import bgcontent from "../../assets/rectangle55.png";
 import { Link } from "react-router-dom";
 import Content from "../../components/ContentCard/index";
 import Jumbo from "../../components/Header/Jumbotron";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux"
 
 const Home = () => {
+  const {searchCourse } = useSelector(state => state.courses)
+
   return (
     <>
-      <Jumbo />
+      {searchCourse !== '' ? (
+        <div></div>
+      ) : (
+        <Jumbo />
+      )}
         <Content />
         <div className="content-register">
           <img src={bgcontent} alt="background content" />

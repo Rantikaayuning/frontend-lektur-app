@@ -22,16 +22,16 @@ function Navbar(props) {
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   useEffect(() => {
-    getUserProfile();
+    props.getUserProfile();
   }, []);
 
   const handleChange = e => {
-    e.preventDefault()
+    // e.preventDefault()
     setSearch(e.target.value);
   };
   const submitSearch = (e) => {
     e.preventDefault()
-    getCourseSearch(search)
+   props.getCourseSearch(search)
   }
   
   console.log("search", search)
