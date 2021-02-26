@@ -6,7 +6,6 @@ import {
   GET_COURSE_STUDENT,
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES,
-  // GET_STUDENT_ASSESSMENT 
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 

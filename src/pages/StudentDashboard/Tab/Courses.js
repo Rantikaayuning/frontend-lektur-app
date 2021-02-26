@@ -43,6 +43,21 @@ const StudentBoardCourses = () => {
                     </Link>
                 </div>
                 
+                {studentCourses === null ? (
+                <>
+                <div className='student-course-list'>
+                    <div className='student-course-detail'>
+                        <div className='course-detail-first'>
+                            <p>Enroll now</p>
+                        </div>
+                        <div className='course-detail-second'>
+                            <p>Enroll Now</p>
+                        </div>
+                    </div> 
+                </div>  
+                </>
+                ) : (
+                <>
                 {studentCourses.course.map((item, index) => (
                 <div className='student-course-list'>
                     {item.status === 2 ? (
@@ -87,26 +102,24 @@ const StudentBoardCourses = () => {
                     ) }                  
                 </div>
                 ))}
-                
-                {/* {studentCourses.course === null ? (
-                    <div id='laoder'></div>
-                ) : ( */}
-                    <Modal
-                    show={popUpCourse}
-                    size='lg'
-                    onHide={() => setPopUpCourse(false)}
-                    className='pop-up-course-box'
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                    >
-                    <PopUpCourse
-                    title={studentCourses.course[1].courseId.title}
-                    firstLesson='What is React?'
-                    nextLesson={2}
-                    lessonLocked='Intro to React'
-                    />
-                    </Modal>
-                {/* )} */}
+                </>
+                )}
+
+                <Modal
+                show={popUpCourse}
+                size='lg'
+                onHide={() => setPopUpCourse(false)}
+                className='pop-up-course-box'
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+                >
+                <PopUpCourse
+                title="React the New Guide"
+                firstLesson='What is React?'
+                nextLesson={2}
+                lessonLocked='Intro to React'
+                />
+                </Modal>
                 <Modal
                 show={popUpMaterial}
                 size='lg'
@@ -116,11 +129,11 @@ const StudentBoardCourses = () => {
                 aria-labelledby="example-custom-modal-styling-title"
                 >
                 <PopUpMaterial
-                title={studentCourses.course[1].courseId.title}
+                title="React the New Guide"
                 firstLesson="what is React"
                 secondLesson="Intro to React"
-                firstMaterial={studentCourses.course[1].courseId.title}
-                secondMaterial={studentCourses.course[1].courseId.title}
+                firstMaterial="React the New Guide"
+                secondMaterial="React the New Guide"
                 />
                 </Modal>
                 </div>

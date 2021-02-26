@@ -15,10 +15,14 @@ function Content() {
     dispatch(getCourses())
   }, [dispatch]);
 
-  console.log(courses)
+  // console.log(courses)
 
   return (
-    <div className="content">
+    <>
+    {courses.length === 0 ? (
+      <div id='loader'></div>
+    ) : (
+      <div className="content">
       <div className="material">
         <div className="home">What to learn next</div>
         <div className="btn-material">
@@ -50,6 +54,8 @@ function Content() {
         </Row>
       </div>
     </div>
+    )}
+    </>
   );
 }
 

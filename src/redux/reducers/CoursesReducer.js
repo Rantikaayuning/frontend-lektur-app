@@ -5,9 +5,8 @@ import {
   POST_ENROLL_COURSE,
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES,
-  GET_STUDENT_ASSESSMENT
+  SEARCH_COURSE
 } from "../types/CoursesTypes";
-import Cookies from "js-cookie";
 
 const initialState = {
   courses: [],
@@ -17,7 +16,7 @@ const initialState = {
   studentEnrollList: [],
   teacherCourses: [],
   studentAssessment: [],
-  isAuthentificated: Cookies.get("token") ? true : false,
+  searchCourse: '',
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -37,7 +36,6 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         enrollCourse: payload,
-        isAuthentificated: true,
       };
     case GET_COURSE_STUDENT:
       return {
@@ -54,10 +52,10 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         teacherCourses: payload,
       };
-    case GET_STUDENT_ASSESSMENT:
+    case SEARCH_COURSE:
       return {
         ...state,
-        studentAssessment: payload,
+        searchCourse: payload,
       };
     default:
       return state;
