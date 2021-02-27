@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postAssessment } from "../../../redux/actions/AssessmentAction";
+import { produce } from "immer";
 
 import { useDispatch } from "react-redux";
 
 const TeacherAssessmentTab = () => {
   const dispatch = useDispatch();
-
-  // const [moreOptions, setMoreOptions] = useState(false)
 
   const [question, setQuestion] = useState({
     number: 1,
@@ -15,14 +14,14 @@ const TeacherAssessmentTab = () => {
     remarks: "",
   });
 
-  const [answer, setAnswer] = useState(null);
   const [options, setOptions] = useState([
     { value: 1, text: "" },
     { value: 2, text: "" },
     { value: 3, text: "" },
     { value: 4, text: "" },
-    { value: 5, text: "" },
   ]);
+
+  const [answer, setAnswer] = useState(null);
 
   const handleChange = (e) => {
     setQuestion({
@@ -30,15 +29,6 @@ const TeacherAssessmentTab = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const handleOption = (value, text) => {
-    let temp = options;
-    temp[value - 1].text = text;
-    // console.log(temp);
-    setOptions(temp);
-  };
-
-  const body = [];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,8 +41,10 @@ const TeacherAssessmentTab = () => {
     };
     dispatch(postAssessment(body));
     // history.push("/teacher-new-assessment");
-    // console.log(body);
+    console.log(body);
   };
+
+  // console.log(JSON.stringify(options, null, 2));
 
   return (
     <>
@@ -66,150 +58,88 @@ const TeacherAssessmentTab = () => {
             <p>Students</p>
           </Link>
         </div>
-        <form>
+        <>
           <div className="teacher-question-title">
             <h4>Questions</h4>
           </div>
           <div className="teacher-new-question">
             <div className="teacher-option-title">
-              <h4>
+              <h4 className="question-answer-tag">
                 #{" "}
                 <input
+                  className="number-input-tag"
                   type="text"
                   name="number"
-                  placeholder="Number"
+                  placeholder="1"
                   onChange={(e) => handleChange(e)}
                 />
                 <input
+                  className="question-input-tag"
                   type="text"
                   placeholder="Question"
                   name="question"
                   onChange={(e) => handleChange(e)}
                 />
-                <hr type="solid" />
               </h4>
             </div>
             <br />
             <div className="teacher-option-box">
               <div className="teacher-answer-option">
-                <h5> Answer</h5>
+                <h5 className="answer-title"> Answer</h5>
                 <br />
-                <table>
-                  <label class="container">
-                    <tr>
-                      <td>
+                {options.map((p, index) => {
+                  return (
+                    <div key={p.value}>
+                      <label class="container-assessment">
                         <input
+                          className="radio-option"
                           type="radio"
-                          name="answer"
-                          value={1}
-                          onChange={(e) => setAnswer(e.target.value)}
+                          name="value"
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            setOptions((currentOption) =>
+                              produce(currentOption, (v) => {
+                                v[index].value = Number(value);
+                              })
+                            );
+                            console.log(value);
+                            // e.target.value
+                            setAnswer(value);
+                          }}
+                          value={p.value}
                         />
-                      </td>
-                      <td className="options-table">
-                        <input
-                          className="options-table"
-                          type="text"
-                          name="options"
-                          placeholder="Option"
-                          onChange={(e) => handleOption(1, e.target.value)}
-                        />
-                        <hr type="solid" />
-                      </td>
-                    </tr>
-                  </label>
 
-                  <label class="container">
-                    <tr>
-                      <td>
-                        <input
-                          type="radio"
-                          name="answer"
-                          value={2}
-                          onChange={(e) => setAnswer(e.target.value)}
-                        />
-                      </td>
-                      <td className="options-table">
                         <input
                           className="options-table"
-                          type="text"
-                          name="options"
+                          onChange={(e) => {
+                            const text = e.target.value;
+                            setOptions((currentOption) =>
+                              produce(currentOption, (v) => {
+                                v[index].text = text;
+                              })
+                            );
+                            // e.target.value
+                          }}
+                          value={p.text}
                           placeholder="Option"
-                          onChange={(e) => handleOption(2, e.target.value)}
                         />
-                        <hr type="solid" />
-                      </td>
-                    </tr>
-                  </label>
 
-                  <label class="container">
-                    <tr>
-                      <td>
-                        <input
-                          type="radio"
-                          name="answer"
-                          value={3}
-                          onChange={(e) => setAnswer(e.target.value)}
-                        />
-                      </td>
-                      <td className="options-table">
-                        <input
-                          className="options-table"
-                          type="text"
-                          name="options"
-                          placeholder="Option"
-                          onChange={(e) => handleOption(3, e.target.value)}
-                        />
-                        <hr type="solid" />
-                      </td>
-                    </tr>
-                  </label>
-
-                  <label class="container">
-                    <tr>
-                      <td>
-                        <input
-                          type="radio"
-                          name="answer"
-                          value={4}
-                          onChange={(e) => setAnswer(e.target.value)}
-                        />
-                      </td>
-                      <td className="options-table">
-                        <input
-                          className="options-table"
-                          type="text"
-                          name="options"
-                          placeholder="Option"
-                          onChange={(e) => handleOption(4, e.target.value)}
-                        />
-                        <hr type="solid" />
-                      </td>
-                    </tr>
-                  </label>
-
-                  <label class="container">
-                    <tr>
-                      <td>
-                        <input
-                          type="radio"
-                          name="answer"
-                          value={5}
-                          onChange={(e) => setAnswer(e.target.value)}
-                        />
-                      </td>
-                      <td className="options-table">
-                        <input
-                          className="options-table"
-                          type="text"
-                          name="options"
-                          placeholder="Option"
-                          onChange={(e) => handleOption(5, e.target.value)}
-                        />
-                        <hr type="solid" />
-                      </td>
-                    </tr>
-                  </label>
-                </table>
+                        {/* a button bellow is for option deletion */}
+                        <button
+                          className="option-deletion-btn"
+                          onClick={() =>
+                            setOptions((currentOption) =>
+                              currentOption.filter((x) => x.value !== p.value)
+                            )
+                          }
+                        >
+                          x
+                        </button>
+                      </label>
+                    </div>
+                  );
+                })}
+                {/* <pre>{JSON.stringify(options, null, 2)}</pre> */}
               </div>
               <div className="teacher-answer-remark">
                 <h5>Remark</h5>
@@ -218,22 +148,31 @@ const TeacherAssessmentTab = () => {
                   type="text"
                   name="remarks"
                   placeholder="Explain here..."
-                  cols="45"
+                  cols="61"
                   rows="5"
                   onChange={(e) => handleChange(e)}
                 />
-                <span>
-                  <hr type="solid" />
-                </span>
               </div>
             </div>
             <br />
             <div className="teacher-add-more">
-              <button>Add More Options</button>
+              <button
+                onClick={() =>
+                  setOptions((currentOption) => [
+                    ...currentOption,
+                    {
+                      value: options.length + 1,
+                      text: "",
+                    },
+                  ])
+                }
+              >
+                Add More Options
+              </button>
             </div>
           </div>
           <div className="add-new-question">
-            <p>Add New Question</p>
+            <Link to="/teacher-new-assessment">Add New Question</Link>
             <div>
               <Link to="/created-questions">See All Questions</Link>
             </div>
@@ -243,7 +182,7 @@ const TeacherAssessmentTab = () => {
               Save Exam
             </button>
           </div>
-        </form>
+        </>
       </div>
     </>
   );

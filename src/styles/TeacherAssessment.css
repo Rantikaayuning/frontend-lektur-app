@@ -61,7 +61,6 @@
 }
 
 .teacher-answer-option {
-  /* margin-right: 35px; */
   width: 50%;
 }
 
@@ -80,23 +79,53 @@
   resize: none;
   outline: none;
   border: none;
+  border-bottom: 2px solid rgb(214, 211, 211);
+  background-color: rgb(253, 251, 251);
 }
 
-.teacher-option-title input {
+.teacher-answer-remark textarea:focus {
+  outline: none;
+  background-color: #eee;
+}
+
+/* .teacher-option-title input {
   border: none;
   outline: none;
   margin: 0;
   border: 100%;
-  width: 80%;
-}
+} */
 
 .teacher-option-title h4 {
   font-size: 20px;
   font-weight: bold;
 }
 
-.teacher-option-title hr {
-  width: 93%;
+.number-input-tag {
+  padding-bottom: 10px;
+  padding-right: 0px;
+  width: 4%;
+  border: none;
+  background-color: rgb(253, 251, 251);
+}
+
+.question-input-tag {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  width: 94%;
+  border: none;
+  border-bottom: 2px solid rgb(214, 211, 211);
+  background-color: rgb(253, 251, 251);
+}
+
+.number-input-tag:focus,
+.question-input-tag:focus {
+  outline: none;
+  background-color: #eee;
+}
+
+.question-answer-tag {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .teacher-add-more button {
@@ -198,6 +227,10 @@
   .teacher-save-question-box {
     padding-left: 80px;
   }
+  .teacher-answer-remark textarea {
+    margin-left: 15px;
+    width: 96%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -205,7 +238,8 @@
     padding-left: 50px;
   }
   .teacher-answer-remark textarea {
-    width: 300px;
+    margin-left: 0px;
+    width: 96%;
   }
   .teacher-save-question-box .teacher-question-title {
     margin-left: 0px;
@@ -217,12 +251,46 @@
   }
 }
 
-.options-table {
-  /* border: 1px solid black; */
-  width: 98%;
-  padding-bottom: 0px;
+.container-assessment {
+  display: flex;
+  padding-bottom: 7px;
+  margin-right: 5px;
 }
 
+.options-table {
+  /* border: 1px solid black; */
+  width: 85%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  border: none;
+  border-bottom: 2px solid rgb(214, 211, 211);
+  background-color: rgb(253, 251, 251);
+}
+
+.options-table:focus {
+  outline: none;
+  background-color: #eee;
+}
+
+.radio-option {
+  margin-right: 14px;
+  margin-top: 16px;
+  margin-left: 10px;
+}
+
+.answer-title {
+  padding-left: 13px;
+}
+
+.option-deletion-btn {
+  border: none;
+  background-color: rgb(253, 251, 251);
+  padding: 10px;
+  color: gray;
+  /* padding-left: 0px; */
+}
 .container-answer {
   display: block;
   position: relative;
