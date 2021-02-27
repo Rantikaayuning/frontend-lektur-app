@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Jumbotron } from "reactstrap";
 import { useDispatch } from "react-redux";
 
-import { postLogin } from "../../redux/actions/UserAction";
+import { postLogin, getUserProfile } from "../../redux/actions/UserAction";
 
 function Login(props) {
   const [userLogin, setUserLogin] = useState({
@@ -22,12 +22,14 @@ function Login(props) {
   };
 
   const submitLogin = (e) => {
+    e.preventDefault();
     const body = {
       email: userLogin.email,
       password: userLogin.password,
     };
     dispatch(postLogin(body))
-    .then(history.push("/"));
+      .then((token) => dispatch(getUserProfile(token)))
+      .then(() => history.push("/"));
   };
 
   return (
@@ -40,7 +42,7 @@ function Login(props) {
           </div>
           <br />
           <br />
-          <form>
+          <form onSubmit={submitLogin}>
             <p className="email">
               Email<span>*</span>
             </p>
@@ -68,11 +70,7 @@ function Login(props) {
             </div>
             <div className="forget-pass">Forgot Password</div>
             <div className="btn-login">
-              <button
-                type="submit"
-                className="login-button"
-                onClick={submitLogin}
-              >
+              <button type="submit" className="login-button">
                 Login
               </button>
             </div>

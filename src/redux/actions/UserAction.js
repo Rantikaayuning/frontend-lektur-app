@@ -11,26 +11,25 @@ import Cookies from "js-cookie";
 const token = Cookies.get("token");
 
 export const postLogin = (body) => async (dispatch) => {
-  API.post("/users/login", body)
+  return API.post("/users/login", body)
     .then((response) => {
-      if (response.status === 200) {
-        dispatch({
-          type: LOGIN,
-          payload: response.data.message,
-          token: response.data.token, 
-          role: jwt_decode(response.data.token).status,
-        });
+      dispatch({
+        type: LOGIN,
+        payload: response.data.message,
+        token: response.data.token,
+        role: jwt_decode(response.data.token).status,
+      });
 
-        Cookies.set("token", response.data.token);
-        getUserProfile();
-      }
+      Cookies.set("token", response.data.token);
+      return response.data.token;
     })
     .catch((payload) => {
       alert(payload.response.data.message);
     });
 };
 
-export const postSignup = (role, payload) => async (dispatch) => { // add async
+export const postSignup = (role, payload) => async (dispatch) => {
+  // add async
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
@@ -46,20 +45,22 @@ export const postSignup = (role, payload) => async (dispatch) => { // add async
     });
 };
 
-export const getUserProfile = () => (dispatch) => {
+export const getUserProfile = (access_token = null) => (dispatch) => {
+  console.log(access_token);
   API.get("/users/profile", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: access_token
+        ? `Bearer ${access_token}`
+        : `Bearer ${token}`,
     },
   })
     .then((response) => {
-      if (response.status === 200) {
-        dispatch({
-          type: GET_USER_PROFILE,
-          payload: response.data.result,
-          // role: jwt_decode(response.data.token).status, // try here
-        });
-      }
+      console.log(response);
+      dispatch({
+        type: GET_USER_PROFILE,
+        payload: response.data.result,
+        // role: jwt_decode(response.data.token).status, // try here
+      });
     })
     .catch((error) => console.log("USER PROFILE ERROR:", error));
 };
@@ -77,13 +78,12 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
       },
     }
   ).then((response) => {
-    if (response.status === 200) {
+    console.log(response);
+    if (response.status === 201) {
       dispatch({
         type: UPDATE_USER_PROFILE,
         payload: response.data.result,
       });
-
-      getUserProfile();
     }
   });
 };

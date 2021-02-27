@@ -19,23 +19,25 @@ function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const toggle = () => setDropdownOpen(prevState => !prevState);
-  const history = useHistory()
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const history = useHistory();
 
   useEffect(() => {
-    props.getUserProfile();
+    props.isAuthentificated && props.getUserProfile();
   }, []);
 
-  const handleChange = e => {
+  console.log(props.userProfile, props.isAuthentificated);
+
+  const handleChange = (e) => {
     // e.preventDefault()
     setSearch(e.target.value);
   };
   const submitSearch = (e) => {
-    e.preventDefault()
-    props.getCourseSearch(search)
-    history.push('/')
-  }
-  
+    e.preventDefault();
+    props.getCourseSearch(search);
+    history.push("/");
+  };
+
   return (
     <div className="sidebar">
       <div className="left">
@@ -46,16 +48,13 @@ function Navbar(props) {
       </div>
       <div className="center">
         <form onSubmit={submitSearch}>
-        <input
-          type="text"
-          placeholder="Search Course or Lecturer"
-          onChange={handleChange}
-        />
+          <input
+            type="text"
+            placeholder="Search Course or Lecturer"
+            onChange={handleChange}
+          />
         </form>
-        <i
-          className="fa fa-search icon"
-          onClick={submitSearch}
-        ></i>
+        <i className="fa fa-search icon" onClick={submitSearch}></i>
       </div>
       <div className="right">
         <ul>
@@ -152,10 +151,11 @@ function Navbar(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userProfile: state.users.userProfile,
     searchCourse: state.courses.searchCourse,
+    isAuthentificated: state.users.isAuthentificated,
   };
 };
 

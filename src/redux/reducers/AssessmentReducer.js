@@ -1,9 +1,10 @@
-import { GET_QUESTIONS } from '../types/AssessmentTypes'
+import { GET_QUESTIONS, POST_QUESTIONS } from "../types/AssessmentTypes";
 
 const initialState = {
-    assessment: null,
-  };
-  
+  assessment: null,
+  addAssessment: null,
+};
+
 const assessmentReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -12,10 +13,14 @@ const assessmentReducer = (state = initialState, action) => {
         ...state,
         assessment: payload,
       };
-    default :
+    case POST_QUESTIONS:
+      return {
+        ...state,
+        addAssessment: payload,
+      };
+    default:
       return state;
   }
 };
 
 export default assessmentReducer;
-  
