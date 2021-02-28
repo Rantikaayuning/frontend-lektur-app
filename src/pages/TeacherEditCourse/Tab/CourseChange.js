@@ -34,31 +34,31 @@ const TeacherCourseUpdate = () => {
                         <p>Students</p>
                     </Link>
                 </div>
-                <div className='teacher-new-course-box'>
+                <div className='teacher-create-course-box'>
                     {courseDetail.course.title === null ? (
-                        <div className='teacher-new-course-title'>
+                        <div className='teacher-create-course-title'>
                             <p><input type="text" placeholder="Title"/><hr type="solid"/></p>
                         </div>
                     ) : (
-                        <div className='teacher-new-course-title'>
+                        <div className='teacher-create-course-title'>
                             <p><input type="text" placeholder="Title" value={courseDetail.course.title} /><hr type="solid"/></p>
                         </div>
                     )}
                     {courseDetail.course.overview === null ? (
-                        <div className='teacher-new-course-overview'>
+                        <div className='teacher-create-course-overview'>
                             <p><textarea type="text" placeholder="Overview*" cols='45' rows='5'/><hr type="solid"/></p>
                         </div>
                     ) : (
-                        <div className='teacher-new-course-overview'>
+                        <div className='teacher-create-course-overview'>
                             <p><textarea type="text" placeholder="Overview*" value={courseDetail.course.overview} cols='45' rows='5'/><hr type="solid"/></p>
                         </div>
                     )}
                     {courseDetail.course.categoryId === null ? (
-                        <div className='teacher-new-course-title'>
+                        <div className='teacher-create-course-title'>
                             <p><input type="text" placeholder="Category"/><hr type="solid"/></p>
                         </div>
                     ) : (
-                        <div className='teacher-new-course-title'>
+                        <div className='teacher-create-course-title'>
                             <p><input type="text" placeholder="Category" value={courseDetail.course.categoryId} /><hr type="solid"/></p>
                         </div>
                     )}

@@ -1,24 +1,24 @@
-.teacher-new-course-box {
+.teacher-create-course-box {
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 72px;
 }
 
-.teacher-new-course-title {
+.teacher-create-course-title {
     display: flex;
 }
 
-.teacher-new-course-title input{
+.teacher-create-course-title input{
     border: none;
     outline: none;
     background-color: whitesmoke;
 }
 
-.teacher-new-course-overview {
+.teacher-create-course-overview {
     display: flex;
 }
 
-.teacher-new-course-overview textarea {
+.teacher-create-course-overview textarea {
     border: none;
     background-color: whitesmoke;
     overflow: auto;
@@ -59,6 +59,16 @@
     margin: 30px;
     color: white;
     background-color: #16213B;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 2px;
+    margin-right: 40px;
+}
+
+.teacher-save-new-course button:disabled {
+    margin: 30px;
+    color: white;
+    background-color: #536ca8;
     border: none;
     padding: 10px 24px;
     border-radius: 2px;
@@ -115,6 +125,10 @@
  
 .add-new-lesson-input {
     width: 50%;
+}
+
+.input-number{
+    width: 40px;
 }
 
 .add-new-lesson-box h4{
@@ -185,7 +199,7 @@
     margin-top: 100px;
 }
 
-.upload-new-lesson .save button{
+.save button{
     background-color: #16213B;
     color: white;
     border: 1px solid #16213B;
@@ -194,17 +208,20 @@
     padding: 10px 24px;
 }
 
+.upload-new-lesson input{
+    font-size: 16px;
+}
+
 .upload-new-lesson {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 50%;
     margin-top: 60px;
     margin-left: 18%;
 }
 
 @media screen and (max-width: 1024px) {
-    .teacher-new-course-box {
+    .teacher-create-course-box {
         margin-left: 10%;
         margin-right: 10%;
         margin-top: 72px;

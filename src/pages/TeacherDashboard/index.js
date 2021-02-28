@@ -94,32 +94,36 @@ function TeacherDashboard(props) {
         </div>
       )}
 
-      {props.teacherCourses !== 0 ? (
         <div className="courses-container">
-          <div className="courses-header">
-            <h5>
-              <b>Courses</b>
-            </h5>
-            <Link to="/teacher-new-course">
-              <button>New Course</button>
-            </Link>
+            <div className="courses-header">
+              <h5>
+                <b>Courses</b>
+              </h5>
+              <Link to="/teacher-create-course">
+                <button>New Course</button>
+              </Link>
+            </div>
+            <div className="card-container overflow-auto">
+          {props.teacherCourses !== [] ? (
+          props.teacherCourses.map((item, index) => (
+          <div>
+            <hr />
+                <CourseCard
+                  key={index}
+                  image={defaultImg}
+                  title={item.title}
+                  numOfVideos={item.totalVideo}
+                  numOfLesson={item.totalMaterial}
+                  enrolledStudents={item.totalEnrolled}
+                  edit={`/course-filled-teacher/${item._id}`}
+                />
           </div>
-          <hr />
-          {props.teacherCourses.map((item, index) => (
-            <CourseCard
-              key={index}
-              image={defaultImg}
-              title={item.title}
-              numOfVideos={item.totalVideo}
-              numOfLesson={item.totalMaterial}
-              enrolledStudents={item.totalEnrolled}
-              edit={`/course-teacher/edit/${item._id}`}
-            />
-          ))}
+          ))
+        ) : (
+          <div id="loader"></div>
+        )}
         </div>
-      ) : (
-        <div id="loader"></div>
-      )}
+      </div>
     </div>
   );
 }

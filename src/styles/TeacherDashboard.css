@@ -68,14 +68,17 @@
   top: 144px;
   left: 440px; /* 122 + 39 + 230 */
   width: 893px; /* 50% */
-  height: max-content;
+  height: 700px;
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   /* padding: 0px 34px 10px 34px; */
-  width: 50%; /* check */
+  /* width: 50%;  */
   margin: 0 auto;
+}
+.card-container{
+  height: 590px;
 }
 
 .courses-header {

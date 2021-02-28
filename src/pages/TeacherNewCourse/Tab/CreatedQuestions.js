@@ -38,7 +38,7 @@ function CreatedQuestions() {
   return (
     <div className="teacher-assessment">
       <div className="teacher-dashboard-list">
-        <Link to="/teacher-new-course">
+        <Link to="/teacher-create-course">
           <p>Course</p>
         </Link>
         <p className="open">Assessment</p>
