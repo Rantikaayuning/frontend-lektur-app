@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import { getQuestions } from "../../../redux/actions/AssessmentAction";
+import { getQuestionsTemp } from "../../../redux/actions/AssessmentAction";
 
 function CreatedQuestions() {
   // const [isPicked, setPicked] = useState({
@@ -13,10 +13,10 @@ function CreatedQuestions() {
   // });
 
   const dispatch = useDispatch();
-  const allQuestions = useSelector((state) => state.assessment.assessment);
+  const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
 
   useEffect(() => {
-    dispatch(getQuestions());
+    dispatch(getQuestionsTemp());
   }, [dispatch]);
 
   function handleDropDown(index) {
