@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   Dropdown,
   DropdownToggle,
@@ -9,13 +9,14 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import searchIcon from "../../../assets/search.png";
-import { studentEnroll } from "../../../assets/JSONFile/dummyData";
 import checklistOne from "../../../assets/checklist1.png";
 import checklistTwo from "../../../assets/checklist2.png";
 import checklistThree from "../../../assets/checklist3.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
+import { studentAcceptance } from "../../../redux/actions/TeacherAction";
 
-const TeacherStudentsTab = ({ getStudentId }) => {
+const TeacherStudentsTab = ({ getListStudent, getStudentList }) => {
+  const { id } = useParams();
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
   const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
@@ -23,6 +24,10 @@ const TeacherStudentsTab = ({ getStudentId }) => {
   const toggleSort = () => setDropdownSortOpen(before => !before);
   const toggleFilter = () => setDropdownFilterOpen(prevState => !prevState);
   const handlePopUp = () => setPopUpOpen(!isPopUpOpen);
+  useEffect(() => {
+    getStudentList(id);
+  }, []);
+  console.log(getListStudent);
 
   return (
     <>
@@ -115,60 +120,59 @@ const TeacherStudentsTab = ({ getStudentId }) => {
                 togglePopUp={handlePopUp}
               />
             </div>
-            {studentEnroll.map(item => (
-              <div className="student-list-name">
-                <div>
-                  <p>
-                    <b>{item.name}</b>
-                  </p>
-                  {item.isActive === true ? (
-                    <p>
-                      <img src={checklistTwo} alt="active" /> Active
-                    </p>
-                  ) : item.isCompleted === true ? (
-                    <p>
-                      <img src={checklistThree} alt="completed" /> Completed
-                    </p>
-                  ) : (
-                    <p>
-                      <img src={checklistOne} alt="pending" /> Pending
-                    </p>
-                  )}
-                </div>
-                <div className="course-status">
-                  {item.isActive === true && item.isPending === false ? (
-                    <div className="course-active">
+            {!getListStudent
+              ? getListStudent.map(item => (
+                  <div className="student-list-name">
+                    <div>
                       <p>
-                        <Progress
-                          color="warning"
-                          value={(item.noQuestion / item.totalQuestion) * 100}
-                        />
+                        <b>{item.fullname}</b>
                       </p>
-                      <p>
-                        {item.noQuestion}/{item.totalQuestion} Course Complete
-                      </p>
+                      {item.isActive === true ? (
+                        <p>
+                          <img src={checklistTwo} alt="active" /> Active
+                        </p>
+                      ) : item.isCompleted === true ? (
+                        <p>
+                          <img src={checklistThree} alt="completed" /> Completed
+                        </p>
+                      ) : (
+                        <p>
+                          <img src={checklistOne} alt="pending" /> Pending
+                        </p>
+                      )}
                     </div>
-                  ) : item.isCompleted === true ? (
-                    <div className="course-completed">
-                      <h3>{item.score}%</h3>
-                      <p>Assessment Score</p>
+                    <div className="course-status">
+                      {item.isActive === true && item.isPending === false ? (
+                        <div className="course-active">
+                          <p>
+                            <Progress
+                              color="warning"
+                              value={
+                                (item.noQuestion / item.totalQuestion) * 100
+                              }
+                            />
+                          </p>
+                          <p>
+                            {item.noQuestion}/{item.totalQuestion} Course
+                            Complete
+                          </p>
+                        </div>
+                      ) : item.isCompleted === true ? (
+                        <div className="course-completed">
+                          <h3>{item.score}%</h3>
+                          <p>Assessment Score</p>
+                        </div>
+                      ) : (
+                        <div className="course-pending">
+                          <p>
+                            <button onClick={null}>Accept</button>
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="course-pending">
-                      <p>
-                        <button
-                          onClick={() => {
-                            console.log(getStudentId);
-                          }}
-                        >
-                          Accept
-                        </button>
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+                  </div>
+                ))
+              : "Ethan"}
           </div>
         </div>
       </div>
@@ -177,6 +181,13 @@ const TeacherStudentsTab = ({ getStudentId }) => {
 };
 
 const stateToProps = state => {
-  return { getStudentId: state.teachers.studentsAccStatus };
+  return {
+    getListStudent: state.teachers.studentsAccStatus,
+  };
 };
-export default connect(stateToProps)(TeacherStudentsTab);
+const dispatchToProps = dispatch => {
+  return {
+    getStudentList: courseId => dispatch(studentAcceptance(courseId)),
+  };
+};
+export default connect(stateToProps, dispatchToProps)(TeacherStudentsTab);

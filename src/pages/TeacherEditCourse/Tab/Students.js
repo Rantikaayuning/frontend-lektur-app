@@ -13,24 +13,29 @@ import checklistOne from "../../../assets/checklist1.png";
 import checklistTwo from "../../../assets/checklist2.png";
 import checklistThree from "../../../assets/checklist3.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
-import { useDispatch } from "react-redux";
-import {getCourseDetail} from '../../../redux/actions/CoursesAction'
+import { useDispatch, useSelector } from "react-redux";
+import { getCourseDetail } from "../../../redux/actions/CoursesAction";
+import { studentAcceptance } from "../../../redux/actions/TeacherAction";
 
 const TeacherStudentsUpdate = () => {
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
   const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
 
-  const toggleSort = () => setDropdownSortOpen((before) => !before);
-  const toggleFilter = () => setDropdownFilterOpen((prevState) => !prevState);
+  const toggleSort = () => setDropdownSortOpen(before => !before);
+  const toggleFilter = () => setDropdownFilterOpen(prevState => !prevState);
   const handlePopUp = () => setPopUpOpen(!isPopUpOpen);
 
-  const {id} = useParams()
-  const dispatch = useDispatch()
+  const { id } = useParams();
+  const studentsAccStatus = useSelector(
+    state => state.teachers.studentsAccStatus
+  );
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCourseDetail(id));
-  }, [dispatch, id])
-
+    dispatch(studentAcceptance(id));
+  }, [dispatch, id]);
+  console.log(studentsAccStatus);
   return (
     <>
       <div className="teacher-assessment">
@@ -122,7 +127,70 @@ const TeacherStudentsUpdate = () => {
                 togglePopUp={handlePopUp}
               />
             </div>
-            {studentEnroll.map((item) => (
+            {studentsAccStatus
+              ? studentsAccStatus.map(item => (
+                  <div className="student-list-name">
+                    <div>
+                      <p>
+                        <b>{item.studentId.fullname}</b>
+                      </p>
+                      {item.status === 1 || item.status === 2 ? (
+                        <p>
+                          <img src={checklistTwo} alt="active" /> Active
+                        </p>
+                      ) : item.status === 3 ? (
+                        <p>
+                          <img src={checklistThree} alt="completed" /> Completed
+                        </p>
+                      ) : (
+                        <p>
+                          <img src={checklistOne} alt="pending" /> Pending
+                        </p>
+                      )}
+                    </div>
+                    <div className="course-status">
+                      {item.status === 1 || item.status === 2 ? (
+                        <div className="course-active">
+                          <p>
+                            <Progress
+                              color="warning"
+                              value={
+                                (item.noQuestion / item.totalQuestion) * 100
+                              }
+                            />
+                          </p>
+                          <p>
+                            {item.noQuestion}/{item.totalQuestion} Course
+                            Complete
+                          </p>
+                        </div>
+                      ) : item.status === 3 ? (
+                        <div className="course-completed">
+                          <h3>{item.score}%</h3>
+                          <p>Assessment Score</p>
+                        </div>
+                      ) : (
+                        <div className="course-pending">
+                          <p>
+                            <button>Accept</button>
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              : ""}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default TeacherStudentsUpdate;
+/*
+
+studentEnroll.map(item => (
               <div className="student-list-name">
                 <div>
                   <p>
@@ -169,12 +237,7 @@ const TeacherStudentsUpdate = () => {
                   )}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+            ))
 
-export default TeacherStudentsUpdate;
+
+*/

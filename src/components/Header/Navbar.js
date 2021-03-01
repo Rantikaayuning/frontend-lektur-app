@@ -29,13 +29,11 @@ function Navbar(props) {
     // e.preventDefault()
     setSearch(e.target.value);
   };
-  const submitSearch = (e) => {
-    e.preventDefault()
-   props.getCourseSearch(search)
-  }
-  
-  console.log("search", search)
-  console.log("input search", props.searchCourse);
+  const submitSearch = e => {
+    e.preventDefault();
+    props.getCourseSearch(search);
+  };
+
   return (
     <div className="sidebar">
       <div className="left">
@@ -46,16 +44,13 @@ function Navbar(props) {
       </div>
       <div className="center">
         <form onSubmit={submitSearch}>
-        <input
-          type="text"
-          placeholder="Search Course or Lecturer"
-          onChange={handleChange}
-        />
+          <input
+            type="text"
+            placeholder="Search Course or Lecturer"
+            onChange={handleChange}
+          />
         </form>
-        <i
-          className="fa fa-search icon"
-          onClick={submitSearch}
-        ></i>
+        <i className="fa fa-search icon" onClick={submitSearch}></i>
       </div>
       <div className="right">
         <ul>
