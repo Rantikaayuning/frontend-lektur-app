@@ -7,6 +7,7 @@ import {
   DropdownItem,
   Progress,
 } from "reactstrap";
+import { connect } from "react-redux";
 import searchIcon from "../../../assets/search.png";
 import { studentEnroll } from "../../../assets/JSONFile/dummyData";
 import checklistOne from "../../../assets/checklist1.png";
@@ -14,13 +15,13 @@ import checklistTwo from "../../../assets/checklist2.png";
 import checklistThree from "../../../assets/checklist3.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
 
-const TeacherStudentsTab = () => {
+const TeacherStudentsTab = ({ getStudentId }) => {
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
   const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
 
-  const toggleSort = () => setDropdownSortOpen((before) => !before);
-  const toggleFilter = () => setDropdownFilterOpen((prevState) => !prevState);
+  const toggleSort = () => setDropdownSortOpen(before => !before);
+  const toggleFilter = () => setDropdownFilterOpen(prevState => !prevState);
   const handlePopUp = () => setPopUpOpen(!isPopUpOpen);
 
   return (
@@ -114,7 +115,7 @@ const TeacherStudentsTab = () => {
                 togglePopUp={handlePopUp}
               />
             </div>
-            {studentEnroll.map((item) => (
+            {studentEnroll.map(item => (
               <div className="student-list-name">
                 <div>
                   <p>
@@ -155,7 +156,13 @@ const TeacherStudentsTab = () => {
                   ) : (
                     <div className="course-pending">
                       <p>
-                        <button>Accept</button>
+                        <button
+                          onClick={() => {
+                            console.log(getStudentId);
+                          }}
+                        >
+                          Accept
+                        </button>
                       </p>
                     </div>
                   )}
@@ -169,4 +176,7 @@ const TeacherStudentsTab = () => {
   );
 };
 
-export default TeacherStudentsTab;
+const stateToProps = state => {
+  return { getStudentId: state.teachers.studentsAccStatus };
+};
+export default connect(stateToProps)(TeacherStudentsTab);
