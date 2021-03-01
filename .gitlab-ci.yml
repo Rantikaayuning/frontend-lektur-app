@@ -1,0 +1,24 @@
+stages:
+  - build
+  - sand-box
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm install
+  cache:
+    paths:
+      - node_modules/
+  only:
+    - try-CI/CD
+
+staging:
+  stage: sand-box
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=lektur-app-ga10 --api-key=$HEROKU_API_KEY
+  only:
+    - try-CI/CD
