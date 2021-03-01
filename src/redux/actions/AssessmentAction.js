@@ -29,7 +29,7 @@ export const getQuestions = (id) => (dispatch) => {
 
 // should be body here
 // export const postAssessment = (body, id) => (dispatch) => {
-export const postAssessment = (body) => (dispatch) => {
+export const postAssessment = (body) => async (dispatch) => {
   // (`/assessment/create?courseId=${id}`)
   API.post(
     `/assessment/create?courseId=602e06cc34a3a426b0311c94`,
@@ -48,7 +48,7 @@ export const postAssessment = (body) => (dispatch) => {
           type: POST_QUESTIONS,
           payload: response.data.result,
         });
-        alert("question created successfully");
+        // alert("question created successfully");
       }
     })
     .catch((payload) => alert(payload.response.data.message));
@@ -71,4 +71,23 @@ export const getQuestionsTemp = (id) => (dispatch) => {
       }
     })
     .catch((err) => alert(err));
+};
+
+export const deleteQuestion = (id) => () => {
+  return new Promise((resolve) => {
+    API.delete(
+      `/assessment/delete?courseId=602e06cc34a3a426b0311c94&questionId=${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          resolve(response.data);
+        }
+      })
+      .catch((err) => alert("error delete question", err));
+  });
 };

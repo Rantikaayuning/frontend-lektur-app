@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import { getQuestionsTemp } from "../../../redux/actions/AssessmentAction";
+import {
+  getQuestionsTemp,
+  deleteQuestion,
+} from "../../../redux/actions/AssessmentAction";
 
 function CreatedQuestions() {
   // const [isPicked, setPicked] = useState({
   //   data: [...assessment],
   // });
+
+  const history = useHistory();
 
   const dispatch = useDispatch();
   const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
@@ -34,6 +39,12 @@ function CreatedQuestions() {
   }
 
   console.log("allQuestions: ", allQuestions);
+
+  const deleteCreatedQuestion = (id) => {
+    dispatch(deleteQuestion(id))
+      .then(() => alert(`question deleted`))
+      .then(() => history.push("/teacher-new-assessment"));
+  };
 
   return (
     <div className="teacher-assessment">
@@ -69,6 +80,17 @@ function CreatedQuestions() {
                       {item.number}. {item.question}
                     </p>
                     <p>
+                      <button
+                        onClick={() => deleteCreatedQuestion(item._id)}
+                        className="option-deletion-btn"
+                        style={{
+                          marginRight: "10px",
+                          paddingTop: "4px",
+                          paddingBottom: "2px",
+                        }}
+                      >
+                        Delete
+                      </button>
                       <img
                         src={imgDropdown}
                         alt="symbol"
@@ -91,6 +113,7 @@ function CreatedQuestions() {
                       <span className="checkmark"></span>
                     </label>
                   ))}
+
                   {handleDropDownActive(index) && (
                     <>
                       {/* <p className="answer">Answer</p>
@@ -134,6 +157,15 @@ function CreatedQuestions() {
                   <br />
                 </div>
               ))}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  textDecoration: "underline",
+                }}
+              >
+                <Link to="/teacher-new-assessment">Add New Question</Link>
+              </div>
             </div>
           </div>
         ) : (
