@@ -201,14 +201,11 @@ export const postContent = (id, title, description, number ) => (dispatch) => {
 }
 
 export const uploadMaterial = (idContent, file) => (dispatch) => {
-  API.post(`/content/upload/file?contentId=${idContent}` , 
-  {
-    file
-  },
+  API.post(`/content/upload/file?contentId=${idContent}` , {file} ,
   {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
+      // "Content-Type": "multipart/form-data",
     }})
     .then((response) => {
       if(response.status === 201) {

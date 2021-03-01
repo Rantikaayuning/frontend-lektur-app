@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
-import {postCourse, postContent, uploadMaterial, uploadVideo, uploadImage} from "../../../redux/actions/CoursesAction";
+import {postCourse, postContent, uploadMaterial, uploadVideo, uploadImage, deleteCourse} from "../../../redux/actions/CoursesAction";
 import {Tooltip} from "reactstrap"
 
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
@@ -12,7 +12,6 @@ const TeacherCourseTab = (props) => {
 
     const toggle = () => setTooltipOpen(!tooltipOpen);
  
-    // const {id} = useParams();
     const history = useHistory();
 
     const dispatch = useDispatch();
@@ -36,8 +35,11 @@ const TeacherCourseTab = (props) => {
 
 
     const submitCourse = () => {
-        dispatch(postCourse(title, overview, category)).then(() => submitImage(id))
+        dispatch(postCourse(title, overview, category))
+        // .then(() => submitImage(id))
     }
+
+//---------------------------HEADER-IMAGE-----------------------------------//
 
     const changeImage = (event) => {
         setImage(event.target.files[0])
@@ -56,11 +58,14 @@ const TeacherCourseTab = (props) => {
     const [titleContent, setTitleContent] = useState("");
     const [material, setMaterial] = useState("")
     const [video, setVideo] = useState("");
+    const [buttonText, setButtonText] = useState("Save")
 
     const submitContent = (e) => {
         e.preventDefault()
         dispatch(postContent(id, titleContent, description, number ));
     }
+
+//-----------------------MATERIAL------------------------//
 
     const changeHandler = (event) => {
         setMaterial(event.target.files[0])
@@ -71,6 +76,8 @@ const TeacherCourseTab = (props) => {
         file.append('file', material);
         dispatch(uploadMaterial(idContent, material))
     }
+
+//----------------------VIDIO----------------------------//
 
     const changeVideo = (event) => {
         setVideo(event.target.files[0])
@@ -83,7 +90,12 @@ const TeacherCourseTab = (props) => {
         dispatch(uploadVideo(idContent, video))
     }
 
-    const [buttonText, setButtonText] = useState("Save")
+//-----------------------DELETE-COURSE--------------------------------//
+
+    const deleteCourseTeacher = () => {
+        dispatch(deleteCourse(id))
+        history.push("/teacher-dashboard")
+      }
 
     console.log(idContent);
 
@@ -161,7 +173,6 @@ const TeacherCourseTab = (props) => {
                         <p>
                             <button 
                                 onClick = {submitCourse}
-                                disabled= {idContent}
                             >
                               Save
                             </button>
@@ -191,22 +202,22 @@ const TeacherCourseTab = (props) => {
                     ) : (
                         <>
                         <div>
-                        <p><hr type="solid"/></p>
+                            <p><hr type="solid"/></p>
                         </div>
                         <div className='teacher-update-content'>
                             <h4>Content*</h4>
                         </div>
                         <div className='add-new-lesson-box'>
-                        <div className='add-new-lesson-input'>
-                            <h4>
-                                <b>Lesson # <input className="input-number" 
-                                                type="text" 
-                                                placeholder="no." 
-                                                onChange={(e) => setNumber (e.target.value)} 
-                                                value={number}
-                                            />
-                                </b>
-                            </h4>
+                            <div className='add-new-lesson-input'>
+                                <h4>
+                                    <b>Lesson # <input className="input-number" 
+                                                    type="text" 
+                                                    placeholder="no." 
+                                                    onChange={(e) => setNumber (e.target.value)} 
+                                                    value={number}
+                                                />
+                                    </b>
+                                </h4>
                             <div className='add-new-lesson-title'>
                                 <p>
                                     <input
@@ -234,7 +245,7 @@ const TeacherCourseTab = (props) => {
                                 </p>
                             </div>
                             <p className='save' onClick = {() => setButtonText("Saved")}>
-                                <button onClick={submitContent} >{buttonText}</button>
+                                <button onClick={submitContent}  disabled= {idContent}>{buttonText}</button>
                             </p>
                         </div>
                         {/* <Tooltip placement="top" isOpen={tooltipOpen} autohide={true} target="DisabledAutoHideExample" toggle={toggle}>
@@ -320,7 +331,7 @@ const TeacherCourseTab = (props) => {
                         <Link to={`/course-filled-teacher/${id}`}>
                             <p><button>Publish Course</button></p>
                         </Link>
-                        <p className='delete'>Delete Course</p>
+                        <p className='delete' onClick={deleteCourseTeacher}>Delete Course</p>
                     </div>
                         </>
                     )}

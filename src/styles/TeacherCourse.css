@@ -112,6 +112,7 @@
     cursor: pointer;
     text-decoration: underline;
     margin: 10px 26px;
+    cursor: pointer;
 }
 
 .add-new-lesson-box {
@@ -206,6 +207,11 @@
     border-radius: 2px;
     font-size: 14px;
     padding: 10px 24px;
+}
+
+.save button:disabled{
+    background-color: #5e6f97;
+    border: 1px solid #5e6f97;
 }
 
 .upload-new-lesson input{
