@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import {createCourse, getTeacherProfile} from "../../../redux/actions/TeacherAction"
+import {getTeacherProfile} from "../../../redux/actions/TeacherAction"
 import {Tooltip} from "reactstrap"
 
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
@@ -31,11 +31,7 @@ const TeacherCourseTab = (props) => {
     const [overview, setOverview] = useState ("")
     const [category, setCategory] = useState("")
 
-    const submitCourse = (e) => {
-        e.preventDefault();
-        dispatch(createCourse(title, overview, category));
-        history.push(`/course-update-teacher/${id}`)
-    }
+  
 
    useEffect(() => {
        dispatch(getTeacherProfile())
@@ -73,7 +69,7 @@ const TeacherCourseTab = (props) => {
                     </div>
                    
                     <div className='teacher-save-new-course'>
-                        <p><button onClick = {submitCourse} >Save</button></p>
+                        <p><button  >Save</button></p>
                     </div>
                    
                     <div>

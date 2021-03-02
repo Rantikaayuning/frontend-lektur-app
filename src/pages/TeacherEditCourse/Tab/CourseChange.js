@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import {getCourseDetail} from '../../../redux/actions/CoursesAction'
+import { Link, useParams, useHistory } from 'react-router-dom';
+import {getCourseDetail, uploadImage, updateCourse, deleteCourse} from '../../../redux/actions/CoursesAction'
 
 const TeacherCourseUpdate = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
-    const {courseDetail} = useSelector(state => state.courses)
+    const history = useHistory()
+
+    const {courseDetail, image, detailTitle, detailOverview} = useSelector(state => state.courses)
 
     const [isAdd, setAdd] = useState(false)
-    const [title, setTitle] = useState ("")
-
+    const [title, setTitle] = useState (`${detailTitle}`)
+    const [overview, setOverview] = useState(`${detailOverview}`)
+    const [imageData, setImageData] = useState("")
+    const [buttonImage, setButtonImage] = useState("Add header image")
+    const [buttonSave, setButtonSave] = useState('Save')
     const handleAdd = () => {
         setAdd(true)
     }
@@ -18,6 +23,21 @@ const TeacherCourseUpdate = () => {
     useEffect(() => {
          dispatch(getCourseDetail(id));
     }, [dispatch, id])
+
+     const submitImage = () => {
+        const data = new FormData();
+        data.append('file', imageData);
+        dispatch(uploadImage(id, data));
+    }
+
+    const submitUpdate = () => {
+        dispatch(updateCourse(id, title, overview))
+    }
+
+    const deleteCourseTeacher = () => {
+        dispatch(deleteCourse(id))
+        history.push("/teacher-dashboard")
+      }
 
     // console.log(courseDetail)
 
@@ -37,46 +57,52 @@ const TeacherCourseUpdate = () => {
                 <div className='teacher-new-course-box'>
                     {courseDetail.course.title === null ? (
                         <div className='teacher-new-course-title'>
-                            <p><input type="text" placeholder="Title"/><hr type="solid"/></p>
+                            <p><input type="text" placeholder="Title" onChange={(e) => setTitle (e.target.value)} /><hr type="solid"/></p>
                         </div>
                     ) : (
                         <div className='teacher-new-course-title'>
-                            <p><input type="text" placeholder="Title" value={courseDetail.course.title} /><hr type="solid"/></p>
+                            <p><input  onChange={(e) => setTitle (e.target.value)} type="text" placeholder="Title" name="title" value={title}/><hr type="solid"/></p>
                         </div>
-                    )}
+                     )}
                     {courseDetail.course.overview === null ? (
                         <div className='teacher-new-course-overview'>
-                            <p><textarea type="text" placeholder="Overview*" cols='45' rows='5'/><hr type="solid"/></p>
+                            <p><textarea onChange={(e) => setOverview (e.target.value)} type="text" placeholder="Overview*" cols='45' rows='5'/><hr type="solid"/></p>
                         </div>
                     ) : (
                         <div className='teacher-new-course-overview'>
-                            <p><textarea type="text" placeholder="Overview*" value={courseDetail.course.overview} cols='45' rows='5'/><hr type="solid"/></p>
+                            <p><textarea  onChange={(e) => setOverview (e.target.value)} type="text" placeholder="Overview*" value={overview} cols='45' rows='5'/><hr type="solid"/></p>
                         </div>
                     )}
-                    {courseDetail.course.categoryId === null ? (
-                        <div className='teacher-new-course-title'>
-                            <p><input type="text" placeholder="Category"/><hr type="solid"/></p>
-                        </div>
-                    ) : (
-                        <div className='teacher-new-course-title'>
-                            <p><input type="text" placeholder="Category" value={courseDetail.course.categoryId} /><hr type="solid"/></p>
-                        </div>
-                    )}
-            
                     <div className='teacher-add-header-image'>
-                        <p><button>Add header image</button></p> 
+                            <p>
+                                <input 
+                                    type="file" 
+                                    placeholder="Image" 
+                                    id='upload'
+                                    onChange={(e) => {
+                                        setImageData(e.target.files[0])
+                                        }
+                                    }
+                                /> 
+                            </p>
+                            <p onClick = {() => setButtonImage("Image Saved")}>
+                                <button onClick={submitImage}>
+                                   {buttonImage}
+                                </button>
+                                
+                            </p> 
+                            
                         <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
+                        <hr type="solid" />
                     </div>
                     <div className='teacher-save-new-course'>
-                        <p>
-                        <Link to={`/course-teacher/lessons/${id}`}>
-                            <button>save</button>
-                        </Link>
+                        <p onClick = {() => setButtonSave("Saved")}>
+                        {/* <Link to={`/course-teacher/lessons/${id}`}> */}
+                            <button onClick={submitUpdate}>{buttonSave}</button>
+                   
                         </p>
                     </div>
-                    <div>
                         <p><hr type="solid"/></p>
-                    </div>
                     <div className='teacher-add-new-lesson-content'>
                         <h4>Content*</h4>
                     </div>
@@ -138,7 +164,7 @@ const TeacherCourseUpdate = () => {
                         <Link to={`/course-teacher/edit/${id}`}>
                             <p><button>Publish Course</button></p>
                         </Link>
-                        <p className='delete'>Delete Course</p>
+                        <p className='delete' onClick={deleteCourseTeacher}>Delete Course</p>
                     </div>
                 </div>
             </div>

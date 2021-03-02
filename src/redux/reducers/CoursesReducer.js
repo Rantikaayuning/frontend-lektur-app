@@ -8,7 +8,10 @@ import {
   SEARCH_COURSE,
   GET_POPUP_CONTENT,
   GET_POPUP_MATERIAL,
-  GET_CONTENT_DETAIL
+  GET_CONTENT_DETAIL,
+  GET_COURSE_FILLED,
+  UPLOAD_IMAGE,
+  UPDATE_COURSE
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -23,10 +26,15 @@ const initialState = {
   popUpContent: {},
   popUpMaterial: [],
   contentDetail: {},
+  courseFilled: null,
+  background: null,
+  image: null,
+  detailTitle: null,
+  detailOverview: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, background, material, content, detailTitle, detailOverview} = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
@@ -37,6 +45,9 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         courseDetail: payload,
+        background: background,
+        detailTitle: detailTitle,
+        detailOverview: detailOverview,
       };
     case POST_ENROLL_COURSE:
       return {
@@ -78,6 +89,26 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         contentDetail: payload,
       };
+     case GET_COURSE_FILLED:
+      return {
+        ...state,
+        courseFilled: payload,
+        contentFilled: content,
+        materialFilled: material,
+      }
+     case UPLOAD_IMAGE:
+      return {
+        ...state,
+        image: payload,
+      }
+    case UPDATE_COURSE:
+      return{
+        ...state,
+        update: payload,
+      } 
+
+
+
     default:
       return state;
   }
