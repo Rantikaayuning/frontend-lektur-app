@@ -35,9 +35,8 @@ const TeacherCourseTab = (props) => {
     // const [imageURL, setImageURL] = useState("")
 
     const submitCourse = () => {
-        const data = new FormData();
-        data.append('file', imageData);
-        dispatch(postCourse(title, overview, data))
+     
+        dispatch(postCourse(title, overview, imageData))
     }
     console.log();
 
@@ -159,7 +158,7 @@ const TeacherCourseTab = (props) => {
                                <hr type="solid" />
                             </p>
                          ) : ( 
-                            <p  >
+                            <p>
                                 <button 
                                    onClick = {handleAdd1}
                                     // disabled= {image}

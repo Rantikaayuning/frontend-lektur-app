@@ -138,18 +138,15 @@ export const getTeacherCourses = () => (dispatch) => {
   }
 
 export const postCourse = ( title, overview, file  ) => (dispatch) => {
+  const data = new FormData();
+  data.append('file', file);
+
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      // 'Content-Type': 'multipart/form-data',
     }
   }
-  API.post("/courses/create", 
-  {
-    data1: title, 
-    data2: overview, 
-    data3: file, 
-  }, config)
+  API.post("/courses/create", {title, overview, file}, config)
     .then((response) => {
         if(response.status === 201){
             dispatch({
