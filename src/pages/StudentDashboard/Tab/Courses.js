@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap';
 import { PopUpCourse } from '../../../components/PopUp/PopUpCourse';
 import { PopUpMaterial } from '../../../components/PopUp/PopUpMaterial';
 import { useDispatch, useSelector } from "react-redux";
-import { getStudentCourses, getPopUpContent, getPopUpMaterial } from "../../../redux/actions/CoursesAction";
+import { getStudentCourses, getPopUpContent, getPopUpMaterial, getCourseDetail } from "../../../redux/actions/CoursesAction";
 import defaultImg from "../../../assets/RectangleSquare.png";
 import logo from '../../../assets/checklist2.png';
 import logo2 from '../../../assets/Vector4.png';
@@ -16,7 +16,7 @@ const StudentBoardCourses = () => {
     const [materialModal, setMaterialModal] = useState(false);
 
     const dispatch = useDispatch();
-    const {studentCourses, popUpContent, popUpMaterial } = useSelector(state => state.courses);
+    const {studentCourses, popUpContent, popUpMaterial, courseDetail } = useSelector(state => state.courses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
@@ -24,6 +24,7 @@ const StudentBoardCourses = () => {
 
     const handlePopUpContent = (id) => {
         dispatch(getPopUpContent(id))
+        dispatch(getCourseDetail(id))
         setContentModal(true)
     }
 
@@ -32,9 +33,10 @@ const StudentBoardCourses = () => {
         setMaterialModal(true)
     }
 
-    console.log("content", popUpContent)
-    console.log("material", popUpMaterial)
-    console.log(studentCourses)
+    // console.log("content", popUpContent)
+    // console.log("material", popUpMaterial)
+    // console.log(studentCourses)
+    console.log('detail', courseDetail)
     return (
         <>
         {studentCourses.course === null || studentCourses.course === undefined ? (
@@ -115,7 +117,7 @@ const StudentBoardCourses = () => {
                 )}
 
                 {/* content popup */}
-                {popUpContent.length > 1 ? (
+                {popUpContent.length > 1 && courseDetail !== null ? (
                 <Modal
                 show={contentModal}
                 size='lg'
@@ -129,7 +131,7 @@ const StudentBoardCourses = () => {
                 lessonContent= 
                 {popUpContent.map((item, id) => (
                     <div className="lock-content" key={id}>
-                        <Link to={`/course-content/${item._id}`}><p className={item.number === 1 ? 'unlocked' : 'locked'}><img src={item.number === 1 ? logo : logo2} alt='logo'/>Lesson #{item.number} {item.title}</p></Link>
+                        <Link to={`/course-content/${courseDetail.course._id}/${item._id}`}><p className={item.number === 1 ? 'unlocked' : 'locked'}><img src={item.number === 1 ? logo : logo2} alt='logo'/>Lesson #{item.number} {item.title}</p></Link>
                     </div>
                 ))}
                 />
