@@ -37,6 +37,7 @@ function CourseUpdate() {
             <div className='teacher-update-box'>
          
             <div className="course-detail-update">
+                <input>{courseDetail.course.title}</input>
                     <span>{courseDetail.course.title}</span>
                     {/* <Link to={`/course-change-teacher/${courseDetail.course.id}`}> */}
                         <i class="fa fa-pencil "></i>

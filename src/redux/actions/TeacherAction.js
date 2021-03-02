@@ -20,26 +20,3 @@ export const getTeacherProfile = () => (dispatch) =>{
     })
     .catch((error) => console.log(error))
 };
-
-export const createCourse = ( title, overview, category) => (dispatch) => {
-    API.post("/courses/create", 
-    {
-        title,
-        overview,
-        category,
-      },
-    {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    })
-    .then((response) => {
-        if(response.status === 201){
-            dispatch({
-                type: CREATE_COURSE,
-                payload: response.data.result,
-            })
-        }
-    })
-    .catch((error) => console.log(error))
-}

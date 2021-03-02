@@ -100,6 +100,7 @@ function TeacherDashboard(props) {
               <button>New Course</button>
             </Link>
           </div>
+          <div className="card-container overflow-auto">
           <hr />
           {props.teacherCourses.map((item, index) => (
             <CourseCard
@@ -112,6 +113,7 @@ function TeacherDashboard(props) {
               edit={`/course-teacher/edit/${item._id}`}
             />
           ))}
+        </div>
         </div>
       ) : (
         <div id="loader"></div>

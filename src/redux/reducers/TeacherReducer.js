@@ -13,11 +13,6 @@ const teacherReducer = (state = initialState, action) => {
                 ...state,
                 getCourses: payload,
             }
-        case CREATE_COURSE:
-            return{
-                ...state,
-                createCourses: payload, 
-            }   
          default :
             return state;
     }
