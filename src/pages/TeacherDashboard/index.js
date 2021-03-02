@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { teacherProfile } from "../../assets/JSONFile/dummyData";
@@ -16,7 +16,6 @@ function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
-  const { id } = useParams();
 
   const handleEdit = () => {
     setEdit(!isEdit);
@@ -24,20 +23,17 @@ function TeacherDashboard(props) {
 
   useEffect(() => {
     props.isAuthentificated && props.getUserProfile();
-    props.isAuthentificated && props.getTeacherCourses(id);
+    props.isAuthentificated && props.getTeacherCourses();
   }, []);
 
   // console.log(props.userProfile);
-  console.log(props.teacherCourses);
+  // console.log(props.teacherCourses);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(fullname, email);
 
     props.updateUserProfile(fullname, email);
-    // props.getUserProfile();
-
-    // props.history.push("/");
   };
 
   return (

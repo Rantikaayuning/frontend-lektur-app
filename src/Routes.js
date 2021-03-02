@@ -48,7 +48,7 @@ export const publicRoutes = [
   },
   {
     component: StudentMaterial,
-    path: "/material",
+    path: "/course-content/:id/:content",
     exact: true,
   },
   {

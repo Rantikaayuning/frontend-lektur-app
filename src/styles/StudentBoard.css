@@ -92,11 +92,12 @@
 
 .student-course-detail img{
     padding: 32px;
-    width: 50%;
+    width: 35%;
+    height: fit-content;
 }
 
 .course-detail-first {
-    width: 50%;
+    width: 30%;
     padding: 35px 10px;
     line-height: 20px;
 }
@@ -111,7 +112,7 @@
 }
 
 .course-detail-second {
-    width: 50%;
+    width: 35%;
     padding: 32px;
     text-align: right;
 }

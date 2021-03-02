@@ -5,7 +5,10 @@ import {
   POST_ENROLL_COURSE,
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES,
-  SEARCH_COURSE
+  SEARCH_COURSE,
+  GET_POPUP_CONTENT,
+  GET_POPUP_MATERIAL,
+  GET_CONTENT_DETAIL
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -17,6 +20,9 @@ const initialState = {
   teacherCourses: [],
   studentAssessment: [],
   searchCourse: '',
+  popUpContent: {},
+  popUpMaterial: [],
+  contentDetail: {},
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -56,6 +62,21 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         searchCourse: payload,
+      };
+    case GET_POPUP_CONTENT:
+      return {
+        ...state,
+        popUpContent: payload,
+      };
+    case GET_POPUP_MATERIAL:
+      return {
+        ...state,
+        popUpMaterial: payload,
+      };
+    case GET_CONTENT_DETAIL:
+      return {
+        ...state,
+        contentDetail: payload,
       };
     default:
       return state;
