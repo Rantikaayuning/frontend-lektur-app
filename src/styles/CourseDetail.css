@@ -3,7 +3,7 @@
   height: 398px;
   display: flex;
   justify-content: space-between;
-  background-image: url(../assets/RectangleCDetail.png);
+  /* background-image: url(../assets/RectangleCDetail.png); */
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -30,26 +30,24 @@ const TeacherCourseTab = (props) => {
 
     const [title, setTitle] = useState ("")
     const [overview, setOverview] = useState ("")
-    const [category, setCategory] = useState("")
-    const [image, setImage] = useState("")
-
+    // const [category, setCategory] = useState("")
+    const [imageData, setImageData] = useState("")
+    // const [imageURL, setImageURL] = useState("")
 
     const submitCourse = () => {
-        dispatch(postCourse(title, overview, category))
-        // .then(() => submitImage(id))
+        const data = new FormData();
+        data.append('file', imageData);
+        dispatch(postCourse(title, overview, data))
     }
+    console.log();
 
 //---------------------------HEADER-IMAGE-----------------------------------//
 
-    const changeImage = (event) => {
-        setImage(event.target.files[0])
-    }
-
-    const submitImage = () => {
-        const data = new FormData();
-        data.append('video', video);
-        dispatch(uploadImage(id, image))
-    }
+    // const submitImage = () => {
+    //     const data = new FormData();
+    //     data.append('file', imageData);
+    //     dispatch(uploadImage(id, data));
+    // }
 
 //---------------CONTENT/LESSON--------------------------------------------//
 
@@ -59,6 +57,9 @@ const TeacherCourseTab = (props) => {
     const [material, setMaterial] = useState("")
     const [video, setVideo] = useState("");
     const [buttonText, setButtonText] = useState("Save")
+    const [buttonImage, setButtonImage] = useState("Add header image")
+
+    console.log(material);
 
     const submitContent = (e) => {
         e.preventDefault()
@@ -67,21 +68,13 @@ const TeacherCourseTab = (props) => {
 
 //-----------------------MATERIAL------------------------//
 
-    const changeHandler = (event) => {
-        setMaterial(event.target.files[0])
-    }
-
     const submitMaterial = () => {
-        const file = new FormData();
-        file.append('file', material);
+        const data = new FormData();
+        data.append('file', material);
         dispatch(uploadMaterial(idContent, material))
     }
 
 //----------------------VIDIO----------------------------//
-
-    const changeVideo = (event) => {
-        setVideo(event.target.files[0])
-    }
 
     const submitVideo = (e) => {
         e.preventDefault(e)
@@ -97,7 +90,7 @@ const TeacherCourseTab = (props) => {
         history.push("/teacher-dashboard")
       }
 
-    console.log(idContent);
+    console.log();
 
     return (
         <>
@@ -138,7 +131,7 @@ const TeacherCourseTab = (props) => {
                             <hr type="solid"/>
                         </p>
                     </div>
-                    <div className='teacher-create-course-title'>
+                    {/* <div className='teacher-create-course-title'>
                         <p>
                             <input 
                                 type="text" 
@@ -149,7 +142,7 @@ const TeacherCourseTab = (props) => {
                             />
                             <hr type="solid"/>
                         </p>
-                    </div>
+                    </div> */}
                     <div className='teacher-add-header-image'>
                         {isAdd1 === true ? (
                             <p>
@@ -157,33 +150,43 @@ const TeacherCourseTab = (props) => {
                                     type="file" 
                                     placeholder="Image" 
                                     id='upload'
-                                    onChange={changeImage}
+                                    onChange={(e) => {
+                                        setImageData(e.target.files[0])
+                                        // setImageURL(URL.createObjectURL(e.target.files[0]))
+                                        }
+                                    }
                                 />
-                                <hr type="solid" />
+                               <hr type="solid" />
                             </p>
-                        ) : (
-                            <p>
-                                <button onClick={handleAdd1}>Add header image</button>
+                         ) : ( 
+                            <p  >
+                                <button 
+                                   onClick = {handleAdd1}
+                                    // disabled= {image}
+                                >
+                                   Add header image
+                                </button>
                             </p> 
-                        )}
+                        )} 
                         <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
                     </div>
-                   
                     <div className='teacher-save-new-course'>
-                        <p>
-                            <button 
-                                onClick = {submitCourse}
-                            >
-                              Save
-                            </button>
-                        </p>
-                    </div>
+                         <p>
+                             <button 
+                                 onClick = {submitCourse}
+                             >
+                               Save
+                             </button>
+                         </p>
+                     </div>
+                   
                     </>
                     ) : (
                     <>
                     {id === null ? (
                         <div id='loader'></div>
                     ) : (
+                        <>
                         <div className="course-detail-update">
                                {getTitle}
                             <Link to='/teacher-create-course'>
@@ -193,6 +196,8 @@ const TeacherCourseTab = (props) => {
                                 {getOverview}
                             </p>
                         </div>
+                       
+                     </>
                         )}
                     </>
                     )}
@@ -258,7 +263,7 @@ const TeacherCourseTab = (props) => {
                                     type="file" 
                                     placeholder="Image" 
                                     id='upload' 
-                                    onChange={(e) => changeVideo(e)}
+                                    onChange={(e) => { setVideo(e.target.files[0])}}
                                 />
                                 <hr type="solid" />
                             </p>
@@ -271,7 +276,7 @@ const TeacherCourseTab = (props) => {
                                     type="file" 
                                     placeholder="Image" 
                                     id='upload' 
-                                    onChange={(e) => changeHandler(e)}
+                                    onChange={(e) => setMaterial(e.target.files[0])}
                                 />
                                 <hr type="solid" />
                             </p>

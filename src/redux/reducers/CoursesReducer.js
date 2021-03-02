@@ -33,10 +33,11 @@ const initialState = {
   material: null,
   vidio: null,
   image: null,
+  background: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload, id, title, overview, idContent, content, material } = action;
+  const { type, payload, id, title, overview, idContent, content, material, background } = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
@@ -47,6 +48,7 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         courseDetail: payload,
+        background: background,
       };
     case POST_ENROLL_COURSE:
       return {

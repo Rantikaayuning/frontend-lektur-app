@@ -13,7 +13,6 @@ import {
   UPLOAD_MATERIAL,
   UPLOAD_VIDEO,
   UPLOAD_IMAGE,
-  DELETE_COURSE,
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 
@@ -41,6 +40,7 @@ export const getCourseDetail = (id) => (dispatch) => {
           dispatch({
             type: GET_COURSE_DETAIL,
             payload: response.data.result,
+            background: response.data.result.course.image,
           });
         }
       })
@@ -125,10 +125,10 @@ export const getTeacherCourses = () => (dispatch) => {
     }})
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result[1])
+        console.log(response.data.result)
         dispatch({
           type: GET_TEACHER_COURSES,
-          payload: response.data.result[1],
+          payload: response.data.result.dataCourse,
         });
       }
     })
@@ -137,19 +137,21 @@ export const getTeacherCourses = () => (dispatch) => {
     });
   }
 
-export const postCourse = ( title, overview, category) => async (dispatch) => {
-    return API.post("/courses/create", 
-    {
-        title, overview, category
-      },
-    {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
-    })
+export const postCourse = ( title, overview, file  ) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      // 'Content-Type': 'multipart/form-data',
+    }
+  }
+  API.post("/courses/create", 
+  {
+    data1: title, 
+    data2: overview, 
+    data3: file, 
+  }, config)
     .then((response) => {
         if(response.status === 201){
-            console.log(response.data.result._id);
             dispatch({
                 type: CREATE_COURSE,
                 payload: response.data.result,
@@ -200,16 +202,15 @@ export const postContent = (id, title, description, number ) => (dispatch) => {
     })
 }
 
-export const uploadMaterial = (idContent, file) => (dispatch) => {
-  API.post(`/content/upload/file?contentId=${idContent}` , {file} ,
-  {
+export const uploadMaterial = (idContent, material) => (dispatch) => {
+  const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      // "Content-Type": "multipart/form-data",
-    }})
+    }
+  }
+  API.post(`/content/upload/file?contentId=${idContent}` , material, config)
     .then((response) => {
       if(response.status === 201) {
-        console.log(response.data.result);
         dispatch({
           type: UPLOAD_MATERIAL,
           payload: response.data.result,
@@ -219,37 +220,29 @@ export const uploadMaterial = (idContent, file) => (dispatch) => {
 }
 
 export const uploadVideo = (idContent, video) => (dispatch) => {
-  API.put(`/content/upload/video?contentId=${idContent}`, 
-  {
-    video
-  },
-  {
+  const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    }})
+    }
+  }
+  API.put(`/content/upload/video?contentId=${idContent}`, video, config)
     .then((response) => {
       if(response.status === 201) {
-        console.log(response.data.result);
         dispatch({
           type: UPLOAD_VIDEO,
           payload: response.data.result,
         })
       }
-
   })
 }
 
 export const uploadImage = (id, file) => (dispatch) => {
-  API.put(`/courses/header/upload?courseId=${id}`, 
-  {
-    file
-  },
-  {
+  const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    }})
+    }
+  }
+  API.put(`/courses/header/upload?courseId=${id}`, file, config)
     .then((response) => {
       if(response.status === 201) {
         console.log(response.data.result);
@@ -258,7 +251,6 @@ export const uploadImage = (id, file) => (dispatch) => {
           payload: response.data.result,
         })
       }
-
   })
 }
 

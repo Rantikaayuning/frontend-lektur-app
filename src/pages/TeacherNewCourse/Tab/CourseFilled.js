@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import Comp1 from "../../../assets/RectangleComputer.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourseFilled, deleteCourse } from "../../../redux/actions/CoursesAction"
+import { getCourseFilled, deleteCourse, getCourseDetail } from "../../../redux/actions/CoursesAction"
 
 function CourseFilled() {
   const dispatch = useDispatch()
   const history = useHistory()
-  const {courseFilled, contentFilled, materialFilled} = useSelector(state => state.courses)
+  const {courseFilled, contentFilled, materialFilled, courseDetail, background} = useSelector(state => state.courses)
 
   const { id } = useParams()
 
   useEffect(() => {
     dispatch(getCourseFilled(id));
+    dispatch(getCourseDetail(id));
   }, [dispatch, id]);
 
   const deleteCourseTeacher = () => {
@@ -20,7 +21,7 @@ function CourseFilled() {
     history.push("/teacher-dashboard")
   }
 
-  console.log(courseFilled)
+  console.log(courseDetail)
   return (
       <>
       {courseFilled === null ? (
@@ -37,7 +38,12 @@ function CourseFilled() {
               <p>Students</p>
           </Link>
         </div>
-        <div className="course-detail">
+        <div 
+          className="course-detail"
+          style={{
+              backgroundImage: `url(${background})`,
+            }}
+        >
           <div className="course-detail-filled">
             <span>{courseFilled.title}</span>
             <Link to={`/course-change-teacher/${id}`}>
@@ -84,7 +90,8 @@ function CourseFilled() {
              
             </div>
             <div className="image-computer1">
-              <img src={Comp1} alt="comp1" />
+            <iframe src = {`${item.video}`} title = "glints" />
+              {/* <img src={Comp1} alt="comp1" /> */}
             </div>
                 </div>
              ))} 
