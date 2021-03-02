@@ -13,6 +13,11 @@ import {
   UPLOAD_MATERIAL,
   UPLOAD_VIDEO,
   UPLOAD_IMAGE,
+  GET_POPUP_CONTENT,
+  GET_POPUP_MATERIAL,
+  GET_CONTENT_DETAIL,
+  GET_COURSE_FILLED,
+  UPDATE_COURSE,
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 
@@ -41,6 +46,8 @@ export const getCourseDetail = (id) => (dispatch) => {
             type: GET_COURSE_DETAIL,
             payload: response.data.result,
             background: response.data.result.course.image,
+            detailTitle: response.data.result.course.title,
+            detailOverview: response.data.result.course.overview,
           });
         }
       })
@@ -125,7 +132,7 @@ export const getTeacherCourses = () => (dispatch) => {
     }})
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result)
+        console.log(response.data.result.dataCourse)
         dispatch({
           type: GET_TEACHER_COURSES,
           payload: response.data.result.dataCourse,
@@ -136,6 +143,109 @@ export const getTeacherCourses = () => (dispatch) => {
       console.log('error');
     });
   }
+
+export const getCourseFilled = (id) => (dispatch) => {
+  API.get(`/courses/filled?courseId=${id}`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  }})
+  .then((response) => {
+    if (response.status === 200) {
+      dispatch({
+        type:   GET_COURSE_FILLED,
+        payload: response.data.result.course,
+        content: response.data.result.content,
+        material: response.data.result.material,
+      })
+    }
+  })
+  .catch((error) => console.log(error))
+}
+
+
+export const getPopUpContent = (id) => (dispatch) => {
+  API.get(`student/pop-up/course/content?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      dispatch({
+        type: GET_POPUP_CONTENT,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+  }
+  
+export const getPopUpMaterial = (id) => (dispatch) => {
+  API.get(`student/pop-up/course/materials?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      // console.log("response", response)
+      dispatch({
+        type: GET_POPUP_MATERIAL,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+  }
+
+export const getContentDetail = (id) => (dispatch) => {
+  API.get(`student/course/content?contentId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      // console.log("response", response)
+      dispatch({
+        type: GET_CONTENT_DETAIL,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+  }
+
+export const uploadImage = (id, file) => (dispatch) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  API.put(`/courses/header/upload?courseId=${id}`, file, config)
+    .then((response) => {
+      if(response.status === 201) {
+        console.log(response.data.result);
+        dispatch({
+          type: UPLOAD_IMAGE,
+          payload: response.data.result,
+        })
+      }
+  })
+}
+
+export const updateCourse = (id, title, overview) => (dispatch) => {
+  API.put(`/courses/update?courseId=${id}`,{title, overview}, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      dispatch({
+        type: UPDATE_COURSE,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+}
 
 export const postCourse = ( title, overview, file  ) => (dispatch) => {
   const data = new FormData();

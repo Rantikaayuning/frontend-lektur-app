@@ -12,7 +12,7 @@ const teacherReducer = (state = initialState, action) => {
             return{
                 ...state,
                 getCourses: payload,
-            }       
+            }
          default :
             return state;
     }

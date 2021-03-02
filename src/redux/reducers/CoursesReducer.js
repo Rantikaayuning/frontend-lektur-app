@@ -11,7 +11,12 @@ import {
   CREATE_CONTENT,
   UPLOAD_MATERIAL,
   UPLOAD_VIDEO,
+  GET_POPUP_CONTENT,
+  GET_POPUP_MATERIAL,
+  GET_CONTENT_DETAIL,
+  GET_COURSE_FILLED,
   UPLOAD_IMAGE,
+  UPDATE_COURSE
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -34,10 +39,15 @@ const initialState = {
   vidio: null,
   image: null,
   background: null,
+  popUpContent: {},
+  popUpMaterial: [],
+  contentDetail: {},
+  detailTitle: null,
+  detailOverview: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload, id, title, overview, idContent, content, material, background } = action;
+  const { type, payload, background,id, material, content, detailTitle, detailOverview, title, overview, idContent,} = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
@@ -49,6 +59,8 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         courseDetail: payload,
         background: background,
+        detailTitle: detailTitle,
+        detailOverview: detailOverview,
       };
     case POST_ENROLL_COURSE:
       return {
@@ -106,11 +118,38 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         video: payload,
       }
-    case UPLOAD_IMAGE:
+    case GET_POPUP_CONTENT:
+      return {
+        ...state,
+        popUpContent: payload,
+      };
+    case GET_POPUP_MATERIAL:
+      return {
+        ...state,
+        popUpMaterial: payload,
+      };
+    case GET_CONTENT_DETAIL:
+      return {
+        ...state,
+        contentDetail: payload,
+      };
+     case GET_COURSE_FILLED:
+      return {
+        ...state,
+        courseFilled: payload,
+        contentFilled: content,
+        materialFilled: material,
+      }
+     case UPLOAD_IMAGE:
       return {
         ...state,
         image: payload,
       }
+    case UPDATE_COURSE:
+      return{
+        ...state,
+        update: payload,
+      } 
     default:
       return state;
   }

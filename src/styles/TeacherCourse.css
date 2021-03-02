@@ -55,6 +55,10 @@
     justify-content: flex-end;
 }
 
+.teacher-save-new-course p{
+    width: 160px;
+}
+
 .teacher-save-new-course button {
     margin: 30px;
     color: white;
