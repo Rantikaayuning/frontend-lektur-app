@@ -7,6 +7,9 @@ import {
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES ,
   SEARCH_COURSE,
+  GET_POPUP_CONTENT,
+  GET_POPUP_MATERIAL,
+  GET_CONTENT_DETAIL
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
 
@@ -129,5 +132,56 @@ export const getTeacherCourses = () => (dispatch) => {
       console.log('error');
     });
   }
+
+export const getPopUpContent = (id) => (dispatch) => {
+  API.get(`student/pop-up/course/content?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      dispatch({
+        type: GET_POPUP_CONTENT,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+  }
+  
+export const getPopUpMaterial = (id) => (dispatch) => {
+  API.get(`student/pop-up/course/materials?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      // console.log("response", response)
+      dispatch({
+        type: GET_POPUP_MATERIAL,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+  }
+
+export const getContentDetail = (id) => (dispatch) => {
+  API.get(`student/course/content?contentId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }})
+    .then((response) => {
+      // console.log("response", response)
+      dispatch({
+        type: GET_CONTENT_DETAIL,
+        payload: response.data.result,
+      });
+    })
+    .catch(() => {
+      console.log('error');
+    });
+  }
+    
   
 
