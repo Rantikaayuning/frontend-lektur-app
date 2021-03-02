@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { postAssessment } from "../../../redux/actions/AssessmentAction";
+import {
+  postAssessment,
+  getQuestionsTemp,
+} from "../../../redux/actions/AssessmentAction";
 import { produce } from "immer";
 
 import { useDispatch } from "react-redux";
@@ -40,9 +43,9 @@ const TeacherAssessmentTab = () => {
       answer: answer,
       options: options,
     };
-    dispatch(postAssessment(body)).then(() =>
-      history.push("/created-questions")
-    );
+    dispatch(postAssessment(body))
+      .then(() => dispatch(getQuestionsTemp()))
+      .then(() => history.push("/created-questions"));
 
     // history.push("/created-questions");
 

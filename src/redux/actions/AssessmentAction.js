@@ -3,13 +3,14 @@ import {
   GET_QUESTIONS,
   POST_QUESTIONS,
   GET_QUESTIONS_TEMP,
+  INPUT_SCORE,
+  UPDATE_QUESTION,
 } from "../types/AssessmentTypes";
 
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
 
-// export const getQuestions = (id) => (dispatch) => {
 export const getQuestions = (id) => (dispatch) => {
   API.get(`/assessment/?courseId=${id}`, {
     headers: {
@@ -48,7 +49,7 @@ export const postAssessment = (body) => async (dispatch) => {
           type: POST_QUESTIONS,
           payload: response.data.result,
         });
-        // alert("question created successfully");
+        alert("question created successfully");
       }
     })
     .catch((payload) => alert(payload.response.data.message));
@@ -90,4 +91,52 @@ export const deleteQuestion = (id) => () => {
       })
       .catch((err) => alert("error delete question", err));
   });
+};
+
+export const inputStudentScore = (score, id) => async (dispatch) => {
+  API.put(
+    `/assessment/result?courseId=${id}`,
+    {
+      score,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+    .then((response) => {
+      // console.log(response.data.result);
+      dispatch({
+        type: INPUT_SCORE,
+        payload: response.data.result,
+      });
+      alert("score got input successfully!");
+    })
+    .catch((err) => alert(`input score error`));
+};
+
+export const updateQuestion = (body, id, questionId) => (dispatch) => {
+  API.put(
+    `/assessment/update?courseId=${id}&questionId=${questionId}`,
+    JSON.stringify(body),
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    }
+  )
+    .then((response) => {
+      if (response.status === 200) {
+        console.log(body);
+        console.log(response.data);
+        dispatch({
+          type: UPDATE_QUESTION,
+          payload: response.data,
+        });
+        alert("question updated"); // response.data.message
+      }
+    })
+    .catch((payload) => alert(payload.response.data.message));
 };

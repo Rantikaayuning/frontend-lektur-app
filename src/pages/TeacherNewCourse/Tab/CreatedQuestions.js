@@ -42,8 +42,8 @@ function CreatedQuestions() {
 
   const deleteCreatedQuestion = (id) => {
     dispatch(deleteQuestion(id))
-      .then(() => alert(`question deleted`))
-      .then(() => history.push("/teacher-new-assessment"));
+      .then(() => dispatch(getQuestionsTemp()))
+      .then(() => alert(`question deleted`));
   };
 
   return (

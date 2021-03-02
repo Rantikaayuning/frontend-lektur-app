@@ -2,12 +2,16 @@ import {
   GET_QUESTIONS,
   POST_QUESTIONS,
   GET_QUESTIONS_TEMP,
+  INPUT_SCORE,
+  UPDATE_QUESTION,
 } from "../types/AssessmentTypes";
 
 const initialState = {
   assessment: null,
   addAssessment: null,
   assessmentTemp: null,
+  studentScore: null,
+  updateCreatedQuestion: null,
 };
 
 const assessmentReducer = (state = initialState, action) => {
@@ -27,6 +31,16 @@ const assessmentReducer = (state = initialState, action) => {
       return {
         ...state,
         assessmentTemp: payload,
+      };
+    case INPUT_SCORE:
+      return {
+        ...state,
+        studentScore: payload,
+      };
+    case UPDATE_QUESTION:
+      return {
+        ...state,
+        updateCreatedQuestion: payload,
       };
     default:
       return state;
