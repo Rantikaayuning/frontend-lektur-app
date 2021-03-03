@@ -83,6 +83,7 @@ const StudentAssessment = () => {
                       </>
                     ))}
                     <div>
+                      {/* just to check the correct answer, should be displayed on this page */}
                       <b>Correct answer:</b>
                       {item.options.map((item_, index) => (
                         <>
