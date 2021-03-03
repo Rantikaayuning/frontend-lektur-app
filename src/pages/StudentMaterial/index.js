@@ -11,7 +11,7 @@ import logo2 from "../../assets/Vector4.png"
 import { getContentDetail, getCourses } from "../../redux/actions/CoursesAction";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
-import defaultImg from "../../assets/RectangleSquare.png";
+import defaultImg from "../../assets/defaultLektur.png";
 
 export default function StudentMaterial() {
     const { id, content } = useParams()
@@ -35,11 +35,11 @@ export default function StudentMaterial() {
                 <div className="text">
                     <div>
                         <Link to={`/course-detail/${id}`}>
-                            <span className="bread-crumb">{contentDetail.content.contentId.title}</span>{" "}
-                        </Link>
-                            /<span className="link"> Lesson : {contentDetail.content.contentId.title}</span>
-                        </div>
-                    <div className="text-title">Lesson : {contentDetail.content.contentId.title}</div>
+                            <span className="bread-crumb">{contentDetail.content.contentId.title}</span>
+                        </Link>{" "}/
+                            <span className="link"> Lesson : {contentDetail.content.contentId.title}</span>
+                    </div>
+                <div className="text-title">Lesson : {contentDetail.content.contentId.title}</div>
                 </div>
                 <div className="content-header">
                     <div className="image-content">

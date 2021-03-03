@@ -19,9 +19,16 @@
     font-weight: normal;
     font-size: 15px;
     line-height: 12px;
-    text-decoration-line: underline;
 
     color: #999999;
+}
+
+.bread-crumb:hover{
+    font-size: 15px;
+    line-height: 12px;
+    text-decoration-line: underline;
+
+    color: skyblue;
 }
 
 .link{

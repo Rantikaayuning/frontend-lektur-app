@@ -33,9 +33,9 @@ const StudentBoardCourses = () => {
         setMaterialModal(true)
     }
 
-    console.log("content", popUpContent)
+    // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    // console.log(studentCourses)
+    console.log("course", studentCourses)
     // console.log('detail', courseDetail)
     return (
         <>
@@ -66,7 +66,9 @@ const StudentBoardCourses = () => {
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
-                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}><u>See course materials</u></p>
+                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}>
+                                <u>See course materials</u>
+                            </p>
                         </div>
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={100} /></p>
@@ -80,7 +82,9 @@ const StudentBoardCourses = () => {
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
-                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}><u>See course materials</u></p>
+                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}>
+                                <u>See course materials</u>
+                            </p>
                         </div>
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={1/100*100} /></p>
@@ -120,9 +124,11 @@ const StudentBoardCourses = () => {
                 lessonContent= 
                 {popUpContent.map((item, id) => (
                     <div className="lock-content" key={id}>
-                        {item.contentStatus === 1 ? (
-                            <Link to={`/course-content/${courseDetail.course._id}/${item.contentId}`}><p className='unlocked'>
-                                <img src={logo} alt='logo'/>Lesson #{id + 1} {item.title}</p>
+                        {item.contentStatus === 1 || id === 0 ? (
+                            <Link to={`/course-content/${courseDetail.course._id}/${item.contentId}`}>
+                                <p className='unlocked'>
+                                    <img src={logo} alt='logo'/>Lesson #{id + 1} {item.title}
+                                </p>
                             </Link>
                         ) : (
                             <p className='locked'>
@@ -145,7 +151,7 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpCourse
                 title={<div>Content</div>}
-                lessonContent={<p className='pop-up-course-nothing'>No Content yet</p>}
+                lessonContent={<p className='pop-up-course-nothing'></p>}
                 />
                 </Modal>
                 )}
@@ -186,7 +192,7 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpMaterial
                 title={<div>Material</div>}
-                materialContent={<p className='pop-up-course-nothing'>No Material yet</p>}
+                materialContent={<p className='pop-up-course-nothing'></p>}
                 />
                 </Modal>
                 )}

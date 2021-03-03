@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCourseDetail, getCourses, postEnrollCourse } from "../../redux/actions/CoursesAction";
 
 import ContentCards from "../../components/ContentCard/Cards";
-import defaultImg from "../../assets/RectangleSquare.png";
+import defaultImg from "../../assets/defaultLektur.png";
 
 function CourseDetail() {
   const [PopUpCourseDetail, setPopUpCourseDetail] = useState(false);
@@ -14,7 +14,7 @@ function CourseDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const {courseDetail, courses} = useSelector(state => state.courses);
+  const {courseDetail, courses, enrollCourse} = useSelector(state => state.courses);
   const {userProfile, isAuthentificated} = useSelector(state => state.users);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function CourseDetail() {
     setPopUpCourseDetail(true)
   }
 
-  // console.log(courseDetail)
+  console.log(enrollCourse)
 
   return (
     <div className="main-course">
@@ -69,7 +69,7 @@ function CourseDetail() {
                   <li>
                     {courseDetail.content.map((item, index) => (
                     <div className="rectangle">
-                      <p>Lesson #{item.number}: {item.title}</p>
+                      <p>Lesson #{index + 1}: {item.title}</p>
                     </div>
                     ))}
                   </li>
@@ -86,7 +86,7 @@ function CourseDetail() {
           <div className="card-content">
             <div className="card-text-course">Related Course</div>
             <Row className="content-card-container">
-              {courses.map((item, index) => (
+              {courses.map((item, index) => index < 4 && (
                 <Col xl="3" md="6" sm="12" key={index} className="card-container">
                   <Link
                     to={`/course-detail/${item._id}`}
@@ -117,7 +117,9 @@ function CourseDetail() {
               <>
                 <Modal.Header closeButton>
                   <div className="modal-central" closeButton>
-                    <div className="modal-central-image"><img src={defaultImg} alt='default'/></div>
+                    <div className='image-content-box'>
+                      <img src={defaultImg} alt='default' className="modal-central-image"/>
+                    </div>
                     <div className="modal-central-content">
                       <p className="p1">Successfully enrolled!</p>
                       <p className="p2">{courseDetail.course.title}</p>
