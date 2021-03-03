@@ -25,8 +25,8 @@ export default function StudentMaterial() {
         dispatch(getCourses());
     }, [dispatch, id, content])
 
-    // console.log("detail", courseDetail)
-    // console.log("content", contentDetail)
+    console.log("detail", courseDetail)
+    console.log("content", contentDetail)
     return (
         <>
             {courseDetail === null || contentDetail.content === undefined ? (
@@ -36,15 +36,15 @@ export default function StudentMaterial() {
                 <div className="text">
                     <div>
                     <span className="bread-crumb">{courseDetail.course.title}</span> /  {" "}
-                    <span className="link">Lesson : {contentDetail.content.title}</span>
+                    <span className="link">Lesson : {contentDetail.content.contentId.title}</span>
                     </div>
-                    <div className="text-title">Lesson : {contentDetail.content.title}</div>
+                    <div className="text-title">Lesson : {contentDetail.content.contentId.title}</div>
                 </div>
                 <div className="content-header">
                     <div className="image-content">
                         <div className="inframe">
                         <ReactPlayer 
-                        controls url={contentDetail.content.video} 
+                        controls url={contentDetail.content.contentId.video} 
                         className='video' 
                         width='100%' 
                         height='100%'
@@ -54,11 +54,19 @@ export default function StudentMaterial() {
                             <ContentMaterial
                             lessonList=
                             {contentDetail.listContent.map((item, index) => (
-                                <Link to={`/course-content/${id}/${item._id}`}>
-                                <div className={'unlocked'}>
-                                    <img src={index === 0 ? logo : logo2} alt='logo'/>Lesson #{index + 1} : {item.title}
-                                </div>
-                                </Link>
+                                <>
+                                {item.contentStatus === 1 ? (
+                                    <Link to={`/course-content/${id}/${item.contentId._id}`}>
+                                    <div className='unlocked'>
+                                        <img src={logo} alt='logo'/>Lesson #{index + 1} : {item.contentId.title}
+                                    </div>
+                                    </Link>
+                                ) : (
+                                    <div className='locked'>
+                                        <img src={logo2} alt='logo'/>Lesson #{index + 1} : {item.contentId.title}
+                                    </div>
+                                    )}
+                                </>
                             ))}
                             />
                         </div>
@@ -66,19 +74,19 @@ export default function StudentMaterial() {
                     <div className="content-lock">
                         <div className="description-text">
                             <div className="title-des">Description</div>
-                            <p>{contentDetail.content.description}</p> 
+                            <p>{contentDetail.content.contentId.description}</p> 
                         </div>  
                         <div className="next">
                             <div className="title-next">What's Next</div>
                             {contentDetail.material.map((item, index) => (
                                 <p>
-                                    <img src={image4} alt='cinematic course'/>{" "}{contentDetail.content.title} :{' '}
+                                    <img src={image4} alt='cinematic course'/>{" "}{contentDetail.content.contentId.title} :{' '}
                                     <a href={item.material} target='_blank' rel='noreferrer'><span>{item._id}.pdf</span></a>
                                 </p>
                             ))}
                             <Link to={`/course-content/${id}/${contentDetail.listContent[1]._id}`}>
                                 <button>
-                                    <img src={image2} alt='next lesson'/>{" "}{contentDetail.listContent[1].title}
+                                    <img src={image2} alt='next lesson'/>{" "}{contentDetail.listContent[1].contentId.title}
                                 </button>
                             </Link>
                         </div>
