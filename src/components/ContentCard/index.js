@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {Link} from "react-router-dom"
 import {getCourses} from "../../redux/actions/CoursesAction"
 import { buttonMaterials } from "../../assets/JSONFile/dummyData";
-import defaultImg from "../../assets/RectangleSquare.png"
+import defaultImg from "../../assets/defaultLektur.png"
 
 function Content() {
   const dispatch = useDispatch();
