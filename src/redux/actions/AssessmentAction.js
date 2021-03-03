@@ -116,7 +116,7 @@ export const inputStudentScore = (score, id) => async (dispatch) => {
     .catch((err) => alert(`input score error`));
 };
 
-export const updateQuestion = (body, id, questionId) => (dispatch) => {
+export const updateQuestion = (body, id, questionId) => async (dispatch) => {
   API.put(
     `/assessment/update?courseId=${id}&questionId=${questionId}`,
     JSON.stringify(body),

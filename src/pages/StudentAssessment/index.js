@@ -68,7 +68,7 @@ const StudentAssessment = () => {
                   <p>Answer</p>
                   <>
                     {item.options.map((item_, index) => (
-                      <>
+                      <div key={item_._id}>
                         <label class="container">
                           <input
                             type="radio"
@@ -80,7 +80,7 @@ const StudentAssessment = () => {
                           />
                           <span> {item_.text}</span>
                         </label>
-                      </>
+                      </div>
                     ))}
                     <div>
                       {/* just to check the correct answer, should be displayed on this page */}

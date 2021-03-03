@@ -35,8 +35,10 @@ const TeacherAssessmentUpdate = () => {
   // };
 
   const history = useHistory();
-  const { id } = useParams();
+  const { id, queId } = useParams();
   const dispatch = useDispatch();
+
+  console.log(`queId:`, queId);
 
   const [question, setQuestion] = useState({
     number: 1,
@@ -61,7 +63,7 @@ const TeacherAssessmentUpdate = () => {
     });
   };
 
-  const handleSubmit = (e, questionId) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
       number: question.number,
@@ -70,8 +72,8 @@ const TeacherAssessmentUpdate = () => {
       answer: answer,
       options: options,
     };
-    dispatch(updateQuestion(body, id, questionId)).then(() =>
-      history.push("/created-questions")
+    dispatch(updateQuestion(body, id, queId)).then(() =>
+      history.push(`/created-questions/${id}`)
     );
     console.log(body);
   };
@@ -90,11 +92,11 @@ const TeacherAssessmentUpdate = () => {
     <>
       <div className="teacher-assessment">
         <div className="teacher-dashboard-list">
-          <Link to="/teacher-new-course">
+          <Link to={`/course-teacher/course/${id}`}>
             <p>Course</p>
           </Link>
           <p className="open">Assessment</p>
-          <Link to="/teacher-new-students">
+          <Link to={`/course-teacher/students/${id}`}>
             <p>Students</p>
           </Link>
         </div>
@@ -215,7 +217,7 @@ const TeacherAssessmentUpdate = () => {
           <div className="add-new-question">
             {/* <Link to="/teacher-new-assessment">Add New Question</Link> */}
             {/* <div> */}
-            <Link to="/created-questions">See All Questions</Link>
+            <Link to={`/created-questions/${id}`}>See All Questions</Link>
             {/* </div> */}
           </div>
           <div className="save-exam-question">

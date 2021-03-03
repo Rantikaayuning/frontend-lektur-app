@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
@@ -17,7 +17,7 @@ function CreatedQuestions() {
 
   const history = useHistory();
 
-  const id = "602e06cc34a3a426b0311c94"; // punya maxim
+  const { id } = useParams(); // punya maxim tadinya skrg skrg diganti id biasa krn di page edit
 
   const dispatch = useDispatch();
   const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
@@ -42,20 +42,20 @@ function CreatedQuestions() {
 
   console.log("allQuestions: ", allQuestions);
 
-  // const deleteCreatedQuestion = (id) => {
-  //   dispatch(deleteQuestion(id))
-  //     .then(() => dispatch(getQuestionsTemp()))
-  //     .then(() => alert(`question deleted`));
-  // };
+  const deleteCreatedQuestion = (id) => {
+    dispatch(deleteQuestion(id))
+      .then(() => dispatch(getQuestionsTemp()))
+      .then(() => alert(`question deleted`));
+  };
 
   return (
     <div className="teacher-assessment">
       <div className="teacher-dashboard-list">
-        <Link to="/teacher-new-course">
+        <Link to={`/course-teacher/course/${id}`}>
           <p>Course</p>
         </Link>
         <p className="open">Assessment</p>
-        <Link to="/teacher-new-students">
+        <Link to={`/course-teacher/students/${id}`}>
           <p>Students</p>
         </Link>
       </div>
@@ -68,9 +68,9 @@ function CreatedQuestions() {
             <div className="teacher-option-save">
               <h4>
                 {allQuestions.length} Questions{" "}
-                <Link to={`/created-questions/${id}`}>
+                {/* <Link to="/teacher-new-assessment">
                   <img src={imgEdit} alt="edit"></img>
-                </Link>
+                </Link> */}
               </h4>
               <br />
             </div>
@@ -82,7 +82,7 @@ function CreatedQuestions() {
                       {item.number}. {item.question}
                     </p>
                     <p>
-                      {/* <button
+                      <button
                         onClick={() => deleteCreatedQuestion(item._id)}
                         className="option-deletion-btn"
                         style={{
@@ -92,12 +92,12 @@ function CreatedQuestions() {
                         }}
                       >
                         Delete
-                      </button> */}
-                      {/* <Link
-                        
+                      </button>
+                      <Link
+                        to={`/course-teacher/assessments/${id}/${item._id}`}
                       >
                         Edit
-                      </Link> */}
+                      </Link>
                       <img
                         src={imgDropdown}
                         alt="symbol"
