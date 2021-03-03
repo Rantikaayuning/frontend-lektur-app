@@ -55,7 +55,7 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
     },
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       dispatch({
         type: GET_USER_PROFILE,
         payload: response.data.result,
@@ -78,7 +78,7 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
       },
     }
   ).then((response) => {
-    console.log(response);
+    // console.log(response);
     if (response.status === 201) {
       dispatch({
         type: UPDATE_USER_PROFILE,

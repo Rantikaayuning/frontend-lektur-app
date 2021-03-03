@@ -108,7 +108,7 @@ export const getCourseSearch = input => dispatch => {
   API.get(`/courses/search?search=${input}`)
     .then(response => {
       if (response.status === 200) {
-        console.log("response", response.data.result)
+        // console.log("response", response.data.result)
         dispatch({
           type: SEARCH_COURSE,
           payload: response.data.result,
@@ -127,7 +127,7 @@ export const getTeacherCourses = () => (dispatch) => {
     }})
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result.dataCourse)
+        // console.log(response.data.result.dataCourse)
         dispatch({
           type: GET_TEACHER_COURSES,
           payload: response.data.result.dataCourse,
@@ -234,7 +234,7 @@ export const uploadImage = (id, file) => (dispatch) => {
   API.put(`/courses/header/upload?courseId=${id}`, file, config)
     .then((response) => {
       if(response.status === 201) {
-        console.log(response.data.result);
+        // console.log(response.data.result);
         dispatch({
           type: UPLOAD_IMAGE,
           payload: response.data.result,
