@@ -129,7 +129,7 @@
   height: max-content;
   display: flex;
   justify-content: space-between;
-  margin: 20px 40px 20px 34px;
+  margin: 20px 0 20px 34px;
   border-bottom: 1px solid #e6e6e6;
 }
 

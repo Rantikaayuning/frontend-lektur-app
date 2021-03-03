@@ -104,7 +104,7 @@ function TeacherDashboard(props) {
           {props.teacherCourses.map((item, index) => (
             <CourseCard
               key={index}
-              image={defaultImg}
+              image={item.image === null ? defaultImg : item.image}
               title={item.title}
               numOfVideos={item.totalVideo}
               numOfLesson={item.totalMaterial}
