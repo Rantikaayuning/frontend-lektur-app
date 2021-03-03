@@ -100,7 +100,7 @@ function TeacherDashboard(props) {
               <button>New Course</button>
             </Link>
           </div>
-          <div className="card-container overflow-auto">
+          <div className="card-teacher-container overflow-auto">
           <hr />
           {props.teacherCourses.map((item, index) => (
             <CourseCard

@@ -79,7 +79,7 @@ export const publicRoutes = [
   },
   {
     component: TeacherStudentsTab,
-    path: "/teacher-new-students",
+    path: "/teacher-new-students", // should be /teacher-new-students/:id
     exact: true,
   },
   {
