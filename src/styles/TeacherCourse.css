@@ -1,3 +1,31 @@
+.teacher-new-course-box {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 72px;
+}
+
+.teacher-new-course-title {
+    display: flex;
+}
+
+.teacher-new-course-title input{
+    border: none;
+    outline: none;
+    background-color: whitesmoke;
+}
+
+.teacher-new-course-overview {
+    display: flex;
+}
+
+.teacher-new-course-overview textarea {
+    border: none;
+    background-color: whitesmoke;
+    overflow: auto;
+    resize: none;
+    outline: none;
+}
+
 .teacher-create-course-box {
     margin-left: 20%;
     margin-right: 20%;

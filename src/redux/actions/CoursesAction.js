@@ -16,7 +16,6 @@ import {
   GET_POPUP_CONTENT,
   GET_POPUP_MATERIAL,
   GET_CONTENT_DETAIL,
-  GET_COURSE_FILLED,
   UPDATE_COURSE,
 } from '../types/CoursesTypes'
 import Cookies from "js-cookie";
@@ -144,25 +143,6 @@ export const getTeacherCourses = () => (dispatch) => {
     });
   }
 
-export const getCourseFilled = (id) => (dispatch) => {
-  API.get(`/courses/filled?courseId=${id}`, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  }})
-  .then((response) => {
-    if (response.status === 200) {
-      dispatch({
-        type:   GET_COURSE_FILLED,
-        payload: response.data.result.course,
-        content: response.data.result.content,
-        material: response.data.result.material,
-      })
-    }
-  })
-  .catch((error) => console.log(error))
-}
-
-
 export const getPopUpContent = (id) => (dispatch) => {
   API.get(`student/pop-up/course/content?courseId=${id}`, {
     headers: {
@@ -213,24 +193,6 @@ export const getContentDetail = (id) => (dispatch) => {
     });
   }
 
-export const uploadImage = (id, file) => (dispatch) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    }
-  }
-  API.put(`/courses/header/upload?courseId=${id}`, file, config)
-    .then((response) => {
-      if(response.status === 201) {
-        console.log(response.data.result);
-        dispatch({
-          type: UPLOAD_IMAGE,
-          payload: response.data.result,
-        })
-      }
-  })
-}
-
 export const updateCourse = (id, title, overview) => (dispatch) => {
   API.put(`/courses/update?courseId=${id}`,{title, overview}, {
     headers: {
@@ -247,9 +209,8 @@ export const updateCourse = (id, title, overview) => (dispatch) => {
     });
 }
 
-export const postCourse = ( title, overview, file  ) => (dispatch) => {
-  const data = new FormData();
-  data.append('file', file);
+export const postCourse = (title, overview, file) => (dispatch) => {
+ 
 
   const config = {
     headers: {

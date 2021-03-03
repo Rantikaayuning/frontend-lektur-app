@@ -89,16 +89,17 @@ function TeacherDashboard(props) {
           </div>
         </div>
       )}
-
+      
+ {props.teacherCourses !== 0 ? (
         <div className="courses-container">
-            <div className="courses-header">
-              <h5>
-                <b>Courses</b>
-              </h5>
-              <Link to="/teacher-create-course">
-                <button>New Course</button>
-              </Link>
-            </div>
+          <div className="courses-header">
+            <h5>
+              <b>Courses</b>
+            </h5>
+            <Link to="/teacher-create-course">
+              <button>New Course</button>
+            </Link>
+          </div>
           <div className="card-container overflow-auto">
           <hr />
           {props.teacherCourses.map((item, index) => (
@@ -120,6 +121,7 @@ function TeacherDashboard(props) {
     </div>
   );
 }
+
 
 const mapStateToProps = (state) => {
   return {
