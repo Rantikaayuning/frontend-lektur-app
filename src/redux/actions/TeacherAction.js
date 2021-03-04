@@ -69,7 +69,7 @@ export const studentAcceptance = courseId => dispatch => {
 export const studentInvite = (courseId, body) => dispatch => {
   console.log(body);
   console.log(courseId);
-  API.get(`/teacher/courses/invite?courseId=${courseId}`, body)
+  API.get(`/teacher/courses/invite?courseId=${courseId}`, JSON.stringify(body))
     .then(response => {
       if (response.status === 200) {
         dispatch({
