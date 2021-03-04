@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserProfile } from "../../redux/actions/UserAction";
 
 export const PopUpInvite = props => {
   const Allusers = useSelector(state => state.users.userProfile);
+  const [studentList, setStudentList] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserProfile());
@@ -34,42 +35,9 @@ export const PopUpInvite = props => {
             </p>
           </div>
           <div className="invite-email-list">
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
+            {studentList.map(() => (
+              <h1>Blackpink</h1>
+            ))}
           </div>
           <div className="invite-button-invite">
             <button onClick={props.togglePopUp}>Invite</button>
@@ -79,3 +47,40 @@ export const PopUpInvite = props => {
     </>
   );
 };
+/*
+/* <div className="student-email">
+              <p>
+                justinjunaedi@gmail.com
+                <span>
+                  <hr type="solid" />
+                </span>
+              </p>
+              <p className="cancel-email">X</p>
+            </div>
+            <div className="student-email">
+              <p>
+                justinjunaedi@gmail.com
+                <span>
+                  <hr type="solid" />
+                </span>
+              </p>
+              <p className="cancel-email">X</p>
+            </div>
+            <div className="student-email">
+              <p>
+                justinjunaedi@gmail.com
+                <span>
+                  <hr type="solid" />
+                </span>
+              </p>
+              <p className="cancel-email">X</p>
+            </div>
+            <div className="student-email">
+              <p>
+                justinjunaedi@gmail.com
+                <span>
+                  <hr type="solid" />
+                </span>
+              </p>
+              <p className="cancel-email">X</p>
+            </div> */

@@ -3,6 +3,7 @@ import {
   GET_PROFILE_TEACHER,
   CREATE_COURSE,
   STUDENTS_ACCEPT,
+  STUDENT_INVITE,
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
 

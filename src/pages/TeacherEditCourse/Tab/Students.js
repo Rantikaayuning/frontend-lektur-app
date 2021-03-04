@@ -172,7 +172,7 @@ const TeacherStudentsUpdate = () => {
                       ) : (
                         <div className="course-pending">
                           <p>
-                            <button>Accept</button>
+                            <button onClick={null}>Accept</button>
                           </p>
                         </div>
                       )}
