@@ -4,49 +4,43 @@ import {
   getUserProfile,
   updateUserProfile,
 } from "../../../redux/actions/UserAction";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const StudentProfile = (props) => {
+const StudentProfile = () => {
   const [isEdit, setEdit] = useState(true);
-  const [fullname, setFullname] = useState("");
-  const [email, setEmail] = useState("");
+
+  const {fullname, email, userProfile} = useSelector(state => state.users)
+  const dispatch = useDispatch()
+
+  const [newFullname, setFullname] = useState(fullname);
+  const [newEmail, setEmail] = useState(email);
 
   const handleEdit = () => {
     setEdit(!isEdit);
   };
 
   useEffect(() => {
-    props.getUserProfile();
-  }, []);
-
-  // console.log(props.userProfile);
+    dispatch(getUserProfile())
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(fullname, email);
-
-    props.updateUserProfile(fullname, email);
-    // props.getUserProfile();
-    alert(
-      `your new updates are email: ${email} and fullname: ${fullname}. Please do signout and login back to see changes`
-    );
-    // localStorage.removeItem("token");
-
-    props.history.push("/");
-  };
+    // console.log(fullname, email);
+    handleEdit(dispatch(updateUserProfile(fullname, email)))
+  }
 
   return (
     <>
       {isEdit ? (
         <>
-          {props.userProfile ? (
+          {userProfile ? (
             <div className="student-profile-box">
               <div className="student-profile">
                 <div className="student-profile-image">
                   <img src={imgStudent} alt="student" />
                 </div>
-                <h5>{props.userProfile.fullname}</h5>
-                <p>{props.userProfile.email}</p>
+                <h5>{userProfile.fullname}</h5>
+                <p>{userProfile.email}</p>
                 <br />
                 <span>
                   <u onClick={handleEdit}> Edit Profile </u>
@@ -70,9 +64,9 @@ const StudentProfile = (props) => {
                 </p>
                 <input
                   type="text"
-                  placeholder="John Doe"
+                  placeholder={userProfile.fullname}
                   onChange={(e) => setFullname(e.target.value)}
-                  value={fullname}
+                  value={newFullname}
                 />
                 <br />
                 <br />
@@ -81,9 +75,9 @@ const StudentProfile = (props) => {
                 </p>
                 <input
                   type="email"
-                  placeholder="john@gmail.com"
+                  placeholder={userProfile.email}
                   onChange={(e) => setEmail(e.target.value)}
-                  value={email}
+                  value={newEmail}
                 />
                 <br />
                 <br />
@@ -97,13 +91,4 @@ const StudentProfile = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userProfile: state.users.userProfile,
-    updateUser: state.users.updateUser,
-  };
-};
-
-export default connect(mapStateToProps, { getUserProfile, updateUserProfile })(
-  StudentProfile
-);
+export default StudentProfile

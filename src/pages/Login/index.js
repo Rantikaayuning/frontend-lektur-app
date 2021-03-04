@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Jumbotron } from "reactstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { postLogin, getUserProfile } from "../../redux/actions/UserAction";
 
-function Login(props) {
-  const [userLogin, setUserLogin] = useState({
-    email: "",
-    password: "",
-  });
-
+function Login() {
+  const {email, password} = useSelector(state => state.users)
   const dispatch = useDispatch();
   const history = useHistory();
+  
+  const [userLogin, setUserLogin] = useState({
+    email: email,
+    password: password,
+  });
 
   const handleLogin = (e) => {
     setUserLogin({

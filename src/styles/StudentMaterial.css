@@ -158,7 +158,7 @@
     color:skyblue ;
 }
 
-.next button{
+.next-lesson-button{
     width: 100%;
     border: none;
     padding: 10px 0;
@@ -172,6 +172,22 @@
     line-height: 17px;
 
     color: #FFFFFF;
+}
+
+.next-locked-button{
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    margin: 10px auto;
+    background: #E6E6E6;
+    border-radius: 2px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #999;
 }
 
 .card-text-course{
