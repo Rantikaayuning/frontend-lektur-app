@@ -286,11 +286,15 @@
 
 .option-deletion-btn {
   border: none;
-  background-color: rgb(253, 251, 251);
+  background-color: white;
   padding: 10px;
-  color: gray;
-  /* padding-left: 0px; */
+  color: rgb(82, 79, 79);
 }
+
+.option-deletion-btn:hover {
+  text-decoration: underline;
+}
+
 .container-answer {
   display: block;
   position: relative;

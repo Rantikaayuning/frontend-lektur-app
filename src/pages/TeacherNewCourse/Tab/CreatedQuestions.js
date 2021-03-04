@@ -5,10 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import {
-  getQuestionsTemp,
-  deleteQuestion,
-} from "../../../redux/actions/AssessmentAction";
+import { getQuestionsTemp } from "../../../redux/actions/AssessmentAction";
 
 function CreatedQuestions() {
   // const [isPicked, setPicked] = useState({
@@ -41,12 +38,6 @@ function CreatedQuestions() {
   }
 
   console.log("allQuestions: ", allQuestions);
-
-  // const deleteCreatedQuestion = (id) => {
-  //   dispatch(deleteQuestion(id))
-  //     .then(() => dispatch(getQuestionsTemp()))
-  //     .then(() => alert(`question deleted`));
-  // };
 
   return (
     <div className="teacher-assessment">
@@ -82,22 +73,6 @@ function CreatedQuestions() {
                       {item.number}. {item.question}
                     </p>
                     <p>
-                      {/* <button
-                        onClick={() => deleteCreatedQuestion(item._id)}
-                        className="option-deletion-btn"
-                        style={{
-                          marginRight: "10px",
-                          paddingTop: "4px",
-                          paddingBottom: "2px",
-                        }}
-                      >
-                        Delete
-                      </button> */}
-                      {/* <Link
-                        
-                      >
-                        Edit
-                      </Link> */}
                       <img
                         src={imgDropdown}
                         alt="symbol"

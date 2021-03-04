@@ -89,11 +89,16 @@ function CreatedQuestions() {
                           marginRight: "10px",
                           paddingTop: "4px",
                           paddingBottom: "2px",
+                          fontWeight: "bolder",
                         }}
                       >
                         Delete
                       </button>
                       <Link
+                        style={{
+                          paddingRight: "20px",
+                          fontWeight: "bolder",
+                        }}
                         to={`/course-teacher/assessments/${id}/${item._id}`}
                       >
                         Edit
@@ -108,7 +113,7 @@ function CreatedQuestions() {
                     </p>
                   </div>
                   <p className="answer">Answer</p>
-                  {item.options.map((option, index) => (
+                  {item.options.map((option) => (
                     <label class="container">
                       <input
                         type="checkbox"
@@ -121,45 +126,6 @@ function CreatedQuestions() {
                     </label>
                   ))}
 
-                  {handleDropDownActive(index) && (
-                    <>
-                      {/* <p className="answer">Answer</p>
-                      {item.options.map((option, index) => (
-                        <label class="container">
-                          <input
-                            type="radio"
-                            name={index}
-                            value={option.value}
-                            checked={item.answer === option.value}
-                          />
-                          <span> {option.text}</span>
-                        </label>
-                      ))} */}
-
-                      {/* <label class="container"> */}
-                      {/* <p className="answer">Answer</p> */}
-                      {/* <input type="radio" name="radio" />{" "}
-                        <span>{item.options.text}</span> */}
-                      {/* </label> */}
-
-                      {/* <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceTwo}</span>
-                      </label>
-                      <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceThree}</span>
-                      </label>
-                      <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceFour}</span>
-                      </label>
-                      <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceFive}</span>
-                      </label> */}
-                    </>
-                  )}
                   <br />
                   <br />
                 </div>

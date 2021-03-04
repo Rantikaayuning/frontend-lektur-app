@@ -12,28 +12,6 @@ import {
 } from "../../../redux/actions/AssessmentAction";
 
 const TeacherAssessmentUpdate = () => {
-  // const [isSave, setSave] = useState(false);
-  // const [isPicked, setPicked] = useState({
-  //   data: [...assessment],
-  // });
-  // function handleDropDown(index) {
-  //   isPicked.data[index].isChosen
-  //     ? (isPicked.data[index].isChosen = false)
-  //     : (isPicked.data[index].isChosen = true);
-  //   setPicked({ ...isPicked });
-  // }
-  // function handleDropDownActive(index) {
-  //   if (isPicked.data[index].isChosen) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // const handleSave = () => {
-  //   setSave(!isSave);
-  // };
-
   const history = useHistory();
   const { id, queId } = useParams();
   const dispatch = useDispatch();
@@ -81,7 +59,9 @@ const TeacherAssessmentUpdate = () => {
   // console.log(JSON.stringify(options, null, 2));
 
   const { assessment } = useSelector((state) => state.assessment);
+  const { updateCreatedQuestion } = useSelector((state) => state.assessment);
   console.log(assessment);
+  console.log("updateCreatedQuestion: ", updateCreatedQuestion);
 
   useEffect(() => {
     dispatch(getQuestions(id));
@@ -146,7 +126,6 @@ const TeacherAssessmentUpdate = () => {
                               })
                             );
                             console.log(value);
-                            // e.target.value
                             setAnswer(value);
                           }}
                           value={p.value}
@@ -161,7 +140,6 @@ const TeacherAssessmentUpdate = () => {
                                 v[index].text = text;
                               })
                             );
-                            // e.target.value
                           }}
                           value={p.text}
                           placeholder="Option"
