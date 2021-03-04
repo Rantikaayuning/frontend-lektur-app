@@ -2,12 +2,14 @@ import {
   GET_PROFILE_TEACHER,
   CREATE_COURSE,
   STUDENTS_ACCEPT,
+  STUDENT_INVITE,
 } from "../types/TeacherTypes";
 
 const initialState = {
   getCourses: [],
   createCourses: null,
   studentsAccStatus: [],
+  studentInvite: [],
 };
 
 const teacherReducer = (state = initialState, action) => {
@@ -27,6 +29,11 @@ const teacherReducer = (state = initialState, action) => {
       return {
         ...state,
         studentsAccStatus: payload,
+      };
+    case STUDENT_INVITE:
+      return {
+        ...state,
+        studentInvite: payload,
       };
     default:
       return state;

@@ -1,16 +1,31 @@
+import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUserProfile } from "../../redux/actions/UserAction";
+import { studentInvite } from "../../redux/actions/TeacherAction";
+import { useParams } from "react-router-dom";
 
 export const PopUpInvite = props => {
-  const Allusers = useSelector(state => state.users.userProfile);
+  const { id } = useParams();
+  const [inputText, setInputText] = useState("");
   const [studentList, setStudentList] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserProfile());
-  }, []);
-  console.log(" user ", Allusers);
+  }, [dispatch, studentList]);
+  function handleAdd(e) {
+    e.preventDefault();
+    setStudentList([...studentList, inputText]);
+    setInputText("");
+  }
+  function handleInput(e) {
+    setInputText(e.target.value);
+  }
+  function handleDelete(id) {
+    setStudentList(studentList.filter((student, index) => index !== id));
+  }
+
   return (
     <>
       {" "}
@@ -27,60 +42,47 @@ export const PopUpInvite = props => {
         <Modal.Body className="modal-invite">
           <div className="invite-add-search">
             <p>
-              <input type="text" placeholder="Type student email" />
-              <span>
-                <button>Add</button>
-              </span>
-              <hr type="solid" />
+              <form>
+                <input
+                  onChange={handleInput}
+                  type="text"
+                  placeholder="Type student email"
+                  value={inputText}
+                />
+                <span>
+                  <button onClick={handleAdd}>Add</button>
+                </span>
+                <hr type="solid" />
+              </form>
             </p>
           </div>
           <div className="invite-email-list">
-            {studentList.map(() => (
-              <h1>Blackpink</h1>
+            {studentList.map((student, index) => (
+              <div className="student-email" key={index}>
+                <p>
+                  {student}
+                  <span>
+                    <hr type="solid" />
+                  </span>
+                </p>
+                <p
+                  className="cancel-email"
+                  onClick={() => {
+                    handleDelete(index);
+                  }}
+                >
+                  X
+                </p>
+              </div>
             ))}
           </div>
           <div className="invite-button-invite">
-            <button onClick={props.togglePopUp}>Invite</button>
+            <button onClick={dispatch(studentInvite(id, studentList))}>
+              Invite
+            </button>
           </div>
         </Modal.Body>
       </Modal>
     </>
   );
 };
-/*
-/* <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div>
-            <div className="student-email">
-              <p>
-                justinjunaedi@gmail.com
-                <span>
-                  <hr type="solid" />
-                </span>
-              </p>
-              <p className="cancel-email">X</p>
-            </div> */
