@@ -10,10 +10,12 @@ const initialState = {
   login: null,
   signup: null,
   status: "",
-  // isAuthentificated: localStorage.getItem("token") ? true : false,
   isAuthentificated: Cookies.get("token") ? true : false,
   userProfile: null,
   updateUser: null,
+  email: '',
+  password: '',
+  fullname: ''
 };
 
 const userReducer = (state = initialState, action) => {
@@ -38,7 +40,7 @@ const userReducer = (state = initialState, action) => {
         userProfile: payload,
       };
     case UPDATE_USER_PROFILE:
-      console.log(state.userProfile, payload);
+      // console.log(state.userProfile, payload);
       return {
         ...state,
         userProfile: { ...state.userProfile, ...payload },

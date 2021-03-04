@@ -5,10 +5,9 @@ import { getQuestions } from '../../redux/actions/AssessmentAction'
 import { getCourseDetail } from '../../redux/actions/CoursesAction';
 
 const StudentAssessment = () => {
-    // const {id} = useParams();
-    const dispatch = useDispatch();
     const {id} = useParams()
-
+    
+    const dispatch = useDispatch();
     const {assessment} = useSelector(state => state.assessment)
     const {courseDetail} = useSelector(state => state.courses)
 
@@ -30,7 +29,7 @@ const StudentAssessment = () => {
                     </div>
                     ) : (
                     <div>
-                        <span className="bread-crumb">{courseDetail.course.title}</span> /  {" "}
+                        <span className="bread-crumb">{courseDetail.course.title}</span>/{" "}
                         <span className="link">Final Assessment</span>
                     </div>
                     )}
@@ -46,7 +45,7 @@ const StudentAssessment = () => {
                         <>
                         {item.options.map((item, id) => (
                             <label class="container">
-                                <input type="radio" name="radio" value={item.value}/>{' '}
+                                <input type='radio' value={item.value}/>{' '}
                                 <span>{item.text}</span>
                             </label>
                         ))}
@@ -63,8 +62,7 @@ const StudentAssessment = () => {
         ) : (
             <div id="loader"></div>
         )}
-                
-        </>
+    </>
     )
 }
 

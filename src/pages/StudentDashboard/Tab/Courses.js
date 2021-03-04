@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-import {Progress} from 'reactstrap'
+import { Progress } from 'reactstrap'
 import { Modal } from 'react-bootstrap';
 import { PopUpCourse } from '../../../components/PopUp/PopUpCourse';
 import { PopUpMaterial } from '../../../components/PopUp/PopUpMaterial';
@@ -16,7 +16,7 @@ const StudentBoardCourses = () => {
     const [materialModal, setMaterialModal] = useState(false);
 
     const dispatch = useDispatch();
-    const {studentCourses, popUpContent, popUpMaterial, courseDetail } = useSelector(state => state.courses);
+    const {studentCourses, popUpContent, popUpMaterial, courseDetail} = useSelector(state => state.courses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
@@ -35,7 +35,7 @@ const StudentBoardCourses = () => {
 
     // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    console.log("course", studentCourses)
+    // console.log("course", studentCourses)
     // console.log('detail', courseDetail)
     return (
         <>
@@ -89,7 +89,7 @@ const StudentBoardCourses = () => {
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={1/100*100} /></p>
                             <p className='title'>0 Course Complete</p>
-                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson #1</button></p>
+                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson</button></p>
                         </div>
                     </div> 
                     ) : (
