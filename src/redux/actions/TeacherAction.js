@@ -3,7 +3,7 @@ import {
   GET_PROFILE_TEACHER,
   CREATE_COURSE,
   STUDENTS_ACCEPT,
-  STUDENT_INVITE,
+  STUDENT_INVITE_SUCCESS,
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
 // import axios from "axios";
@@ -68,19 +68,20 @@ export const studentAcceptance = courseId => dispatch => {
     .catch(error => console.log("USER PROFILE ERROR:", error));
 };
 export const studentInvite = (courseId, body) => dispatch => {
+  console.log('tes cek trigger student invite');
   API({
     method: "post",
     url: `/teacher/courses/invite?courseId=${courseId}`,
+    data: body,
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: body,
   })
     .then(response => {
-      console.log(response);
+      console.log('response =>', response);
       dispatch({
-        type: STUDENT_INVITE,
-        payload: response.data.result,
+        type: STUDENT_INVITE_SUCCESS,
+        payload: response.data.message,
       });
     })
     .catch(error => console.log("USER PROFILE ERROR:", error));

@@ -119,12 +119,13 @@ const TeacherStudentsUpdate = () => {
                 <b>Students</b>
               </h5>
               <p>
-                <button onClick={handlePopUp}>Invite</button>
+                <button onClick={handlePopUp}>Invite Guys</button>
               </p>
               <PopUpInvite
                 show={isPopUpOpen}
                 onHide={() => setPopUpOpen(false)}
                 togglePopUp={handlePopUp}
+                setPopUpOpen={setPopUpOpen}
               />
             </div>
             {studentsAccStatus
