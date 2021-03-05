@@ -146,7 +146,7 @@
 .add-new-question {
   display: flex;
   justify-content: space-between;
-  margin: 60px 250px 100px 250px;
+  margin: 20px 250px 100px 250px;
   text-decoration: underline;
   cursor: pointer;
   color: #3e89ae;
@@ -154,7 +154,7 @@
 
 .save-exam-question {
   display: flex;
-  margin: 10px 250px 100px 250px;
+  margin: 0px 250px 100px 250px;
   justify-content: center;
 }
 
@@ -286,11 +286,15 @@
 
 .option-deletion-btn {
   border: none;
-  background-color: rgb(253, 251, 251);
+  background-color: white;
   padding: 10px;
-  color: gray;
-  /* padding-left: 0px; */
+  color: rgb(82, 79, 79);
 }
+
+.option-deletion-btn:hover {
+  text-decoration: underline;
+}
+
 .container-answer {
   display: block;
   position: relative;
