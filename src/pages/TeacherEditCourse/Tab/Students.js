@@ -8,7 +8,6 @@ import {
   Progress,
 } from "reactstrap";
 import searchIcon from "../../../assets/search.png";
-import { studentEnroll } from "../../../assets/JSONFile/dummyData";
 import checklistOne from "../../../assets/checklist1.png";
 import checklistTwo from "../../../assets/checklist2.png";
 import checklistThree from "../../../assets/checklist3.png";
