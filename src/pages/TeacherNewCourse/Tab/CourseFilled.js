@@ -77,14 +77,14 @@ function CourseFilled() {
                 <>
                 {materi.contentId === item._id ? (
                 
-                <div>
+                <>
                   <Link to={`/course-change-teacher/${id}`}>
                   <i class="fa fa-file files"></i>
                   </Link>
                     <a href={materi.material} target="_blank">
                       <span className="span-detail">{item.title}{" "}{index + 1}.pdf</span>
                     </a>
-                </div>
+                </>
                     ) : (
                       null
               )}
@@ -98,7 +98,9 @@ function CourseFilled() {
              
             </div>
             <div className="image-computer1">
-            <iframe src = {`${item.video}`} title = "glints" className="iframe"/>
+            {item.video === null ? null : (
+                <iframe src = {`${item.video}`} title = "glints" />
+              )}
               {/* <img src={Comp1} alt="comp1" /> */}
             </div>
                 </div>
