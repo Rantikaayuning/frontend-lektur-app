@@ -20,6 +20,7 @@ import TeacherAssessmentUpdate from "./pages/TeacherEditCourse/Tab/Assessment";
 import TeacherStudentsUpdate from "./pages/TeacherEditCourse/Tab/Students";
 import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
 import CreatedQuestionsEdit from "./pages/TeacherEditCourse/Tab/CreatedQuestionsEdit";
+import TeacherCourseUpdate from "./pages/TeacherEditCourse/Tab/CourseChange";
 
 export const publicRoutes = [
   {
@@ -79,7 +80,7 @@ export const publicRoutes = [
   },
   {
     component: TeacherStudentsTab,
-    path: "/teacher-new-students",
+    path: "/teacher-new-students", // should be /teacher-new-students/:id
     exact: true,
   },
   {
@@ -120,6 +121,11 @@ export const publicRoutes = [
   {
     component: TeacherAssessmentUpdate,
     path: "/course-teacher/assessments/:id/:queId",
+    exact: true,
+  },
+  {
+    component: TeacherCourseUpdate,
+    path: "/course-change-teacher/:id",
     exact: true,
   },
   {

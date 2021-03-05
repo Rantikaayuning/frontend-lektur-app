@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StudentProfile from '../Profile';
-import {Progress} from 'reactstrap'
+import { Progress } from 'reactstrap'
 import { Modal } from 'react-bootstrap';
 import { PopUpCourse } from '../../../components/PopUp/PopUpCourse';
 import { PopUpMaterial } from '../../../components/PopUp/PopUpMaterial';
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentCourses, getPopUpContent, getPopUpMaterial, getCourseDetail } from "../../../redux/actions/CoursesAction";
-import defaultImg from "../../../assets/RectangleSquare.png";
+import defaultImg from "../../../assets/defaultLektur.png";
 import logo from '../../../assets/checklist2.png';
 import logo2 from '../../../assets/Vector4.png';
 
@@ -16,7 +16,7 @@ const StudentBoardCourses = () => {
     const [materialModal, setMaterialModal] = useState(false);
 
     const dispatch = useDispatch();
-    const {studentCourses, popUpContent, popUpMaterial, courseDetail } = useSelector(state => state.courses);
+    const {studentCourses, popUpContent, popUpMaterial, courseDetail} = useSelector(state => state.courses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
@@ -35,8 +35,8 @@ const StudentBoardCourses = () => {
 
     // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    // console.log(studentCourses)
-    console.log('detail', courseDetail)
+    // console.log("course", studentCourses)
+    // console.log('detail', courseDetail)
     return (
         <>
         {studentCourses.course === null || studentCourses.course === undefined ? (
@@ -53,31 +53,22 @@ const StudentBoardCourses = () => {
                         <p>Assesment</p>
                     </Link>
                 </div>
-                
+            <div className='student-course-list'>
                 {studentCourses === null ? (
-                <>
-                <div className='student-course-list'>
-                    <div className='student-course-detail'>
-                        <div className='course-detail-first'>
-                            <p>Enroll now</p>
-                        </div>
-                        <div className='course-detail-second'>
-                            <p>Enroll Now</p>
-                        </div>
-                    </div> 
-                </div>  
-                </>
+                <div></div>
                 ) : (
                 <>
                 {studentCourses.course.map((item, index) => (
-                <div className='student-course-list'>
+                <div>
                     {item.status === 2 ? (
                     <div className='student-course-detail' key={index}>
-                        <img src={defaultImg} alt='courses'/>
+                        <img src={item.courseId.image ? item.courseId.image : defaultImg} alt='courses'/>
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
-                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}><u>See course materials</u></p>
+                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}>
+                                <u>See course materials</u>
+                            </p>
                         </div>
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={100} /></p>
@@ -87,21 +78,23 @@ const StudentBoardCourses = () => {
                     </div> 
                     ) : item.status === 1 ? (
                     <div className='student-course-detail' key={index}>
-                        <img src={defaultImg} alt='courses'/>
+                        <img src={item.courseId.image ? item.courseId.image : defaultImg} alt='courses'/>
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
-                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}><u>See course materials</u></p>
+                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}>
+                                <u>See course materials</u>
+                            </p>
                         </div>
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={1/100*100} /></p>
                             <p className='title'>0 Course Complete</p>
-                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson #1</button></p>
+                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson</button></p>
                         </div>
                     </div> 
                     ) : (
                     <div className='student-course-detail' key={index}>
-                        <img src={defaultImg} alt='courses'/>
+                        <img src={item.courseId.image ? item.courseId.image : defaultImg} alt='courses'/>
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
@@ -115,7 +108,7 @@ const StudentBoardCourses = () => {
                 ))}
                 </>
                 )}
-
+                </div>
                 {/* content popup */}
                 {popUpContent.length > 1 && courseDetail !== null ? (
                 <Modal
@@ -131,7 +124,18 @@ const StudentBoardCourses = () => {
                 lessonContent= 
                 {popUpContent.map((item, id) => (
                     <div className="lock-content" key={id}>
-                        <Link to={`/course-content/${courseDetail.course._id}/${item._id}`}><p className={item.number === 1 ? 'unlocked' : 'locked'}><img src={item.number === 1 ? logo : logo2} alt='logo'/>Lesson #{item.number} {item.title}</p></Link>
+                        {item.contentStatus === 1 || id === 0 ? (
+                            <Link to={`/course-content/${courseDetail.course._id}/${item.contentId}`}>
+                                <p className='unlocked'>
+                                    <img src={logo} alt='logo'/>Lesson #{id + 1} {item.title}
+                                </p>
+                            </Link>
+                        ) : (
+                            <p className='locked'>
+                                <img src={logo2} alt='logo'/>
+                                Lesson #{id + 1} {item.title}
+                            </p>
+                        )}
                     </div>
                 ))}
                 />
@@ -147,7 +151,7 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpCourse
                 title={<div>Content</div>}
-                lessonContent={<p className='pop-up-course-nothing'>No Content yet</p>}
+                lessonContent={<p className='pop-up-course-nothing'></p>}
                 />
                 </Modal>
                 )}
@@ -170,7 +174,7 @@ const StudentBoardCourses = () => {
                     <>
                     <p>Lesson #{id + 1} : {item.contentId.title}?</p>
                     <li key={item.contentId.title}>
-                        <label>Read course material : <a href={item.material} target='_blank' rel='noreferrer'>{item.contentId.title}</a></label>
+                        <label>Read course material : <a href={item.material} target='_blank' rel='noreferrer'>{item.contentId.title}.pdf</a></label>
                     </li>
                     </>
                     ))}
@@ -188,7 +192,7 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpMaterial
                 title={<div>Material</div>}
-                materialContent={<p className='pop-up-course-nothing'>No Material yet</p>}
+                materialContent={<p className='pop-up-course-nothing'></p>}
                 />
                 </Modal>
                 )}

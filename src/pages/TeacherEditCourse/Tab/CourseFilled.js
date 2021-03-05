@@ -1,23 +1,40 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import Comp1 from "../../../assets/RectangleComputer.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourseDetail } from "../../../redux/actions/CoursesAction";
+import {
+  getCourseFilled,
+  deleteCourse,
+  getCourseDetail,
+} from "../../../redux/actions/CoursesAction";
 
 function CourseFilledEdit() {
   const dispatch = useDispatch();
-  const { courseDetail } = useSelector((state) => state.courses);
+  const history = useHistory();
+  const {
+    courseFilled,
+    contentFilled,
+    materialFilled,
+    courseDetail,
+    background,
+  } = useSelector((state) => state.courses);
 
   const { id } = useParams();
 
   useEffect(() => {
+    dispatch(getCourseFilled(id));
     dispatch(getCourseDetail(id));
   }, [dispatch, id]);
+
+  const deleteCourseTeacher = () => {
+    dispatch(deleteCourse(id));
+    history.push("/teacher-dashboard");
+  };
 
   console.log(courseDetail);
   return (
     <>
-      {courseDetail === null ? (
+      {courseFilled === null ? (
         <div id="loader"></div>
       ) : (
         <>
@@ -31,53 +48,79 @@ function CourseFilledEdit() {
                 <p>Students</p>
               </Link>
             </div>
-            <div className="course-detail">
+            <div
+              className="course-detail"
+              style={{
+                backgroundImage: `url(${background})`,
+              }}
+            >
               <div className="course-detail-filled">
-                <span>{courseDetail.course.title}</span>
-                <Link to={`/course-teacher/course/${id}`}>
+                <span>{courseFilled.title}</span>
+                <Link to={`/course-change-teacher/${id}`}>
                   <i class="fa fa-pencil "></i>
                 </Link>
-                <p>{courseDetail.course.overview}</p>
+                <p>{courseFilled.overview}</p>
               </div>
             </div>
             <div className="course-filled-content">
               <p>Content*</p>
               <div className="course-filled-content-box">
                 <div className="course-filled-content-card">
-                  {/* {courseDetail.content.map((item, index) => ( */}
-                  <>
-                    <div className="course-filled-content-card-left">
-                      {/* <span className="span">Lesson #{courseDetail.content[0].number} : {courseDetail.content[0].title} </span> */}
-                      <Link to={`/course-teacher/course/${id}`}>
-                        <i className="fa fa-pencil "></i>
-                      </Link>
-                      <span className="span-paragraph">
-                        Create React App is a comfortable environment for
-                        learning React.
-                      </span>
-                      <Link to={`/course-teacher/course/${id}`}>
-                        <i class="fa fa-file files"></i>
-                      </Link>
-                      <span className="span-detail">
-                        React and Open Source.pdf
-                      </span>
-                      <br />
-                      <Link to={`/course-teacher/course/${id}`}>
-                        <i className="fa fa-file files"></i>
-                      </Link>
-                      <span>Just Javascript.pdf</span>
+                  {contentFilled.map((item, index) => (
+                    <div className="card-filled">
+                      <div className="course-filled-content-card-left">
+                        <span className="span">
+                          Lesson #{index + 1} : {item.title}{" "}
+                        </span>
+                        <Link to={`/course-change-teacher/${id}`}>
+                          <i className="fa fa-pencil "></i>
+                        </Link>
+                        <br />
+                        <>
+                          {item.description === null ? null : (
+                            <span className="span-paragraph">
+                              {item.description}
+                            </span>
+                          )}
+                        </>
+
+                        {materialFilled.map((materi, index) => (
+                          <>
+                            <Link to={`/course-change-teacher/${id}`}>
+                              <i class="fa fa-file files"></i>
+                            </Link>
+                            {materi === null ? (
+                              <div></div>
+                            ) : (
+                              <a href={materi.material} target="_blank">
+                                <span className="span-detail">
+                                  {item.title} {index + 1}.pdf
+                                </span>
+                              </a>
+                            )}
+                            <br />
+                            {/* <Link to={`/course-change-teacher/${id}`}>
+                <i className="fa fa-file files"></i>
+                </Link>
+                <span>Just Javascript.pdf</span> */}
+                          </>
+                        ))}
+                      </div>
+                      <div className="image-computer1">
+                        {item.video === null ? null : (
+                          <iframe src={`${item.video}`} title="glints" />
+                        )}
+
+                        {/* <img src={Comp1} alt="comp1" /> */}
+                      </div>
                     </div>
-                    <div className="image-computer1">
-                      <img src={Comp1} alt="comp1" />
-                    </div>
-                  </>
-                  {/* ))} */}
+                  ))}
                 </div>
               </div>
               {/* <div className="course-filled-content-card">
             <div className="course-filled-content-card-left">
               <span className="span">Lesson #2 : Create React App </span>
-              <Link to={`/course-teacher/course/${id}`}>
+              <Link to={`/course-change-teacher/${id}`}>
               <i className="fa fa-pencil "></i>
               </Link>
               <span className="span-paragraph">
@@ -90,7 +133,9 @@ function CourseFilledEdit() {
           </div> */}
               <u className="add-new-lesson">Add New Lesson</u>
               <button> Save Changes</button>
-              <u className="delete-course">Delete Course</u>
+              <u className="delete-course" onClick={deleteCourseTeacher}>
+                Delete Course
+              </u>
             </div>
           </div>
         </>

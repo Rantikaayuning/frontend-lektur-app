@@ -10,7 +10,7 @@ import {
   updateUserProfile,
 } from "../../redux/actions/UserAction";
 import { getTeacherCourses } from "../../redux/actions/CoursesAction";
-import defaultImg from "../../assets/RectangleSquare.png";
+import defaultImg from "../../assets/defaultLektur.png";
 
 function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
@@ -31,7 +31,7 @@ function TeacherDashboard(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(fullname, email);
+    // console.log(fullname, email);
 
     props.updateUserProfile(fullname, email);
   };
@@ -100,11 +100,12 @@ function TeacherDashboard(props) {
               <button>New Course</button>
             </Link>
           </div>
+          <div className="card-teacher-container overflow-auto">
           <hr />
           {props.teacherCourses.map((item, index) => (
             <CourseCard
               key={index}
-              image={defaultImg}
+              image={item.image === null ? defaultImg : item.image}
               title={item.title}
               numOfVideos={item.totalVideo}
               numOfLesson={item.totalMaterial}
@@ -112,6 +113,7 @@ function TeacherDashboard(props) {
               edit={`/course-teacher/edit/${item._id}`}
             />
           ))}
+        </div>
         </div>
       ) : (
         <div id="loader"></div>
