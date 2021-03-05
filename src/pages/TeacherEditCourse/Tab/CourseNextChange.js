@@ -92,7 +92,7 @@ function CourseNextChange() {
               <p>Add new lesson</p>
             </div>
             <div className="publish-and-delete-course">
-              <Link to="/course-filled-teacher">
+              <Link to={`/course-teacher/edit/${id}`}>
                 <p>
                   <button>Publish Course</button>
                 </p>
