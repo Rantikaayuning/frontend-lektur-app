@@ -13,6 +13,7 @@ const StudentAssessment = () => {
     const {courseDetail} = useSelector(state => state.courses)
 
     const [selected, setSelected] = useState([])
+    const [selectedAns, setSelectedAns] = useState({}); // trying to change selected from arr to obj
     const [score, setScore] = useState(inputAnswer)
     // const [answer, setAnswer] = useState([])
     
@@ -24,11 +25,15 @@ const StudentAssessment = () => {
     
     const handleChecked = () => {
         // handleShow(setScore(score + Number(selected)))
-        handleShow(setScore(selected))
+        // handleShow(setScore(selected))
+        handleShow();
+        setScore(selected)
     }
 
     const handleSubmit = () => {
-        const calculateScore = score.reduce((a, b) => Number(a) + Number(b))
+        // Object.values(selectedAns)  // untuk jadiin skor di atas jadi object, ambil valuesnya, udab ke array, trus reduce utk hitung total skor
+        // const calculateScore = score.reduce((a, b) => Number(a) + Number(b));
+        const calculateScore = Object.values(selectedAns).reduce((a, b) => Number(a) + Number(b));
         const submitScore = assessment.length !== null && (calculateScore/assessment.length)*100
         dispatch(putFinalScore(submitScore, id))
         handleClose()
@@ -45,10 +50,21 @@ const StudentAssessment = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log(assessment)
+    const handleSelectedAns = (e) => {
+        setSelectedAns({
+            ...selectedAns,
+            [e.target.name]: e.target.value
+        })
+        
+        console.log('tes handleShandleSelectedAns')
+    }
+
+    console.log('assessment', assessment)
     console.log('selected', selected)
     console.log('score', score)
     console.log('finalScore', finalScore)
+    console.log('selectedAns =>', selectedAns);
+    console.log('obj values selectedAns =>', Object.values(selectedAns));
 
     return (
         <>
@@ -84,7 +100,9 @@ const StudentAssessment = () => {
                                 id={id} 
                                 type='radio' 
                                 name={assessment[index].question}
-                                value={option.value === assessment[index].answer ? 1 : 0 }
+                                value={option.value === assessment[index].answer ? 1 : 0 } // ini udah oke gengs ga usah diganti
+                                // value={option.value === assessment[index].answer ? handleSelectedAns(1) : handleSelectedAns(0) }
+                                onChange={handleSelectedAns}
                                 />
                                 {option.text}
                                 </label>
