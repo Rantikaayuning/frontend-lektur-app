@@ -89,14 +89,14 @@ function TeacherDashboard(props) {
           </div>
         </div>
       )}
-
-      {props.teacherCourses !== 0 ? (
+      
+ {props.teacherCourses !== 0 ? (
         <div className="courses-container">
           <div className="courses-header">
             <h5>
               <b>Courses</b>
             </h5>
-            <Link to="/teacher-new-course">
+            <Link to="/teacher-create-course">
               <button>New Course</button>
             </Link>
           </div>
@@ -121,6 +121,7 @@ function TeacherDashboard(props) {
     </div>
   );
 }
+
 
 const mapStateToProps = (state) => {
   return {

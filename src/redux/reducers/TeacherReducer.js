@@ -1,8 +1,8 @@
-import {GET_PROFILE_TEACHER, CREATE_COURSE} from "../types/TeacherTypes";
+import {GET_PROFILE_TEACHER} from "../types/TeacherTypes";
 
 const initialState = {
      getCourses : [],
-     createCourses : null,
+     
 }
 
 const teacherReducer = (state = initialState, action) => {

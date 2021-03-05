@@ -27,7 +27,7 @@ const TeacherStudentsTab = () => {
     <>
       <div className="teacher-assessment">
         <div className="teacher-dashboard-list">
-          <Link to="/teacher-new-course">
+          <Link to="/teacher-create-course">
             <p>Course</p>
           </Link>
           <Link to="/teacher-new-assessment">

@@ -6,10 +6,14 @@ import {
   GET_STUDENT_ENROLL,
   GET_TEACHER_COURSES,
   SEARCH_COURSE,
+  CREATE_COURSE,
+  GET_COURSE_FILLED,
+  CREATE_CONTENT,
+  UPLOAD_MATERIAL,
+  UPLOAD_VIDEO,
   GET_POPUP_CONTENT,
   GET_POPUP_MATERIAL,
   GET_CONTENT_DETAIL,
-  GET_COURSE_FILLED,
   UPLOAD_IMAGE,
   UPDATE_COURSE
 } from "../types/CoursesTypes";
@@ -23,18 +27,26 @@ const initialState = {
   teacherCourses: [],
   studentAssessment: [],
   searchCourse: '',
+  createCourses : null,
+  id: null,
+  getTitle: null,
+  getOverview: null,
+  courseFilled: null,
+  content:null,
+  idContent: null,
+  material: null,
+  videoMaterial: null,
+  image: null,
+  background: null,
   popUpContent: {},
   popUpMaterial: [],
   contentDetail: {},
-  courseFilled: null,
-  background: null,
-  image: null,
   detailTitle: null,
   detailOverview: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload, background, material, content, detailTitle, detailOverview} = action;
+  const { type, payload, background,id, material, content, detailTitle, detailOverview, title, overview, idContent,} = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
@@ -74,6 +86,37 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         searchCourse: payload,
       };
+    case CREATE_COURSE:
+      return{
+        ...state,
+        createCourses: payload,
+        id: id,
+        getTitle: title,
+        getOverview: overview, 
+      }  
+    case GET_COURSE_FILLED:
+      return {
+        ...state,
+        courseFilled: payload,
+        contentFilled: content,
+        materialFilled: material,
+      }
+    case CREATE_CONTENT:
+      return{
+        ...state,
+        content: payload,
+        idContent: idContent,
+      }
+    case UPLOAD_MATERIAL:
+      return{
+        ...state,
+        material: payload,
+      }
+    case UPLOAD_VIDEO:
+      return {
+        ...state,
+        videoMaterial: payload,
+      }
     case GET_POPUP_CONTENT:
       return {
         ...state,
@@ -106,9 +149,6 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         update: payload,
       } 
-
-
-
     default:
       return state;
   }
