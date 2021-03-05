@@ -35,7 +35,7 @@ const initialState = {
   content:null,
   idContent: null,
   material: null,
-  vidio: null,
+  videoMaterial: null,
   image: null,
   background: null,
   popUpContent: {},
@@ -115,7 +115,7 @@ const coursesReducer = (state = initialState, action) => {
     case UPLOAD_VIDEO:
       return {
         ...state,
-        video: payload,
+        videoMaterial: payload,
       }
     case GET_POPUP_CONTENT:
       return {

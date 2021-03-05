@@ -160,6 +160,10 @@
     width: 50%;
 }
 
+.add-new-lesson-input h4 b{
+   color: black;
+}
+
 .input-number{
     width: 40px;
 }

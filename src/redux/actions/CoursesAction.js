@@ -210,14 +210,19 @@ export const updateCourse = (id, title, overview) => (dispatch) => {
 }
 
 export const postCourse = (title, overview, file) => (dispatch) => {
- 
+  const form = {title, overview, file}
 
-  const config = {
+  const data = new FormData();
+  Object.keys(form).forEach(key => 
+  data.append(key, form[key]));
+  
+  API.post("/courses/create", data, 
+  {
     headers: {
       Authorization: `Bearer ${token}`,
     }
   }
-  API.post("/courses/create", {title, overview, file}, config)
+  )
     .then((response) => {
         if(response.status === 201){
             dispatch({

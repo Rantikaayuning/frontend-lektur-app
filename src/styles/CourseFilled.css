@@ -30,6 +30,7 @@
   border-radius: 2px;
   left: 220px;
   margin-top: 42px;
+  height: 280px;
 }
 
 .course-filled-content-card {
@@ -130,11 +131,11 @@
   width: 100%;
   height: 200px;
 }
-.image-computer1 img {
+.image-computer1 iframe {
   /* position: relative; */
   right: 0px;
-  width: 300px;
-  height: 150px;
+  width: 369px;
+  height: 202px;
 }
 .add-new-lesson {
   position: relative;

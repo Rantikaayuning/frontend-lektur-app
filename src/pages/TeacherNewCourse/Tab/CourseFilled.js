@@ -65,22 +65,30 @@ function CourseFilled() {
               <Link to={`/course-change-teacher/${id}`}>
               <i className="fa fa-pencil "></i>
               </Link>
-              <span className="span-paragraph">
-              {item.description}
-              </span>
+              <br/>
+              <>
+              {item.description === null ? null : (
+                  <span className="span-paragraph">
+                    {item.description}
+                  </span>
+              )}
+              </>
               {materialFilled.map((materi, index) => (
                 <>
-                <Link to={`/course-change-teacher/${id}`}>
-                <i class="fa fa-file files"></i>
-                </Link>
-                {materi === null ? (
-                    <div></div>
-                  ) : (
+                {materi.contentId === item._id ? (
+                
+                <div>
+                  <Link to={`/course-change-teacher/${id}`}>
+                  <i class="fa fa-file files"></i>
+                  </Link>
                     <a href={materi.material} target="_blank">
                       <span className="span-detail">{item.title}{" "}{index + 1}.pdf</span>
                     </a>
-                  )}
-                <br />
+                </div>
+                    ) : (
+                      null
+              )}
+            <br />
                 {/* <Link to={`/course-change-teacher/${id}`}>
                 <i className="fa fa-file files"></i>
                 </Link>
@@ -90,7 +98,7 @@ function CourseFilled() {
              
             </div>
             <div className="image-computer1">
-            <iframe src = {`${item.video}`} title = "glints" />
+            <iframe src = {`${item.video}`} title = "glints" className="iframe"/>
               {/* <img src={Comp1} alt="comp1" /> */}
             </div>
                 </div>

@@ -8,7 +8,7 @@ import { getCourseFilled, deleteCourse, getCourseDetail } from "../../../redux/a
 function CourseFilledEdit() {
   const dispatch = useDispatch()
   const history = useHistory()
-  const {courseFilled, contentFilled, materialFilled, courseDetail, background} = useSelector(state => state.courses)
+  const {courseFilled, contentFilled, materialFilled, courseDetail, background, idContent} = useSelector(state => state.courses)
 
   const { id } = useParams()
 
@@ -69,25 +69,27 @@ function CourseFilledEdit() {
                 <br/>
               <>
               {item.description === null ? null : (
-               
                   <span className="span-paragraph">
                     {item.description}
                   </span>
-              
               )}
               </>
               
               {materialFilled.map((materi, index) => (
                 <>
-                <Link to={`/course-change-teacher/${id}`}>
-                <i class="fa fa-file files"></i>
-                </Link>
-                {materi === null ? (
-                    <div></div>
-                  ) : (
+               
+                {materi.contentId === item._id ? (
+                
+                    <>
+                    <Link to={`/course-change-teacher/${id}`}>
+                    <i class="fa fa-file files"></i>
+                    </Link>
                       <a href={materi.material} target="_blank">
                         <span className="span-detail">{item.title}{" "}{index + 1}.pdf</span>
                       </a>
+                      </>
+                        ) : (
+                          null
                   )}
                 <br />
                 {/* <Link to={`/course-change-teacher/${id}`}>
