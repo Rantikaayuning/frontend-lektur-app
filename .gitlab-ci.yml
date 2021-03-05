@@ -1,0 +1,36 @@
+stages:
+  - build
+  - staging
+  - production
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm install
+  cache:
+    paths:
+      - node_modules/
+  only:
+    - develop
+    - master
+
+staging:
+  stage: staging
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=lektur-app-develop --api-key=$HEROKU_API_KEY
+  only:
+    - develop
+
+production:
+  stage: production
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=lektur-glints-app --api-key=$HEROKU_API_KEY
+  only:
+    - master
