@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
@@ -11,10 +11,6 @@ function CreatedQuestions() {
   // const [isPicked, setPicked] = useState({
   //   data: [...assessment],
   // });
-
-  const history = useHistory();
-
-  const id = "602e06cc34a3a426b0311c94"; // punya maxim
 
   const dispatch = useDispatch();
   const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
@@ -59,7 +55,7 @@ function CreatedQuestions() {
             <div className="teacher-option-save">
               <h4>
                 {allQuestions.length} Questions{" "}
-                <Link to={`/created-questions/${id}`}>
+                <Link to="/teacher-new-assessment">
                   <img src={imgEdit} alt="edit"></img>
                 </Link>
               </h4>
@@ -95,7 +91,6 @@ function CreatedQuestions() {
                       <span className="checkmark"></span>
                     </label>
                   ))}
-
                   {handleDropDownActive(index) && (
                     <>
                       {/* <p className="answer">Answer</p>
@@ -139,15 +134,6 @@ function CreatedQuestions() {
                   <br />
                 </div>
               ))}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  textDecoration: "underline",
-                }}
-              >
-                <Link to="/teacher-new-assessment">Add New Question</Link>
-              </div>
             </div>
           </div>
         ) : (

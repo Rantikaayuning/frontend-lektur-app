@@ -74,7 +74,7 @@
     padding-right: 100px;
 }
 
-.submit-assessment button{
+.submit-assessment .button{
     border: none;
     background-color: #3E89AE;
     padding: 12px 50px;
@@ -111,6 +111,26 @@
     font-weight: bold;
 }
 
+.container input[type=radio]{
+    width: 30px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.questions-answer-box .container img{
+    width: 15px;
+    margin: 0 7px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.submit-confirmation {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
 @media screen and (max-width: 1024px){
     .student-assessment {
         display: flex;
@@ -122,3 +142,4 @@
         padding-bottom: 174px;
     }
 }
+

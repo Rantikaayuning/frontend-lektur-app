@@ -35,7 +35,7 @@ const StudentBoardCourses = () => {
 
     // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    // console.log("course", studentCourses)
+    console.log("course", studentCourses)
     // console.log('detail', courseDetail)
     return (
         <>
@@ -71,8 +71,8 @@ const StudentBoardCourses = () => {
                             </p>
                         </div>
                         <div className='course-detail-second'>
-                            <p><Progress color="warning" value={100} /></p>
-                            <p className='title'>Course Complete</p>
+                            <p><Progress color="warning" value={item.totalSeenCourses/item.totalCourse*100} /></p>
+                            <p className='title'>{item.totalSeenCourses}/{item.totalCourse} Course Complete</p>
                             <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Review</button></p>
                         </div>
                     </div> 
@@ -87,9 +87,9 @@ const StudentBoardCourses = () => {
                             </p>
                         </div>
                         <div className='course-detail-second'>
-                            <p><Progress color="warning" value={1/100*100} /></p>
-                            <p className='title'>0 Course Complete</p>
-                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson</button></p>
+                            <p><Progress color="warning" value={item.totalSeenCourses/item.totalCourse*100} /></p>
+                            <p className='title'>{item.totalSeenCourses}/{item.totalCourse} Course Complete</p>
+                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson #{item.totalSeenCourses + 1}</button></p>
                         </div>
                     </div> 
                     ) : (

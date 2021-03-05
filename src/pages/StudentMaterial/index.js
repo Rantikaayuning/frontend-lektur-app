@@ -30,6 +30,7 @@ export default function StudentMaterial() {
     const handleOpenLesson = () => {
         setOpenLesson(!openLesson)
     }
+    
     const find = contentDetail.listContent && contentDetail.listContent.find((item, id) => item.contentStatus === 0)
     console.log("content", contentDetail)
     // console.log("find", find)
@@ -42,7 +43,7 @@ export default function StudentMaterial() {
                 <div className="text">
                     <div>
                         <Link to={`/course-detail/${id}`}>
-                            <span className="bread-crumb">{contentDetail.content.contentId.title}</span>
+                            <span className="bread-crumb">{contentDetail.content.courseId.title}</span>
                         </Link>{" "}/
                             <span className="link"> Lesson : {contentDetail.content.contentId.title}</span>
                     </div>
@@ -101,8 +102,8 @@ export default function StudentMaterial() {
                             ))}
                             
                             {find !== null && find !== undefined ? (
-                            <Link to={`/course-content/${contentDetail.content.courseId}/${find.contentId._id}`}>
-                                <button className={openLesson ? 'next-lesson-button' : 'next-locked-button'} onClick={handleOpenLesson}>
+                            <Link to={openLesson ? `/course-content/${contentDetail.content.courseId._id}/${find.contentId._id}` : '#'}>
+                                <button className={openLesson ? 'next-lesson-button' : 'next-locked-button'} onClick={openLesson ? handleOpenLesson : ''}>
                                     <img src={openLesson ? logo3 : logo2} alt='next lesson'/>{" "}Next Lesson : {find.contentId.title}
                                 </button>
                             </Link>

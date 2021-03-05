@@ -23,7 +23,7 @@ const Home = () => {
               Create Your <span className="own-class">Own Class</span>
             </h1>
             <Link to="/register">
-              <button>Register Now</button>
+              <button>Register now</button>
             </Link>
           </div>
         </div>        

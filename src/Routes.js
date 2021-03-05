@@ -19,7 +19,6 @@ import CourseFilledEdit from "./pages/TeacherEditCourse/Tab/CourseFilled";
 import TeacherAssessmentUpdate from "./pages/TeacherEditCourse/Tab/Assessment";
 import TeacherStudentsUpdate from "./pages/TeacherEditCourse/Tab/Students";
 import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
-import CreatedQuestionsEdit from "./pages/TeacherEditCourse/Tab/CreatedQuestionsEdit";
 import TeacherCourseUpdate from "./pages/TeacherEditCourse/Tab/CourseChange";
 
 export const publicRoutes = [
@@ -120,7 +119,7 @@ export const publicRoutes = [
   },
   {
     component: TeacherAssessmentUpdate,
-    path: "/course-teacher/assessments/:id/:queId",
+    path: "/course-teacher/assessments/:id",
     exact: true,
   },
   {
@@ -130,12 +129,7 @@ export const publicRoutes = [
   },
   {
     component: CreatedQuestions,
-    path: "/created-questions", // nanti tambah id jadi /created-questions/:id dan ubah nama path nya nnti jgn /created-questions biar ga sama kaya edit
-    exact: true,
-  },
-  {
-    component: CreatedQuestionsEdit,
-    path: "/created-questions/:id",
+    path: "/created-questions", // nanti tambah id jadi /created-questions/:id
     exact: true,
   },
 ];

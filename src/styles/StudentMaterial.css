@@ -38,6 +38,7 @@
     line-height: 12px;
     color: skyblue;
     text-decoration-line:none;
+    cursor: default;
 }
 
 .text-title{
