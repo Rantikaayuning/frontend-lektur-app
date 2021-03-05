@@ -1,71 +1,122 @@
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux"
-import { getQuestions } from '../../redux/actions/AssessmentAction'
-import { getCourseDetail } from '../../redux/actions/CoursesAction';
+import React, { useEffect, useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getQuestions,
+  inputStudentScore,
+} from "../../redux/actions/AssessmentAction";
+import { getCourseDetail } from "../../redux/actions/CoursesAction";
 
 const StudentAssessment = () => {
-    // const {id} = useParams();
-    const dispatch = useDispatch();
-    const {id} = useParams()
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-    const {assessment} = useSelector(state => state.assessment)
-    const {courseDetail} = useSelector(state => state.courses)
+  const [selected, setSelected] = useState(null);
+  const [score, setScore] = useState(55); // still manually input the score to test the action
 
-    useEffect(() => {
-        dispatch(getQuestions(id));
-        dispatch(getCourseDetail(id))
-      }, [dispatch, id]);
+  const { assessment } = useSelector((state) => state.assessment);
+  const { courseDetail } = useSelector((state) => state.courses);
 
-    console.log(assessment)
+  useEffect(() => {
+    dispatch(getQuestions(id));
+    dispatch(getCourseDetail(id));
+  }, [dispatch, id]);
 
-    return (
-        <>
-        {courseDetail !== null && assessment !== null ? (
-            <div className='student-assessment'>
-                <div className="assessment-title">
-                    {courseDetail === null ? (
+  const handleChange = (e) => {
+    setSelected(e.target.value);
+    // console.log(selected);
+  };
+
+  // console.log(assessment);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(inputStudentScore(score, id)).then(() =>
+      history.push(`/assessment/result/${assessment[0].courseId}`)
+    );
+    console.log(`your score is ${score}`);
+  };
+
+  return (
+    <>
+      {courseDetail !== null && assessment !== null ? (
+        <div className="student-assessment">
+          <div className="assessment-title">
+            {courseDetail === null ? (
+              <div>
+                <span className="link">Final Assessment</span>
+              </div>
+            ) : (
+              <div>
+                <span className="bread-crumb">{courseDetail.course.title}</span>{" "}
+                / <span className="link">Final Assessment</span>
+              </div>
+            )}
+            <div className="final-assessment-title">Final Assessment</div>
+          </div>
+          <div className="student-assessment-box">
+            <h4>{assessment.length} Questions</h4>
+            <hr class="solid"></hr>
+            <form onSubmit={handleSubmit}>
+              {assessment.map((item, index) => (
+                <div className="assessment-questions" key={index}>
+                  <p>
+                    {item.number}. {item.question}
+                  </p>
+                  <p>Answer</p>
+                  <>
+                    {item.options.map((item_, index) => (
+                      <div key={item_._id}>
+                        <label class="container">
+                          <input
+                            type="radio"
+                            name={`${index + 1}`}
+                            value={item_.value}
+                            // checked={selected === item_.value}
+                            checked={selected === item_.value}
+                            onChange={handleChange}
+                          />
+                          <span> {item_.text}</span>
+                        </label>
+                      </div>
+                    ))}
                     <div>
-                        <span className="link">Final Assessment</span>
-                    </div>
-                    ) : (
-                    <div>
-                        <span className="bread-crumb">{courseDetail.course.title}</span> /  {" "}
-                        <span className="link">Final Assessment</span>
-                    </div>
-                    )}
-                    <div className="final-assessment-title">Final Assessment</div>
-                </div>
-                <div className='student-assessment-box'>
-                    <h4>{assessment.length} Questions</h4>
-                    <hr class="solid"></hr>
-                    {assessment.map((item, index) => (
-                    <div className='assessment-questions' key={index}>
-                        <p>{item.number}. {item.question}</p>
-                        <p>Answer</p>
+                      {/* just to check the correct answer, should be displayed on this page */}
+                      <b>Correct answer:</b>
+                      {item.options.map((item_, index) => (
                         <>
-                        {item.options.map((item, id) => (
-                            <label class="container">
-                                <input type="radio" name="radio" value={item.value}/>{' '}
-                                <span>{item.text}</span>
-                            </label>
-                        ))}
+                          {item.answer === item_.value && (
+                            <div>
+                              {item_.text} <b>({item_.value})</b>
+                            </div>
+                          )}
                         </>
+                      ))}
+                      <br />
+                      Selected option is : {selected}{" "}
+                      {/* <span>
+                      {item.answer === selected ? setSelected(selected++) : null}
+                    </span> */}
                     </div>
-                        ))}
+                  </>
                 </div>
-                <div className='submit-assessment'>
-                    <Link to={`/assessment/result/${assessment[0].courseId}`}>
-                        <p><button>Submit Assessment</button></p>
-                    </Link>
-                </div>
-            </div>
-        ) : (
-            <div id="loader"></div>
-        )}
-                
-        </>
-    )
-}
+              ))}
+              <div className="submit-assessment">
+                <p>
+                  <button>Submit Assessment</button>
+                  {/* after submiting, get the score, then post/update the score */}
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : (
+        <div id="loader"></div>
+      )}
+    </>
+  );
+};
 
 export default StudentAssessment;

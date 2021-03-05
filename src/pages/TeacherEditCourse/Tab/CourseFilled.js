@@ -125,7 +125,9 @@ function CourseFilledEdit() {
               <img src={Comp2} alt="comp2" />
             </div>
           </div> */}
-          <u className="add-new-lesson">Add New Lesson</u>
+           <Link to={`/course-change-teacher/${id}`}>
+              <u className="add-new-lesson">Add New Lesson</u>
+          </Link>
           <button> Save Changes</button>
           <u className="delete-course" onClick={deleteCourseTeacher}>Delete Course</u>
         </div>
@@ -138,5 +140,3 @@ function CourseFilledEdit() {
 
 
 export default CourseFilledEdit;
-
-

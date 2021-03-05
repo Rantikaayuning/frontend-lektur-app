@@ -3,13 +3,14 @@ import {
   GET_QUESTIONS,
   POST_QUESTIONS,
   GET_QUESTIONS_TEMP,
+  INPUT_SCORE,
+  UPDATE_QUESTION,
 } from "../types/AssessmentTypes";
 
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
 
-// export const getQuestions = (id) => (dispatch) => {
 export const getQuestions = (id) => (dispatch) => {
   API.get(`/assessment/?courseId=${id}`, {
     headers: {
@@ -29,7 +30,7 @@ export const getQuestions = (id) => (dispatch) => {
 
 // should be body here
 // export const postAssessment = (body, id) => (dispatch) => {
-export const postAssessment = (body) => (dispatch) => {
+export const postAssessment = (body) => async (dispatch) => {
   // (`/assessment/create?courseId=${id}`)
   API.post(
     `/assessment/create?courseId=602e06cc34a3a426b0311c94`,
@@ -71,4 +72,69 @@ export const getQuestionsTemp = (id) => (dispatch) => {
       }
     })
     .catch((err) => alert(err));
+};
+
+export const deleteQuestion = (courseId, id) => () => {
+  return new Promise((resolve) => {
+    API.delete(`/assessment/delete?courseId=${courseId}&questionId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          resolve(response.data);
+        }
+        alert("question deleted");
+      })
+      .catch((err) => alert("error delete question", err));
+  });
+};
+
+export const inputStudentScore = (score, id) => async (dispatch) => {
+  API.put(
+    `/assessment/result?courseId=${id}`,
+    {
+      score,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+    .then((response) => {
+      // console.log(response.data.result);
+      dispatch({
+        type: INPUT_SCORE,
+        payload: response.data.result,
+      });
+      alert("score got input successfully!");
+    })
+    .catch((err) => alert(`input score error`));
+};
+
+export const updateQuestion = (body, id, questionId) => async (dispatch) => {
+  API.put(
+    `/assessment/update?courseId=${id}&questionId=${questionId}`,
+    JSON.stringify(body),
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    }
+  )
+    .then((response) => {
+      if (response.status === 200) {
+        console.log(body);
+        console.log(response.data);
+        dispatch({
+          type: UPDATE_QUESTION,
+          payload: response.data,
+        });
+        alert("question updated"); // response.data.message
+      }
+    })
+    .catch((payload) => alert(payload.response.data.message));
 };

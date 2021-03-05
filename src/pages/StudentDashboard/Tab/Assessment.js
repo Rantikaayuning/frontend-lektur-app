@@ -12,7 +12,7 @@ const StudentBoardAssessment = () => {
         dispatch(getStudentCourses());
     }, [dispatch]);
 
-    // console.log(studentCourses.course)
+    console.log(studentCourses.course)
     return (
         <>
         {studentCourses.course === null || studentCourses.course === undefined ? (
@@ -29,11 +29,10 @@ const StudentBoardAssessment = () => {
                     </Link>
                     <p><b>Assesment</b></p>
                 </div>
+                <div className='student-course-list'>
                 {studentCourses.course.map((item, index) => (
-                    <div className='student-course-list'>
-                        {item.status === 0 ? (
-                        <div className='student-assess-detail'></div>
-                        ) : item.status === 1 ? (
+                    <div>
+                        {item.status === 1 ? ( // status still not fixed
                         <div className='student-assess-detail'>
                             <div className='assessment-detail'>
                                 <h4>{item.courseId.title}</h4>
@@ -49,25 +48,26 @@ const StudentBoardAssessment = () => {
                                 </div>
                             </div>
                         </div>
-                        ) : (
-                            <div className='student-assess-detail'>
+                        ) : item.status === 2 ? (
+                        <div className='student-assess-detail'>
                             <div className='assessment-detail'>
                                 <h4>{item.courseId.title}</h4>
                                 <p className='lecture'>{item.courseId.teacherId.fullname}</p>
-                                <p className='complete'>Completed at: -</p>
+                                <p className='complete'>Completed at: </p>
                             </div>
                             <div className='assessment-precentage'>
                                 <div>
-                                    <p><i>No result yet</i></p>
-                                    <Link to={`/assessment/${item.courseId._id}`}>
-                                        <button>Take Test</button>
-                                    </Link>
+                                    <h4>{item.score}%</h4>
+                                    <p>Question Correct</p>
                                 </div>
                             </div>
                         </div>
+                        ) : (
+                            <div className='student-assess-detail'></div>
                         )}
                     </div>
                 ))}
+                </div>
                 </div>
             </div>
         )}

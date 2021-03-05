@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { postAssessment } from "../../../redux/actions/AssessmentAction";
+import {
+  postAssessment,
+  getQuestionsTemp,
+} from "../../../redux/actions/AssessmentAction";
 import { produce } from "immer";
 
 import { useDispatch } from "react-redux";
 
 const TeacherAssessmentTab = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [question, setQuestion] = useState({
@@ -39,8 +43,12 @@ const TeacherAssessmentTab = () => {
       answer: answer,
       options: options,
     };
-    dispatch(postAssessment(body));
-    // history.push("/teacher-new-assessment");
+    dispatch(postAssessment(body))
+      .then(() => dispatch(getQuestionsTemp()))
+      .then(() => history.push("/created-questions"));
+
+    // history.push("/created-questions");
+
     console.log(body);
   };
 
@@ -172,10 +180,10 @@ const TeacherAssessmentTab = () => {
             </div>
           </div>
           <div className="add-new-question">
-            <Link to="/teacher-new-assessment">Add New Question</Link>
-            <div>
-              <Link to="/created-questions">See All Questions</Link>
-            </div>
+            {/* <Link to="/teacher-new-assessment">Add New Question</Link> */}
+            {/* <div> */}
+            <Link to="/created-questions">See All Questions</Link>
+            {/* </div> */}
           </div>
           <div className="save-exam-question">
             <button type="submit" onClick={handleSubmit}>

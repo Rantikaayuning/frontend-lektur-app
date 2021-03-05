@@ -112,7 +112,7 @@ export const getCourseSearch = input => dispatch => {
   API.get(`/courses/search?search=${input}`)
     .then(response => {
       if (response.status === 200) {
-        console.log("response", response.data.result)
+        // console.log("response", response.data.result)
         dispatch({
           type: SEARCH_COURSE,
           payload: response.data.result,
@@ -131,7 +131,7 @@ export const getTeacherCourses = () => (dispatch) => {
     }})
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result.dataCourse)
+        // console.log(response.data.result.dataCourse)
         dispatch({
           type: GET_TEACHER_COURSES,
           payload: response.data.result.dataCourse,
@@ -301,6 +301,7 @@ export const uploadVideo = (idContent, video) => (dispatch) => {
   API.put(`/content/upload/video?contentId=${idContent}`, video, config)
     .then((response) => {
       if(response.status === 201) {
+        // console.log(response.data.result);
         dispatch({
           type: UPLOAD_VIDEO,
           payload: response.data.result,

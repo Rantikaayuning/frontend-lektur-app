@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import { getQuestionsTemp } from "../../../redux/actions/AssessmentAction";
+import {
+  getQuestionsTemp,
+  deleteQuestion,
+} from "../../../redux/actions/AssessmentAction";
 
 function CreatedQuestions() {
   // const [isPicked, setPicked] = useState({
@@ -14,7 +17,7 @@ function CreatedQuestions() {
 
   const history = useHistory();
 
-  const id = "602e06cc34a3a426b0311c94"; // punya maxim
+  const { id } = useParams(); // punya maxim tadinya skrg skrg diganti id biasa krn di page edit
 
   const dispatch = useDispatch();
   const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
@@ -39,14 +42,20 @@ function CreatedQuestions() {
 
   console.log("allQuestions: ", allQuestions);
 
+  const deleteCreatedQuestion = (courseId, id) => {
+    dispatch(deleteQuestion(courseId, id))
+      .then(() => dispatch(getQuestionsTemp()))
+      .then(() => history.push(`/created-questions/${id}`));
+  };
+
   return (
     <div className="teacher-assessment">
       <div className="teacher-dashboard-list">
-        <Link to="/teacher-create-course">
+        <Link to={`/course-teacher/course/${id}`}>
           <p>Course</p>
         </Link>
         <p className="open">Assessment</p>
-        <Link to="/teacher-new-students">
+        <Link to={`/course-teacher/students/${id}`}>
           <p>Students</p>
         </Link>
       </div>
@@ -57,12 +66,7 @@ function CreatedQuestions() {
         {allQuestions !== null ? (
           <div className="teacher-new-question-save">
             <div className="teacher-option-save">
-              <h4>
-                {allQuestions.length} Questions{" "}
-                <Link to={`/created-questions/${id}`}>
-                  <img src={imgEdit} alt="edit"></img>
-                </Link>
-              </h4>
+              <h4>{allQuestions.length} Questions </h4>
               <br />
             </div>
             <div className="save-question-box">
@@ -73,6 +77,27 @@ function CreatedQuestions() {
                       {item.number}. {item.question}
                     </p>
                     <p>
+                      <button
+                        onClick={() => deleteCreatedQuestion(id, item._id)}
+                        className="option-deletion-btn"
+                        style={{
+                          marginRight: "10px",
+                          paddingTop: "4px",
+                          paddingBottom: "2px",
+                          fontWeight: "bolder",
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <Link
+                        style={{
+                          paddingRight: "20px",
+                          fontWeight: "bolder",
+                        }}
+                        to={`/course-teacher/assessments/${id}/${item._id}`}
+                      >
+                        Edit
+                      </Link>
                       <img
                         src={imgDropdown}
                         alt="symbol"
@@ -83,7 +108,7 @@ function CreatedQuestions() {
                     </p>
                   </div>
                   <p className="answer">Answer</p>
-                  {item.options.map((option, index) => (
+                  {item.options.map((option) => (
                     <label class="container">
                       <input
                         type="checkbox"
@@ -96,45 +121,6 @@ function CreatedQuestions() {
                     </label>
                   ))}
 
-                  {handleDropDownActive(index) && (
-                    <>
-                      {/* <p className="answer">Answer</p>
-                      {item.options.map((option, index) => (
-                        <label class="container">
-                          <input
-                            type="radio"
-                            name={index}
-                            value={option.value}
-                            checked={item.answer === option.value}
-                          />
-                          <span> {option.text}</span>
-                        </label>
-                      ))} */}
-
-                      {/* <label class="container"> */}
-                      {/* <p className="answer">Answer</p> */}
-                      {/* <input type="radio" name="radio" />{" "}
-                        <span>{item.options.text}</span> */}
-                      {/* </label> */}
-
-                      {/* <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceTwo}</span>
-                      </label>
-                      <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceThree}</span>
-                      </label>
-                      <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceFour}</span>
-                      </label>
-                      <label class="container">
-                        <input type="radio" name="radio" />{" "}
-                        <span>{item.choiceFive}</span>
-                      </label> */}
-                    </>
-                  )}
                   <br />
                   <br />
                 </div>

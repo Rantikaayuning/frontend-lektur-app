@@ -26,7 +26,7 @@ function Navbar(props) {
     props.isAuthentificated && props.getUserProfile();
   }, []);
 
-  console.log(props.userProfile, props.isAuthentificated);
+  // console.log(props.userProfile, props.isAuthentificated);
 
   const handleChange = (e) => {
     // e.preventDefault()

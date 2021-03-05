@@ -1,64 +1,85 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col} from "reactstrap";
 import { Link, useParams } from 'react-router-dom'
 import ContentCards from "../../components/ContentCard/Cards";
-import image2 from "../../assets/Vector1.png"
-// import image3 from "../../assets/Vector2.png"
-import image4 from "../../assets/radio-button.png"
 import ContentMaterial from "./content/index"
 import logo from "../../assets/Vector.png"
-// import logo1 from "../../assets/Vector3.png"
 import logo2 from "../../assets/Vector4.png"
-import { getCourseDetail, getContentDetail, getCourses } from "../../redux/actions/CoursesAction";
+import logo3 from "../../assets/Vector1.png"
+import logo4 from "../../assets/finalSymbol.png"
+import logo5 from "../../assets/radio-button.png"
+import logo6 from "../../assets/Vector2.png"
+import { getContentDetail, getCourses } from "../../redux/actions/CoursesAction";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
-import defaultImg from "../../assets/RectangleSquare.png";
+import defaultImg from "../../assets/defaultLektur.png";
 
 export default function StudentMaterial() {
+    const [openLesson, setOpenLesson] = useState(false)
+    const [openMaterial, setOpenMaterial] = useState(false)
     const { id, content } = useParams()
+    
     const dispatch = useDispatch()
-    const { courseDetail, contentDetail, courses } = useSelector(state => state.courses)
+    const { contentDetail, courses } = useSelector(state => state.courses)
     
     useEffect(() => {
-        dispatch(getCourseDetail(id))
         dispatch(getContentDetail(content))
         dispatch(getCourses());
     }, [dispatch, id, content])
 
-    // console.log("detail", courseDetail)
-    // console.log("content", contentDetail)
+    const handleOpenLesson = () => {
+        setOpenLesson(!openLesson)
+    }
+    const find = contentDetail.listContent && contentDetail.listContent.find((item, id) => item.contentStatus === 0)
+    console.log("content", contentDetail)
+    // console.log("find", find)
     return (
         <>
-            {courseDetail === null || contentDetail.content === undefined ? (
+            {contentDetail.content === undefined ? (
             <div id='loader'></div>
             ) : (
             <div className="content-material">
                 <div className="text">
                     <div>
-                    <span className="bread-crumb">{courseDetail.course.title}</span> /  {" "}
-                    <span className="link">Lesson : {contentDetail.content.title}</span>
+                        <Link to={`/course-detail/${id}`}>
+                            <span className="bread-crumb">{contentDetail.content.contentId.title}</span>
+                        </Link>{" "}/
+                            <span className="link"> Lesson : {contentDetail.content.contentId.title}</span>
                     </div>
-                    <div className="text-title">Lesson : {contentDetail.content.title}</div>
+                <div className="text-title">Lesson : {contentDetail.content.contentId.title}</div>
                 </div>
                 <div className="content-header">
                     <div className="image-content">
                         <div className="inframe">
                         <ReactPlayer 
-                        controls url={contentDetail.content.video} 
+                        onEnablePIP={true}
+                        controls url={contentDetail.content.contentId.video} 
                         className='video' 
                         width='100%' 
                         height='100%'
+                        light={contentDetail.content.contentId.thumbnail}
+                        playing={true}
+                        volume={0.182}
+                        onEnded={handleOpenLesson}
                         />
                         </div>
                         <div className="content-lock-material">
                             <ContentMaterial
                             lessonList=
                             {contentDetail.listContent.map((item, index) => (
-                                <Link to={`/course-content/${id}/${item._id}`}>
-                                <div className={'unlocked'}>
-                                    <img src={index === 0 ? logo : logo2} alt='logo'/>Lesson #{index + 1} : {item.title}
-                                </div>
-                                </Link>
+                                <>
+                                {item.contentStatus === 1 ? (
+                                    <Link to={`/course-content/${id}/${item.contentId._id}`}>
+                                    <div className='unlocked'>
+                                        <img src={logo} alt='logo'/>Lesson #{index + 1} : {item.contentId.title}
+                                    </div>
+                                    </Link>
+                                ) : (
+                                    <div className='locked'>
+                                        <img src={logo2} alt='logo'/>Lesson #{index + 1} : {item.contentId.title}
+                                    </div>
+                                    )}
+                                </>
                             ))}
                             />
                         </div>
@@ -66,21 +87,32 @@ export default function StudentMaterial() {
                     <div className="content-lock">
                         <div className="description-text">
                             <div className="title-des">Description</div>
-                            <p>{contentDetail.content.description}</p> 
+                            <p>{contentDetail.content.contentId.description}</p> 
                         </div>  
                         <div className="next">
                             <div className="title-next">What's Next</div>
                             {contentDetail.material.map((item, index) => (
                                 <p>
-                                    <img src={image4} alt='cinematic course'/>{" "}{contentDetail.content.title} :{' '}
-                                    <a href={item.material} target='_blank' rel='noreferrer'><span>{item._id}.pdf</span></a>
+                                    <img src={openMaterial ? logo6 : logo5} alt='cinematic course'/>{" "}Read course material :{' '}
+                                    <a href={item.material} target='_blank' rel='noreferrer' onClick={() => setOpenMaterial(true)}>
+                                        <span>{contentDetail.content.contentId.title} {index === 0 ? '' : (index + 1) }.pdf</span>
+                                    </a>
                                 </p>
                             ))}
-                            <Link to={`/course-content/${id}/${contentDetail.listContent[1]._id}`}>
-                                <button>
-                                    <img src={image2} alt='next lesson'/>{" "}{contentDetail.listContent[1].title}
+                            
+                            {find !== null && find !== undefined ? (
+                            <Link to={`/course-content/${contentDetail.content.courseId}/${find.contentId._id}`}>
+                                <button className={openLesson ? 'next-lesson-button' : 'next-locked-button'} onClick={handleOpenLesson}>
+                                    <img src={openLesson ? logo3 : logo2} alt='next lesson'/>{" "}Next Lesson : {find.contentId.title}
                                 </button>
                             </Link>
+                            ) : (
+                            <Link to={`/assessment/${id}`}>
+                                <button className='next-lesson-button'>
+                                    <img src={logo4} alt='next lesson'/>{" "}Final Assessment
+                                </button>
+                            </Link>
+                            )}
                         </div>
                     </div>
                 </div>
