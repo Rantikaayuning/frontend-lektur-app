@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import CreateContent from "../../../components/CreateContent"
 
-import {getTeacherProfile} from "../../../redux/actions/TeacherAction"
+import {postCourse,  deleteCourse} from "../../../redux/actions/CoursesAction";
 import {Tooltip} from "reactstrap"
 
 // import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
@@ -13,33 +13,44 @@ const TeacherCourseTab = (props) => {
 
     const toggle = () => setTooltipOpen(!tooltipOpen);
  
-    const {id} = useParams();
     const history = useHistory();
 
     const dispatch = useDispatch();
 
-    // const [isAdd, setAdd] = useState(false)
+    const [isAdd1, setAdd1] = useState(false)
 
-    // const handleAdd = () => {
-    //     setAdd(true)
-    // }
-    // const courses = useSelector(state => state.courses.courses)
-    // const {getCourses} = useSelector(state => state.teachers)
+    const handleAdd1 = () => {
+        setAdd1(true);
+    }
 
-    // const courseDetail = useSelector((state) => state.teachers.courseDetail)
+    const {id, getTitle, getOverview, idContent} = useSelector(state => state.courses)
+
     const [title, setTitle] = useState ("")
     const [overview, setOverview] = useState ("")
-    const [category, setCategory] = useState("")
+    const [imageData, setImageData] = useState("")
+    // const [category, setCategory] = useState("")
 
-  
 
-   useEffect(() => {
-       dispatch(getTeacherProfile())
-        // dispatch(getCourseDetail(id));
-    //    dispatch(getCourses(id))
-   }, [dispatch])
+    const submitCourse = () => {
+        dispatch(postCourse(title, overview, imageData))
+    }
 
-    // console.log(getCourses[getCourses.length-1]);
+//---------------CONTENT/LESSON--------------------------------------------//
+
+    const [contentList, setContentList] = useState([])
+
+    const addCOntent = () => {
+        setContentList(contentList.concat(<CreateContent key={contentList.length} />));
+      };
+
+//-----------------------DELETE-COURSE--------------------------------//
+
+    const deleteCourseTeacher = () => {
+        dispatch(deleteCourse(id))
+        history.push("/teacher-dashboard")
+      }
+
+    console.log(idContent);
 
     return (
         <>
@@ -53,80 +64,131 @@ const TeacherCourseTab = (props) => {
                         <p>Students</p>
                     </Link>
                 </div>
-                <div className='teacher-new-course-box'>
-                    <div className='teacher-new-course-title'>
-                        <p><input type="text" placeholder="Title"  onChange={(e) => setTitle (e.target.value)} value={title}/><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-new-course-overview'>
-                        <p><textarea type="text" placeholder="Overview*" cols='45' rows='5'onChange={(e) => setOverview (e.target.value)} value={overview}/><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-new-course-title'>
-                    <p><input type="text" placeholder="Category"  onChange={(e) => setCategory (e.target.value)} value={category}/><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-add-header-image'>
-                        <p><button>Add header image</button></p> 
-                        <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
-                    </div>
-                   
-                    <div className='teacher-save-new-course'>
-                        <p><button  >Save</button></p>
-                    </div>
-                   
-                    <div>
-                        <p><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-add-new-lesson-content'>
-                        <h4>Content*</h4>
-                    </div>
-                    {/* {isAdd === true ? (
-                    <div className='add-new-lesson-box'> */}
-                        {/* <div className='add-new-lesson-input'>
-                            <h4><b>Lesson #1</b></h4>
-                            <div className='add-new-lesson-title'>
-                                <p><input type="text" placeholder="     Title*"/></p>
-                                <p><hr type="solid"/></p>
-                            </div>
-                            <div className='add-new-lesson-description'>
-                                <p><textarea type="text" placeholder="      Description*" /></p>
-                                <p><hr type="solid"/></p>
-                            </div>
-                        </div>
-                        <div className='upload-new-lesson'>
-                            <p><button className='video-lesson'>Upload Video</button></p>
-                            <p>Required. Max. size 200 MB. Supported format .mp4</p>
-                            <p><button className='material-lesson'>Add Lesson Material</button></p>
-                            <p>Max. size 20MB. Supported format .pdf</p>
-                            <p className='save'><button>save</button></p>
-                        </div> */}
-                        
-                        <Tooltip placement="top" isOpen={tooltipOpen} autohide={true} target="DisabledAutoHideExample" toggle={toggle}>
-                            You have to save first! 
-                        </Tooltip>
-                    {/* </div>
-                    ) : (
-                        <div></div>
-                    ) } */}
-                    <div className='teacher-add-new-lesson-button'>
-                        <p onClick={toggle}>
-                            <span href="#" id="DisabledAutoHideExample">Add new lesson </span>
+                <div className='teacher-create-course-box'>
+                    {id === null ? (
+                    <>
+                    <div className='teacher-create-course-title'>
+                        <p>
+                            <input 
+                                type="text" 
+                                placeholder="Title"  
+                                onChange={(e) => 
+                                setTitle (e.target.value)} 
+                                value={title}/><hr type="solid"
+                            />
                         </p>
                     </div>
-                    <div className='publish-and-delete-course'>
-                        <Link to='/course-filled-teacher'>
-                            <p><button>Publish Course</button></p>
-                        </Link>
-                        <p className='delete'>Delete Course</p>
+                    <div className='teacher-create-course-overview'>
+                        <p>
+                            <textarea 
+                                type="text" 
+                                placeholder="Overview*" 
+                                cols='45' rows='5'
+                                onChange={(e) => 
+                                setOverview (e.target.value)} 
+                                value={overview}
+                            />
+                            <hr type="solid"/>
+                        </p>
                     </div>
+                    {/* <div className='teacher-create-course-title'>
+                        <p>
+                            <input 
+                                type="text" 
+                                placeholder="Category"  
+                                onChange={(e) => 
+                                setCategory (e.target.value)} 
+                                value={category}
+                            />
+                            <hr type="solid"/>
+                        </p>
+                    </div> */}
+                    <div className='teacher-add-header-image'>
+                        {isAdd1 === true ? (
+                            <p>
+                                <input 
+                                    type="file" 
+                                    placeholder="Image" 
+                                    id='upload'
+                                    onChange={(e) => 
+                                        setImageData(e.target.files[0])
+                                    }
+                                />
+                               <hr type="solid" />
+                            </p>
+                          ) : ( 
+                            <p>
+                                <button 
+                                   onClick = {handleAdd1}
+                                   
+                                >
+                                   Add header image
+                                </button>
+                            </p> 
+                        )}  
+                        <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
+                    </div>
+                    <div className='teacher-save-new-course'>
+                         <p>
+                             <button 
+                                 onClick = {submitCourse}
+                             >
+                               Save
+                             </button>
+                         </p>
+                     </div>
+                   
+                    </>
+                     ) : (
+                    <>
+                    {id === null ? (
+                        <div id='loader'></div>
+                    ) : (
+                        <>
+                        <div className="course-detail-update">
+                               {getTitle}
+                            <Link to='/teacher-create-course'>
+                                <i class="fa fa-pencil "></i>
+                            </Link>
+                            <p>
+                                {getOverview}
+                            </p>
+                        </div>
+                       
+                     </>
+                        )}
+                    </>
+                    )} 
+                  
+                    {id === null ? (
+                        <div></div>
+                    ) : (
+                        <>
+                            <div>
+                                <p><hr type="solid"/></p>
+                            </div>
+                            <div className='teacher-update-content'>
+                                <h4>Content*</h4>
+                            </div>
+                            <CreateContent/>
+                            <div className='teacher-add-new-lesson-button'>
+                                {contentList}
+                                <p onClick={addCOntent}>Add new lesson</p>
+                            </div>
+                            <div className='publish-and-delete-course'>
+                                <Link to={`/course-filled-teacher/${id}`}>
+                                    <p><button>Publish Course</button></p>
+                                </Link>
+                                <p className='delete' onClick={deleteCourseTeacher}>Delete Course</p>
+                            </div>
+                        </>
+                     )} 
                 </div>
             </div>
+   
         </>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        createCourses: state.teachers.createCourses
-    };
-  };
-  
-  export default connect(mapStateToProps)(TeacherCourseTab);
+export default TeacherCourseTab;
+
