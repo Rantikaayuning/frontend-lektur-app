@@ -1,7 +1,7 @@
 import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../../redux/actions/UserAction";
 import { studentInvite } from "../../redux/actions/TeacherAction";
 import { useParams } from "react-router-dom";
@@ -11,6 +11,7 @@ export const PopUpInvite = props => {
   const [inputText, setInputText] = useState("");
   const [studentList, setStudentList] = useState([]);
   const dispatch = useDispatch();
+  const state = useSelector(state => state.teachers.studentInvite);
   useEffect(() => {
     dispatch(getUserProfile());
   }, [dispatch, studentList]);
@@ -18,6 +19,7 @@ export const PopUpInvite = props => {
     e.preventDefault();
     setStudentList([...studentList, inputText]);
     setInputText("");
+    console.log(state);
   }
   function handleInput(e) {
     setInputText(e.target.value);
@@ -28,7 +30,6 @@ export const PopUpInvite = props => {
 
   return (
     <>
-      {" "}
       <Modal
         show={props.show}
         size="lg"
@@ -52,7 +53,7 @@ export const PopUpInvite = props => {
                 <span>
                   <button onClick={handleAdd}>Add</button>
                 </span>
-                <hr type="solid" />
+                <hr />
               </form>
             </p>
           </div>
@@ -62,7 +63,7 @@ export const PopUpInvite = props => {
                 <p>
                   {student}
                   <span>
-                    <hr type="solid" />
+                    <hr />
                   </span>
                 </p>
                 <p
@@ -77,7 +78,7 @@ export const PopUpInvite = props => {
             ))}
           </div>
           <div className="invite-button-invite">
-            <button onClick={dispatch(studentInvite(id, studentList))}>
+            <button onClick={() => dispatch(studentInvite(id, studentList))}>
               Invite
             </button>
           </div>

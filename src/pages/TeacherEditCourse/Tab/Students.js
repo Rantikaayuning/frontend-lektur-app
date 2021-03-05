@@ -35,7 +35,7 @@ const TeacherStudentsUpdate = () => {
     dispatch(getCourseDetail(id));
     dispatch(studentAcceptance(id));
   }, [dispatch, id]);
-  console.log(studentsAccStatus);
+
   return (
     <>
       <div className="teacher-assessment">

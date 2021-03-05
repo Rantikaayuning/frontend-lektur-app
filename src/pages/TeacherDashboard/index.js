@@ -2,23 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {
-  teacherProfile,
-} from "../../assets/JSONFile/dummyData";
+import { teacherProfile } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
 
 import {
   getUserProfile,
   updateUserProfile,
 } from "../../redux/actions/UserAction";
-import {getTeacherCourses} from "../../redux/actions/CoursesAction"
+import { getTeacherCourses } from "../../redux/actions/CoursesAction";
 import defaultImg from "../../assets/RectangleSquare.png";
 
 function TeacherDashboard(props) {
   const [isEdit, setEdit] = useState(true);
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
-  const {id} = useParams()
+  const { id } = useParams();
 
   const handleEdit = () => {
     setEdit(!isEdit);
@@ -26,13 +24,13 @@ function TeacherDashboard(props) {
 
   useEffect(() => {
     props.getUserProfile();
-    props.getTeacherCourses(id)
+    props.getTeacherCourses(id);
   }, []);
 
   // console.log(props.userProfile);
-  console.log(props.teacherCourses)
+  console.log(props.teacherCourses);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log(fullname, email);
 
@@ -64,7 +62,7 @@ function TeacherDashboard(props) {
               </span>
             </div>
           ) : (
-            <div id='regular-loader'></div>
+            <div id="regular-loader"></div>
           )}
         </div>
       ) : (
@@ -78,7 +76,7 @@ function TeacherDashboard(props) {
               <input
                 type="text"
                 placeholder="John Doe"
-                onChange={(e) => setFullname(e.target.value)}
+                onChange={e => setFullname(e.target.value)}
                 value={fullname}
               />
               <br />
@@ -89,7 +87,7 @@ function TeacherDashboard(props) {
               <input
                 type="email"
                 placeholder="john@gmail.com"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 value={email}
               />
               <br />
@@ -100,7 +98,7 @@ function TeacherDashboard(props) {
         </div>
       )}
 
-        {props.teacherCourses !== 0 ? (
+      {props.teacherCourses !== 0 ? (
         <div className="courses-container">
           <div className="courses-header">
             <h5>
@@ -110,34 +108,36 @@ function TeacherDashboard(props) {
               <button>New Course</button>
             </Link>
           </div>
-          <hr />
-          {props.teacherCourses.map((item, index) => (
-              <CourseCard
-                key={index}
-                image={defaultImg}
-                title={item.title}
-                numOfVideos={item.totalVideo}
-                numOfLesson={item.totalMaterial}
-                enrolledStudents={item.totalEnrolled}
-                edit={`/course-teacher/edit/${item._id}`}
-              />
-          ))}
+          {/* <hr /> */}
+          {/* {props.teacherCourses.map((item, index) => (
+            <CourseCard
+              key={index}
+              image={defaultImg}
+              title={item.title}
+              numOfVideos={item.totalVideo}
+              numOfLesson={item.totalMaterial}
+              enrolledStudents={item.totalEnrolled}
+              edit={`/course-teacher/edit/${item._id}`}
+            />
+          ))} */}
         </div>
-        ) : (
-          <div id="loader"></div>
-        )}
+      ) : (
+        <div id="loader"></div>
+      )}
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userProfile: state.users.userProfile,
     updateUser: state.users.updateUser,
-    teacherCourses: state.courses.teacherCourses
+    teacherCourses: state.courses.teacherCourses,
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile, updateUserProfile, getTeacherCourses })(
-  TeacherDashboard
-);
+export default connect(mapStateToProps, {
+  getUserProfile,
+  updateUserProfile,
+  getTeacherCourses,
+})(TeacherDashboard);

@@ -6,6 +6,7 @@ import {
   STUDENT_INVITE,
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
+// import axios from "axios";
 
 const token = Cookies.get("token");
 
@@ -67,16 +68,20 @@ export const studentAcceptance = courseId => dispatch => {
     .catch(error => console.log("USER PROFILE ERROR:", error));
 };
 export const studentInvite = (courseId, body) => dispatch => {
-  console.log(body);
-  console.log(courseId);
-  API.get(`/teacher/courses/invite?courseId=${courseId}`, JSON.stringify(body))
+  API({
+    method: "post",
+    url: `/teacher/courses/invite?courseId=${courseId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: body,
+  })
     .then(response => {
-      if (response.status === 200) {
-        dispatch({
-          type: STUDENT_INVITE,
-          payload: response.data.result,
-        });
-      }
+      console.log(response);
+      dispatch({
+        type: STUDENT_INVITE,
+        payload: response.data.result,
+      });
     })
     .catch(error => console.log("USER PROFILE ERROR:", error));
 };
