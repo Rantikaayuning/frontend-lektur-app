@@ -13,20 +13,21 @@ const initialState = {
   isAuthentificated: Cookies.get("token") ? true : false,
   userProfile: null,
   updateUser: null,
-  email: '',
-  password: '',
-  fullname: ''
+  email: "",
+  password: "",
+  fullname: "",
+  token: Cookies.get("token") || null,
 };
 
 const userReducer = (state = initialState, action) => {
-  const { type, payload, role } = action;
+  const { type, payload, role, token } = action;
   switch (type) {
     case LOGIN:
       return {
         ...state,
         login: payload,
         status: role,
-        isAuthentificated: true,
+        token: token,
       };
     case SIGN_UP:
       return {
