@@ -74,20 +74,18 @@ export const getQuestionsTemp = (id) => (dispatch) => {
     .catch((err) => alert(err));
 };
 
-export const deleteQuestion = (id) => () => {
+export const deleteQuestion = (courseId, id) => () => {
   return new Promise((resolve) => {
-    API.delete(
-      `/assessment/delete?courseId=602e06cc34a3a426b0311c94&questionId=${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    API.delete(`/assessment/delete?courseId=${courseId}&questionId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => {
         if (response.status === 200) {
           resolve(response.data);
         }
+        alert("question deleted");
       })
       .catch((err) => alert("error delete question", err));
   });

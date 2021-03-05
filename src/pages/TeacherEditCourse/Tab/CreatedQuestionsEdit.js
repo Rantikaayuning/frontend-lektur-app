@@ -42,10 +42,10 @@ function CreatedQuestions() {
 
   console.log("allQuestions: ", allQuestions);
 
-  const deleteCreatedQuestion = (id) => {
-    dispatch(deleteQuestion(id))
+  const deleteCreatedQuestion = (courseId, id) => {
+    dispatch(deleteQuestion(courseId, id))
       .then(() => dispatch(getQuestionsTemp()))
-      .then(() => alert(`question deleted`));
+      .then(() => history.push(`/created-questions/${id}`));
   };
 
   return (
@@ -66,12 +66,7 @@ function CreatedQuestions() {
         {allQuestions !== null ? (
           <div className="teacher-new-question-save">
             <div className="teacher-option-save">
-              <h4>
-                {allQuestions.length} Questions{" "}
-                {/* <Link to="/teacher-new-assessment">
-                  <img src={imgEdit} alt="edit"></img>
-                </Link> */}
-              </h4>
+              <h4>{allQuestions.length} Questions </h4>
               <br />
             </div>
             <div className="save-question-box">
@@ -83,7 +78,7 @@ function CreatedQuestions() {
                     </p>
                     <p>
                       <button
-                        onClick={() => deleteCreatedQuestion(item._id)}
+                        onClick={() => deleteCreatedQuestion(id, item._id)}
                         className="option-deletion-btn"
                         style={{
                           marginRight: "10px",
