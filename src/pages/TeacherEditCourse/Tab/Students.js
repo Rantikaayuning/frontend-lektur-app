@@ -14,7 +14,7 @@ import checklistTwo from "../../../assets/checklist2.png";
 import checklistThree from "../../../assets/checklist3.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
 import { useDispatch } from "react-redux";
-import {getCourseDetail} from '../../../redux/actions/CoursesAction'
+import { getCourseDetail } from "../../../redux/actions/CoursesAction";
 
 const TeacherStudentsUpdate = () => {
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
@@ -25,11 +25,11 @@ const TeacherStudentsUpdate = () => {
   const toggleFilter = () => setDropdownFilterOpen((prevState) => !prevState);
   const handlePopUp = () => setPopUpOpen(!isPopUpOpen);
 
-  const {id} = useParams()
-  const dispatch = useDispatch()
+  const { id } = useParams();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCourseDetail(id));
-  }, [dispatch, id])
+  }, [dispatch, id]);
 
   return (
     <>
@@ -38,7 +38,7 @@ const TeacherStudentsUpdate = () => {
           <Link to={`/course-teacher/course/${id}`}>
             <p>Course</p>
           </Link>
-          <Link to={`/course-teacher/assessments/${id}`}>
+          <Link to={`/created-questions/${id}`}>
             <p>Assessment</p>
           </Link>
           <p className="open">Students</p>
