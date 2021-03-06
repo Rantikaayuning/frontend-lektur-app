@@ -155,7 +155,7 @@
   line-height: 20px;
   color: #ffffff;
 }
-.course-detail-left button {
+.course-detail-left .not-enrolled {
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
@@ -169,6 +169,23 @@
 
   top: 377px;
   background: #ef9c27;
+  border-radius: 2px;
+  border: none;
+}
+.course-detail-left .enrolled {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #ffffff;
+
+  width: 200px;
+  height: 37px;
+
+  top: 377px;
+  background: #999;
   border-radius: 2px;
   border: none;
 }

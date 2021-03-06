@@ -11,6 +11,7 @@ import defaultImg from "../../../assets/defaultLektur.png";
 import logo from '../../../assets/checklist2.png';
 import logo2 from '../../../assets/Vector4.png';
 
+
 const StudentBoardCourses = () => {
     const [contentModal, setContentModal] = useState(false);
     const [materialModal, setMaterialModal] = useState(false);
@@ -32,10 +33,10 @@ const StudentBoardCourses = () => {
         dispatch(getPopUpMaterial(id))
         setMaterialModal(true)
     }
-
+    
     // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    // console.log("course", studentCourses)
+    console.log("course", studentCourses)
     // console.log('detail', courseDetail)
     return (
         <>
@@ -66,13 +67,13 @@ const StudentBoardCourses = () => {
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
-                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}>
+                            <p className='title-link' onClick={() => handlePopUpMaterial(item.courseId._id)}>
                                 <u>See course materials</u>
                             </p>
                         </div>
                         <div className='course-detail-second'>
-                            <p><Progress color="warning" value={100} /></p>
-                            <p className='title'>Course Complete</p>
+                            <p><Progress color="warning" value={item.totalSeenCourses/item.totalCourse*100} /></p>
+                            <p className='title'>{item.totalSeenCourses}/{item.totalCourse} Course Complete</p>
                             <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Review</button></p>
                         </div>
                     </div> 
@@ -82,14 +83,14 @@ const StudentBoardCourses = () => {
                         <div className='course-detail-first'>
                             <p><b>{item.courseId.title}</b></p>
                             <p className='title'>By {item.courseId.teacherId.fullname}</p>
-                            <p className='title' onClick={() => handlePopUpMaterial(item.courseId._id)}>
+                            <p className='title-link' onClick={() => handlePopUpMaterial(item.courseId._id)}>
                                 <u>See course materials</u>
                             </p>
                         </div>
                         <div className='course-detail-second'>
-                            <p><Progress color="warning" value={1/100*100} /></p>
-                            <p className='title'>0 Course Complete</p>
-                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson</button></p>
+                            <p><Progress color="warning" value={item.totalSeenCourses/item.totalCourse*100} /></p>
+                            <p className='title'>{item.totalSeenCourses}/{item.totalCourse} Course Complete</p>
+                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson #{item.totalSeenCourses === 0 ? '' : item.totalSeenCourses}</button></p>
                         </div>
                     </div> 
                     ) : (

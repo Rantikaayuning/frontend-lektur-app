@@ -112,8 +112,20 @@
     cursor: pointer;
 }
 
+.course-detail-first .title-link{
+    color: #999999;
+    cursor: pointer;
+}
+
+.course-detail-first .title-link:hover{
+    color: #999999;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .course-detail-second .title {
     color: #999999;
+    cursor: default;
 }
 
 .course-detail-second {
@@ -125,11 +137,16 @@
 .course-detail-second button{
     background-color: rgba(62, 137, 174, 1);
     border: none;
-    width: 80%;
+    width: 75%;
     height: max-content;
     color: white;
     margin-top: 20px;
     padding: 10px 24px;
+    border-radius: 2px;
+}
+
+.course-detail-second button:hover{
+    background-color: rgb(49, 106, 134);
 }
 
 .assessment-detail {

@@ -3,7 +3,7 @@ import {
   GET_QUESTIONS,
   POST_QUESTIONS,
   GET_QUESTIONS_TEMP,
-  INPUT_SCORE,
+  PUT_FINAL_SCORE,
   UPDATE_QUESTION,
 } from "../types/AssessmentTypes";
 
@@ -91,11 +91,11 @@ export const deleteQuestion = (courseId, id) => () => {
   });
 };
 
-export const inputStudentScore = (score, id) => async (dispatch) => {
+export const putFinalScore = (score, id) => (dispatch) => {
   API.put(
     `/assessment/result?courseId=${id}`,
     {
-      score,
+      score
     },
     {
       headers: {
@@ -104,14 +104,13 @@ export const inputStudentScore = (score, id) => async (dispatch) => {
     }
   )
     .then((response) => {
-      // console.log(response.data.result);
-      dispatch({
-        type: INPUT_SCORE,
-        payload: response.data.result,
-      });
-      alert("score got input successfully!");
+        console.log('score', score);
+        dispatch({
+          type: PUT_FINAL_SCORE,
+          payload: response.data.result,
+        })
     })
-    .catch((err) => alert(`input score error`));
+    .catch((payload) => alert(payload.response.data.message));
 };
 
 export const updateQuestion = (body, id, questionId) => async (dispatch) => {
