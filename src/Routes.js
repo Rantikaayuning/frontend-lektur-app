@@ -22,6 +22,8 @@ import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
 import CreatedQuestionsEdit from "./pages/TeacherEditCourse/Tab/CreatedQuestionsEdit";
 import TeacherCourseUpdate from "./pages/TeacherEditCourse/Tab/CourseChange";
 
+import CobaContent from "./pages/TeacherNewCourse/Tab/CobaContent";
+
 export const publicRoutes = [
   {
     component: Home,
@@ -70,7 +72,7 @@ export const publicRoutes = [
   },
   {
     component: TeacherCourseTab,
-    path: "/teacher-new-course",
+    path: "/teacher-create-course",
     exact: true,
   },
   {
@@ -138,4 +140,15 @@ export const publicRoutes = [
     path: "/created-questions/:id",
     exact: true,
   },
+  {
+    component: TeacherCourseUpdate,
+    path: "/course-change-teacher/:id", // nanti tambah id jadi /created-questions/:id
+    exact: true,
+  },
+  {
+    component: CobaContent,
+    path: "/coba-content", // nanti tambah id jadi /created-questions/:id
+    exact: true,
+  },
+  
 ];

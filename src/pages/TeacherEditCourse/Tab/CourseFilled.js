@@ -17,6 +17,7 @@ function CourseFilledEdit() {
     materialFilled,
     courseDetail,
     background,
+    idContent,
   } = useSelector((state) => state.courses);
 
   const { id } = useParams();
@@ -86,18 +87,18 @@ function CourseFilledEdit() {
 
                         {materialFilled.map((materi, index) => (
                           <>
-                            <Link to={`/course-change-teacher/${id}`}>
-                              <i class="fa fa-file files"></i>
-                            </Link>
-                            {materi === null ? (
-                              <div></div>
-                            ) : (
-                              <a href={materi.material} target="_blank">
-                                <span className="span-detail">
-                                  {item.title} {index + 1}.pdf
-                                </span>
-                              </a>
-                            )}
+                            {materi.contentId === item._id ? (
+                              <>
+                                <Link to={`/course-change-teacher/${id}`}>
+                                  <i class="fa fa-file files"></i>
+                                </Link>
+                                <a href={materi.material} target="_blank">
+                                  <span className="span-detail">
+                                    {item.title} {index + 1}.pdf
+                                  </span>
+                                </a>
+                              </>
+                            ) : null}
                             <br />
                             {/* <Link to={`/course-change-teacher/${id}`}>
                 <i className="fa fa-file files"></i>
@@ -131,7 +132,9 @@ function CourseFilledEdit() {
               <img src={Comp2} alt="comp2" />
             </div>
           </div> */}
-              <u className="add-new-lesson">Add New Lesson</u>
+              <Link to={`/course-change-teacher/${id}`}>
+                <u className="add-new-lesson">Add New Lesson</u>
+              </Link>
               <button> Save Changes</button>
               <u className="delete-course" onClick={deleteCourseTeacher}>
                 Delete Course
