@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 
 import { teacherProfile } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
@@ -22,8 +23,10 @@ function TeacherDashboard(props) {
   };
 
   useEffect(() => {
-    props.isAuthentificated && props.getUserProfile();
-    props.isAuthentificated && props.getTeacherCourses();
+    props.token ? props.getUserProfile(props.token) : props.getUserProfile();
+    props.token
+      ? props.getTeacherCourses(props.token)
+      : props.getTeacherCourses();
   }, []);
 
   // console.log(props.userProfile);
@@ -101,19 +104,19 @@ function TeacherDashboard(props) {
             </Link>
           </div>
           <div className="card-teacher-container overflow-auto">
-          <hr />
-          {props.teacherCourses.map((item, index) => (
-            <CourseCard
-              key={index}
-              image={item.image === null ? defaultImg : item.image}
-              title={item.title}
-              numOfVideos={item.totalVideo}
-              numOfLesson={item.totalMaterial}
-              enrolledStudents={item.totalEnrolled}
-              edit={`/course-teacher/edit/${item._id}`}
-            />
-          ))}
-        </div>
+            <hr />
+            {props.teacherCourses.map((item, index) => (
+              <CourseCard
+                key={index}
+                image={item.image === null ? defaultImg : item.image}
+                title={item.title}
+                numOfVideos={item.totalVideo}
+                numOfLesson={item.totalMaterial}
+                enrolledStudents={item.totalEnrolled}
+                edit={`/course-teacher/edit/${item._id}`}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <div id="loader"></div>
@@ -128,7 +131,7 @@ const mapStateToProps = (state) => {
     userProfile: state.users.userProfile,
     updateUser: state.users.updateUser,
     teacherCourses: state.courses.teacherCourses,
-    isAuthentificated: state.users.isAuthentificated,
+    token: state.users.token,
   };
 };
 

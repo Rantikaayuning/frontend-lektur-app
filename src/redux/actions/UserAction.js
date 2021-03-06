@@ -51,7 +51,7 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
     headers: {
       Authorization: access_token
         ? `Bearer ${access_token}`
-        : `Bearer ${token}`,
+        : `Bearer ${Cookies.get("token")}`,
     },
   })
     .then((response) => {
@@ -85,5 +85,6 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
         payload: response.data.result,
       });
     }
+    // return response.data.token;
   });
 };
