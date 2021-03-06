@@ -11,7 +11,7 @@ export const PopUpInvite = props => {
   const [inputText, setInputText] = useState("");
   const [studentList, setStudentList] = useState([]);
   const dispatch = useDispatch();
-  const state = useSelector(state => state.teachers.studentInvite);
+  const msgSuccess = useSelector(state => state.teachers.studentInviteSuccess);
   useEffect(() => {
     dispatch(getUserProfile());
   }, [dispatch, studentList]);
@@ -19,7 +19,6 @@ export const PopUpInvite = props => {
     e.preventDefault();
     setStudentList([...studentList, inputText]);
     setInputText("");
-    console.log(state);
   }
   function handleInput(e) {
     setInputText(e.target.value);
@@ -27,6 +26,11 @@ export const PopUpInvite = props => {
   function handleDelete(id) {
     setStudentList(studentList.filter((student, index) => index !== id));
   }
+  const handleInvite = () => {
+    dispatch(studentInvite(id, studentList));
+    // setShowInviteModal(false);
+    props.setPopUpOpen(false);
+  };
 
   return (
     <>
@@ -78,9 +82,7 @@ export const PopUpInvite = props => {
             ))}
           </div>
           <div className="invite-button-invite">
-            <button onClick={() => dispatch(studentInvite(id, studentList))}>
-              Invite
-            </button>
+            <button onClick={handleInvite}>Invite</button>
           </div>
         </Modal.Body>
       </Modal>

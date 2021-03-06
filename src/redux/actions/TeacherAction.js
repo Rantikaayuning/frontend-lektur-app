@@ -3,7 +3,7 @@ import {
   GET_PROFILE_TEACHER,
   CREATE_COURSE,
   STUDENTS_ACCEPT,
-  STUDENT_INVITE,
+  STUDENT_INVITE_SUCCESS,
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
 // import axios from "axios";
@@ -79,10 +79,10 @@ export const studentInvite = (courseId, body) => dispatch => {
     .then(response => {
       console.log(response);
       dispatch({
-        type: STUDENT_INVITE,
+        type: STUDENT_INVITE_SUCCESS,
         payload: response.data.message,
       });
-      alert(`${response.data.message}, please continue to login`);
+      alert(`${response.data.message}`);
     })
     .catch(error => console.log("USER PROFILE ERROR:", error));
 };
