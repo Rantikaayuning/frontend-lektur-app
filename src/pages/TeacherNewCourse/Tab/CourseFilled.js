@@ -73,6 +73,7 @@ function CourseFilled() {
                   </span>
               )}
               </>
+              <br/>
               {materialFilled.map((materi, index) => (
                 <>
                 {materi.contentId === item._id ? (
