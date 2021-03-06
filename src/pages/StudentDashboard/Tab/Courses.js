@@ -89,8 +89,8 @@ const StudentBoardCourses = () => {
                         </div>
                         <div className='course-detail-second'>
                             <p><Progress color="warning" value={item.totalSeenCourses/item.totalCourse*100} /></p>
-                            <p className='title'>{item.totalSeenCourses}/{item.totalCourse} Course Complete</p>
-                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson #{item.totalSeenCourses === 0 ? '' : item.totalSeenCourses}</button></p>
+                            <p className='title'>{item.totalSeenCourses === 0 ? 0 : `${item.totalSeenCourses}/${item.totalCourse}`} Course Complete</p>
+                            <p><button onClick={() => handlePopUpContent(item.courseId._id)}>Lesson {item.totalSeenCourses === 0 ? '' : `#${item.totalSeenCourses}`}</button></p>
                         </div>
                     </div> 
                     ) : (
@@ -173,7 +173,7 @@ const StudentBoardCourses = () => {
                 {<div className="pop-up-course-material">
                     {popUpMaterial.map((item, id) => (
                     <>
-                    <p>Lesson #{id + 1} : {item.contentId.title}?</p>
+                    {/* <p>Lesson : {item.contentId.title}</p> */}
                     <li key={item.contentId.title}>
                         <label>Read course material : <a href={item.material} target='_blank' rel='noreferrer'>{item.contentId.title}.pdf</a></label>
                     </li>
