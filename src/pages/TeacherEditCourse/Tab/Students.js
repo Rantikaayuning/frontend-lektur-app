@@ -124,6 +124,7 @@ const TeacherStudentsUpdate = () => {
                 show={isPopUpOpen}
                 onHide={() => setPopUpOpen(false)}
                 togglePopUp={handlePopUp}
+                setPopUpOpen={setPopUpOpen}
               />
             </div>
             {studentsAccStatus

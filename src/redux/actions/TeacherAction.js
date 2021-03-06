@@ -6,7 +6,6 @@ import {
   STUDENT_INVITE_SUCCESS,
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
-// import axios from "axios";
 
 const token = Cookies.get("token");
 
@@ -71,10 +70,10 @@ export const studentInvite = (courseId, body) => dispatch => {
   API({
     method: "post",
     url: `/teacher/courses/invite?courseId=${courseId}`,
+    data: body,
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: body,
   })
     .then(response => {
       console.log(response);

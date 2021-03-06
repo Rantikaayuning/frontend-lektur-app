@@ -1,4 +1,4 @@
-import { set } from "js-cookie";
+// import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ export const PopUpInvite = props => {
   const handleInvite = () => {
     dispatch(studentInvite(id, studentList));
     // setShowInviteModal(false);
-    props.setPopUpOpen(false);
+    if (msgSuccess.length > 0) props.setPopUpOpen(false);
   };
 
   return (
