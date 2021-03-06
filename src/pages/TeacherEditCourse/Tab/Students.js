@@ -169,7 +169,7 @@ const TeacherStudentsUpdate = () => {
                             Complete
                           </p>
                         </div>
-                      ) : item.status === 3 ? (
+                      ) : item.status === 2 ? (
                         <div className="course-completed">
                           <h3>{item.score}%</h3>
                           <p>Assessment Score</p>
