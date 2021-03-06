@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourseDetail, getCourses, postEnrollCourse } from "../../redux/actions/CoursesAction";
+import { getCourseDetail, getCourses, postEnrollCourse, getStudentCourses } from "../../redux/actions/CoursesAction";
 
 import ContentCards from "../../components/ContentCard/Cards";
 import defaultImg from "../../assets/defaultLektur.png";
@@ -14,12 +14,13 @@ function CourseDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const {courseDetail, courses, enrollCourse} = useSelector(state => state.courses);
+  const {courseDetail, courses, studentCourses} = useSelector(state => state.courses);
   const {userProfile, isAuthentificated} = useSelector(state => state.users);
 
   useEffect(() => {
     dispatch(getCourseDetail(id));
     dispatch(getCourses());
+    dispatch(getStudentCourses());
   }, [dispatch, id]);
 
   const handleEnroll = () => {
@@ -27,7 +28,10 @@ function CourseDetail() {
     setPopUpCourseDetail(true)
   }
 
-  console.log(enrollCourse)
+  const find = studentCourses.course && studentCourses.course.find(item => [item.courseId._id].includes(id))
+
+  // console.log("detail", courseDetail)
+  // console.log(find)
 
   return (
     <div className="main-course">
@@ -43,13 +47,21 @@ function CourseDetail() {
               {userProfile ? (
                 <div>
                   {userProfile.status === 0 ? (
-                    <button onClick={handleEnroll}>
-                      Enroll Now
-                    </button>
+                    <>
+                    {find === null || find === undefined ? (
+                      <button onClick={handleEnroll} className='not-enrolled'>
+                        Enroll Now
+                      </button>
+                    ) : (
+                      <button className='enrolled'>
+                        You've already enrolled
+                      </button>
+                    )}
+                    </>
                   ) : null}
                 </div>
               ) : (
-                <button onClick={handleEnroll}>
+                <button onClick={handleEnroll} className='not-enrolled'>
                   Enroll Now
                 </button>
               )}
@@ -140,9 +152,6 @@ function CourseDetail() {
                       course !
                     </p>
                   </div>
-                  {/* <div className="modal-central-body-login">
-                <Link to="/login">LOGIN</Link>   
-              </div> */}
                 </div>
               </Modal.Header>
             )}
