@@ -9,7 +9,7 @@ const initialState = {
   getCourses: [],
   createCourses: null,
   studentsAccStatus: [],
-  studentInvite: [],
+  studentInvite: "",
 };
 
 const teacherReducer = (state = initialState, action) => {

@@ -80,8 +80,9 @@ export const studentInvite = (courseId, body) => dispatch => {
       console.log(response);
       dispatch({
         type: STUDENT_INVITE,
-        payload: response.data.result,
+        payload: response.data.message,
       });
+      alert(`${response.data.message}, please continue to login`);
     })
     .catch(error => console.log("USER PROFILE ERROR:", error));
 };
