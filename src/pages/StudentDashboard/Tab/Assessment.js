@@ -12,7 +12,7 @@ const StudentBoardAssessment = () => {
         dispatch(getStudentCourses());
     }, [dispatch]);
 
-    console.log(studentCourses)
+    // console.log(studentCourses)
     return (
         <>
         {studentCourses.course === null || studentCourses.course === undefined ? (
@@ -32,7 +32,7 @@ const StudentBoardAssessment = () => {
                 <div className='student-course-list'>
                 {studentCourses.course.map((item, index) => (
                     <div>
-                        {item.status === 1 && (item.totalSeenCourses === item.totalCourse) ? ( // status still not fixed
+                        {item.status === 1 && (item.totalSeenCourses === item.totalCourse && item.totalSeenCourses !== 0) ? (
                         <div className='student-assess-detail'>
                             <div className='assessment-detail'>
                                 <h4>{item.courseId.title}</h4>
@@ -48,7 +48,7 @@ const StudentBoardAssessment = () => {
                                 </div>
                             </div>
                         </div>
-                        ) : item.status === 1 && (item.totalSeenCourses !== item.totalCourse) ? (
+                        ) : item.status === 1 && (item.totalSeenCourses !== item.totalCourse || item.totalSeenCourses === 0)? (
                         <div className='student-assess-detail'>
                             <div className='assessment-detail'>
                                 <h4>{item.courseId.title}</h4>
