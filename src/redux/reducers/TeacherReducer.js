@@ -3,6 +3,7 @@ import {
   CREATE_COURSE,
   STUDENTS_ACCEPT,
   STUDENT_INVITE_SUCCESS,
+  STUDENT_APPROVE,
 } from "../types/TeacherTypes";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   createCourses: null,
   studentsAccStatus: [],
   studentInviteSuccess: "",
+  studentApprove: null,
 };
 
 const teacherReducer = (state = initialState, action) => {
@@ -34,6 +36,11 @@ const teacherReducer = (state = initialState, action) => {
       return {
         ...state,
         studentInviteSuccess: payload,
+      };
+    case STUDENT_APPROVE:
+      return {
+        ...state,
+        studentApprove: payload,
       };
     default:
       return state;

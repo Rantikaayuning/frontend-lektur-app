@@ -14,7 +14,10 @@ import checklistThree from "../../../assets/checklist3.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseDetail } from "../../../redux/actions/CoursesAction";
-import { studentAcceptance } from "../../../redux/actions/TeacherAction";
+import {
+  studentAcceptance,
+  studentApprove,
+} from "../../../redux/actions/TeacherAction";
 
 const TeacherStudentsUpdate = () => {
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
@@ -34,7 +37,9 @@ const TeacherStudentsUpdate = () => {
     dispatch(getCourseDetail(id));
     dispatch(studentAcceptance(id));
   }, [dispatch, id]);
-
+  function handleAccept(studentId) {
+    dispatch(studentApprove(id, studentId));
+  }
   return (
     <>
       <div className="teacher-assessment">
@@ -172,7 +177,11 @@ const TeacherStudentsUpdate = () => {
                       ) : (
                         <div className="course-pending">
                           <p>
-                            <button onClick={null}>Accept</button>
+                            <button
+                              onClick={() => handleAccept(item.studentId._id)}
+                            >
+                              Accept
+                            </button>
                           </p>
                         </div>
                       )}
