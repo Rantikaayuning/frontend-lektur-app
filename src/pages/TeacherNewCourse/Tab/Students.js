@@ -5,13 +5,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Progress,
 } from "reactstrap";
 import searchIcon from "../../../assets/search.png";
-import { studentEnroll } from "../../../assets/JSONFile/dummyData";
-import checklistOne from "../../../assets/checklist1.png";
-import checklistTwo from "../../../assets/checklist2.png";
-import checklistThree from "../../../assets/checklist3.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
 
 const TeacherStudentsTab = () => {
@@ -114,54 +109,7 @@ const TeacherStudentsTab = () => {
                 togglePopUp={handlePopUp}
               />
             </div>
-            {studentEnroll.map((item) => (
-              <div className="student-list-name">
-                <div>
-                  <p>
-                    <b>{item.name}</b>
-                  </p>
-                  {item.isActive === true ? (
-                    <p>
-                      <img src={checklistTwo} alt="active" /> Active
-                    </p>
-                  ) : item.isCompleted === true ? (
-                    <p>
-                      <img src={checklistThree} alt="completed" /> Completed
-                    </p>
-                  ) : (
-                    <p>
-                      <img src={checklistOne} alt="pending" /> Pending
-                    </p>
-                  )}
-                </div>
-                <div className="course-status">
-                  {item.isActive === true && item.isPending === false ? (
-                    <div className="course-active">
-                      <p>
-                        <Progress
-                          color="warning"
-                          value={(item.noQuestion / item.totalQuestion) * 100}
-                        />
-                      </p>
-                      <p>
-                        {item.noQuestion}/{item.totalQuestion} Course Complete
-                      </p>
-                    </div>
-                  ) : item.isCompleted === true ? (
-                    <div className="course-completed">
-                      <h3>{item.score}%</h3>
-                      <p>Assessment Score</p>
-                    </div>
-                  ) : (
-                    <div className="course-pending">
-                      <p>
-                        <button>Accept</button>
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+            <div className='student-list-empty'></div>
           </div>
         </div>
       </div>

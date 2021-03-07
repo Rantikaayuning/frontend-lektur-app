@@ -70,6 +70,11 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
+.student-list-empty {
+  display: flex;
+  height: 200px;
+}
+
 .student-list-header button {
   padding: 10px 24px;
   color: white;

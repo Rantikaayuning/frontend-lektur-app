@@ -142,11 +142,11 @@ const TeacherStudentsUpdate = () => {
                       <p>
                         <b>{item.studentId.fullname}</b>
                       </p>
-                      {item.status === 1 || item.status === 2 ? (
+                      {item.status === 1 ? (
                         <p>
                           <img src={checklistTwo} alt="active" /> Active
                         </p>
-                      ) : item.status === 3 ? (
+                      ) : item.status === 2 ? (
                         <p>
                           <img src={checklistThree} alt="completed" /> Completed
                         </p>
@@ -157,19 +157,18 @@ const TeacherStudentsUpdate = () => {
                       )}
                     </div>
                     <div className="course-status">
-                      {item.status === 1 || item.status === 2 ? (
+                      {item.status === 1 ? (
                         <div className="course-active">
                           <p>
                             <Progress
                               color="warning"
                               value={
-                                (item.noQuestion / item.totalQuestion) * 100
+                                (item.totalSeenCourses/item.totalCourse) * 100
                               }
                             />
                           </p>
                           <p>
-                            {item.noQuestion}/{item.totalQuestion} Course
-                            Complete
+                            {`${item.totalSeenCourses}/${item.totalCourse} Course Complete`}
                           </p>
                         </div>
                       ) : item.status === 2 ? (
