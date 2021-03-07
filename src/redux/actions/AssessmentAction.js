@@ -2,9 +2,9 @@ import API from "../../api/index";
 import {
   GET_QUESTIONS,
   POST_QUESTIONS,
-  GET_QUESTIONS_TEMP,
   PUT_FINAL_SCORE,
   UPDATE_QUESTION,
+  GET_ONE_QUESTION,
 } from "../types/AssessmentTypes";
 
 import Cookies from "js-cookie";
@@ -28,20 +28,13 @@ export const getQuestions = (id) => (dispatch) => {
     .catch((err) => alert(err));
 };
 
-// should be body here
-// export const postAssessment = (body, id) => (dispatch) => {
-export const postAssessment = (body) => async (dispatch) => {
-  // (`/assessment/create?courseId=${id}`)
-  API.post(
-    `/assessment/create?courseId=602e06cc34a3a426b0311c94`,
-    JSON.stringify(body),
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-type": "application/json",
-      },
-    }
-  )
+export const postAssessment = (body, id) => async (dispatch) => {
+  API.post(`/assessment/create?courseId=${id}`, JSON.stringify(body), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+  })
     .then((response) => {
       if (response.status === 201) {
         console.log(body);
@@ -55,32 +48,16 @@ export const postAssessment = (body) => async (dispatch) => {
     .catch((payload) => alert(payload.response.data.message));
 };
 
-// export const getQuestions = (id) => (dispatch) => {
-export const getQuestionsTemp = (id) => (dispatch) => {
-  // API.get(`/assessment/?courseId=${id}`, {
-  API.get(`/assessment/?courseId=602e06cc34a3a426b0311c94`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        dispatch({
-          type: GET_QUESTIONS_TEMP,
-          payload: response.data.result,
-        });
-      }
-    })
-    .catch((err) => alert(err));
-};
-
-export const deleteQuestion = (courseId, id) => () => {
+export const deleteQuestion = (courseId, questionId) => () => {
   return new Promise((resolve) => {
-    API.delete(`/assessment/delete?courseId=${courseId}&questionId=${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    API.delete(
+      `/assessment/delete?courseId=${courseId}&questionId=${questionId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((response) => {
         if (response.status === 200) {
           resolve(response.data);
@@ -95,7 +72,7 @@ export const putFinalScore = (score, id) => (dispatch) => {
   API.put(
     `/assessment/result?courseId=${id}`,
     {
-      score
+      score,
     },
     {
       headers: {
@@ -104,11 +81,11 @@ export const putFinalScore = (score, id) => (dispatch) => {
     }
   )
     .then((response) => {
-        console.log('score', score);
-        dispatch({
-          type: PUT_FINAL_SCORE,
-          payload: response.data.result,
-        })
+      console.log("score", score);
+      dispatch({
+        type: PUT_FINAL_SCORE,
+        payload: response.data.result,
+      });
     })
     .catch((payload) => alert(payload.response.data.message));
 };
@@ -134,6 +111,28 @@ export const updateQuestion = (body, id, questionId) => async (dispatch) => {
         });
         alert("question updated"); // response.data.message
       }
+    })
+    .catch((payload) => alert(payload.response.data.message));
+};
+
+export const getOneQuestion = (questionId) => (dispatch) => {
+  API.get(`/assessment/question?questionId=${questionId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: GET_ONE_QUESTION,
+          payload: response.data.result,
+          questionText: response.data.result.question,
+          questionNumber: response.data.result.number,
+          questionRemarks: response.data.result.remarks,
+          questionOptions: response.data.result.options,
+        });
+      }
+      // alert(`question with questionId ${questionId} got dispatched`);
     })
     .catch((payload) => alert(payload.response.data.message));
 };

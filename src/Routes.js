@@ -77,12 +77,12 @@ export const publicRoutes = [
   },
   {
     component: TeacherAssessmentTab,
-    path: "/teacher-new-assessment", // should be /teacher-new-assessment/:id
+    path: "/teacher-new-assessment/:id", // 1. should be /teacher-new-assessment/:id
     exact: true,
   },
   {
     component: TeacherStudentsTab,
-    path: "/teacher-new-students", // should be /teacher-new-students/:id
+    path: "/teacher-new-students/:id", // should be /teacher-new-students/:id
     exact: true,
   },
   {
@@ -132,7 +132,7 @@ export const publicRoutes = [
   },
   {
     component: CreatedQuestions,
-    path: "/created-questions", // nanti tambah id jadi /created-questions/:id dan ubah nama path nya nnti jgn /created-questions biar ga sama kaya edit
+    path: "/new-created-questions/:id", // 2. nanti tambah id jadi /created-questions/:id dan ubah nama path nya nnti jgn /created-questions biar ga sama kaya edit
     exact: true,
   },
   {
@@ -150,5 +150,4 @@ export const publicRoutes = [
     path: "/coba-content", // nanti tambah id jadi /created-questions/:id
     exact: true,
   },
-  
 ];
