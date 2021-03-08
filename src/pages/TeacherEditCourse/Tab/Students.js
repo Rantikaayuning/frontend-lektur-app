@@ -50,7 +50,7 @@ const TeacherStudentsUpdate = () => {
           <Link to={`/course-teacher/course/${id}`}>
             <p>Course</p>
           </Link>
-          <Link to={`/course-teacher/assessments/${id}`}>
+          <Link to={`/created-questions/${id}`}>
             <p>Assessment</p>
           </Link>
           <p className="open">Students</p>
