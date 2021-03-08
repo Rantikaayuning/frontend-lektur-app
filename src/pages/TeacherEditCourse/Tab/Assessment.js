@@ -283,7 +283,18 @@ const TeacherAssessmentUpdate = () => {
             {/* </div> */}
           </div>
           <div className="save-exam-question">
-            <button type="submit" onClick={handleSubmit}>
+            <button
+              type="submit"
+              onClick={(e) =>
+                question.number &&
+                question.question &&
+                question.remarks &&
+                options &&
+                answer
+                  ? handleSubmit(e)
+                  : alert("Please fill in the question correctly")
+              }
+            >
               Save Exam
             </button>
           </div>
