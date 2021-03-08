@@ -75,12 +75,12 @@ export const publicRoutes = [
   },
   {
     component: TeacherAssessmentTab,
-    path: "/teacher-new-assessment", // should be /teacher-new-assessment/:id
+    path: "/teacher-new-assessment/:id", // should be /teacher-new-assessment/:id
     exact: true,
   },
   {
     component: TeacherStudentsTab,
-    path: "/teacher-new-students", // should be /teacher-new-students/:id
+    path: "/teacher-new-students/:id", // should be /teacher-new-students/:id
     exact: true,
   },
   {
@@ -130,7 +130,7 @@ export const publicRoutes = [
   },
   {
     component: CreatedQuestions,
-    path: "/created-questions",
+    path: "/new-created-questions/:id",
     exact: true,
   },
   {
