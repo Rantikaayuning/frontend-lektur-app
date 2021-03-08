@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import {
   postAssessment,
-  getQuestionsTemp,
+  getQuestions,
 } from "../../../redux/actions/AssessmentAction";
 import { produce } from "immer";
 
@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 
 const TeacherAssessmentTab = () => {
   const history = useHistory();
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const [question, setQuestion] = useState({
@@ -43,9 +44,9 @@ const TeacherAssessmentTab = () => {
       answer: answer,
       options: options,
     };
-    dispatch(postAssessment(body))
-      .then(() => dispatch(getQuestionsTemp()))
-      .then(() => history.push("/created-questions"));
+    dispatch(postAssessment(body, id))
+      .then(() => dispatch(getQuestions(id)))
+      .then(() => history.push(`/new-created-questions/${id}`));
 
     // history.push("/created-questions");
 
@@ -58,11 +59,11 @@ const TeacherAssessmentTab = () => {
     <>
       <div className="teacher-assessment">
         <div className="teacher-dashboard-list">
-          <Link to="/teacher-create-course">
+          <Link to={`/course-filled-teacher/${id}`}>
             <p>Course</p>
           </Link>
           <p className="open">Assessment</p>
-          <Link to="/teacher-new-students">
+          <Link to={`/teacher-new-students/${id}`}>
             <p>Students</p>
           </Link>
         </div>
@@ -182,7 +183,7 @@ const TeacherAssessmentTab = () => {
           <div className="add-new-question">
             {/* <Link to="/teacher-new-assessment">Add New Question</Link> */}
             {/* <div> */}
-            <Link to="/created-questions">See All Questions</Link>
+            <Link to={`/new-created-questions/${id}`}>See All Questions</Link>
             {/* </div> */}
           </div>
           <div className="save-exam-question">

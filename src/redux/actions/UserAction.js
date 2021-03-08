@@ -65,7 +65,7 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
     .catch((error) => console.log("USER PROFILE ERROR:", error));
 };
 
-export const updateUserProfile = (fullname, email) => (dispatch) => {
+export const updateUserProfile = (fullname, email) => async (dispatch) => {
   API.put(
     "/users/update",
     {

@@ -6,7 +6,7 @@ import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyD
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
 import {
-  getQuestionsTemp,
+  getQuestions,
   deleteQuestion,
 } from "../../../redux/actions/AssessmentAction";
 
@@ -17,13 +17,13 @@ function CreatedQuestions() {
 
   const history = useHistory();
 
-  const { id } = useParams(); // punya maxim tadinya skrg skrg diganti id biasa krn di page edit
+  const { id } = useParams();
 
   const dispatch = useDispatch();
-  const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
+  const allQuestions = useSelector((state) => state.assessment.assessment);
 
   useEffect(() => {
-    dispatch(getQuestionsTemp());
+    dispatch(getQuestions(id));
   }, [dispatch]);
 
   function handleDropDown(index) {
@@ -42,9 +42,9 @@ function CreatedQuestions() {
 
   console.log("allQuestions: ", allQuestions);
 
-  const deleteCreatedQuestion = (courseId, id) => {
-    dispatch(deleteQuestion(courseId, id))
-      .then(() => dispatch(getQuestionsTemp()))
+  const deleteCreatedQuestion = (courseId, questionId) => {
+    dispatch(deleteQuestion(courseId, questionId))
+      .then(() => dispatch(getQuestions(id)))
       .then(() => history.push(`/created-questions/${id}`));
   };
 
@@ -132,7 +132,9 @@ function CreatedQuestions() {
                   textDecoration: "underline",
                 }}
               >
-                <Link to="/teacher-new-assessment">Add New Question</Link>
+                <Link to={`/teacher-new-assessment/${id}`}>
+                  Add New Question
+                </Link>
               </div>
             </div>
           </div>

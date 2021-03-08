@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import { getQuestionsTemp } from "../../../redux/actions/AssessmentAction";
+import { getQuestions } from "../../../redux/actions/AssessmentAction";
 
 function CreatedQuestions() {
   // const [isPicked, setPicked] = useState({
@@ -13,14 +13,13 @@ function CreatedQuestions() {
   // });
 
   const history = useHistory();
-
-  const id = "602e06cc34a3a426b0311c94"; // punya maxim
+  const { id } = useParams();
 
   const dispatch = useDispatch();
-  const allQuestions = useSelector((state) => state.assessment.assessmentTemp);
+  const allQuestions = useSelector((state) => state.assessment.assessment);
 
   useEffect(() => {
-    dispatch(getQuestionsTemp());
+    dispatch(getQuestions(id));
   }, [dispatch]);
 
   function handleDropDown(index) {
@@ -42,11 +41,11 @@ function CreatedQuestions() {
   return (
     <div className="teacher-assessment">
       <div className="teacher-dashboard-list">
-        <Link to="/teacher-create-course">
+        <Link to={`/course-filled-teacher/${id}`}>
           <p>Course</p>
         </Link>
         <p className="open">Assessment</p>
-        <Link to="/teacher-new-students">
+        <Link to={`/teacher-new-students/${id}`}>
           <p>Students</p>
         </Link>
       </div>
@@ -146,7 +145,9 @@ function CreatedQuestions() {
                   textDecoration: "underline",
                 }}
               >
-                <Link to="/teacher-new-assessment">Add New Question</Link>
+                <Link to={`/teacher-new-assessment/${id}`}>
+                  Add New Question
+                </Link>
               </div>
             </div>
           </div>

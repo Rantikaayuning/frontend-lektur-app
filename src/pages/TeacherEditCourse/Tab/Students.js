@@ -24,13 +24,13 @@ const TeacherStudentsUpdate = () => {
   const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
 
-  const toggleSort = () => setDropdownSortOpen(before => !before);
-  const toggleFilter = () => setDropdownFilterOpen(prevState => !prevState);
+  const toggleSort = () => setDropdownSortOpen((before) => !before);
+  const toggleFilter = () => setDropdownFilterOpen((prevState) => !prevState);
   const handlePopUp = () => setPopUpOpen(!isPopUpOpen);
 
   const { id } = useParams();
   const { studentsAccStatus, studentApprove } = useSelector(
-    state => state.teachers
+    (state) => state.teachers
   );
 
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const TeacherStudentsUpdate = () => {
           <Link to={`/course-teacher/course/${id}`}>
             <p>Course</p>
           </Link>
-          <Link to={`/course-teacher/assessments/${id}`}>
+          <Link to={`/created-questions/${id}`}>
             <p>Assessment</p>
           </Link>
           <p className="open">Students</p>
@@ -136,7 +136,7 @@ const TeacherStudentsUpdate = () => {
               />
             </div>
             {studentsAccStatus
-              ? studentsAccStatus.map(item => (
+              ? studentsAccStatus.map((item) => (
                   <div className="student-list-name">
                     <div>
                       <p>
@@ -163,7 +163,7 @@ const TeacherStudentsUpdate = () => {
                             <Progress
                               color="warning"
                               value={
-                                (item.totalSeenCourses/item.totalCourse) * 100
+                                (item.totalSeenCourses / item.totalCourse) * 100
                               }
                             />
                           </p>
