@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import CreateContent from "../../../components/CreateContent"
 
 import {postCourse,  deleteCourse} from "../../../redux/actions/CoursesAction";
-import {Tooltip} from "reactstrap"
 
-// import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
-
-const TeacherCourseTab = (props) => {
-    const [tooltipOpen, setTooltipOpen] = useState(false);
-
-    const toggle = () => setTooltipOpen(!tooltipOpen);
- 
+const TeacherCourseTab = () => {
     const history = useHistory();
 
     const dispatch = useDispatch();
@@ -39,7 +32,7 @@ const TeacherCourseTab = (props) => {
 
     const [contentList, setContentList] = useState([])
 
-    const addCOntent = () => {
+    const addContent = () => {
         setContentList(contentList.concat(<CreateContent key={contentList.length} />));
       };
 
@@ -173,7 +166,7 @@ const TeacherCourseTab = (props) => {
                             <CreateContent/>
                             <div className='teacher-add-new-lesson-button'>
                                 {contentList}
-                                <p onClick={addCOntent}>Add new lesson</p>
+                                <p onClick={addContent}>Add new lesson</p>
                             </div>
                             <div className='publish-and-delete-course'>
                                 <Link to={`/course-filled-teacher/${id}`}>
