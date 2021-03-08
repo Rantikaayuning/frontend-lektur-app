@@ -50,12 +50,8 @@ const TeacherCourseTab = () => {
             <div className='teacher-assessment'>
                 <div className='teacher-dashboard-list'>
                     <p className='open'>Course</p>
-                    <Link to='/teacher-new-assessment'>
-                        <p>Assessment</p>
-                    </Link>
-                    <Link to='/teacher-new-students'>
-                        <p>Students</p>
-                    </Link>
+                    <p className='tab-locked'>Assessment</p>
+                    <p className='tab-locked'>Students</p>
                 </div>
                 <div className='teacher-create-course-box'>
                     {id === null ? (

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { Link, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import {postContent, uploadMaterial, uploadVideo} from "../../redux/actions/CoursesAction";
@@ -8,7 +8,7 @@ import {postContent, uploadMaterial, uploadVideo} from "../../redux/actions/Cour
 export default function CreateContent() {
     const dispatch = useDispatch();
 
-    const {id, idContent, videoMaterial} = useSelector(state => state.courses)
+    const {id, idContent } = useSelector(state => state.courses)
 
     const [number, setNumber] = useState("");
     const [description, setDescription] = useState("");
@@ -82,9 +82,6 @@ export default function CreateContent() {
                     <button onClick={submitContent}  >{buttonText}</button>
                 </p>
             </div>
-    {/* <Tooltip placement="top" isOpen={tooltipOpen} autohide={true} target="DisabledAutoHideExample" toggle={toggle}>
-            You have to save first! 
-    </Tooltip> */}
     <div className='upload-new-lesson'>
     
         <p>

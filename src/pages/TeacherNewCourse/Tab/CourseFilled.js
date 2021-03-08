@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import Comp1 from "../../../assets/RectangleComputer.png";
+// import Comp1 from "../../../assets/RectangleComputer.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCourseFilled,
@@ -92,7 +92,7 @@ function CourseFilled() {
                                 <Link to={`/course-change-teacher/${id}`}>
                                   <i class="fa fa-file files"></i>
                                 </Link>
-                                <a href={materi.material} target="_blank">
+                                <a href={materi.material} target="_blank" rel="noreferrer">
                                   <span className="span-detail">
                                     {item.title} {index + 1}.pdf
                                   </span>
@@ -100,10 +100,6 @@ function CourseFilled() {
                               </>
                             ) : null}
                             <br />
-                            {/* <Link to={`/course-change-teacher/${id}`}>
-                <i className="fa fa-file files"></i>
-                </Link>
-                <span>Just Javascript.pdf</span> */}
                           </>
                         ))}
                       </div>
@@ -117,22 +113,10 @@ function CourseFilled() {
                   ))}
                 </div>
               </div>
-              {/* <div className="course-filled-content-card">
-            <div className="course-filled-content-card-left">
-              <span className="span">Lesson #2 : Create React App </span>
-              <Link to={`/course-change-teacher/${id}`}>
-              <i className="fa fa-pencil "></i>
-              </Link>
-              <span className="span-paragraph">
-              Create React App is a comfortable environment for learning React, and is the best way to start building a new single-page application in React. It sets up your development environment so that you can use the latest JavaScript features, provides a nice developer experience, and optimizes your app for production.
-              </span>
-            </div>
-            <div className="image-computer1">
-              <img src={Comp2} alt="comp2" />
-            </div>
-          </div> */}
               <u className="add-new-lesson">Add New Lesson</u>
-              <button> Save Changes</button>
+              <Link to={`/teacher-new-assessment/${id}`}>
+                <button> Save Changes</button>
+              </Link>
               <u className="delete-course" onClick={deleteCourseTeacher}>
                 Delete Course
               </u>
