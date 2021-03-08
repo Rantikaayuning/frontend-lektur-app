@@ -18,7 +18,7 @@ function CourseFilledEdit() {
     courseDetail,
     background,
     idContent,
-  } = useSelector(state => state.courses);
+  } = useSelector((state) => state.courses);
 
   const { id } = useParams();
 

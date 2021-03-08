@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import Cookies from "js-cookie";
 // import { useSelector, useDispatch } from "react-redux";
 
 import { teacherProfile } from "../../assets/JSONFile/dummyData";
@@ -34,9 +35,13 @@ function TeacherDashboard(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(fullname, email);
-
-    props.updateUserProfile(fullname, email);
+    props
+      .updateUserProfile(fullname, email)
+      .then(() =>
+        alert(`Hi ${fullname} Please do login back to get your changes`)
+      )
+      .then(() => Cookies.remove("token"))
+      .then(() => window.open("/login", "_self"));
   };
 
   return (
@@ -92,8 +97,8 @@ function TeacherDashboard(props) {
           </div>
         </div>
       )}
-      
- {props.teacherCourses !== 0 ? (
+
+      {props.teacherCourses !== 0 ? (
         <div className="courses-container">
           <div className="courses-header">
             <h5>
@@ -124,7 +129,6 @@ function TeacherDashboard(props) {
     </div>
   );
 }
-
 
 const mapStateToProps = (state) => {
   return {

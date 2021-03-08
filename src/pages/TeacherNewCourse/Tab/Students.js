@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Dropdown,
   DropdownToggle,
@@ -10,6 +10,8 @@ import searchIcon from "../../../assets/search.png";
 import { PopUpInvite } from "../../../components/PopUp/PopUpInvite";
 
 const TeacherStudentsTab = () => {
+  const { id } = useParams();
+
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
   const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
@@ -22,10 +24,10 @@ const TeacherStudentsTab = () => {
     <>
       <div className="teacher-assessment">
         <div className="teacher-dashboard-list">
-          <Link to="/teacher-create-course">
+          <Link to={`/course-filled-teacher/${id}`}>
             <p>Course</p>
           </Link>
-          <Link to="/teacher-new-assessment">
+          <Link to={`/teacher-new-assessment/${id}`}>
             <p>Assessment</p>
           </Link>
           <p className="open">Students</p>
@@ -109,7 +111,7 @@ const TeacherStudentsTab = () => {
                 togglePopUp={handlePopUp}
               />
             </div>
-            <div className='student-list-empty'></div>
+            <div className="student-list-empty"></div>
           </div>
         </div>
       </div>
