@@ -1,33 +1,39 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+
 import imgStudent from "../../../assets/studentpicture.png";
 import {
   getUserProfile,
   updateUserProfile,
 } from "../../../redux/actions/UserAction";
-import { useDispatch, useSelector } from "react-redux";
 
 const StudentProfile = () => {
   const [isEdit, setEdit] = useState(true);
 
-  const {fullname, email, userProfile} = useSelector(state => state.users)
-  const dispatch = useDispatch()
+  const { userProfile, token } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
-  const [newFullname, setFullname] = useState(fullname);
-  const [newEmail, setEmail] = useState(email);
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     setEdit(!isEdit);
   };
 
   useEffect(() => {
-    dispatch(getUserProfile())
+    token ? dispatch(getUserProfile(token)) : dispatch(getUserProfile());
   }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(fullname, email);
     handleEdit(dispatch(updateUserProfile(fullname, email)))
-  }
+      .then(() =>
+        alert(`Hi ${fullname} Please do login back to get your changes`)
+      )
+      .then(() => Cookies.remove("token"))
+      .then(() => window.open("/login", "_self"));
+  };
 
   return (
     <>
@@ -58,7 +64,14 @@ const StudentProfile = () => {
               <img src={imgStudent} alt="student" />
             </div>
             <div className="student-profile-form">
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={(e) =>
+                  fullname && email
+                    ? handleSubmit(e)
+                    : // : setForgetAlert("*fill in the form correctly")
+                      alert("Please fill in the form correctly")
+                }
+              >
                 <p>
                   Name<span>*</span>
                 </p>
@@ -66,7 +79,7 @@ const StudentProfile = () => {
                   type="text"
                   placeholder={userProfile.fullname}
                   onChange={(e) => setFullname(e.target.value)}
-                  value={newFullname}
+                  value={fullname}
                 />
                 <br />
                 <br />
@@ -77,7 +90,7 @@ const StudentProfile = () => {
                   type="email"
                   placeholder={userProfile.email}
                   onChange={(e) => setEmail(e.target.value)}
-                  value={newEmail}
+                  value={email}
                 />
                 <br />
                 <br />
@@ -91,4 +104,4 @@ const StudentProfile = () => {
   );
 };
 
-export default StudentProfile
+export default StudentProfile;
