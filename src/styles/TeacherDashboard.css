@@ -13,7 +13,7 @@
 
 .teacher-profile {
   width: 279px;
-  height: 400px; /* 322 */
+  height: 440px; /* 322 */
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -93,7 +93,7 @@
   margin: 0px 10px;
 }
 
-.card-teacher-container{
+.card-teacher-container {
   height: 650px;
 }
 
