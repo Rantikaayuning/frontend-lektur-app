@@ -46,7 +46,7 @@ export const postSignup = (role, payload) => async (dispatch) => {
 };
 
 export const getUserProfile = (access_token = null) => (dispatch) => {
-  console.log(access_token);
+  // console.log(access_token);
   API.get("/users/profile", {
     headers: {
       Authorization: access_token
