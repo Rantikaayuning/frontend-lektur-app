@@ -19,7 +19,7 @@ function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggle = () => setDropdownOpen(prevState => !prevState);
   const history = useHistory();
 
   useEffect(() => {
@@ -28,16 +28,14 @@ function Navbar(props) {
 
   // console.log(props.userProfile, props.isAuthentificated);
 
-  const handleChange = (e) => {
-    // e.preventDefault()
+  const handleChange = e => {
     setSearch(e.target.value);
   };
-  const submitSearch = (e) => {
+  const submitSearch = e => {
     e.preventDefault();
     props.getCourseSearch(search);
     history.push("/");
   };
-
   return (
     <div className="sidebar">
       <div className="left">
@@ -54,11 +52,11 @@ function Navbar(props) {
             onChange={handleChange}
           />
         </form>
-        <i className="fa fa-search icon" onClick={submitSearch}></i>
+        <i className="fa fa-search " onClick={submitSearch}></i>
       </div>
       <div className="right">
         <ul>
-          <li className="li-1">
+          <li className={props.isAuthentificated ? "li-2" : "li-1"}>
             <Dropdown isOpen={dropdownOpen} toggle={toggle} size="md">
               <DropdownToggle className="sidebar-dropdown" color="none">
                 <span>
@@ -75,8 +73,9 @@ function Navbar(props) {
               </DropdownMenu>
             </Dropdown>
           </li>
+
           <li>
-            <div>
+            <div className="user-profile">
               {props.userProfile ? (
                 <>
                   <div className="drop-img">
@@ -151,7 +150,7 @@ function Navbar(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userProfile: state.users.userProfile,
     searchCourse: state.courses.searchCourse,
