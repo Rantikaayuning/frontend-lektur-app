@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Progress,
+  Spinner,
 } from "reactstrap";
 import searchIcon from "../../../assets/search.png";
 import checklistOne from "../../../assets/checklist1.png";
@@ -135,62 +136,73 @@ const TeacherStudentsUpdate = () => {
                 setPopUpOpen={setPopUpOpen}
               />
             </div>
-            {studentsAccStatus
-              ? studentsAccStatus.map((item) => (
-                  <div className="student-list-name">
-                    <div>
+            {studentsAccStatus.length !== 0 ? (
+              studentsAccStatus.map((item) => (
+                <div className="student-list-name">
+                  <div>
+                    <p>
+                      <b>{item.studentId.fullname}</b>
+                    </p>
+                    {item.status === 1 ? (
                       <p>
-                        <b>{item.studentId.fullname}</b>
+                        <img src={checklistTwo} alt="active" /> Active
                       </p>
-                      {item.status === 1 ? (
-                        <p>
-                          <img src={checklistTwo} alt="active" /> Active
-                        </p>
-                      ) : item.status === 2 ? (
-                        <p>
-                          <img src={checklistThree} alt="completed" /> Completed
-                        </p>
-                      ) : (
-                        <p>
-                          <img src={checklistOne} alt="pending" /> Pending
-                        </p>
-                      )}
-                    </div>
-                    <div className="course-status">
-                      {item.status === 1 ? (
-                        <div className="course-active">
-                          <p>
-                            <Progress
-                              color="warning"
-                              value={
-                                (item.totalSeenCourses / item.totalCourse) * 100
-                              }
-                            />
-                          </p>
-                          <p>
-                            {`${item.totalSeenCourses}/${item.totalCourse} Course Complete`}
-                          </p>
-                        </div>
-                      ) : item.status === 2 ? (
-                        <div className="course-completed">
-                          <h3>{item.score}%</h3>
-                          <p>Assessment Score</p>
-                        </div>
-                      ) : (
-                        <div className="course-pending">
-                          <p>
-                            <button
-                              onClick={() => handleAccept(item.studentId._id)}
-                            >
-                              Accept
-                            </button>
-                          </p>
-                        </div>
-                      )}
-                    </div>
+                    ) : item.status === 2 ? (
+                      <p>
+                        <img src={checklistThree} alt="completed" /> Completed
+                      </p>
+                    ) : (
+                      <p>
+                        <img src={checklistOne} alt="pending" /> Pending
+                      </p>
+                    )}
                   </div>
-                ))
-              : ""}
+                  <div className="course-status">
+                    {item.status === 1 ? (
+                      <div className="course-active">
+                        <p>
+                          <Progress
+                            color="warning"
+                            value={
+                              (item.totalSeenCourses / item.totalCourse) * 100
+                            }
+                          />
+                        </p>
+                        <p>
+                          {`${item.totalSeenCourses}/${item.totalCourse} Course Complete`}
+                        </p>
+                      </div>
+                    ) : item.status === 2 ? (
+                      <div className="course-completed">
+                        <h3>{item.score}%</h3>
+                        <p>Assessment Score</p>
+                      </div>
+                    ) : (
+                      <div className="course-pending">
+                        <p>
+                          <button
+                            onClick={() => handleAccept(item.studentId._id)}
+                          >
+                            Accept
+                          </button>
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <Spinner
+                style={{
+                  width: "6rem",
+                  height: "6rem",
+                  position: "fixed",
+                  top: "50%",
+                  left: "53%",
+                }}
+                color="secondary"
+              />
+            )}
           </div>
         </div>
       </div>

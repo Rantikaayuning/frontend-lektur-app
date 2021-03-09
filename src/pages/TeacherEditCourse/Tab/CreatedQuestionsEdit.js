@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
-import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import {
-  getQuestions,
-  deleteQuestion,
-} from "../../../redux/actions/AssessmentAction";
+import { getQuestions } from "../../../redux/actions/AssessmentAction";
 
 function CreatedQuestions() {
-  // const [isPicked, setPicked] = useState({
-  //   data: [...assessment],
-  // });
-
-  const history = useHistory();
-
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -26,27 +15,7 @@ function CreatedQuestions() {
     dispatch(getQuestions(id));
   }, [dispatch]);
 
-  function handleDropDown(index) {
-    // isPicked.data[index].isChosen
-    //   ? (isPicked.data[index].isChosen = false)
-    //   : (isPicked.data[index].isChosen = true);
-    // setPicked({ ...isPicked });
-  }
-  function handleDropDownActive(index) {
-    // if (isPicked.data[index].isChosen) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-  }
-
   console.log("allQuestions: ", allQuestions);
-
-  const deleteCreatedQuestion = (courseId, questionId) => {
-    dispatch(deleteQuestion(courseId, questionId))
-      .then(() => dispatch(getQuestions(id)))
-      .then(() => history.push(`/created-questions/${id}`));
-  };
 
   return (
     <div className="teacher-assessment">
@@ -60,86 +29,69 @@ function CreatedQuestions() {
         </Link>
       </div>
       <div className="teacher-save-question-box">
-        <div className="teacher-question-title">
-          <h4>Questions</h4>
-        </div>
-        {allQuestions !== null ? (
-          <div className="teacher-new-question-save">
-            <div className="teacher-option-save">
-              <h4>{allQuestions.length} Questions </h4>
-              <br />
+        {allQuestions.length !== 0 ? (
+          <>
+            <div className="teacher-question-title">
+              <h4>Questions</h4>
             </div>
-            <div className="save-question-box">
-              {allQuestions.map((item, index) => (
-                <div className="questions-answer-box-save">
-                  <div className="question-dropdown">
-                    <p>
-                      {item.number}. {item.question}
-                    </p>
-                    <p>
-                      <button
-                        onClick={() => deleteCreatedQuestion(id, item._id)}
-                        className="option-deletion-btn"
-                        style={{
-                          marginRight: "10px",
-                          paddingTop: "4px",
-                          paddingBottom: "2px",
-                          fontWeight: "bolder",
-                        }}
-                      >
-                        Delete
-                      </button>
-                      <Link
-                        style={{
-                          paddingRight: "20px",
-                          fontWeight: "bolder",
-                        }}
-                        to={`/course-teacher/assessments/${id}/${item._id}`}
-                      >
-                        Edit
-                      </Link>
-                      <img
-                        src={imgDropdown}
-                        alt="symbol"
-                        onClick={() => {
-                          handleDropDown(index);
-                        }}
-                      />
-                    </p>
-                  </div>
-                  <p className="answer">Answer</p>
-                  {item.options.map((option) => (
-                    <label class="container">
-                      <input
-                        type="checkbox"
-                        // name={index}
-                        value={option.value}
-                        checked={item.answer === option.value}
-                      />
-                      <span> {option.text}</span>
-                      <span className="checkmark"></span>
-                    </label>
-                  ))}
+            <div className="teacher-new-question-save">
+              <div className="teacher-option-save">
+                <h4>{allQuestions.length} Questions </h4>
+                <br />
+              </div>
+              <div className="save-question-box">
+                {allQuestions.map((item) => (
+                  <div className="questions-answer-box-save" key={item._id}>
+                    <div className="question-dropdown">
+                      <p>
+                        {item.number}. {item.question}
+                      </p>
 
-                  <br />
-                  <br />
+                      <div className="delete-edit-btn">
+                        <Link
+                          style={{
+                            paddingRight: "20px",
+                            fontWeight: "bolder",
+                          }}
+                          to={`/course-teacher/assessments/${id}/${item._id}`}
+                        >
+                          Edit
+                        </Link>
+                      </div>
+                    </div>
+                    <p className="answer">Answer</p>
+                    {item.options.map((option) => (
+                      <label class="container">
+                        <input
+                          type="checkbox"
+                          value={option.value}
+                          checked={item.answer === option.value}
+                        />
+                        <span> {option.text}</span>
+                        <span className="checkmark"></span>
+                      </label>
+                    ))}
+
+                    <br />
+                    <br />
+                  </div>
+                ))}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    textDecoration: "underline",
+                  }}
+                >
+                  <Link to={`/teacher-new-assessment/${id}`}>
+                    Add New Question
+                  </Link>
                 </div>
-              ))}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  textDecoration: "underline",
-                }}
-              >
-                <Link to={`/teacher-new-assessment/${id}`}>
-                  Add New Question
-                </Link>
               </div>
             </div>
-          </div>
+          </>
         ) : (
-          <div>Loading... </div>
+          <div id="loader"></div>
         )}
       </div>
     </div>
