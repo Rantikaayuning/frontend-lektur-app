@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
 import { getQuestions } from "../../../redux/actions/AssessmentAction";
@@ -12,7 +11,6 @@ function CreatedQuestions() {
   //   data: [...assessment],
   // });
 
-  const history = useHistory();
   const { id } = useParams();
 
   const dispatch = useDispatch();

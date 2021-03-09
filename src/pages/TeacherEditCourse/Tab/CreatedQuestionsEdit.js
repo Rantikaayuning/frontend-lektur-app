@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Link, useParams } from "react-router-dom";
 
-import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
-import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
-import {
-  getQuestions,
-  deleteQuestion,
-} from "../../../redux/actions/AssessmentAction";
+import { getQuestions } from "../../../redux/actions/AssessmentAction";
 
-function CreatedQuestions(props) {
-  const { buttonLabel, className } = props;
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
-
-  const history = useHistory();
+function CreatedQuestions() {
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -27,12 +16,6 @@ function CreatedQuestions(props) {
   }, [dispatch]);
 
   console.log("allQuestions: ", allQuestions);
-
-  const deleteCreatedQuestion = async (id, questionId) => {
-    dispatch(deleteQuestion(id, questionId))
-      .then(() => dispatch(getQuestions(id)))
-      .then(() => history.push(`/created-questions/${id}`));
-  };
 
   return (
     <div className="teacher-assessment">
@@ -57,53 +40,14 @@ function CreatedQuestions(props) {
                 <br />
               </div>
               <div className="save-question-box">
-                {allQuestions.map((item, index) => (
-                  <div className="questions-answer-box-save">
+                {allQuestions.map((item) => (
+                  <div className="questions-answer-box-save" key={item._id}>
                     <div className="question-dropdown">
                       <p>
                         {item.number}. {item.question}
                       </p>
 
                       <div className="delete-edit-btn">
-                        <div>
-                          <button
-                            onClick={toggle}
-                            className="option-deletion-btn"
-                            style={{
-                              marginRight: "10px",
-                              paddingTop: "0px",
-                              paddingBottom: "2px",
-                              fontWeight: "bolder",
-                            }}
-                          >
-                            Delete
-                          </button>
-                          <Modal
-                            isOpen={modal}
-                            toggle={toggle}
-                            className={className}
-                          >
-                            <ModalBody>
-                              Are you sure you want to delete this question?
-                            </ModalBody>
-                            <ModalFooter>
-                              <Button
-                                color="primary"
-                                onClick={() =>
-                                  deleteCreatedQuestion(id, item._id).then(() =>
-                                    toggle()
-                                  )
-                                }
-                              >
-                                Delete
-                                {/* {deleteCreatedQuestion(id, item._id)} */}
-                              </Button>{" "}
-                              <Button color="secondary" onClick={toggle}>
-                                Cancel
-                              </Button>
-                            </ModalFooter>
-                          </Modal>
-                        </div>
                         <Link
                           style={{
                             paddingRight: "20px",
@@ -120,7 +64,6 @@ function CreatedQuestions(props) {
                       <label class="container">
                         <input
                           type="checkbox"
-                          // name={index}
                           value={option.value}
                           checked={item.answer === option.value}
                         />

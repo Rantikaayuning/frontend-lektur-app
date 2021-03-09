@@ -128,6 +128,11 @@
   justify-content: flex-start;
 }
 
+.teacher-add-more {
+  display: flex;
+  justify-content: space-between;
+}
+
 .teacher-add-more button {
   border: 1px solid #ef9c27;
   background-color: white;
@@ -150,6 +155,16 @@
   text-decoration: underline;
   cursor: pointer;
   color: #3e89ae;
+}
+
+.trash-pic {
+  margin-top: 10px;
+  width: 35px;
+  height: 40px;
+}
+
+.trash-pic:hover {
+  cursor: pointer;
 }
 
 .save-exam-question {
@@ -304,12 +319,18 @@
   color: rgb(82, 79, 79);
 }
 
-.option-deletion-btn:hover {
+.option-deletion {
+  border: none;
+  margin-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 2px;
+  background: whitesmoke;
+  color: #007bff;
   text-decoration: underline;
 }
 
-.delete-edit-btn {
-  display: flex;
+.option-deletion:hover {
+  color: blue;
 }
 
 .container-answer {
