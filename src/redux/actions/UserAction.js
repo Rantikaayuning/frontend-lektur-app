@@ -4,6 +4,7 @@ import {
   GET_USER_PROFILE,
   SIGN_UP,
   UPDATE_USER_PROFILE,
+  UPDATE_PROFILE_IMAGE,
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
@@ -46,7 +47,7 @@ export const postSignup = (role, payload) => async (dispatch) => {
 };
 
 export const getUserProfile = (access_token = null) => (dispatch) => {
-  console.log(access_token);
+  // console.log(access_token);
   API.get("/users/profile", {
     headers: {
       Authorization: access_token
@@ -88,3 +89,18 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
     // return response.data.token;
   });
 };
+
+export const updateProfileImage = (file) => (dispatch) => {
+  API.put("/users/update/image", file, 
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    dispatch({
+      type: UPDATE_PROFILE_IMAGE,
+      payload: response.data.result,
+    })
+  })
+}

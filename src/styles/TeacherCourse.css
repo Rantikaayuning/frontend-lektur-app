@@ -97,6 +97,10 @@
     margin-right: 40px;
 }
 
+.teacher-save-new-course button:hover {
+    background-color: #304880;;
+}
+
 .teacher-save-new-course button:disabled {
     margin: 30px;
     color: white;

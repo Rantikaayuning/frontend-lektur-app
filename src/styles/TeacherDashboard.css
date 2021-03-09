@@ -13,7 +13,9 @@
 
 .teacher-profile {
   width: 279px;
-  height: 400px; /* 322 */
+  padding: 20px;
+  height: max-content;
+  /* height: 440px; 322 */
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -39,7 +41,11 @@
   color: rgba(62, 137, 174, 1);
 }
 
-.teacher-profile-edit input {
+.input-profile{
+  padding: 20px;
+}
+
+form input {
   border: none;
   border-bottom: 1px solid black;
   outline: none;
@@ -55,7 +61,49 @@
   padding-top: 25px;
 }
 
-.teacher-profile-edit button {
+.upload-image{
+  border-radius: 5px;
+  padding: 6px 15px;
+  border: 1px solid #16213b;
+  background-color: #ffffff;
+  color: #16213b;
+  font-weight: bold;
+}
+
+.upload-image:hover{
+  background-color: #16213b;
+  color: #ffffff;
+}
+
+.teacher-profile-popup{
+  height: 350px;
+  margin-left: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.upload-image-popup{
+  border-radius: 5px;
+  padding: 6px 15px;
+  border: 1px solid #16213b;
+  background-color: #ffffff;
+  color: #16213b;
+  font-weight: bold;
+  margin: 20px auto;
+}
+
+.teacher-profile-popup img{
+  width: 140px;
+  height: 140px;
+  top: 165px;
+  left: 192px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto 15px auto;
+}
+
+.save-edit{
   border-radius: 2px;
   padding: 8px 20px;
   background: #16213b;
@@ -93,7 +141,7 @@
   margin: 0px 10px;
 }
 
-.card-teacher-container{
+.card-teacher-container {
   height: 650px;
 }
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { Link, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import {postContent, uploadMaterial, uploadVideo} from "../../redux/actions/CoursesAction";
@@ -86,9 +86,6 @@ export default function CreateContent() {
                     <button onClick={submitContent}  >{buttonText}</button>
                 </p>
             </div>
-    {/* <Tooltip placement="top" isOpen={tooltipOpen} autohide={true} target="DisabledAutoHideExample" toggle={toggle}>
-            You have to save first! 
-    </Tooltip> */}
     <div className='upload-new-lesson'>
     
         <p>

@@ -15,7 +15,7 @@ import {
   GET_POPUP_MATERIAL,
   GET_CONTENT_DETAIL,
   UPLOAD_IMAGE,
-  UPDATE_COURSE
+  UPDATE_COURSE,
 } from "../types/CoursesTypes";
 
 const initialState = {
