@@ -12,7 +12,7 @@ function CreateAssessment() {
   const [buttonText, setButtonText] = useState("Save Question");
 
   const [question, setQuestion] = useState({
-    number: 1,
+    number: null,
     question: "",
     remarks: "",
   });

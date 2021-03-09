@@ -308,6 +308,10 @@
   text-decoration: underline;
 }
 
+.delete-edit-btn {
+  display: flex;
+}
+
 .container-answer {
   display: block;
   position: relative;

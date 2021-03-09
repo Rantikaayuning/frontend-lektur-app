@@ -50,54 +50,57 @@ function CreatedQuestions() {
         </Link>
       </div>
       <div className="teacher-save-question-box">
-        <div className="teacher-question-title">
-          <h4>Questions</h4>
-        </div>
-        {allQuestions !== null ? (
-          <div className="teacher-new-question-save">
-            <div className="teacher-option-save">
-              <h4>
-                {allQuestions.length} Questions{" "}
-                <Link to={`/created-questions/${id}`}>
-                  <img src={imgEdit} alt="edit"></img>
-                </Link>
-              </h4>
-              <br />
+        {allQuestions.length === 0 ? (
+          <div id="loader"></div>
+        ) : (
+          <>
+            <div className="teacher-question-title">
+              <h4>Questions</h4>
             </div>
-            <div className="save-question-box">
-              {allQuestions.map((item, index) => (
-                <div className="questions-answer-box-save">
-                  <div className="question-dropdown">
-                    <p>
-                      {item.number}. {item.question}
-                    </p>
-                    <p>
-                      <img
-                        src={imgDropdown}
-                        alt="symbol"
-                        onClick={() => {
-                          handleDropDown(index);
-                        }}
-                      />
-                    </p>
-                  </div>
-                  <p className="answer">Answer</p>
-                  {item.options.map((option, index) => (
-                    <label class="container">
-                      <input
-                        type="checkbox"
-                        // name={index}
-                        value={option.value}
-                        checked={item.answer === option.value}
-                      />
-                      <span> {option.text}</span>
-                      <span className="checkmark"></span>
-                    </label>
-                  ))}
+            <div className="teacher-new-question-save">
+              <div className="teacher-option-save">
+                <h4>
+                  {allQuestions.length} Questions{" "}
+                  <Link to={`/created-questions/${id}`}>
+                    <img src={imgEdit} alt="edit"></img>
+                  </Link>
+                </h4>
+                <br />
+              </div>
+              <div className="save-question-box">
+                {allQuestions.map((item, index) => (
+                  <div className="questions-answer-box-save">
+                    <div className="question-dropdown">
+                      <p>
+                        {item.number}. {item.question}
+                      </p>
+                      <p>
+                        <img
+                          src={imgDropdown}
+                          alt="symbol"
+                          onClick={() => {
+                            handleDropDown(index);
+                          }}
+                        />
+                      </p>
+                    </div>
+                    <p className="answer">Answer</p>
+                    {item.options.map((option, index) => (
+                      <label class="container">
+                        <input
+                          type="checkbox"
+                          // name={index}
+                          value={option.value}
+                          checked={item.answer === option.value}
+                        />
+                        <span> {option.text}</span>
+                        <span className="checkmark"></span>
+                      </label>
+                    ))}
 
-                  {handleDropDownActive(index) && (
-                    <>
-                      {/* <p className="answer">Answer</p>
+                    {handleDropDownActive(index) && (
+                      <>
+                        {/* <p className="answer">Answer</p>
                       {item.options.map((option, index) => (
                         <label class="container">
                           <input
@@ -110,13 +113,13 @@ function CreatedQuestions() {
                         </label>
                       ))} */}
 
-                      {/* <label class="container"> */}
-                      {/* <p className="answer">Answer</p> */}
-                      {/* <input type="radio" name="radio" />{" "}
+                        {/* <label class="container"> */}
+                        {/* <p className="answer">Answer</p> */}
+                        {/* <input type="radio" name="radio" />{" "}
                         <span>{item.options.text}</span> */}
-                      {/* </label> */}
+                        {/* </label> */}
 
-                      {/* <label class="container">
+                        {/* <label class="container">
                         <input type="radio" name="radio" />{" "}
                         <span>{item.choiceTwo}</span>
                       </label>
@@ -132,27 +135,26 @@ function CreatedQuestions() {
                         <input type="radio" name="radio" />{" "}
                         <span>{item.choiceFive}</span>
                       </label> */}
-                    </>
-                  )}
-                  <br />
-                  <br />
+                      </>
+                    )}
+                    <br />
+                    <br />
+                  </div>
+                ))}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    textDecoration: "underline",
+                  }}
+                >
+                  <Link to={`/teacher-new-assessment/${id}`}>
+                    Add New Question
+                  </Link>
                 </div>
-              ))}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  textDecoration: "underline",
-                }}
-              >
-                <Link to={`/teacher-new-assessment/${id}`}>
-                  Add New Question
-                </Link>
               </div>
             </div>
-          </div>
-        ) : (
-          <div>Loading... </div>
+          </>
         )}
       </div>
     </div>

@@ -76,10 +76,10 @@ const TeacherAssessmentUpdate = () => {
       answer: answer,
       options: options,
     };
-    dispatch(updateQuestion(body, id, queId)).then(() =>
-      history.push(`/created-questions/${id}`)
-    );
-    console.log(body);
+    dispatch(updateQuestion(body, id, queId))
+      .then(() => dispatch(getQuestions(id)))
+      .then(() => history.push(`/created-questions/${id}`));
+    // console.log(body);
   };
 
   // console.log(JSON.stringify(options, null, 2));
@@ -285,14 +285,20 @@ const TeacherAssessmentUpdate = () => {
           <div className="save-exam-question">
             <button
               type="submit"
-              onClick={(e) =>
-                question.number &&
-                question.question &&
-                question.remarks &&
-                options &&
-                answer
-                  ? handleSubmit(e)
-                  : alert("Please fill in the question correctly")
+              onClick={
+                (e) =>
+                  !question.number
+                    ? alert("Please fill in the number")
+                    : !question.question
+                    ? alert("Please fill in the question")
+                    : !answer
+                    ? alert("Please select the correct answer")
+                    : !question.remarks
+                    ? alert("Please fill in the remarks")
+                    : !options.map((item) => item.text) // bugs
+                    ? alert("Please fill in the options")
+                    : handleSubmit(e)
+                // : alert("Please fill in the question correctly")
               }
             >
               Save Exam
