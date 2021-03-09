@@ -255,7 +255,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 40vh;
+    height: 30vh;
   }
   .sidebar ul {
     position: relative;
@@ -272,6 +272,7 @@
   }
   .sidebar .center i {
     bottom: 100%;
+    left: 85%;
     cursor: pointer;
   }
   .sidebar .right {
