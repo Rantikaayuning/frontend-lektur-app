@@ -90,8 +90,11 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
   });
 };
 
-export const updateProfileImage = (file) => (dispatch) => {
-  API.put("/users/update/image", file, 
+export const updateProfileImage = (file) => async (dispatch) => {
+  const data = new FormData()
+  data.append("file", file)
+
+  API.put("/users/update/image", data, 
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -100,7 +103,9 @@ export const updateProfileImage = (file) => (dispatch) => {
   .then((response) => {
     dispatch({
       type: UPDATE_PROFILE_IMAGE,
-      payload: response.data.result,
+      payload: response.data.result.Location,
+      message: response.data.message,
     })
   })
+  .catch((err) => alert("updated fail, try again!", err));
 }

@@ -19,10 +19,11 @@ const initialState = {
   fullname: "",
   token: Cookies.get("token") || null,
   profileImage: null,
+  message: null,
 };
 
 const userReducer = (state = initialState, action) => {
-  const { type, payload, role, token } = action;
+  const { type, payload, role, token, message } = action;
   switch (type) {
     case LOGIN:
       return {
@@ -52,6 +53,7 @@ const userReducer = (state = initialState, action) => {
       return{
         ...state,
         profileImage: payload,
+        message: message,
       }
     default:
       return state;

@@ -14,6 +14,7 @@ import {
 } from "../../redux/actions/UserAction";
 import { getTeacherCourses } from "../../redux/actions/CoursesAction";
 import defaultPhoto from "../../assets/user.png"
+import successLogo from "../../assets/upload2.png"
 import defaultImg from "../../assets/defaultLektur.png";
 
 function TeacherDashboard() {
@@ -27,7 +28,7 @@ function TeacherDashboard() {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
 
-  const userProfile = useSelector((state) => state.users.userProfile);
+  const {userProfile, profileImage, message} = useSelector((state) => state.users);
   const teacherCourses = useSelector((state) => state.courses.teacherCourses);
   const token = useSelector((state) => state.users.token);
 
@@ -36,7 +37,7 @@ function TeacherDashboard() {
   };
 
   useEffect(() => {
-    token ? dispatch(getUserProfile(token)) : dispatch(getUserProfile());
+    // token ? dispatch(getUserProfile(token)) : dispatch(getUserProfile());
     token ? dispatch(getTeacherCourses(token)) : dispatch(getTeacherCourses());
   }, [dispatch]);
 
@@ -51,9 +52,13 @@ function TeacherDashboard() {
   };
 
   const updateProfile = () => {
-    const data = new FormData()
-    data.append("file", imageProfile)
-    dispatch(updateProfileImage(data))
+    dispatch(updateProfileImage(imageProfile))
+    setPopUpProfileImage(true)
+  }
+
+  const popUp = () => {
+    setPopUpProfileImage(false)
+    window.location.reload()
   }
 
   console.log(userProfile);
@@ -78,9 +83,12 @@ function TeacherDashboard() {
                 <u onClick={handleEdit}> Edit Profile </u>
               </span>
             </div>
-          ) : (
+             
+         ) : (
+          <div className="teacher-profile">
             <div id="regular-loader"></div>
-          )}
+          </div>
+          )} 
         </div>
       ) : (
         <div className="teacher-profile">
@@ -161,39 +169,31 @@ function TeacherDashboard() {
       ) : (
         <div id="loader"></div>
       )}
-       {/* <Modal
+       <Modal
             show={PopUpProfileImage}
-            size="lg"
+            size="md"
             onHide={() => setPopUpProfileImage(false)}
-            dialogClassName="modal-90w"
+            className="popup-upload"
             aria-labelledby="example-custom-modal-styling-title"
             centered
           >
              <Modal.Header closeButton>
                <div className="teacher-profile-popup">
-                <img src={teacherProfile.image} alt="student" />
-                {/* <div>
-                  <input type="file"/>
-                </div> */}
-                {/* <div class="input-group">
-                  <div class="custom-file">
-                    <input 
-                        type="file"
-                        class="custom-file-input" 
-                        id="inputGroupFile04" 
-                        onChange={(e) => setImageProfile(e.target.files[0])}
-                    />
-                    {!imageProfile.name ? (
-                        <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                    ) : (
-                        <label class="custom-file-label" for="inputGroupFile04">{imageProfile.name}</label>
-                    )}
+                 {!profileImage ? (
+                  <div className="popUp-loading">
+                    <div id="popUp-loader"></div>
+                    <p>Currently Uploading</p>
                   </div>
-                </div>
-                <button className="upload-image-popup" onClick={updateProfile}>Upload Image</button>
+                 ) : (
+                   <div className="upload-success">
+                      <img src={successLogo} alt="logo"/>
+                      <p>{message}</p>
+                      <button className="upload-image-popup" onClick={popUp}>Done</button>
+                   </div>
+                 )}
                </div>
              </Modal.Header>
-          </Modal> */} 
+          </Modal> 
     </div>
   );
 }

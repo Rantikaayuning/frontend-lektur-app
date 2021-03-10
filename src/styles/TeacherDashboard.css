@@ -77,7 +77,6 @@ form input {
 
 .teacher-profile-popup{
   height: 350px;
-  margin-left: 125px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -94,8 +93,8 @@ form input {
 }
 
 .teacher-profile-popup img{
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   top: 165px;
   left: 192px;
   border-radius: 50%;
@@ -272,6 +271,42 @@ form input {
     margin-right: 0px;
   }
 }
+
+.popUp-loading{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 90px;
+}
+
+.popUp-loading p{
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+.upload-success{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 90px;
+}
+
+.upload-success p{
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+/* .popup-upload{
+  position: relative;
+  width: 400px;
+  margin-left: 700px;
+} */
 
 @media only screen and (max-width: 768px) {
   .course-info {

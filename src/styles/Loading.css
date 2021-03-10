@@ -12,7 +12,19 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
   }
-  
+  #popUp-loader{
+    position: relative;
+    z-index: 0.99;
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid black;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
@@ -25,12 +37,24 @@
   
 #regular-loader {
     position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 50% 0;
+    width: 60px;
+    height: 60px;
+    margin: 50% auto;
     border: 16px solid white;
     border-radius: 50%;
-    border-top: 16px solid black;
+    border-top: 16px solid gray;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  #small-loader{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: auto 60%;
+    border: 8px solid white;
+    border-radius: 50%;
+    border-top: 8px solid gray;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
   }
