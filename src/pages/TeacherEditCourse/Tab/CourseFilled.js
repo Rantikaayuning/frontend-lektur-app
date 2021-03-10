@@ -135,7 +135,12 @@ function CourseFilledEdit() {
               <Link to={`/course-change-teacher/${id}`}>
                 <u className="add-new-lesson">Add New Lesson</u>
               </Link>
-              <button> Save Changes</button>
+              <button
+                onClick={() => history.push(`/teacher-new-assessment/${id}`)}
+              >
+                {" "}
+                Save Changes
+              </button>
               <u className="delete-course" onClick={deleteCourseTeacher}>
                 Delete Course
               </u>

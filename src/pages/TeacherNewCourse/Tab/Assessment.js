@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import {
-  postAssessment,
-  getQuestions,
-} from "../../../redux/actions/AssessmentAction";
 import CreateAssessment from "../../../components/CreateAssessment";
 
 const TeacherAssessmentTab = () => {

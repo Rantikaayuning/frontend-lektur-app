@@ -48,11 +48,15 @@ const TeacherAssessmentUpdate = (props) => {
   console.log("questionRemarks", questionRemarks);
   console.log("questionOptions:", questionOptions);
 
-  const [question, setQuestion] = useState({
-    number: questionNumber,
-    question: questionText,
-    remarks: questionRemarks,
-  });
+  const [number, setNumber] = useState(questionNumber);
+  const [question, setQuestion] = useState(questionText);
+  const [remarks, setRemarks] = useState(questionRemarks);
+
+  // const [question, setQuestion] = useState({
+  //   number: questionNumber,
+  //   question: questionText,
+  //   remarks: questionRemarks,
+  // });
 
   const [options, setOptions] = useState(
     questionOptions !== null
@@ -73,19 +77,19 @@ const TeacherAssessmentUpdate = (props) => {
 
   const [answer, setAnswer] = useState(null);
 
-  const handleChange = (e) => {
-    setQuestion({
-      ...question,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   setQuestion({
+  //     ...question,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
-      number: question.number,
-      question: question.question,
-      remarks: question.remarks,
+      number: number,
+      question: question,
+      remarks: remarks,
       answer: answer,
       options: options,
     };
@@ -116,187 +120,181 @@ const TeacherAssessmentUpdate = (props) => {
           </Link>
         </div>
         <>
-          {questionById !== null ? (
-            <>
-              <div className="teacher-question-title">
-                <h4>Questions</h4>
+          {/* {questionById !== null ? ( */}
+          <>
+            <div className="teacher-question-title">
+              <h4>Questions</h4>
+            </div>
+            <div className="teacher-new-question">
+              <div className="teacher-option-title">
+                <h4 className="question-answer-tag">
+                  {questionNumber === null ? (
+                    <>
+                      <div>Loading..</div>#{" "}
+                      {/* <input
+                        className="number-input-tag"
+                        type="text"
+                        name="number"
+                        placeholder="1"
+                        // onChange={(e) => handleChange(e)}
+                      /> */}
+                    </>
+                  ) : (
+                    <>
+                      #{" "}
+                      <input
+                        className="number-input-tag"
+                        type="text"
+                        name="number"
+                        placeholder="1"
+                        value={number}
+                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => setNumber(e.target.value)}
+                      />
+                    </>
+                  )}
+
+                  {questionText === null ? (
+                    <>
+                      <div>Loading..</div>
+                      {/* <input
+                        className="question-input-tag"
+                        type="text"
+                        placeholder="Question"
+                        name="question"
+                        // onChange={(e) => handleChange(e)}
+                      /> */}
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        className="question-input-tag"
+                        type="text"
+                        placeholder="Question"
+                        name="question"
+                        value={question}
+                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => setQuestion(e.target.value)}
+                      />
+                    </>
+                  )}
+                </h4>
               </div>
-              <div className="teacher-new-question">
-                <div className="teacher-option-title">
-                  <h4 className="question-answer-tag">
-                    {questionNumber === null ? (
-                      <>
-                        <div>Loading..</div>
-                        {/* #{" "}
-                        <input
-                          className="number-input-tag"
-                          type="text"
-                          name="number"
-                          placeholder="1"
-                          onChange={(e) => handleChange(e)}
-                        /> */}
-                      </>
-                    ) : (
-                      <>
-                        #{" "}
-                        <input
-                          className="number-input-tag"
-                          type="text"
-                          name="number"
-                          placeholder="1"
-                          value={question.number}
-                          onChange={(e) => handleChange(e)}
-                        />
-                      </>
-                    )}
+              <br />
+              <div className="teacher-option-box">
+                <div className="teacher-answer-option">
+                  <h5 className="answer-title"> Answer</h5>
+                  <br />
+                  {options.map((p, index) => {
+                    return (
+                      <div key={p.value}>
+                        <label class="container-assessment">
+                          <input
+                            className="radio-option"
+                            type="radio"
+                            name="value"
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              setOptions((currentOption) =>
+                                produce(currentOption, (v) => {
+                                  v[index].value = Number(value);
+                                })
+                              );
+                              setAnswer(value);
+                              console.log(value);
+                            }}
+                            value={p.value}
+                            // checked={answer ? true : false}
+                          />
 
-                    {questionText === null ? (
-                      <>
-                        <div>Loading..</div>
-                        {/* <input
-                          className="question-input-tag"
-                          type="text"
-                          placeholder="Question"
-                          name="question"
-                          onChange={(e) => handleChange(e)}
-                        /> */}
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          className="question-input-tag"
-                          type="text"
-                          placeholder="Question"
-                          name="question"
-                          value={question.question}
-                          onChange={(e) => handleChange(e)}
-                        />
-                      </>
-                    )}
-                  </h4>
+                          <input
+                            className="options-table"
+                            onChange={(e) => {
+                              const text = e.target.value;
+                              setOptions((currentOption) =>
+                                produce(currentOption, (v) => {
+                                  v[index].text = text;
+                                })
+                              );
+                            }}
+                            value={p.text}
+                            placeholder="Option"
+                          />
+
+                          {/* a button bellow is for option deletion */}
+                          <button
+                            className="option-deletion-btn"
+                            onClick={() =>
+                              setOptions((currentOption) =>
+                                currentOption.filter((x) => x.value !== p.value)
+                              )
+                            }
+                          >
+                            x
+                          </button>
+                        </label>
+                      </div>
+                    );
+                  })}
+                  {/* <pre>{JSON.stringify(options, null, 2)}</pre> */}
                 </div>
-                <br />
-                <div className="teacher-option-box">
-                  <div className="teacher-answer-option">
-                    <h5 className="answer-title"> Answer</h5>
-                    <br />
-                    {options.map((p, index) => {
-                      return (
-                        <div key={p.value}>
-                          <label class="container-assessment">
-                            <input
-                              className="radio-option"
-                              type="radio"
-                              name="value"
-                              onChange={(e) => {
-                                const value = e.target.value;
-                                setOptions((currentOption) =>
-                                  produce(currentOption, (v) => {
-                                    v[index].value = Number(value);
-                                  })
-                                );
-                                setAnswer(value);
-                                console.log(value);
-                              }}
-                              value={p.value}
-                              // checked={answer ? true : false}
-                            />
-
-                            <input
-                              className="options-table"
-                              onChange={(e) => {
-                                const text = e.target.value;
-                                setOptions((currentOption) =>
-                                  produce(currentOption, (v) => {
-                                    v[index].text = text;
-                                  })
-                                );
-                              }}
-                              value={p.text}
-                              placeholder="Option"
-                            />
-
-                            {/* a button bellow is for option deletion */}
-                            <button
-                              className="option-deletion-btn"
-                              onClick={() =>
-                                setOptions((currentOption) =>
-                                  currentOption.filter(
-                                    (x) => x.value !== p.value
-                                  )
-                                )
-                              }
-                            >
-                              x
-                            </button>
-                          </label>
-                        </div>
-                      );
-                    })}
-                    {/* <pre>{JSON.stringify(options, null, 2)}</pre> */}
-                  </div>
-                  <div className="teacher-answer-remark">
-                    <h5>Remark</h5>
-                    {questionRemarks === null ? (
-                      <>
-                        <div>Loading..</div>
-                        {/* <textarea
-                          type="text"
-                          name="remarks"
-                          placeholder="Explain here..."
-                          cols="61"
-                          rows="5"
-                          onChange={(e) => handleChange(e)}
-                        /> */}
-                      </>
-                    ) : (
-                      <>
-                        <textarea
-                          type="text"
-                          name="remarks"
-                          placeholder="Explain here..."
-                          cols="61"
-                          rows="5"
-                          value={question.remarks}
-                          onChange={(e) => handleChange(e)}
-                        />
-                      </>
-                    )}
-                    <br />
-                  </div>
-                </div>
-                <br />
-                <div className="teacher-add-more">
-                  <button
-                    onClick={() =>
-                      setOptions((currentOption) => [
-                        ...currentOption,
-                        {
-                          value: options.length + 1,
-                          text: "",
-                        },
-                      ])
-                    }
-                  >
-                    Add More Options
-                  </button>
-                  <img src={trashCan} onClick={toggle} className="trash-pic" />
+                <div className="teacher-answer-remark">
+                  <h5>Remark</h5>
+                  {questionRemarks === null ? (
+                    <>
+                      <div>Loading..</div>
+                      {/* <textarea
+                        type="text"
+                        name="remarks"
+                        placeholder="Explain here..."
+                        cols="61"
+                        rows="5"
+                        // onChange={(e) => handleChange(e)}
+                      /> */}
+                    </>
+                  ) : (
+                    <>
+                      <textarea
+                        type="text"
+                        name="remarks"
+                        placeholder="Explain here..."
+                        cols="61"
+                        rows="5"
+                        value={remarks}
+                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      />
+                    </>
+                  )}
+                  <br />
                 </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div>Loading...</div>
-            </>
-          )}
+              <br />
+              <div className="teacher-add-more">
+                <button
+                  onClick={() =>
+                    setOptions((currentOption) => [
+                      ...currentOption,
+                      {
+                        value: options.length + 1,
+                        text: "",
+                      },
+                    ])
+                  }
+                >
+                  Add More Options
+                </button>
+                <img src={trashCan} onClick={toggle} className="trash-pic" />
+              </div>
+            </div>
+          </>
+          {/* ) : (
+            <div id="loader"></div>
+          )} */}
 
           <div className="add-new-question">
             <Link to={`/created-questions/${id}`}>See All Questions</Link>
             <div>
-              {/* <button onClick={toggle} className="option-deletion">
-                Delete Question
-              </button> */}
-
               <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalBody>
                   Are you sure you want to delete this question?

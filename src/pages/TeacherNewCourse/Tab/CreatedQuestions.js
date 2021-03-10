@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
@@ -59,7 +59,7 @@ function CreatedQuestions() {
               <div className="teacher-option-save">
                 <h4>
                   {allQuestions.length} Questions{" "}
-                  <Link to={`/created-questions/${id}`}>
+                  <Link to={`/created-questions-edit/${id}`}>
                     <img src={imgEdit} alt="edit"></img>
                   </Link>
                 </h4>
