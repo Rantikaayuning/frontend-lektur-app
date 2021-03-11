@@ -14,6 +14,10 @@ const TeacherAssessmentTab = () => {
     );
   };
 
+  const handleClickSave = async () => {
+    history.push(`/new-created-questions/${id}`);
+  };
+
   return (
     <>
       <div className="teacher-assessment">
@@ -41,7 +45,9 @@ const TeacherAssessmentTab = () => {
 
           <div className="save-exam-question">
             <button
-              onClick={() => history.push(`/new-created-questions/${id}`)}
+              onClick={() =>
+                handleClickSave().then(() => window.location.reload(true))
+              }
             >
               Save Exam
             </button>

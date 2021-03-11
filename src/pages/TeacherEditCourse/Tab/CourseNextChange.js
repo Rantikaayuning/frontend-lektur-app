@@ -1,19 +1,35 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
-import { getCourseDetail } from "../../../redux/actions/CoursesAction";
+import {
+  getCourseDetail,
+  deleteCourse,
+  getTeacherCourses,
+} from "../../../redux/actions/CoursesAction";
 
-function CourseNextChange() {
+function CourseNextChange(props) {
   const dispatch = useDispatch();
-
   const { id } = useParams();
+  const history = useHistory();
 
   const { courseDetail } = useSelector((state) => state.courses);
+
+  const { className } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   useEffect(() => {
     dispatch(getCourseDetail(id));
   }, [dispatch, id]);
+
+  const deleteCourseTeacher = async () => {
+    dispatch(deleteCourse(id))
+      .then(() => dispatch(getTeacherCourses))
+      .then(() => history.push("/teacher-dashboard"))
+      .then(() => window.location.reload(false));
+  };
 
   // console.log(courseDetail);
 
@@ -97,8 +113,26 @@ function CourseNextChange() {
                   <button>Publish Course</button>
                 </p>
               </Link>
-              <p className="delete">Delete Course</p>
+              <p className="delete" onClick={toggle}>
+                Delete Course
+              </p>
             </div>
+            <Modal isOpen={modal} toggle={toggle} className={className}>
+              <ModalBody>
+                Are you sure you want to delete this course?
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  onClick={() => deleteCourseTeacher().then(() => toggle())}
+                >
+                  Delete
+                </Button>
+                <Button color="secondary" onClick={toggle}>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Modal>
           </div>
         </>
       )}

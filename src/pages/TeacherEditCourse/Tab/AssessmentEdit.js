@@ -19,6 +19,10 @@ const TeacherAssessmentTabEdit = () => {
     dispatch(getQuestions(id));
   }, [dispatch, id]);
 
+  const handleClick = async () => {
+    history.push(`/new-created-questions/${id}`);
+  };
+
   return (
     <>
       <div className="teacher-assessment">
@@ -37,7 +41,27 @@ const TeacherAssessmentTabEdit = () => {
             <h4>Questions</h4>
           </div>
           {assessment.length === 0 ? (
-            <div id="loader"></div>
+            <>
+              <div
+                className="teacher-new-question-save"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <h4>{assessment.length} Questions</h4>
+                <span
+                  style={{
+                    textDecoration: "underline",
+                  }}
+                >
+                  <Link to={`/teacher-new-assessment/${id}`}>
+                    Add New Question
+                  </Link>
+                </span>
+              </div>
+              <div id="loader"></div>
+            </>
           ) : (
             <>
               {assessment.map((item) => (
@@ -49,6 +73,15 @@ const TeacherAssessmentTabEdit = () => {
                   queId={item._id}
                 />
               ))}
+              <div className="save-exam-question save-update-question">
+                <button
+                  onClick={() =>
+                    handleClick().then(() => window.location.reload(false))
+                  }
+                >
+                  Save Exam
+                </button>
+              </div>
             </>
           )}
 
@@ -57,14 +90,6 @@ const TeacherAssessmentTabEdit = () => {
               Add new question
             </p>
           </div> */}
-
-          <div className="save-exam-question save-update-question">
-            <button
-              onClick={() => history.push(`/new-created-questions/${id}`)}
-            >
-              Save Exam
-            </button>
-          </div>
         </>
       </div>
     </>

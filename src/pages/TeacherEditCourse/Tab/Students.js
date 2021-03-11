@@ -123,9 +123,16 @@ const TeacherStudentsUpdate = () => {
 
           <div className="student-list-box">
             <div className="student-list-header">
-              <h5>
-                <b>Students</b>
-              </h5>
+              {studentsAccStatus.length === 0 ? (
+                <h5>
+                  <b>{studentsAccStatus.length} Students</b>
+                </h5>
+              ) : (
+                <h5>
+                  <b>Students</b>
+                </h5>
+              )}
+
               <p>
                 <button onClick={handlePopUp}>Invite</button>
               </p>

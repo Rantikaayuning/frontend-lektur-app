@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { produce } from "immer";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useDispatch } from "react-redux";
@@ -11,14 +11,16 @@ import {
 } from "../../redux/actions/AssessmentAction";
 import trashCan from "../../assets/trash.png";
 
-function EditAssessment({
-  className,
-  numberAll,
-  questionAll,
-  optionsAll,
-  remarksAll,
-  queId,
-}) {
+function EditAssessment(props) {
+  const {
+    className,
+    numberAll,
+    questionAll,
+    optionsAll,
+    remarksAll,
+    queId,
+  } = props;
+
   const history = useHistory();
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -50,13 +52,6 @@ function EditAssessment({
 
   const [answer, setAnswer] = useState(null);
 
-  // const handleChange = (e) => {
-  //   setQuestion({
-  //     ...question,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = {
@@ -69,14 +64,13 @@ function EditAssessment({
     dispatch(updateQuestion(body, id, questionId))
       .then(() => dispatch(getQuestions(id)))
       .then(() => setButtonText("Updated"));
-    // .then(() => history.push(`/new-created-questions/${id}`));
-    // console.log(body);
   };
 
   const deleteCreatedQuestion = async () => {
     dispatch(deleteQuestion(id, questionId))
       .then(() => dispatch(getQuestions(id)))
-      .then(() => history.push(`/new-created-questions/${id}`));
+      .then(() => window.location.reload(false));
+    // .then(() => history.push(`/new-created-questions/${id}`));
   };
 
   // console.log(JSON.stringify(options, null, 2));
@@ -97,7 +91,6 @@ function EditAssessment({
                     placeholder="1"
                     required
                     value={number}
-                    // onChange={(e) => handleChange(e)}
                     onChange={(e) => setNumber(e.target.value)}
                   />
                 </>
@@ -109,7 +102,6 @@ function EditAssessment({
                     name="question"
                     required
                     value={question}
-                    // onChange={(e) => handleChange(e)}
                     onChange={(e) => setQuestion(e.target.value)}
                   />
                 </>
@@ -137,7 +129,6 @@ function EditAssessment({
                               })
                             );
                             console.log(value);
-                            // e.target.value
                             setAnswer(value);
                           }}
                           value={p.value}
@@ -153,13 +144,11 @@ function EditAssessment({
                                 v[index].text = text;
                               })
                             );
-                            // e.target.value
                           }}
                           value={p.text}
                           placeholder="Option"
                         />
 
-                        {/* a button bellow is for option deletion */}
                         <button
                           className="option-deletion-btn"
                           onClick={() =>
@@ -188,7 +177,6 @@ function EditAssessment({
                     cols="61"
                     rows="5"
                     value={remarks}
-                    // onChange={(e) => handleChange(e)}
                     onChange={(e) => setRemarks(e.target.value)}
                   />
                 </>
@@ -225,9 +213,7 @@ function EditAssessment({
                       ? alert("Please fill in the question")
                       : !answer
                       ? alert("Please select the correct answer")
-                      : // : !remarks
-                        // ? alert("Please fill in the remarks")
-                        setButtonText("CLICK to update!")
+                      : setButtonText("CLICK to update!")
                   }
                 >
                   <button
