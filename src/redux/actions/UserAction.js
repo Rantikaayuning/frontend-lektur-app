@@ -8,6 +8,7 @@ import {
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
+import _ from "lodash";
 
 const token = Cookies.get("token");
 
@@ -78,34 +79,42 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  ).then((response) => {
-    // console.log(response);
-    if (response.status === 201) {
+  )
+    .then((response) => {
+      console.log("updateUserProfile=>", response);
+      Cookies.set("token", response.data.token);
+      let decoded;
+      if (response.data && !_.isEmpty(response.data.token)) {
+        decoded = jwt_decode(response.data.token);
+      }
+      // if (response.status === 201) {
       dispatch({
         type: UPDATE_USER_PROFILE,
-        payload: response.data.result,
+        payload: decoded, //response.data.result
       });
-    }
-    // return response.data.token;
-  });
+      alert("Update Data Success");
+      // window.location.reload(false);
+      // }
+      // return response.data.token;
+    })
+    .catch((error) => alert(`ERROR NIH: ${error}`));
 };
 
 export const updateProfileImage = (file) => async (dispatch) => {
-  const data = new FormData()
-  data.append("file", file)
+  const data = new FormData();
+  data.append("file", file);
 
-  API.put("/users/update/image", data, 
-  {
+  API.put("/users/update/image", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
-  .then((response) => {
-    dispatch({
-      type: UPDATE_PROFILE_IMAGE,
-      payload: response.data.result.Location,
-      message: response.data.message,
+    .then((response) => {
+      dispatch({
+        type: UPDATE_PROFILE_IMAGE,
+        payload: response.data.result.Location,
+        message: response.data.message,
+      });
     })
-  })
-  .catch((err) => alert("updated fail, try again!", err));
-}
+    .catch((err) => alert("updated fail, try again!", err));
+};
