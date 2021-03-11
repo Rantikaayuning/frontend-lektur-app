@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import Comp1 from "../../../assets/RectangleComputer.png";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+
 import {
   getCourseFilled,
   deleteCourse,
   getCourseDetail,
+  getTeacherCourses,
 } from "../../../redux/actions/CoursesAction";
 
-function CourseFilledEdit() {
+function CourseFilledEdit(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const {
@@ -22,14 +24,20 @@ function CourseFilledEdit() {
 
   const { id } = useParams();
 
+  const { className } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
   useEffect(() => {
     dispatch(getCourseFilled(id));
     dispatch(getCourseDetail(id));
   }, [dispatch, id]);
 
-  const deleteCourseTeacher = () => {
-    dispatch(deleteCourse(id));
-    history.push("/teacher-dashboard");
+  const deleteCourseTeacher = async () => {
+    dispatch(deleteCourse(id))
+      .then(() => dispatch(getTeacherCourses))
+      .then(() => history.push("/teacher-dashboard"))
+      .then(() => window.location.reload(false));
   };
 
   console.log(courseDetail);
@@ -135,11 +143,32 @@ function CourseFilledEdit() {
               <Link to={`/course-change-teacher/${id}`}>
                 <u className="add-new-lesson">Add New Lesson</u>
               </Link>
-              <button> Save Changes</button>
-              <u className="delete-course" onClick={deleteCourseTeacher}>
+              <button
+                onClick={() => history.push(`/teacher-new-assessment/${id}`)}
+              >
+                {" "}
+                Save Changes
+              </button>
+              <u className="delete-course" onClick={toggle}>
                 Delete Course
               </u>
             </div>
+            <Modal isOpen={modal} toggle={toggle} className={className}>
+              <ModalBody>
+                Are you sure you want to delete this course?
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  onClick={() => deleteCourseTeacher().then(() => toggle())}
+                >
+                  Delete
+                </Button>
+                <Button color="secondary" onClick={toggle}>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Modal>
           </div>
         </>
       )}

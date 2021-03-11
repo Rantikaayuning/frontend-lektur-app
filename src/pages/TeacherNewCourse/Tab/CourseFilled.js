@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-// import Comp1 from "../../../assets/RectangleComputer.png";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+
 import {
   getCourseFilled,
   deleteCourse,
   getCourseDetail,
+  getTeacherCourses,
 } from "../../../redux/actions/CoursesAction";
 
-function CourseFilled() {
+function CourseFilled(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const {
@@ -20,16 +22,21 @@ function CourseFilled() {
   } = useSelector((state) => state.courses);
 
   const { id } = useParams();
-  console.log(id);
+
+  const { className } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   useEffect(() => {
     dispatch(getCourseFilled(id));
     dispatch(getCourseDetail(id));
   }, [dispatch, id]);
 
-  const deleteCourseTeacher = () => {
-    dispatch(deleteCourse(id));
-    history.push("/teacher-dashboard");
+  const deleteCourseTeacher = async () => {
+    dispatch(deleteCourse(id))
+      .then(() => dispatch(getTeacherCourses))
+      .then(() => history.push("/teacher-dashboard"))
+      .then(() => window.location.reload(false));
   };
 
   console.log(courseDetail);
@@ -92,7 +99,11 @@ function CourseFilled() {
                                 <Link to={`/course-change-teacher/${id}`}>
                                   <i class="fa fa-file files"></i>
                                 </Link>
-                                <a href={materi.material} target="_blank" rel="noreferrer">
+                                <a
+                                  href={materi.material}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
                                   <span className="span-detail">
                                     {item.title} {index + 1}.pdf
                                   </span>
@@ -117,10 +128,26 @@ function CourseFilled() {
               <Link to={`/teacher-new-assessment/${id}`}>
                 <button> Save Changes</button>
               </Link>
-              <u className="delete-course" onClick={deleteCourseTeacher}>
+              <u className="delete-course" onClick={toggle}>
                 Delete Course
               </u>
             </div>
+            <Modal isOpen={modal} toggle={toggle} className={className}>
+              <ModalBody>
+                Are you sure you want to delete this course?
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="danger"
+                  onClick={() => deleteCourseTeacher().then(() => toggle())}
+                >
+                  Delete
+                </Button>
+                <Button color="secondary" onClick={toggle}>
+                  Cancel
+                </Button>
+              </ModalFooter>
+            </Modal>
           </div>
         </>
       )}
