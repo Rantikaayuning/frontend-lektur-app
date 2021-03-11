@@ -52,7 +52,7 @@ function CreateAssessment() {
     <>
       <div className="teacher-assessment">
         <>
-          <div className="teacher-new-question">
+          <form className="teacher-new-question">
             <div className="teacher-option-title">
               <h4 className="question-answer-tag">
                 #{" "}
@@ -61,6 +61,7 @@ function CreateAssessment() {
                   type="text"
                   name="number"
                   placeholder="1"
+                  required
                   onChange={(e) => handleChange(e)}
                 />
                 <input
@@ -68,6 +69,7 @@ function CreateAssessment() {
                   type="text"
                   placeholder="Question"
                   name="question"
+                  required
                   onChange={(e) => handleChange(e)}
                 />
               </h4>
@@ -85,6 +87,7 @@ function CreateAssessment() {
                           className="radio-option"
                           type="radio"
                           name="value"
+                          required
                           onChange={(e) => {
                             const value = e.target.value;
                             setOptions((currentOption) =>
@@ -101,6 +104,7 @@ function CreateAssessment() {
 
                         <input
                           className="options-table"
+                          required
                           onChange={(e) => {
                             const text = e.target.value;
                             setOptions((currentOption) =>
@@ -165,13 +169,17 @@ function CreateAssessment() {
               <p
                 className="save-per-question"
                 onClick={() =>
-                  question.number &&
-                  question.question &&
-                  question.remarks &&
-                  options &&
-                  answer
-                    ? setButtonText("Question Saved")
-                    : buttonText
+                  !question.number
+                    ? alert("Please fill in the number")
+                    : !question.question
+                    ? alert("Please fill in the question")
+                    : !answer
+                    ? alert(
+                        "Please fill in the options and select the correct answer"
+                      )
+                    : // : !question.remarks
+                      // ? alert("Please fill in the remarks")
+                      setButtonText("Question Saved")
                 }
               >
                 <button type="submit" onClick={handleSubmit}>
@@ -179,7 +187,7 @@ function CreateAssessment() {
                 </button>
               </p>
             </div>
-          </div>
+          </form>
         </>
       </div>
     </>

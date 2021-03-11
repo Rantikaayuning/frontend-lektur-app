@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import {
-  postAssessment,
-  getQuestions,
-} from "../../../redux/actions/AssessmentAction";
 import CreateAssessment from "../../../components/CreateAssessment";
 
 const TeacherAssessmentTab = () => {
@@ -16,6 +12,10 @@ const TeacherAssessmentTab = () => {
     setQuestionList(
       questionList.concat(<CreateAssessment key={questionList.length} />)
     );
+  };
+
+  const handleClickSave = async () => {
+    history.push(`/new-created-questions/${id}`);
   };
 
   return (
@@ -45,7 +45,9 @@ const TeacherAssessmentTab = () => {
 
           <div className="save-exam-question">
             <button
-              onClick={() => history.push(`/new-created-questions/${id}`)}
+              onClick={() =>
+                handleClickSave().then(() => window.location.reload(true))
+              }
             >
               Save Exam
             </button>

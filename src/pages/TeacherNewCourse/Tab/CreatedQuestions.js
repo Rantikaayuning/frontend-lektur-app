@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
@@ -49,7 +49,27 @@ function CreatedQuestions() {
       </div>
       <div className="teacher-save-question-box">
         {allQuestions.length === 0 ? (
-          <div id="loader"></div>
+          <>
+            <div
+              className="teacher-new-question-save"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <h4>{allQuestions.length} Questions</h4>
+              <span
+                style={{
+                  textDecoration: "underline",
+                }}
+              >
+                <Link to={`/teacher-new-assessment/${id}`}>
+                  Add New Question
+                </Link>
+              </span>
+            </div>
+            <div id="loader"></div>
+          </>
         ) : (
           <>
             <div className="teacher-question-title">

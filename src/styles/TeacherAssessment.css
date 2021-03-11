@@ -158,9 +158,10 @@
 }
 
 .trash-pic {
-  margin-top: 10px;
-  width: 35px;
-  height: 40px;
+  margin-top: 3px;
+  margin-right: 15px;
+  width: 30px;
+  height: 35px;
 }
 
 .trash-pic:hover {
@@ -171,6 +172,10 @@
   display: flex;
   margin: 0px 250px 100px 250px;
   justify-content: center;
+}
+
+.save-update-question {
+  margin-top: 50px;
 }
 
 .save-exam-question button {
