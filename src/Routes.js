@@ -142,5 +142,5 @@ export const publicRoutes = [
     component: TeacherCourseUpdate,
     path: "/course-change-teacher/:id",
     exact: true,
-  }
+  },
 ];
