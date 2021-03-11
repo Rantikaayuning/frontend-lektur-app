@@ -16,11 +16,10 @@ import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
 import CourseChange from "./pages/TeacherEditCourse/Tab/CourseChange";
 import CourseNextChange from "./pages/TeacherEditCourse/Tab/CourseNextChange";
 import CourseFilledEdit from "./pages/TeacherEditCourse/Tab/CourseFilled";
-import TeacherAssessmentUpdate from "./pages/TeacherEditCourse/Tab/Assessment";
 import TeacherStudentsUpdate from "./pages/TeacherEditCourse/Tab/Students";
 import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
-import CreatedQuestionsEdit from "./pages/TeacherEditCourse/Tab/CreatedQuestionsEdit";
 import TeacherCourseUpdate from "./pages/TeacherEditCourse/Tab/CourseChange";
+import TeacherAssessmentTabEdit from "./pages/TeacherEditCourse/Tab/AssessmentEdit";
 
 export const publicRoutes = [
   {
@@ -75,12 +74,12 @@ export const publicRoutes = [
   },
   {
     component: TeacherAssessmentTab,
-    path: "/teacher-new-assessment/:id", // should be /teacher-new-assessment/:id
+    path: "/teacher-new-assessment/:id",
     exact: true,
   },
   {
     component: TeacherStudentsTab,
-    path: "/teacher-new-students/:id", // should be /teacher-new-students/:id
+    path: "/teacher-new-students/:id",
     exact: true,
   },
   {
@@ -118,11 +117,7 @@ export const publicRoutes = [
     path: "/course-teacher/students/:id",
     exact: true,
   },
-  {
-    component: TeacherAssessmentUpdate,
-    path: "/course-teacher/assessments/:id/:queId",
-    exact: true,
-  },
+
   {
     component: TeacherCourseUpdate,
     path: "/course-change-teacher/:id",
@@ -134,13 +129,13 @@ export const publicRoutes = [
     exact: true,
   },
   {
-    component: CreatedQuestionsEdit,
-    path: "/created-questions/:id",
+    component: TeacherCourseUpdate,
+    path: "/course-change-teacher/:id",
     exact: true,
   },
   {
-    component: TeacherCourseUpdate,
-    path: "/course-change-teacher/:id",
+    component: TeacherAssessmentTabEdit,
+    path: "/created-questions/:id",
     exact: true,
   },
 ];

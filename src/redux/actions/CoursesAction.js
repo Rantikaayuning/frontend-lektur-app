@@ -17,10 +17,19 @@ import {
   GET_POPUP_MATERIAL,
   GET_CONTENT_DETAIL,
   UPDATE_COURSE,
+  DOWNLOAD_CERTIFICATE,
+  FETCH_LOADING
 } from "../types/CoursesTypes";
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
+
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_LOADING,
+    payload: payload
+  }
+}
 
 export const getCourses = (payload) => (dispatch) => {
   API.get("/courses/all", payload)
@@ -155,6 +164,8 @@ export const getTeacherCourses = (access_token = null) => (dispatch) => {
 };
 
 export const getPopUpContent = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.get(`student/pop-up/course/content?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -165,9 +176,13 @@ export const getPopUpContent = (id) => (dispatch) => {
         type: GET_POPUP_CONTENT,
         payload: response.data.result,
       });
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     })
     .catch(() => {
       console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     });
 };
 
@@ -372,3 +387,28 @@ export const deleteCourse = (id) => () => {
       .catch((err) => console.log(err));
   });
 };
+
+export const getCertificate = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
+  API.get(`/student/certificate?courseId=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  })
+    .then((response) => {
+      // console.log(response.data.result)
+        dispatch({
+          type: DOWNLOAD_CERTIFICATE,
+          payload: response.data.result
+        });
+        isLoading = false;
+        dispatch(fetchLoading(isLoading))
+    })
+    .catch((err) => {
+      console.log('error')
+      isLoading = false;
+      dispatch(fetchLoading(isLoading))
+    });
+};
+

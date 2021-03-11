@@ -139,7 +139,7 @@ function Navbar(props) {
                   ) : (
                     <div className="drop-img">
                     <div className="vl"></div>
-                    <div id="small-loader"></div>
+                    <div id="small-loader-navbar"></div>
                     </div>
                   )}
                 </>

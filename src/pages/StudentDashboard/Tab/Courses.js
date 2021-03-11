@@ -17,7 +17,7 @@ const StudentBoardCourses = () => {
     const [materialModal, setMaterialModal] = useState(false);
 
     const dispatch = useDispatch();
-    const {studentCourses, popUpContent, popUpMaterial, courseDetail} = useSelector(state => state.courses);
+    const {studentCourses, popUpContent, popUpMaterial, courseDetail, isLoading} = useSelector(state => state.courses);
 
     useEffect(() => {
         dispatch(getStudentCourses());
@@ -110,8 +110,9 @@ const StudentBoardCourses = () => {
                 </>
                 )}
                 </div>
+                
                 {/* content popup */}
-                {popUpContent.length > 1 && courseDetail !== null ? (
+                {popUpContent.length > 0 && courseDetail !== null && isLoading === false ? (
                 <Modal
                 show={contentModal}
                 size='lg'
@@ -141,6 +142,20 @@ const StudentBoardCourses = () => {
                 ))}
                 />
                 </Modal>
+                ) : isLoading === true ? (
+                <Modal
+                show={contentModal}
+                size='lg'
+                onHide={() => setContentModal(false)}
+                className='pop-up-course-box'
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+                >
+                <PopUpCourse
+                title={<div>Content</div>}
+                lessonContent={<div id='popup-loader'></div>}
+                />
+                </Modal>
                 ) : (
                 <Modal
                 show={contentModal}
@@ -152,13 +167,13 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpCourse
                 title={<div>Content</div>}
-                lessonContent={<p className='pop-up-course-nothing'></p>}
+                lessonContent={<p className='pop-up-course-nothing'>No Content yet</p>}
                 />
                 </Modal>
                 )}
 
                 {/* material popup */}
-                {popUpMaterial.length !== null || studentCourses === null || studentCourses === undefined ? (
+                {popUpMaterial.length !== null ? (
                 <Modal
                 show={materialModal}
                 size='lg'
