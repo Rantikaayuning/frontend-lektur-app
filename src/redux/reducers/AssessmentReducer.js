@@ -3,7 +3,6 @@ import {
   POST_QUESTIONS,
   PUT_FINAL_SCORE,
   UPDATE_QUESTION,
-  GET_ONE_QUESTION,
 } from "../types/AssessmentTypes";
 
 const initialState = {
@@ -11,22 +10,10 @@ const initialState = {
   addAssessment: null,
   finalScore: null,
   updateCreatedQuestion: null,
-  questionById: null,
-  questionText: null,
-  questionNumber: null,
-  questionRemarks: null,
-  questionOptions: null,
 };
 
 const assessmentReducer = (state = initialState, action) => {
-  const {
-    type,
-    payload,
-    questionText,
-    questionNumber,
-    questionRemarks,
-    questionOptions,
-  } = action;
+  const { type, payload } = action;
   switch (type) {
     case GET_QUESTIONS:
       return {
@@ -48,15 +35,7 @@ const assessmentReducer = (state = initialState, action) => {
         ...state,
         updateCreatedQuestion: payload,
       };
-    case GET_ONE_QUESTION:
-      return {
-        ...state,
-        questionById: payload,
-        questionText: questionText,
-        questionNumber: questionNumber,
-        questionRemarks: questionRemarks,
-        questionOptions: questionOptions,
-      };
+
     default:
       return state;
   }

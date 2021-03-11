@@ -49,7 +49,12 @@ function CreatedQuestions() {
       </div>
       <div className="teacher-save-question-box">
         {allQuestions.length === 0 ? (
-          <div id="loader"></div>
+          <div className="teacher-new-question-save">
+            <h4>
+              Questions <div id="loader"></div>
+            </h4>
+            <br />
+          </div>
         ) : (
           <>
             <div className="teacher-question-title">
@@ -59,7 +64,7 @@ function CreatedQuestions() {
               <div className="teacher-option-save">
                 <h4>
                   {allQuestions.length} Questions{" "}
-                  <Link to={`/created-questions-edit/${id}`}>
+                  <Link to={`/created-questions/${id}`}>
                     <img src={imgEdit} alt="edit"></img>
                   </Link>
                 </h4>
