@@ -206,6 +206,10 @@ form input {
   color: white;
 }
 
+.btn-invite a {
+  color: #e9a94f;
+}
+
 .invite-edit-btn a:link {
   text-decoration: none;
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { produce } from "immer";
-import { studentAssessment as assessment } from "../../../assets/JSONFile/dummyData";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+
+import trashCan from "../../../assets/trash.png";
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +12,17 @@ import {
   updateQuestion,
   getQuestions,
   getOneQuestion,
+  deleteQuestion,
 } from "../../../redux/actions/AssessmentAction";
 
-const TeacherAssessmentUpdate = () => {
+const TeacherAssessmentUpdate = (props) => {
   const history = useHistory();
   const { id, queId } = useParams();
   const dispatch = useDispatch();
+
+  const { className } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   // console.log(`queId:`, queId);
 
@@ -27,6 +34,12 @@ const TeacherAssessmentUpdate = () => {
     questionRemarks,
     questionOptions,
   } = useSelector((state) => state.assessment);
+
+  useEffect(() => {
+    dispatch(getQuestions(id));
+    dispatch(getOneQuestion(queId));
+    dispatch(getCourseDetail(id));
+  }, [dispatch, id]);
 
   console.log(assessment);
   console.log("questionById: ", questionById);
@@ -76,19 +89,19 @@ const TeacherAssessmentUpdate = () => {
       answer: answer,
       options: options,
     };
-    dispatch(updateQuestion(body, id, queId)).then(() =>
-      history.push(`/created-questions/${id}`)
-    );
-    console.log(body);
+    dispatch(updateQuestion(body, id, queId))
+      .then(() => dispatch(getQuestions(id)))
+      .then(() => history.push(`/created-questions/${id}`));
+    // console.log(body);
   };
 
   // console.log(JSON.stringify(options, null, 2));
 
-  useEffect(() => {
-    dispatch(getQuestions(id));
-    dispatch(getOneQuestion(queId));
-    dispatch(getCourseDetail(id));
-  }, [dispatch, id]);
+  const deleteCreatedQuestion = async () => {
+    dispatch(deleteQuestion(id, queId))
+      .then(() => dispatch(getQuestions(id)))
+      .then(() => history.push(`/created-questions/${id}`));
+  };
 
   return (
     <>
@@ -267,6 +280,7 @@ const TeacherAssessmentUpdate = () => {
                   >
                     Add More Options
                   </button>
+                  <img src={trashCan} onClick={toggle} className="trash-pic" />
                 </div>
               </div>
             </>
@@ -277,22 +291,48 @@ const TeacherAssessmentUpdate = () => {
           )}
 
           <div className="add-new-question">
-            {/* <Link to="/teacher-new-assessment">Add New Question</Link> */}
-            {/* <div> */}
             <Link to={`/created-questions/${id}`}>See All Questions</Link>
+            <div>
+              {/* <button onClick={toggle} className="option-deletion">
+                Delete Question
+              </button> */}
+
+              <Modal isOpen={modal} toggle={toggle} className={className}>
+                <ModalBody>
+                  Are you sure you want to delete this question?
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="danger"
+                    onClick={() => deleteCreatedQuestion().then(() => toggle())}
+                  >
+                    Delete
+                  </Button>{" "}
+                  <Button color="secondary" onClick={toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            </div>
             {/* </div> */}
           </div>
           <div className="save-exam-question">
             <button
               type="submit"
-              onClick={(e) =>
-                question.number &&
-                question.question &&
-                question.remarks &&
-                options &&
-                answer
-                  ? handleSubmit(e)
-                  : alert("Please fill in the question correctly")
+              onClick={
+                (e) =>
+                  !question.number
+                    ? alert("Please fill in the number")
+                    : !question.question
+                    ? alert("Please fill in the question")
+                    : !answer
+                    ? alert("Please select the correct answer")
+                    : !question.remarks
+                    ? alert("Please fill in the remarks")
+                    : !options.map((item) => item.text) // bugs
+                    ? alert("Please fill in the options")
+                    : handleSubmit(e)
+                // : alert("Please fill in the question correctly")
               }
             >
               Save Exam

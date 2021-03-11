@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function CourseCard(props) {
-  const { image, title, numOfVideos, numOfLesson, enrolledStudents, edit } = props;
+  const {
+    image,
+    title,
+    numOfVideos,
+    numOfLesson,
+    enrolledStudents,
+    edit,
+    invite,
+  } = props;
   return (
     <>
       <div className="course-all">
@@ -15,11 +23,15 @@ function CourseCard(props) {
             {numOfVideos} Videos | {numOfLesson} Lesson Material
           </small>
           <div>
-            <small className="text-muted small-text">{enrolledStudents} Students Enrolled</small>
+            <small className="text-muted small-text">
+              {enrolledStudents} Students Enrolled
+            </small>
           </div>
         </div>
         <div className="invite-edit-btn">
-          <button className="btn-invite">Invite</button>{" "}
+          <button className="btn-invite">
+            <Link to={invite}>Invite</Link>
+          </button>
           <button className="btn-edit">
             <Link to={edit}>Edit</Link>
           </button>

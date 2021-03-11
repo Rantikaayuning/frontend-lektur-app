@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
+import { Spinner } from "reactstrap";
 
 import { teacherProfile } from "../../assets/JSONFile/dummyData";
 import CourseCard from "./CourseCard";
@@ -85,9 +86,7 @@ function TeacherDashboard() {
             </div>
              
          ) : (
-          <div className="teacher-profile">
-            <div id="regular-loader"></div>
-          </div>
+          <div></div>
           )} 
         </div>
       ) : (
@@ -141,7 +140,7 @@ function TeacherDashboard() {
         </div>
       )}
 
-      {teacherCourses !== 0 ? (
+      {teacherCourses.length !== 0 ? (
         <div className="courses-container">
           <div className="courses-header">
             <h5>
@@ -162,6 +161,7 @@ function TeacherDashboard() {
                 numOfLesson={item.totalMaterial}
                 enrolledStudents={item.totalEnrolled}
                 edit={`/course-teacher/edit/${item._id}`}
+                invite={`/course-teacher/students/${item._id}`}
               />
             ))}
           </div>
