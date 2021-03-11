@@ -34,7 +34,7 @@ const StudentBoardCourses = () => {
         setMaterialModal(true)
     }
     
-    // console.log("content", popUpContent)
+    console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
     console.log("course", studentCourses)
     // console.log('detail', courseDetail)

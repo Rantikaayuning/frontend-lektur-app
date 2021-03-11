@@ -4,6 +4,7 @@ import {
   GET_USER_PROFILE,
   SIGN_UP,
   UPDATE_USER_PROFILE,
+  UPDATE_PROFILE_IMAGE,
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
@@ -88,3 +89,23 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
     // return response.data.token;
   });
 };
+
+export const updateProfileImage = (file) => async (dispatch) => {
+  const data = new FormData()
+  data.append("file", file)
+
+  API.put("/users/update/image", data, 
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((response) => {
+    dispatch({
+      type: UPDATE_PROFILE_IMAGE,
+      payload: response.data.result.Location,
+      message: response.data.message,
+    })
+  })
+  .catch((err) => alert("updated fail, try again!", err));
+}

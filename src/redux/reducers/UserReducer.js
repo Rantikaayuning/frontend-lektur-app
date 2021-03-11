@@ -3,6 +3,7 @@ import {
   LOGIN,
   SIGN_UP,
   UPDATE_USER_PROFILE,
+  UPDATE_PROFILE_IMAGE,
 } from "../types/UserLogin";
 import Cookies from "js-cookie";
 
@@ -17,10 +18,12 @@ const initialState = {
   password: "",
   fullname: "",
   token: Cookies.get("token") || null,
+  profileImage: null,
+  message: null,
 };
 
 const userReducer = (state = initialState, action) => {
-  const { type, payload, role, token } = action;
+  const { type, payload, role, token, message } = action;
   switch (type) {
     case LOGIN:
       return {
@@ -45,6 +48,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         userProfile: { ...state.userProfile, ...payload },
       };
+    case UPDATE_PROFILE_IMAGE:
+      return{
+        ...state,
+        profileImage: payload,
+        message: message,
+      }
     default:
       return state;
   }

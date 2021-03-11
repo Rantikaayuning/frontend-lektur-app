@@ -161,8 +161,8 @@ const TeacherCourseTab = (props) => {
                 <h4>Content*</h4>
               </div>
               <CreateContent />
+              {contentList}
               <div className="teacher-add-new-lesson-button">
-                {contentList}
                 <p onClick={addContent}>Add new lesson</p>
               </div>
               <div className="publish-and-delete-course">

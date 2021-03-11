@@ -8,7 +8,7 @@ import {postContent, uploadMaterial, uploadVideo} from "../../redux/actions/Cour
 export default function CreateContent() {
     const dispatch = useDispatch();
 
-    const {id, idContent } = useSelector(state => state.courses)
+    const {id, idContent, videoMaterial, courseId} = useSelector(state => state.courses)
 
     const [number, setNumber] = useState("");
     const [description, setDescription] = useState("");
@@ -21,7 +21,11 @@ export default function CreateContent() {
 
     const submitContent = (e) => {
         e.preventDefault()
-        dispatch(postContent(id, titleContent, description, number ));
+        id === null ? (
+            dispatch(postContent(courseId, titleContent, description, number  ))
+        ) : (
+            dispatch(postContent(id, titleContent, description, number ))
+        );
     }
 
 //-----------------------MATERIAL------------------------//

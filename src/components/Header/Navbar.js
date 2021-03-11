@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 import Cookies from "js-cookie";
 
 import profile from "../../assets/Ellipse 2.png";
+import defaultPhoto from "../../assets/user.png"
+
 
 function Navbar(props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -76,17 +78,27 @@ function Navbar(props) {
 
           <li>
             <div className="user-profile">
-              {props.userProfile ? (
+              {props.isAuthentificated ? (
+                <>
+                {props.userProfile ? (
                 <>
                   <div className="drop-img">
                     <div className="vl"></div>
                     <Link>
-                      <img
+                    {props.userProfile.image === null ? (
+                      <img src={defaultPhoto} alt="student"  alt="profile"
+                      className="profile-img"/>
+                    ) : (
+                      <img src={props.userProfile.image} alt="student"  alt="profile"
+                      className="profile-img" />
+                    )}
+                      {/* <img
                         src={profile}
                         alt="profile"
                         className="profile-img"
-                      />
+                      /> */}
                     </Link>
+                    {/* <div id="small-loader"></div> */}
                     <span> {props.userProfile.fullname}</span>
                     {props.userProfile.status === 0 ? (
                       <div className="dropdown-content-img">
@@ -123,6 +135,13 @@ function Navbar(props) {
                       </div>
                     )}
                   </div>
+                </>
+                  ) : (
+                    <div className="drop-img">
+                    <div className="vl"></div>
+                    <div id="small-loader-navbar"></div>
+                    </div>
+                  )}
                 </>
               ) : (
                 <div className="form-navbar">

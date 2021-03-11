@@ -276,9 +276,11 @@ export const getCourseFilled = (id) => (dispatch) => {
   })
     .then((response) => {
       if (response.status === 200) {
+        console.log(response.data.result.course);
         dispatch({
           type: GET_COURSE_FILLED,
           payload: response.data.result.course,
+          courseId: response.data.result.course._id,
           content: response.data.result.content,
           material: response.data.result.material,
         });

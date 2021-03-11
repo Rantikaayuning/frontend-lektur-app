@@ -30,7 +30,8 @@
   border-radius: 2px;
   left: 220px;
   margin-top: 42px;
-  height: 280px;
+  min-height: 280px;
+  height: max-content;
 }
 
 .course-filled-content-card {

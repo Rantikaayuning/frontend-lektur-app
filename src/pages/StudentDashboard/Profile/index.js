@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
+import { Modal } from "react-bootstrap";
 
 import imgStudent from "../../../assets/studentpicture.png";
+import defaultPhoto from "../../../assets/user.png"
+import successLogo from "../../../assets/upload2.png"
+
 import {
   getUserProfile,
   updateUserProfile,
+  updateProfileImage,
 } from "../../../redux/actions/UserAction";
 
 const StudentProfile = () => {
   const [isEdit, setEdit] = useState(true);
 
-  const { userProfile, token } = useSelector((state) => state.users);
+  const { userProfile, token, message, profileImage } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
+  const [imageProfile, setImageProfile] = useState("");
+  const [PopUpProfileImage, setPopUpProfileImage] = useState(false);
 
   const handleEdit = async () => {
     setEdit(!isEdit);
@@ -35,16 +42,29 @@ const StudentProfile = () => {
       .then(() => window.open("/login", "_self"));
   };
 
+  const updateProfile = () => {
+    dispatch(updateProfileImage(imageProfile)) 
+    setPopUpProfileImage(true)
+  }
+
+  const popUp = () => {
+    setPopUpProfileImage(false)
+    window.location.reload()
+  }
+
   return (
     <>
       {isEdit ? (
         <>
           {userProfile ? (
-            <div className="student-profile-box">
+            <div>
               <div className="student-profile">
                 <div className="student-profile-image">
-                  <img src={imgStudent} alt="student" />
-                </div>
+                {userProfile.image === null ? (
+                  <img src={defaultPhoto} alt="student" />
+                ) : (
+                  <img src={userProfile.image} alt="student" />
+                )}                </div>
                 <h5>{userProfile.fullname}</h5>
                 <p>{userProfile.email}</p>
                 <br />
@@ -58,11 +78,22 @@ const StudentProfile = () => {
           )}
         </>
       ) : (
-        <div className="student-profile-box">
+        <div>
           <div className="student-profile-edit">
             <div className="student-profile-image">
-              <img src={imgStudent} alt="student" />
+            {userProfile.image === null ? (
+              <img src={defaultPhoto} alt="student" />
+            ) : (
+              <img src={userProfile.image} alt="student" />
+            )}
             </div>
+            <input
+                className="input-profile-student" 
+                type="file"
+                onChange={(e) => setImageProfile(e.target.files[0])}
+            />
+            <button className="upload-image" onClick={updateProfile}>Upload Image</button>
+           
             <div className="student-profile-form">
               <form
                 onSubmit={(e) =>
@@ -94,12 +125,37 @@ const StudentProfile = () => {
                 />
                 <br />
                 <br />
-                <button>Save Changes</button>
+                <button className="save-edit">Save Changes</button>
               </form>
             </div>
           </div>
         </div>
       )}
+       <Modal
+            show={PopUpProfileImage}
+            size="md"
+            onHide={() => setPopUpProfileImage(false)}
+            className="popup-upload"
+            aria-labelledby="example-custom-modal-styling-title"
+            centered
+          >
+             <Modal.Header closeButton>
+               <div className="teacher-profile-popup">
+                 {!profileImage ? (
+                  <div className="popUp-loading">
+                    <div id="popUp-loader"></div>
+                    <p>Currently Uploading</p>
+                  </div>
+                 ) : (
+                   <div className="upload-success">
+                   <img src={successLogo} alt="logo"/>
+                   <p>{message}</p>
+                   <button className="upload-image-popup" onClick={popUp}>Done</button>
+                   </div>
+                 )}
+               </div>
+             </Modal.Header>
+          </Modal> 
     </>
   );
 };
