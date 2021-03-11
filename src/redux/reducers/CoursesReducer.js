@@ -15,7 +15,9 @@ import {
   GET_POPUP_MATERIAL,
   GET_CONTENT_DETAIL,
   UPLOAD_IMAGE,
-  UPDATE_COURSE
+  UPDATE_COURSE,
+  DOWNLOAD_CERTIFICATE,
+  FETCH_LOADING
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -43,6 +45,8 @@ const initialState = {
   contentDetail: {},
   detailTitle: null,
   detailOverview: null,
+  certificateData: [],
+  isLoading: false
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -132,13 +136,6 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         contentDetail: payload,
       };
-     case GET_COURSE_FILLED:
-      return {
-        ...state,
-        courseFilled: payload,
-        contentFilled: content,
-        materialFilled: material,
-      }
      case UPLOAD_IMAGE:
       return {
         ...state,
@@ -148,6 +145,16 @@ const coursesReducer = (state = initialState, action) => {
       return{
         ...state,
         update: payload,
+      } 
+    case DOWNLOAD_CERTIFICATE:
+      return{
+        ...state,
+        certificateData: payload,
+      } 
+    case FETCH_LOADING:
+      return{
+        ...state,
+        isLoading: payload,
       } 
     default:
       return state;
