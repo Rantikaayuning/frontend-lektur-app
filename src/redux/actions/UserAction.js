@@ -5,13 +5,23 @@ import {
   SIGN_UP,
   UPDATE_USER_PROFILE,
   UPDATE_PROFILE_IMAGE,
+  FETCH_LOADING
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
 
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_LOADING,
+    payload: payload
+  }
+}
+
 export const postLogin = (body) => async (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   return API.post("/users/login", body)
     .then((response) => {
       dispatch({
@@ -20,17 +30,21 @@ export const postLogin = (body) => async (dispatch) => {
         token: response.data.token,
         role: jwt_decode(response.data.token).status,
       });
-
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
       Cookies.set("token", response.data.token);
       return response.data.token;
     })
     .catch((payload) => {
       alert(payload.response.data.message);
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     });
 };
 
 export const postSignup = (role, payload) => async (dispatch) => {
-  // add async
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
@@ -38,11 +52,15 @@ export const postSignup = (role, payload) => async (dispatch) => {
           type: SIGN_UP,
           payload: response.data.message,
         });
+        let isLoading = false;
+        dispatch(fetchLoading(isLoading))
         alert(`${response.data.message}, please continue to login`);
       }
     })
     .catch((payload) => {
       alert(payload.response.data.message);
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     });
 };
 

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
-
-import imgStudent from "../../../assets/studentpicture.png";
-import defaultPhoto from "../../../assets/user.png"
-import successLogo from "../../../assets/upload2.png"
+import defaultPhoto from "../../../assets/user.png";
+import successLogo from "../../../assets/upload2.png";
+import editIcon from "../../../assets/iconEdit.png";
 
 import {
   getUserProfile,
@@ -14,9 +13,10 @@ import {
 } from "../../../redux/actions/UserAction";
 
 const StudentProfile = () => {
-  const [isEdit, setEdit] = useState(true);
+  const [isProfile, setProfile] = useState(true);
+  const [isEditPhoto, setEditPhoto] = useState(false);
 
-  const { userProfile, token, message, profileImage } = useSelector((state) => state.users);
+  const { userProfile, token, message, profileImage, } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   const [fullname, setFullname] = useState("");
@@ -25,12 +25,16 @@ const StudentProfile = () => {
   const [PopUpProfileImage, setPopUpProfileImage] = useState(false);
 
   const handleEdit = async () => {
-    setEdit(!isEdit);
+    setProfile(!isProfile);
+  };
+
+  const handleEditPhoto = async () => {
+    setEditPhoto(!isEditPhoto);
   };
 
   useEffect(() => {
     token ? dispatch(getUserProfile(token)) : dispatch(getUserProfile());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +58,7 @@ const StudentProfile = () => {
 
   return (
     <>
-      {isEdit ? (
+      {isProfile && !isEditPhoto ? (
         <>
           {userProfile ? (
             <div>
@@ -64,7 +68,9 @@ const StudentProfile = () => {
                   <img src={defaultPhoto} alt="student" />
                 ) : (
                   <img src={userProfile.image} alt="student" />
-                )}                </div>
+                )}                
+                </div>
+                <img src={editIcon} alt='Edit Profile' className='edit-photo-icon' onClick={handleEditPhoto}/>
                 <h5>{userProfile.fullname}</h5>
                 <p>{userProfile.email}</p>
                 <br />
@@ -77,7 +83,7 @@ const StudentProfile = () => {
             <div id="regular-loader"></div>
           )}
         </>
-      ) : (
+      ) : isEditPhoto ? (
         <div>
           <div className="student-profile-edit">
             <div className="student-profile-image">
@@ -93,15 +99,23 @@ const StudentProfile = () => {
                 onChange={(e) => setImageProfile(e.target.files[0])}
             />
             <button className="upload-image" onClick={updateProfile}>Upload Image</button>
-           
-            <div className="student-profile-form">
+            <p className="back-edit" onClick={handleEditPhoto}>Cancel</p>
+          </div>
+        </div>
+      ) : (
+        <div className="student-profile-edit">
+          <div className="student-profile-image">
+            {userProfile.image === null ? (
+              <img src={defaultPhoto} alt="student" />
+            ) : (
+              <img src={userProfile.image} alt="student" />
+            )}
+          </div>
+          <div className="student-profile-form">
               <form
-                onSubmit={(e) =>
-                  fullname && email
-                    ? handleSubmit(e)
-                    : // : setForgetAlert("*fill in the form correctly")
-                      alert("Please fill in the form correctly")
-                }
+              onSubmit={(e) =>
+                fullname && email ? handleSubmit(e) : alert("Please fill in the form correctly")
+              }
               >
                 <p>
                   Name<span>*</span>
@@ -125,37 +139,37 @@ const StudentProfile = () => {
                 />
                 <br />
                 <br />
-                <button className="save-edit">Save Changes</button>
+                <button className="save-edit" onClick={handleSubmit}>Save Changes</button>
+                <p className="back-edit" onClick={handleEdit}>Cancel</p>
               </form>
-            </div>
           </div>
         </div>
       )}
        <Modal
-            show={PopUpProfileImage}
-            size="md"
-            onHide={() => setPopUpProfileImage(false)}
-            className="popup-upload"
-            aria-labelledby="example-custom-modal-styling-title"
-            centered
-          >
-             <Modal.Header closeButton>
-               <div className="teacher-profile-popup">
-                 {!profileImage ? (
-                  <div className="popUp-loading">
-                    <div id="popUp-loader"></div>
-                    <p>Currently Uploading</p>
-                  </div>
-                 ) : (
-                   <div className="upload-success">
-                   <img src={successLogo} alt="logo"/>
-                   <p>{message}</p>
-                   <button className="upload-image-popup" onClick={popUp}>Done</button>
-                   </div>
-                 )}
-               </div>
-             </Modal.Header>
-          </Modal> 
+        show={PopUpProfileImage}
+        size="md"
+        onHide={() => setPopUpProfileImage(false)}
+        className="popup-upload"
+        aria-labelledby="example-custom-modal-styling-title"
+        centered
+        >
+          <Modal.Header closeButton onClick={popUp}>
+            <div className="teacher-profile-popup">
+              {!profileImage ? (
+              <div className="popUp-loading">
+                <div id="popUp-loader"></div>
+                <p>Currently Uploading</p>
+              </div>
+              ) : (
+                <div className="upload-success">
+                <img src={successLogo} alt="logo"/>
+                <p>{message}</p>
+                <button className="upload-image-popup" onClick={popUp}>Save</button>
+                </div>
+              )}
+            </div>
+          </Modal.Header>
+        </Modal> 
     </>
   );
 };

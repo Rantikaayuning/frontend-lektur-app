@@ -30,9 +30,11 @@ export default function StudentMaterial() {
     const handleOpenLesson = () => {
         setOpenLesson(!openLesson)
     }
+    
     const find = contentDetail.listContent && contentDetail.listContent.find((item, id) => item.contentStatus === 0)
-    console.log("content", contentDetail)
+    // console.log("content", contentDetail)
     // console.log("find", find)
+
     return (
         <>
             {contentDetail.content === undefined ? (

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Jumbotron } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { postSignup, postLogin } from "../../redux/actions/UserAction";
+import { postSignup } from "../../redux/actions/UserAction";
 
 export default function SignUp(props) {
   const [role, setRole] = useState(null);
@@ -15,6 +15,7 @@ export default function SignUp(props) {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(state => state.users)
 
   const handleSignUp = (e) => {
     setSignupData({
@@ -23,13 +24,17 @@ export default function SignUp(props) {
     });
   };
 
-  const submitTeacher = () => {
+  const submitSignUp = () => {
     dispatch(postSignup(role, signupData));
+    history.push('/login')
   };
 
   return (
     <Jumbotron className="jumbotron">
-      <div className="signup-page">
+      {isLoading ? (
+        <div id='loader'></div>
+      ) : (
+        <div className="signup-page">
         <div className="signup">
           <div>
             <div className="form-select">
@@ -82,7 +87,7 @@ export default function SignUp(props) {
           <div className="btn">
             <button
               className="btn-signup"
-              onClick={submitTeacher}
+              onClick={submitSignUp}
               disabled={
                 !role ||
                 !signupData.fullname ||
@@ -101,6 +106,7 @@ export default function SignUp(props) {
           </div>
         </div>
       </div>
+      )}
     </Jumbotron>
   );
 }

@@ -7,7 +7,7 @@ import { postLogin, getUserProfile } from "../../redux/actions/UserAction";
 import Cookies from "js-cookie";
 
 function Login() {
-  const { email, password } = useSelector((state) => state.users);
+  const { email, password, isLoading } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -37,10 +37,14 @@ function Login() {
     };
     dispatch(postLogin(body))
       .then((token) => dispatch(getUserProfile(token)))
-      .then(() => window.location.reload(false));
+      .then(() => window.location.reload());
   };
 
   return (
+    <>
+    {isLoading ? (
+      <div id='loader'></div>
+    ) : (
     <Jumbotron className="jumbotron">
       <div className="login-page">
         <div className="login-form">
@@ -92,6 +96,8 @@ function Login() {
         </div>
       </div>
     </Jumbotron>
+    )}
+    </>
   );
 }
 

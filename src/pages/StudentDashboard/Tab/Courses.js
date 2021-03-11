@@ -173,7 +173,7 @@ const StudentBoardCourses = () => {
                 )}
 
                 {/* material popup */}
-                {popUpMaterial.length !== null ? (
+                {popUpMaterial.length !== null && isLoading === false ? (
                 <Modal
                 show={materialModal}
                 size='lg'
@@ -197,6 +197,20 @@ const StudentBoardCourses = () => {
                     </div>}
                 />
                 </Modal>
+                ) : isLoading === true ? (
+                <Modal
+                show={materialModal}
+                size='lg'
+                onHide={() => setMaterialModal(false)}
+                dialogClassName="modal-90w"
+                className='pop-up-material-box'
+                aria-labelledby="example-custom-modal-styling-title"
+                >
+                <PopUpMaterial
+                title={<div>Material</div>}
+                materialContent={<div id='popup-loader'></div>}
+                />
+                </Modal>
                 ) : (
                 <Modal
                 show={materialModal}
@@ -208,9 +222,9 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpMaterial
                 title={<div>Material</div>}
-                materialContent={<p className='pop-up-course-nothing'></p>}
+                materialContent={<p className='pop-up-course-nothing'>No Material yet</p>}
                 />
-                </Modal>
+                </Modal> 
                 )}
                 </div>
             </div>
