@@ -41,7 +41,7 @@
   color: rgba(62, 137, 174, 1);
 }
 
-.input-profile{
+.input-profile {
   padding: 20px;
 }
 
@@ -61,7 +61,7 @@ form input {
   padding-top: 25px;
 }
 
-.upload-image{
+.upload-image {
   border-radius: 5px;
   padding: 6px 15px;
   border: 1px solid #16213b;
@@ -70,19 +70,19 @@ form input {
   font-weight: bold;
 }
 
-.upload-image:hover{
+.upload-image:hover {
   background-color: #16213b;
   color: #ffffff;
 }
 
-.teacher-profile-popup{
+.teacher-profile-popup {
   height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.upload-image-popup{
+.upload-image-popup {
   border-radius: 5px;
   padding: 6px 15px;
   border: 1px solid #16213b;
@@ -92,7 +92,7 @@ form input {
   margin: 20px auto;
 }
 
-.teacher-profile-popup img{
+.teacher-profile-popup img {
   width: 150px;
   height: 150px;
   top: 165px;
@@ -102,7 +102,7 @@ form input {
   margin: 15px auto 15px auto;
 }
 
-.save-edit{
+.save-edit {
   border-radius: 2px;
   padding: 8px 20px;
   background: #16213b;
@@ -116,7 +116,7 @@ form input {
   /* margin-top: 122px; */
   margin-left: 49px; /* 122 + 39 + 230 */
   width: 893px; /* 50% */
-  height: 800px;
+  height: 600px;
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -141,7 +141,7 @@ form input {
 }
 
 .card-teacher-container {
-  height: 650px;
+  height: 500px;
 }
 
 .courses-header a {
@@ -256,7 +256,6 @@ form input {
   }
 
   .course-info {
-    margin-right: 200px;
     font-size: large;
     padding: 0 10px 0 0px;
   }
@@ -274,9 +273,13 @@ form input {
   .invite-edit-btn .btn-invite {
     margin-right: 0px;
   }
+
+  .card-teacher-container {
+    height: 430px;
+  }
 }
 
-.popUp-loading{
+.popUp-loading {
   width: 100%;
   height: 200px;
   display: flex;
@@ -286,13 +289,13 @@ form input {
   margin-left: 90px;
 }
 
-.popUp-loading p{
+.popUp-loading p {
   font-size: 18px;
   line-height: 25px;
   font-weight: bold;
 }
 
-.upload-success{
+.upload-success {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -300,7 +303,7 @@ form input {
   margin-left: 90px;
 }
 
-.upload-success p{
+.upload-success p {
   font-size: 18px;
   line-height: 25px;
   font-weight: bold;
