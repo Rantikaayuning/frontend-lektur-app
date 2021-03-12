@@ -9,7 +9,9 @@ import defaultImg from "../../assets/defaultLektur.png";
 
 function Content() {
   const dispatch = useDispatch();
-  const { courses, searchCourse } = useSelector((state) => state.courses);
+  const { courses, searchCourse, categoryById } = useSelector(
+    (state) => state.courses
+  );
   const { homePage, category } = useSelector((state) => state.homePage);
 
   const [categoryIds, setCategoryIds] = useState(0);
@@ -19,14 +21,11 @@ function Content() {
     dispatch(getHomepage());
   }, [dispatch]);
 
-  // console.log(homePage);
-  // console.log(courses);
-
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
     // console.log(homePage);
-    console.log(categoryIds);
+    // console.log(categoryById);
   };
 
   return (
@@ -117,36 +116,12 @@ function Content() {
                           footer={
                             item.categoryId
                               ? item.categoryId.categories
-                              : "DEFAULT"
+                              : "General Science"
                           }
                         />
                       </Link>
                     </Col>
                   ))}
-                {/* {courses.map((item, index) => (
-                  <Col
-                    xl="3"
-                    md="6"
-                    sm="12"
-                    key={index}
-                    className="card-container"
-                  >
-                    <Link
-                      to={`/course-detail/${item._id}`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <ContentCards
-                        image={item.image === null ? defaultImg : item.image}
-                        text={item.overview}
-                        title={item.title}
-                        lecture={item.teacherId.fullname}
-                        video_numbers={item.totalVideo}
-                        material_numbers={item.totalMaterial}
-                        footer={""}
-                      />
-                    </Link>
-                  </Col>
-                ))} */}
               </Row>
             )}
           </div>

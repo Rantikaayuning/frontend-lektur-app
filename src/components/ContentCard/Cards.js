@@ -22,25 +22,23 @@ function Cards(props) {
     footer,
   } = props;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const { homePage } = useSelector((state) => state.homePage);
+  // const { homePage } = useSelector((state) => state.homePage);
 
-  useEffect(() => {
-    dispatch(getHomepage());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getHomepage());
+  // }, [dispatch]);
 
-  const categories = homePage.course.map((item) =>
-    item.categoryId ? item.categoryId.categories : "gaada"
-  );
+  // const categories = homePage.course.map((item) =>
+  //   item.categoryId ? item.categoryId.categories : "gaada"
+  // );
 
   // console.log(categories);
 
-  const filterCat = categories.filter(
-    (item) => item === "Software Engineering"
-  );
-
-  // console.log(filterCat);
+  // const filterCat = categories.filter((item) =>
+  //   item === "Software Engineering" ? alert("right") : "no"
+  // );
 
   return (
     <div>
@@ -67,7 +65,45 @@ function Cards(props) {
           </span>
           <CardText className="mt-3 card-text">{text}</CardText>
         </CardBody>
-        <div className="card-footer">{footer}</div>
+        <div
+          style={{
+            background:
+              footer === "Business"
+                ? "#e2d5d5"
+                : footer === "Data Science"
+                ? "#fbe6c2"
+                : footer === "Economics"
+                ? "#f7d9d9"
+                : footer === "Food and Beverage"
+                ? "#f2b4b4"
+                : footer === "Human Resources"
+                ? "#eff0b6"
+                : footer === "Literature"
+                ? "#eaffd0"
+                : footer === "Mathematics"
+                ? "#eae3c8"
+                : footer === "Media and Journalism"
+                ? "#faf3e0"
+                : footer === "Network and Security"
+                ? "#ece2e1"
+                : footer === "Pharmacology"
+                ? "#d3e0dc"
+                : footer === "Psychology"
+                ? "#d4e2d4"
+                : footer === "Sales and Marketing"
+                ? "#d0e8f2"
+                : footer === "Science & Engineering"
+                ? "#d8ac9c"
+                : footer === "Social Science"
+                ? "#a0c1b8"
+                : footer === "Software Engineering"
+                ? "99bbad"
+                : "#d4b5b0",
+          }}
+          className="card-footer"
+        >
+          {footer}
+        </div>
       </Card>
     </div>
   );
