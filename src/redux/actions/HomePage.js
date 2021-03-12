@@ -1,14 +1,15 @@
 import {GET_HOMEPAGE} from "../types/HomePage"
-import API from "../../api/index";
+import Axios from "axios";
 
 export const getHomepage = () => (dispatch) => {
-    API.get("/all")
+    Axios.get("https://lekturapp.herokuapp.com/all")
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result);
+        console.log(response.data);
         dispatch({
           type: GET_HOMEPAGE,
           payload: response.data.data,
+          category: response.data.data.category,
         });
       }
     })

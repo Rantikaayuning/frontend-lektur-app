@@ -3,7 +3,7 @@ import { Row, Col } from "reactstrap";
 import ContentCards from "./Cards";
 import {useDispatch, useSelector} from "react-redux"
 import {Link} from "react-router-dom"
-import {getCategory, getCourses} from "../../redux/actions/CoursesAction"
+import {getCourses} from "../../redux/actions/CoursesAction"
 import {getHomepage} from "../../redux/actions/HomePage"
 import { buttonMaterials } from "../../assets/JSONFile/dummyData";
 import defaultImg from "../../assets/defaultLektur.png"
@@ -11,7 +11,7 @@ import defaultImg from "../../assets/defaultLektur.png"
 function Content() {
   const dispatch = useDispatch();
   const { courses, searchCourse } = useSelector(state => state.courses)
-  const {homePage} = useSelector(state => state.homePage)
+  const {homePage, category} = useSelector(state => state.homePage)
 
   useEffect(() => {
     dispatch(getCourses())
@@ -35,9 +35,9 @@ function Content() {
       ) : (
         <div className="material">
           <div className="home">What to learn next</div>
-          {homePage != null ? (
+          {category != null ? (
             <div className="btn-material">
-            {homePage.map(item => (
+            {category.map(item => (
               <button className="btn-home-detail">{item.categories}</button>
             ))}
           </div>
@@ -64,7 +64,7 @@ function Content() {
                 video_numbers={item.totalVideo}
                 material_numbers={item.totalMaterial}
                 // footer = {item.categoryId.categories}
-                footer="Business"
+                footer="Music"
               />
               </Link>
             </Col>
