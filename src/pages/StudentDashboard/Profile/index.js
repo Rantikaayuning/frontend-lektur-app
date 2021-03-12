@@ -82,16 +82,16 @@ const StudentProfile = () => {
         <div>
           <div className="student-profile-edit">
             <div className="student-profile-image">
-            {userProfile.image === null ? (
-              <img src={defaultPhoto} alt="student" />
-            ) : (
-              <img src={userProfile.image} alt="student" />
-            )}
+              {userProfile.image === null ? (
+                <img src={defaultPhoto} alt="student" />
+              ) : (
+                <img src={userProfile.image} alt="student" />
+              )}
             </div>
             <input
-                className="input-profile-student" 
-                type="file"
-                onChange={(e) => setImageProfile(e.target.files[0])}
+              className="input-profile-student"
+              type="file"
+              onChange={(e) => setImageProfile(e.target.files[0])}
             />
             <button className="upload-image" onClick={updateProfile}>Upload Image</button>
             <p className="back-edit" onClick={handleEditPhoto}>Cancel</p>
@@ -132,6 +132,7 @@ const StudentProfile = () => {
                   placeholder={userProfile.email}
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  required
                 />
                 <br />
                 <br />

@@ -87,8 +87,6 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
 };
 
 export const updateUserProfile = (fullname, email) => async (dispatch) => {
-  let isUserLoading = true;
-  dispatch(fetchLoading(isUserLoading))
   API.put(
     "/users/update",
     {
@@ -112,15 +110,10 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
         type: UPDATE_USER_PROFILE,
         payload: decoded, //response.data.result
       });
-      // let isUserLoading = false;
-      // dispatch(fetchLoading(isUserLoading))
-      // alert("Update Data Success");
       window.location.reload()
     })
     .catch((error) => {
       alert(`ERROR : ${error}`)
-      // let isUserLoading = false;
-      // dispatch(fetchLoading(isUserLoading))
     });
 };
 
