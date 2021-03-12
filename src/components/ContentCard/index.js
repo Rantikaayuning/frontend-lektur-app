@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCourses, getCategoryById } from "../../redux/actions/CoursesAction";
 import { getHomepage } from "../../redux/actions/HomePage";
-import { buttonMaterials } from "../../assets/JSONFile/dummyData";
 import defaultImg from "../../assets/defaultLektur.png";
 
 function Content() {
@@ -20,14 +19,14 @@ function Content() {
     dispatch(getHomepage());
   }, [dispatch]);
 
-  console.log(homePage);
-  console.log(courses);
-  // console.log(category);
+  // console.log(homePage);
+  // console.log(courses);
 
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
-    console.log(homePage);
+    // console.log(homePage);
+    console.log(categoryIds);
   };
 
   return (
@@ -45,15 +44,7 @@ function Content() {
           ) : (
             <div className="material">
               <div className="home">What to learn next</div>
-              {/* {category != null ? (
-            <div className="btn-material">
-            {category.map(item => (
-              <button className="btn-home-detail">{item.categories}</button>
-            ))}
-          </div>
-          ) : (
-            <div></div>
-          )} */}
+
               <div className="btn-material">
                 {homePage !== null &&
                   homePage.category.map((item) => (

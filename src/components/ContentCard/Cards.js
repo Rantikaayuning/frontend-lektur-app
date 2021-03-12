@@ -7,7 +7,7 @@ import {
   CardSubtitle,
   CardBody,
 } from "reactstrap";
-import {} from "module";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getHomepage } from "../../redux/actions/HomePage";
 
@@ -22,14 +22,25 @@ function Cards(props) {
     footer,
   } = props;
 
-  // const { homePage, category } = useSelector((state) => state.homePage);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   effect
-  //   return () => {
-  //     cleanup
-  //   }
-  // }, [input])
+  const { homePage } = useSelector((state) => state.homePage);
+
+  useEffect(() => {
+    dispatch(getHomepage());
+  }, [dispatch]);
+
+  const categories = homePage.course.map((item) =>
+    item.categoryId ? item.categoryId.categories : "gaada"
+  );
+
+  // console.log(categories);
+
+  const filterCat = categories.filter(
+    (item) => item === "Software Engineering"
+  );
+
+  // console.log(filterCat);
 
   return (
     <div>
