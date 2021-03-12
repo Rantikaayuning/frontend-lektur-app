@@ -34,13 +34,13 @@ const StudentBoardCourses = () => {
         setMaterialModal(true)
     }
     
-    console.log("content", popUpContent)
+    // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    console.log("course", studentCourses)
+    // console.log("course", studentCourses)
     // console.log('detail', courseDetail)
     return (
         <>
-        {studentCourses.course === null || studentCourses.course === undefined ? (
+        {(studentCourses.course === null || studentCourses.course === undefined) ? (
             <div id='loader'></div>
         ) : (
             <div className="student-board">
@@ -173,7 +173,7 @@ const StudentBoardCourses = () => {
                 )}
 
                 {/* material popup */}
-                {popUpMaterial.length !== null && isLoading === false ? (
+                {popUpMaterial.length !== null ? (
                 <Modal
                 show={materialModal}
                 size='lg'
@@ -197,20 +197,6 @@ const StudentBoardCourses = () => {
                     </div>}
                 />
                 </Modal>
-                ) : isLoading === true ? (
-                <Modal
-                show={materialModal}
-                size='lg'
-                onHide={() => setMaterialModal(false)}
-                dialogClassName="modal-90w"
-                className='pop-up-material-box'
-                aria-labelledby="example-custom-modal-styling-title"
-                >
-                <PopUpMaterial
-                title={<div>Material</div>}
-                materialContent={<div id='popup-loader'></div>}
-                />
-                </Modal>
                 ) : (
                 <Modal
                 show={materialModal}
@@ -222,9 +208,9 @@ const StudentBoardCourses = () => {
                 >
                 <PopUpMaterial
                 title={<div>Material</div>}
-                materialContent={<p className='pop-up-course-nothing'>No Material yet</p>}
+                materialContent={<p className='pop-up-course-nothing'></p>}
                 />
-                </Modal> 
+                </Modal>
                 )}
                 </div>
             </div>

@@ -211,6 +211,8 @@ export const getPopUpMaterial = (id) => (dispatch) => {
 };
 
 export const getContentDetail = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.get(`student/course/content?contentId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -222,9 +224,13 @@ export const getContentDetail = (id) => (dispatch) => {
         type: GET_CONTENT_DETAIL,
         payload: response.data.result,
       });
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     })
     .catch(() => {
       console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     });
 };
 

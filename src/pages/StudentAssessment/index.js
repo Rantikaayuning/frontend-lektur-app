@@ -9,7 +9,7 @@ const StudentAssessment = () => {
     const {id} = useParams()
     
     const dispatch = useDispatch();
-    const {assessment, finalScore} = useSelector(state => state.assessment)
+    const {assessment, isAssessmentLoading} = useSelector(state => state.assessment)
     const {courseDetail} = useSelector(state => state.courses)
 
     const [selected, setSelected] = useState({})
@@ -44,13 +44,17 @@ const StudentAssessment = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    
+    const afterSelected = Object.values(selected)
 
-    console.log('finalScore', finalScore)
-    console.log('selected', selected)
+    // console.log('finalScore', finalScore)
+    // console.log('selected', selected)
 
     return (
         <>
-        {courseDetail !== null && assessment !== null ? (
+        {isAssessmentLoading ? (
+            <div id="loader"></div>
+        ) : (
             <div className='student-assessment'>
                 <div className="assessment-title">
                     {courseDetail === null ? (
@@ -84,6 +88,7 @@ const StudentAssessment = () => {
                                 name={assessment[index].question}
                                 value={option.value === assessment[index].answer ? 1 : 0 }
                                 onChange={(e) => handleChange(e)}
+                                disabled={!selected}
                                 />
                                 {option.text}
                                 </label>
@@ -94,11 +99,15 @@ const StudentAssessment = () => {
                         ))}
                 </div>
                 <div className='submit-assessment'>
-                    <p><button onClick={(e) => handleCheck(e)} className='button'>Submit Assessment</button></p>
+                    <p>
+                        {afterSelected.length === 0 ? (
+                            <button className='disabled'>Submit Assessment</button>
+                        ) : (
+                            <button onClick={(e) => handleCheck(e)} className='button'>Submit Assessment</button>
+                        )}
+                    </p>
                 </div>
             </div>
-        ) : (
-            <div id="loader"></div>
         )}
 
         <Modal show={show} onHide={handleClose} size='lg'>

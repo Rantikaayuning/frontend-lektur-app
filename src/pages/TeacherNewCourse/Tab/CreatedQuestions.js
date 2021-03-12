@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { Spinner } from "reactstrap";
 
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
@@ -49,7 +50,7 @@ function CreatedQuestions() {
       </div>
       <div className="teacher-save-question-box">
         {allQuestions.length === 0 ? (
-          <>
+          <div className="teacher-save-question-box">
             <div
               className="teacher-new-question-save"
               style={{
@@ -67,9 +68,18 @@ function CreatedQuestions() {
                   Add New Question
                 </Link>
               </span>
+              <Spinner
+                style={{
+                  width: "6rem",
+                  height: "6rem",
+                  position: "fixed",
+                  top: "50%",
+                  left: "53%",
+                }}
+                color="secondary"
+              />
             </div>
-            <div id="loader"></div>
-          </>
+          </div>
         ) : (
           <>
             <div className="teacher-question-title">

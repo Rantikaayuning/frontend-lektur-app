@@ -5,23 +5,24 @@ import {
   SIGN_UP,
   UPDATE_USER_PROFILE,
   UPDATE_PROFILE_IMAGE,
-  FETCH_LOADING
+  FETCH_USER_LOADING
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
+import _ from "lodash";
 
 const token = Cookies.get("token");
 
 export const fetchLoading = (payload) => {
   return {
-    type: FETCH_LOADING,
+    type: FETCH_USER_LOADING,
     payload: payload
   }
 }
 
 export const postLogin = (body) => async (dispatch) => {
-  let isLoading = true;
-  dispatch(fetchLoading(isLoading))
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
   return API.post("/users/login", body)
     .then((response) => {
       dispatch({
@@ -30,21 +31,21 @@ export const postLogin = (body) => async (dispatch) => {
         token: response.data.token,
         role: jwt_decode(response.data.token).status,
       });
-      let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
       Cookies.set("token", response.data.token);
       return response.data.token;
     })
     .catch((payload) => {
       alert(payload.response.data.message);
-      let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
 
 export const postSignup = (role, payload) => async (dispatch) => {
-  let isLoading = true;
-  dispatch(fetchLoading(isLoading))
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
@@ -52,17 +53,18 @@ export const postSignup = (role, payload) => async (dispatch) => {
           type: SIGN_UP,
           payload: response.data.message,
         });
-        let isLoading = false;
-        dispatch(fetchLoading(isLoading))
+        let isUserLoading = false;
+        dispatch(fetchLoading(isUserLoading))
         alert(`${response.data.message}, please continue to login`);
       }
     })
     .catch((payload) => {
       alert(payload.response.data.message);
-      let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
+
 
 export const getUserProfile = (access_token = null) => (dispatch) => {
   // console.log(access_token);
@@ -85,6 +87,8 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
 };
 
 export const updateUserProfile = (fullname, email) => async (dispatch) => {
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
   API.put(
     "/users/update",
     {
@@ -96,34 +100,45 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  ).then((response) => {
-    // console.log(response);
-    if (response.status === 201) {
+  )
+    .then((response) => {
+      console.log("updateUserProfile=>", response);
+      Cookies.set("token", response.data.token);
+      let decoded;
+      if (response.data && !_.isEmpty(response.data.token)) { // or use 
+        decoded = jwt_decode(response.data.token);
+      }
       dispatch({
         type: UPDATE_USER_PROFILE,
-        payload: response.data.result,
+        payload: decoded, //response.data.result
       });
-    }
-    // return response.data.token;
-  });
+      // let isUserLoading = false;
+      // dispatch(fetchLoading(isUserLoading))
+      // alert("Update Data Success");
+      window.location.reload()
+    })
+    .catch((error) => {
+      alert(`ERROR : ${error}`)
+      // let isUserLoading = false;
+      // dispatch(fetchLoading(isUserLoading))
+    });
 };
 
 export const updateProfileImage = (file) => async (dispatch) => {
-  const data = new FormData()
-  data.append("file", file)
+  const data = new FormData();
+  data.append("file", file);
 
-  API.put("/users/update/image", data, 
-  {
+  API.put("/users/update/image", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
-  .then((response) => {
-    dispatch({
-      type: UPDATE_PROFILE_IMAGE,
-      payload: response.data.result.Location,
-      message: response.data.message,
+    .then((response) => {
+      dispatch({
+        type: UPDATE_PROFILE_IMAGE,
+        payload: response.data.result.Location,
+        message: response.data.message,
+      });
     })
-  })
-  .catch((err) => alert("updated fail, try again!", err));
-}
+    .catch((err) => alert("updated fail, try again!", err));
+};

@@ -4,7 +4,7 @@ import {
   SIGN_UP,
   UPDATE_USER_PROFILE,
   UPDATE_PROFILE_IMAGE,
-  FETCH_LOADING
+  FETCH_USER_LOADING
 } from "../types/UserLogin";
 import Cookies from "js-cookie";
 
@@ -21,7 +21,7 @@ const initialState = {
   token: Cookies.get("token") || null,
   profileImage: null,
   message: null,
-  isLoading: false
+  isUserLoading: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -56,10 +56,10 @@ const userReducer = (state = initialState, action) => {
         profileImage: payload,
         message: message,
       }
-    case FETCH_LOADING:
+    case FETCH_USER_LOADING:
       return{
         ...state,
-        isLoading: payload,
+        isUserLoading: payload,
       } 
     default:
       return state;

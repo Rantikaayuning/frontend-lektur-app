@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
+
 import defaultPhoto from "../../../assets/user.png";
 import successLogo from "../../../assets/upload2.png";
 import editIcon from "../../../assets/iconEdit.png";
@@ -16,7 +16,9 @@ const StudentProfile = () => {
   const [isProfile, setProfile] = useState(true);
   const [isEditPhoto, setEditPhoto] = useState(false);
 
-  const { userProfile, token, message, profileImage, } = useSelector((state) => state.users);
+  const { userProfile, token, message, profileImage, isUserLoading } = useSelector(
+    (state) => state.users
+  );
   const dispatch = useDispatch();
 
   const [fullname, setFullname] = useState("");
@@ -27,7 +29,7 @@ const StudentProfile = () => {
   const handleEdit = async () => {
     setProfile(!isProfile);
   };
-
+  
   const handleEditPhoto = async () => {
     setEditPhoto(!isEditPhoto);
   };
@@ -38,29 +40,24 @@ const StudentProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleEdit(dispatch(updateUserProfile(fullname, email)))
-      .then(() =>
-        alert(`Hi ${fullname} Please do login back to get your changes`)
-      )
-      .then(() => Cookies.remove("token"))
-      .then(() => window.open("/login", "_self"));
+    dispatch(updateUserProfile(fullname, email));
   };
 
   const updateProfile = () => {
-    dispatch(updateProfileImage(imageProfile)) 
-    setPopUpProfileImage(true)
-  }
+    dispatch(updateProfileImage(imageProfile));
+    setPopUpProfileImage(true);
+  };
 
   const popUp = () => {
-    setPopUpProfileImage(false)
-    window.location.reload()
-  }
+    setPopUpProfileImage(false);
+    window.location.reload();
+  };
 
   return (
     <>
       {isProfile && !isEditPhoto ? (
         <>
-          {userProfile ? (
+          {userProfile && (
             <div>
               <div className="student-profile">
                 <div className="student-profile-image">
@@ -79,8 +76,6 @@ const StudentProfile = () => {
                 </span>
               </div>
             </div>
-          ) : (
-            <div id="regular-loader"></div>
           )}
         </>
       ) : isEditPhoto ? (
@@ -125,6 +120,7 @@ const StudentProfile = () => {
                   placeholder={userProfile.fullname}
                   onChange={(e) => setFullname(e.target.value)}
                   value={fullname}
+                  required
                 />
                 <br />
                 <br />
@@ -139,7 +135,11 @@ const StudentProfile = () => {
                 />
                 <br />
                 <br />
-                <button className="save-edit" onClick={handleSubmit}>Save Changes</button>
+                {isUserLoading ? (
+                  <button className="save-edit" onClick={handleSubmit}>Saving...</button>
+                ) : (
+                  <button className="save-edit" onClick={handleSubmit}>Save Changes</button>
+                )}
                 <p className="back-edit" onClick={handleEdit}>Cancel</p>
               </form>
           </div>

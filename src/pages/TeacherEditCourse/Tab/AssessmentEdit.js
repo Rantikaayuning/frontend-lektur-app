@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "reactstrap";
 
 import {
   postAssessment,
@@ -41,7 +42,7 @@ const TeacherAssessmentTabEdit = () => {
             <h4>Questions</h4>
           </div>
           {assessment.length === 0 ? (
-            <>
+            <div className="teacher-save-question-box">
               <div
                 className="teacher-new-question-save"
                 style={{
@@ -59,9 +60,18 @@ const TeacherAssessmentTabEdit = () => {
                     Add New Question
                   </Link>
                 </span>
+                <Spinner
+                  style={{
+                    width: "6rem",
+                    height: "6rem",
+                    position: "fixed",
+                    top: "50%",
+                    left: "53%",
+                  }}
+                  color="secondary"
+                />
               </div>
-              <div id="loader"></div>
-            </>
+            </div>
           ) : (
             <>
               {assessment.map((item) => (

@@ -15,7 +15,7 @@ export default function SignUp(props) {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isLoading } = useSelector(state => state.users)
+  const { isUserLoading } = useSelector(state => state.users)
 
   const handleSignUp = (e) => {
     setSignupData({
@@ -24,17 +24,17 @@ export default function SignUp(props) {
     });
   };
 
-  const submitSignUp = () => {
+  const submitTeacher = () => {
     dispatch(postSignup(role, signupData));
     history.push('/login')
   };
 
   return (
     <Jumbotron className="jumbotron">
-      {isLoading ? (
+      {isUserLoading ? (
         <div id='loader'></div>
       ) : (
-        <div className="signup-page">
+      <div className="signup-page">
         <div className="signup">
           <div>
             <div className="form-select">
@@ -87,7 +87,7 @@ export default function SignUp(props) {
           <div className="btn">
             <button
               className="btn-signup"
-              onClick={submitSignUp}
+              onClick={submitTeacher}
               disabled={
                 !role ||
                 !signupData.fullname ||

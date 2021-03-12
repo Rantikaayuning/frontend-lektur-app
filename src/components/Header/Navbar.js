@@ -13,6 +13,7 @@ import { getCourseSearch } from "../../redux/actions/CoursesAction";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 
+import profile from "../../assets/Ellipse 2.png";
 import defaultPhoto from "../../assets/user.png"
 
 
@@ -37,7 +38,6 @@ function Navbar(props) {
     props.getCourseSearch(search);
     history.push("/");
   };
-
   return (
     <div className="sidebar">
       <div className="left">
@@ -86,13 +86,19 @@ function Navbar(props) {
                     <div className="vl"></div>
                     <Link>
                     {props.userProfile.image === null ? (
-                      <img src={defaultPhoto} alt="profile-default"
+                      <img src={defaultPhoto} alt="student"  alt="profile"
                       className="profile-img"/>
                     ) : (
-                      <img src={props.userProfile.image} alt="your-profile"
+                      <img src={props.userProfile.image} alt="student"  alt="profile"
                       className="profile-img" />
                     )}
+                      {/* <img
+                        src={profile}
+                        alt="profile"
+                        className="profile-img"
+                      /> */}
                     </Link>
+                    {/* <div id="small-loader"></div> */}
                     <span> {props.userProfile.fullname}</span>
                     {props.userProfile.status === 0 ? (
                       <div className="dropdown-content-img">
@@ -123,7 +129,7 @@ function Navbar(props) {
                               window.open("/", "_self");
                             }}
                           >
-                            <p>Sign Out</p>
+                            Sign Out
                           </div>
                         </Link>
                       </div>
