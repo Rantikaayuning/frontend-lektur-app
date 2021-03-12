@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCourses, getCategoryById } from "../../redux/actions/CoursesAction";
 import { getHomepage } from "../../redux/actions/HomePage";
-import { buttonMaterials } from "../../assets/JSONFile/dummyData";
 import defaultImg from "../../assets/defaultLektur.png";
 
 function Content() {
   const dispatch = useDispatch();
-  const { courses, searchCourse } = useSelector((state) => state.courses);
-  const { homePage } = useSelector((state) => state.homePage);
+  const { courses, searchCourse, categoryById } = useSelector(
+    (state) => state.courses
+  );
+  const { homePage, category } = useSelector((state) => state.homePage);
 
   const [categoryIds, setCategoryIds] = useState(0);
 
@@ -20,13 +21,11 @@ function Content() {
     dispatch(getHomepage());
   }, [dispatch]);
 
-  // console.log(homePage.category);
-  // console.log(homePage);
-  // console.log(category);
-
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
+    // console.log(homePage);
+    // console.log(categoryById);
   };
 
   return (
@@ -120,7 +119,7 @@ function Content() {
                           footer={
                             item.categoryId
                               ? item.categoryId.categories
-                              : "DEFAULT"
+                              : "General Science"
                           }
                         />
                       </Link>

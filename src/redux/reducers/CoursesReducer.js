@@ -51,8 +51,7 @@ const initialState = {
   certificateData: [],
   isLoading: false,
   categories: null,
-  categoryId:[],
-  // categoryById: null,
+  categoryById: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -186,7 +185,7 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         courses: payload,
-        categoryId: categoryId,
+        categoryById: payload,
       };
     default:
       return state;

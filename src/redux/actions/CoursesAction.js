@@ -441,11 +441,10 @@ export const getCategoryById = (id) => (dispatch) => {
       },
     })
     .then((response) => {
-      console.log(response.data.course);
+      console.log(response.data);
       dispatch({
         type: GET_CATEGORY_BY_ID,
         payload: response.data.course,
-        categoryId: response.data.course,
       });
     })
     .catch((error) => alert(error));
