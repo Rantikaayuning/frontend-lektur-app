@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CreateContent from "../../../components/CreateContent";
@@ -8,6 +8,7 @@ import {
   postCourse,
   deleteCourse,
   getTeacherCourses,
+  getCategory,
 } from "../../../redux/actions/CoursesAction";
 
 const TeacherCourseTab = (props) => {
@@ -25,17 +26,17 @@ const TeacherCourseTab = (props) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { id, getTitle, getOverview, idContent } = useSelector(
+  const { id, getTitle, getOverview, idContent, categories } = useSelector(
     (state) => state.courses
   );
 
   const [title, setTitle] = useState("");
   const [overview, setOverview] = useState("");
   const [imageData, setImageData] = useState("");
-  // const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("")
 
   const submitCourse = () => {
-    dispatch(postCourse(title, overview, imageData));
+    dispatch(postCourse(title, overview, imageData, category));
   };
 
   //---------------CONTENT/LESSON--------------------------------------------//
@@ -57,7 +58,11 @@ const TeacherCourseTab = (props) => {
       .then(() => window.location.reload(false));
   };
 
-  console.log(idContent);
+  useEffect(() => {
+    dispatch(getCategory())
+  }, [])
+
+  console.log(categories);
 
   return (
     <>
@@ -123,6 +128,21 @@ const TeacherCourseTab = (props) => {
                   </p>
                 )}
                 <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
+              </div>
+              <hr type="solid" />
+              <div>
+                {categories === null ? (
+                  <select className="select-category">
+                    <option selected>...loading</option>
+                  </select>
+                ) : (
+                  <select className="select-category" onChange={(e) => setCategory(e.target.value)}>
+                    <option className="option-category" selected>Choose a category</option>
+                    {categories.map((item, index) => (
+                    <option value={item._id}>{item.categories}</option>
+                  ))}
+                </select>
+                )}
               </div>
               <div className="teacher-save-new-course">
                 <p>

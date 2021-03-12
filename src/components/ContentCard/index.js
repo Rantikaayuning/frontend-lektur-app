@@ -3,19 +3,22 @@ import { Row, Col } from "reactstrap";
 import ContentCards from "./Cards";
 import {useDispatch, useSelector} from "react-redux"
 import {Link} from "react-router-dom"
-import {getCourses} from "../../redux/actions/CoursesAction"
+import {getCategory, getCourses} from "../../redux/actions/CoursesAction"
+import {getHomepage} from "../../redux/actions/HomePage"
 import { buttonMaterials } from "../../assets/JSONFile/dummyData";
 import defaultImg from "../../assets/defaultLektur.png"
 
 function Content() {
   const dispatch = useDispatch();
   const { courses, searchCourse } = useSelector(state => state.courses)
+  const {homePage} = useSelector(state => state.homePage)
 
   useEffect(() => {
     dispatch(getCourses())
+    dispatch(getHomepage())
   }, [dispatch]);
 
-  // console.log("result", searchCourse)
+  console.log(homePage)
 
   return (
     <>
@@ -32,11 +35,16 @@ function Content() {
       ) : (
         <div className="material">
           <div className="home">What to learn next</div>
-          <div className="btn-material">
-            {buttonMaterials.map(material => (
-              <button className="btn-home-detail">{material.name}</button>
+          {homePage != null ? (
+            <div className="btn-material">
+            {homePage.map(item => (
+              <button className="btn-home-detail">{item.categories}</button>
             ))}
           </div>
+          ) : (
+            <div></div>
+          )}
+          
         </div>
       )}
       <div className="card-content">
@@ -55,6 +63,7 @@ function Content() {
                 lecture={item.fullname[0].fullname}
                 video_numbers={item.totalVideo}
                 material_numbers={item.totalMaterial}
+                // footer = {item.categoryId.categories}
                 footer="Business"
               />
               </Link>

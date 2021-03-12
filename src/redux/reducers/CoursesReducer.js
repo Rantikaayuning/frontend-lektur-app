@@ -17,7 +17,8 @@ import {
   UPLOAD_IMAGE,
   UPDATE_COURSE,
   DOWNLOAD_CERTIFICATE,
-  FETCH_LOADING
+  FETCH_LOADING,
+  GET_CATEGORY,
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -47,7 +48,8 @@ const initialState = {
   detailOverview: null,
   courseId: null,
   certificateData: [],
-  isLoading: false
+  isLoading: false,
+  categories:null,
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -158,6 +160,11 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         isLoading: payload,
       } 
+    case GET_CATEGORY:
+      return{
+        ...state,
+        categories: payload,
+      }
     default:
       return state;
   }
