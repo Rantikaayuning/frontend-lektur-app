@@ -4,6 +4,7 @@ import {
   STUDENTS_ACCEPT,
   STUDENT_INVITE_SUCCESS,
   STUDENT_APPROVE,
+  SEARCH_STUDENT,
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
 
@@ -76,6 +77,26 @@ export const putStudentApprove = (courseId, studentId) => dispatch => {
     })
     .catch(error => console.log("USER PROFILE ERROR:", error));
 };
+export const getSearchStudent = (courseId, body) => dispatch => {
+  API({
+    method: "post",
+    url: `/teacher/courses/student/search?courseId=${courseId}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: body,
+  })
+    .then(response => {
+      console.log(response);
+      console.log(body);
+      dispatch({
+        type: SEARCH_STUDENT,
+        payload: response.data.result,
+      });
+    })
+    .catch(error => console.log("USER PROFILE ERROR:", error));
+};
+
 // export const createCourse = ( title, overview, category) => (dispatch) => {
 //     API.post("/courses/create",
 //     {
