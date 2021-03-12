@@ -50,15 +50,17 @@ const initialState = {
   certificateData: [],
   isLoading: false,
   categories:null,
+  category: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload, background,id, material, content, detailTitle, detailOverview, title, overview, idContent,courseId} = action;
+  const { type, payload, background,id, material, content, detailTitle, detailOverview, title, overview, idContent,courseId,category} = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
         ...state,
         courses: payload,
+        category:category,
       };
     case GET_COURSE_DETAIL:
       return {

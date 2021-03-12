@@ -11,14 +11,14 @@ import defaultImg from "../../assets/defaultLektur.png"
 function Content() {
   const dispatch = useDispatch();
   const { courses, searchCourse } = useSelector(state => state.courses)
-  const {homePage, category} = useSelector(state => state.homePage)
+  const { category } = useSelector(state => state.homePage)
 
   useEffect(() => {
     dispatch(getCourses())
     dispatch(getHomepage())
   }, [dispatch]);
 
-  console.log(homePage)
+  console.log()
 
   return (
     <>
@@ -64,7 +64,7 @@ function Content() {
                 video_numbers={item.totalVideo}
                 material_numbers={item.totalMaterial}
                 // footer = {item.categoryId.categories}
-                footer="Music"
+                footer="Businnes"
               />
               </Link>
             </Col>
@@ -78,15 +78,15 @@ function Content() {
                 to={`/course-detail/${item._id}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
-              <ContentCards
-                image={item.image === null ? defaultImg : item.image}
-                text={item.overview}
-                title={item.title}
-                lecture={item.teacherId.fullname}
-                video_numbers={item.totalVideo}
-                material_numbers={item.totalMaterial}
-                footer="Business"
-              />
+                   <ContentCards
+                   image={item.image === null ? defaultImg : item.image}
+                   text={item.overview}
+                   title={item.title}
+                   lecture={item.teacherId.fullname}
+                   video_numbers={item.totalVideo}
+                   material_numbers={item.totalMaterial}
+                   footer="Businnes"
+                 /> 
               </Link>
             </Col>
           ))}

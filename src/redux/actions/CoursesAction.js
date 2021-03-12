@@ -39,6 +39,7 @@ export const getCourses = (payload) => (dispatch) => {
         dispatch({
           type: GET_ALL_COURSES,
           payload: response.data.result.result,
+          category: response.data.result.result.categoryId,
         });
       }
     })
