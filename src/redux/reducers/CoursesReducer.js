@@ -19,6 +19,7 @@ import {
   DOWNLOAD_CERTIFICATE,
   FETCH_LOADING,
   GET_CATEGORY,
+  GET_CATEGORY_BY_ID,
 } from "../types/CoursesTypes";
 
 const initialState = {
@@ -29,13 +30,13 @@ const initialState = {
   studentEnrollList: [],
   teacherCourses: [],
   studentAssessment: [],
-  searchCourse: '',
-  createCourses : null,
+  searchCourse: "",
+  createCourses: null,
   id: null,
   getTitle: null,
   getOverview: null,
   courseFilled: null,
-  content:null,
+  content: null,
   idContent: null,
   material: null,
   videoMaterial: null,
@@ -49,11 +50,25 @@ const initialState = {
   courseId: null,
   certificateData: [],
   isLoading: false,
-  categories:null,
+  categories: null,
+  // categoryById: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
-  const { type, payload, background,id, material, content, detailTitle, detailOverview, title, overview, idContent,courseId} = action;
+  const {
+    type,
+    payload,
+    background,
+    id,
+    material,
+    content,
+    detailTitle,
+    detailOverview,
+    title,
+    overview,
+    idContent,
+    courseId,
+  } = action;
   switch (type) {
     case GET_ALL_COURSES:
       return {
@@ -94,13 +109,13 @@ const coursesReducer = (state = initialState, action) => {
         searchCourse: payload,
       };
     case CREATE_COURSE:
-      return{
+      return {
         ...state,
         createCourses: payload,
         id: id,
         getTitle: title,
-        getOverview: overview, 
-      }  
+        getOverview: overview,
+      };
     case GET_COURSE_FILLED:
       return {
         ...state,
@@ -108,23 +123,23 @@ const coursesReducer = (state = initialState, action) => {
         courseId: courseId,
         contentFilled: content,
         materialFilled: material,
-      }
+      };
     case CREATE_CONTENT:
-      return{
+      return {
         ...state,
         content: payload,
         idContent: idContent,
-      }
+      };
     case UPLOAD_MATERIAL:
-      return{
+      return {
         ...state,
         material: payload,
-      }
+      };
     case UPLOAD_VIDEO:
       return {
         ...state,
         videoMaterial: payload,
-      }
+      };
     case GET_POPUP_CONTENT:
       return {
         ...state,
@@ -140,31 +155,36 @@ const coursesReducer = (state = initialState, action) => {
         ...state,
         contentDetail: payload,
       };
-     case UPLOAD_IMAGE:
+    case UPLOAD_IMAGE:
       return {
         ...state,
         image: payload,
-      }
+      };
     case UPDATE_COURSE:
-      return{
+      return {
         ...state,
         update: payload,
-      } 
+      };
     case DOWNLOAD_CERTIFICATE:
-      return{
+      return {
         ...state,
         certificateData: payload,
-      } 
+      };
     case FETCH_LOADING:
-      return{
+      return {
         ...state,
         isLoading: payload,
-      } 
+      };
     case GET_CATEGORY:
-      return{
+      return {
         ...state,
         categories: payload,
-      }
+      };
+    case GET_CATEGORY_BY_ID:
+      return {
+        ...state,
+        courses: payload,
+      };
     default:
       return state;
   }
