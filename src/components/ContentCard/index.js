@@ -11,7 +11,7 @@ import defaultImg from "../../assets/defaultLektur.png";
 function Content() {
   const dispatch = useDispatch();
   const { courses, searchCourse } = useSelector((state) => state.courses);
-  const { homePage, category } = useSelector((state) => state.homePage);
+  const { homePage } = useSelector((state) => state.homePage);
 
   const [categoryIds, setCategoryIds] = useState(0);
 
@@ -20,19 +20,18 @@ function Content() {
     dispatch(getHomepage());
   }, [dispatch]);
 
-  console.log(homePage);
-  console.log(courses);
+  // console.log(homePage.category);
+  // console.log(homePage);
   // console.log(category);
 
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
-    console.log(homePage);
   };
 
   return (
     <>
-      {courses.length === 0 ? (
+      {homePage === null ? (
         <div id="loader"></div>
       ) : (
         <div className="content">
@@ -45,15 +44,6 @@ function Content() {
           ) : (
             <div className="material">
               <div className="home">What to learn next</div>
-              {/* {category != null ? (
-            <div className="btn-material">
-            {category.map(item => (
-              <button className="btn-home-detail">{item.categories}</button>
-            ))}
-          </div>
-          ) : (
-            <div></div>
-          )} */}
               <div className="btn-material">
                 {homePage !== null &&
                   homePage.category.map((item) => (
@@ -64,6 +54,7 @@ function Content() {
                         backgroundColor: categoryIds === item._id && "#EF9C27",
                         opacity: categoryIds === item._id && 0.8,
                       }}
+                      key={item._id}
                       onClick={() => handleCategoryById(item._id)}
                     >
                       {item.categories}
@@ -94,22 +85,25 @@ function Content() {
                         lecture={item.fullname[0].fullname}
                         video_numbers={item.totalVideo}
                         material_numbers={item.totalMaterial}
-                        // footer = {item.categoryId.categories}
-                        footer="Music"
+                        footer={
+                          item.categoryId
+                            ? item.categoryId.categories
+                            : "DEFAULT"
+                        }
                       />
                     </Link>
                   </Col>
                 ))}
               </Row>
             ) : (
-              <Row className="content-card-container">
-                {homePage !== null &&
-                  homePage.course.map((item, index) => (
+                <Row className="content-card-container">
+                {courses !== null &&
+                  courses.map((item, index) => (
                     <Col
                       xl="3"
                       md="6"
                       sm="12"
-                      key={index}
+                      key={item._id}
                       className="card-container"
                     >
                       <Link
@@ -132,30 +126,6 @@ function Content() {
                       </Link>
                     </Col>
                   ))}
-                {/* {courses.map((item, index) => (
-                  <Col
-                    xl="3"
-                    md="6"
-                    sm="12"
-                    key={index}
-                    className="card-container"
-                  >
-                    <Link
-                      to={`/course-detail/${item._id}`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <ContentCards
-                        image={item.image === null ? defaultImg : item.image}
-                        text={item.overview}
-                        title={item.title}
-                        lecture={item.teacherId.fullname}
-                        video_numbers={item.totalVideo}
-                        material_numbers={item.totalMaterial}
-                        footer={""}
-                      />
-                    </Link>
-                  </Col>
-                ))} */}
               </Row>
             )}
           </div>
@@ -166,3 +136,6 @@ function Content() {
 }
 
 export default Content;
+
+
+

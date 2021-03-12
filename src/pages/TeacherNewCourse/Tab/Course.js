@@ -79,7 +79,7 @@ const TeacherCourseTab = (props) => {
                 <p>
                   <input
                     type="text"
-                    placeholder="Title"
+                    placeholder="Title*"
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                   />
@@ -120,11 +120,10 @@ const TeacherCourseTab = (props) => {
                       id="upload"
                       onChange={(e) => setImageData(e.target.files[0])}
                     />
-                    <hr type="solid" />
                   </p>
                 ) : (
                   <p>
-                    <button onClick={handleAdd1}>Add header image</button>
+                    <button onClick={handleAdd1}>Add header image*</button>
                   </p>
                 )}
                 <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
@@ -137,7 +136,7 @@ const TeacherCourseTab = (props) => {
                   </select>
                 ) : (
                   <select className="select-category" onChange={(e) => setCategory(e.target.value)}>
-                    <option className="option-category" selected>Choose a category</option>
+                    <option className="option-category" selected>Choose a category*</option>
                     {categories.map((item, index) => (
                     <option value={item._id}>{item.categories}</option>
                   ))}
