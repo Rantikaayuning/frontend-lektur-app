@@ -5,6 +5,7 @@ import {
   SIGN_UP,
   UPDATE_USER_PROFILE,
   UPDATE_PROFILE_IMAGE,
+  FETCH_USER_LOADING
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
@@ -12,7 +13,16 @@ import _ from "lodash";
 
 const token = Cookies.get("token");
 
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_USER_LOADING,
+    payload: payload
+  }
+}
+
 export const postLogin = (body) => async (dispatch) => {
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
   return API.post("/users/login", body)
     .then((response) => {
       dispatch({
@@ -21,17 +31,21 @@ export const postLogin = (body) => async (dispatch) => {
         token: response.data.token,
         role: jwt_decode(response.data.token).status,
       });
-
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
       Cookies.set("token", response.data.token);
       return response.data.token;
     })
     .catch((payload) => {
       alert(payload.response.data.message);
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
 
 export const postSignup = (role, payload) => async (dispatch) => {
-  // add async
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
   API.post(`/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
@@ -39,13 +53,18 @@ export const postSignup = (role, payload) => async (dispatch) => {
           type: SIGN_UP,
           payload: response.data.message,
         });
+        let isUserLoading = false;
+        dispatch(fetchLoading(isUserLoading))
         alert(`${response.data.message}, please continue to login`);
       }
     })
     .catch((payload) => {
       alert(payload.response.data.message);
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
+
 
 export const getUserProfile = (access_token = null) => (dispatch) => {
   // console.log(access_token);
@@ -84,20 +103,18 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
       console.log("updateUserProfile=>", response);
       Cookies.set("token", response.data.token);
       let decoded;
-      if (response.data && !_.isEmpty(response.data.token)) {
+      if (response.data && !_.isEmpty(response.data.token)) { // or use 
         decoded = jwt_decode(response.data.token);
       }
-      // if (response.status === 201) {
       dispatch({
         type: UPDATE_USER_PROFILE,
         payload: decoded, //response.data.result
       });
-      alert("Update Data Success");
-      // window.location.reload(false);
-      // }
-      // return response.data.token;
+      window.location.reload()
     })
-    .catch((error) => alert(`ERROR NIH: ${error}`));
+    .catch((error) => {
+      alert(`ERROR : ${error}`)
+    });
 };
 
 export const updateProfileImage = (file) => async (dispatch) => {

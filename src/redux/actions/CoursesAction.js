@@ -187,6 +187,8 @@ export const getPopUpContent = (id) => (dispatch) => {
 };
 
 export const getPopUpMaterial = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.get(`student/pop-up/course/materials?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -198,13 +200,19 @@ export const getPopUpMaterial = (id) => (dispatch) => {
         type: GET_POPUP_MATERIAL,
         payload: response.data.result,
       });
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     })
     .catch(() => {
       console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     });
 };
 
 export const getContentDetail = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.get(`student/course/content?contentId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -216,9 +224,13 @@ export const getContentDetail = (id) => (dispatch) => {
         type: GET_CONTENT_DETAIL,
         payload: response.data.result,
       });
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     })
     .catch(() => {
       console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     });
 };
 

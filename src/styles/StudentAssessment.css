@@ -82,6 +82,13 @@
     color: white;
 }
 
+.submit-assessment .disabled{
+    border: none;
+    background-color: #525f66;
+    padding: 12px 50px;
+    color: white;
+}
+
 .assessment-questions-result {
     margin: 50px 10px 30px 50px;
     display: flex;

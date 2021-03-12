@@ -15,35 +15,41 @@ import { getTeacherCourses } from "../../redux/actions/CoursesAction";
 import defaultPhoto from "../../assets/user.png";
 import successLogo from "../../assets/upload2.png";
 import defaultImg from "../../assets/defaultLektur.png";
+import editIcon from "../../assets/iconEdit.png";
 
 function TeacherDashboard() {
   const dispatch = useDispatch();
 
-  const [isEdit, setEdit] = useState(true);
+  const [isProfile, setProfile] = useState(true);
+  const [isEditPhoto, setEditPhoto] = useState(false);
   const [PopUpProfileImage, setPopUpProfileImage] = useState(false);
   const [imageProfile, setImageProfile] = useState("");
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
 
-  const { userProfile, profileImage, message } = useSelector(
+  const { userProfile, profileImage, message, isUserLoading } = useSelector(
     (state) => state.users
   );
   const teacherCourses = useSelector((state) => state.courses.teacherCourses);
   const token = useSelector((state) => state.users.token);
 
   const handleEdit = async () => {
-    setEdit(!isEdit);
+    setProfile(!isProfile);
+  };
+  
+  const handleEditPhoto = async () => {
+    setEditPhoto(!isEditPhoto);
   };
 
   useEffect(() => {
     token ? dispatch(getUserProfile(token)) : dispatch(getUserProfile()); // why was this commented?
     token ? dispatch(getTeacherCourses(token)) : dispatch(getTeacherCourses());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleEdit(dispatch(updateUserProfile(fullname, email)));
+    dispatch(updateUserProfile(fullname, email));
   };
 
   const updateProfile = () => {
@@ -56,18 +62,19 @@ function TeacherDashboard() {
     window.location.reload();
   };
 
-  console.log(userProfile);
+  // console.log(userProfile);
   return (
     <div className="teacher-dashboard-container">
-      {isEdit ? (
+      {isProfile && !isEditPhoto ? (
         <div>
-          {userProfile ? (
+          {userProfile  ? (
             <div className="teacher-profile">
               {userProfile.image === null ? (
                 <img src={defaultPhoto} alt="student" />
               ) : (
                 <img src={userProfile.image} alt="student" />
               )}
+              <img src={editIcon} alt='Edit Profile' className='edit-photo-icon' onClick={handleEditPhoto}/>
               <div className="name-email">
                 <div>
                   <b>{userProfile.fullname}</b>
@@ -79,10 +86,12 @@ function TeacherDashboard() {
               </span>
             </div>
           ) : (
-            <div></div>
+            <div className='student-profile'>
+              <div id="popup-loader"></div>
+            </div>
           )}
         </div>
-      ) : (
+      ) : isEditPhoto ? (
         <div className="teacher-profile">
           <div className="teacher-profile-edit">
             {userProfile.image === null ? (
@@ -98,6 +107,17 @@ function TeacherDashboard() {
             <button className="upload-image" onClick={updateProfile}>
               Upload Image
             </button>
+            <p className="back-edit" onClick={handleEditPhoto}>Cancel</p>
+          </div>
+        </div>
+      ) : (
+        <div className="teacher-profile">
+          <div className="teacher-profile-edit">
+            {userProfile.image === null ? (
+              <img src={defaultPhoto} alt="student" />
+            ) : (
+              <img src={userProfile.image} alt="student" />
+            )}
             <form onSubmit={handleSubmit}>
               <p>
                 Name<span>*</span>
@@ -123,7 +143,12 @@ function TeacherDashboard() {
               />
               <br />
               <br />
-              <button className="save-edit">Save Changes</button>
+              {isUserLoading ? (
+                  <button className="save-edit" onClick={handleSubmit}>Saving...</button>
+                ) : (
+                  <button className="save-edit" onClick={handleSubmit}>Save Changes</button>
+                )}
+              <p className="back-edit" onClick={handleEdit}>Cancel</p>
             </form>
           </div>
         </div>
@@ -197,7 +222,7 @@ function TeacherDashboard() {
                 <img src={successLogo} alt="logo" />
                 <p>{message}</p>
                 <button className="upload-image-popup" onClick={popUp}>
-                  Done
+                  Save
                 </button>
               </div>
             )}

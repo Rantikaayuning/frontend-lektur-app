@@ -4,13 +4,23 @@ import {
   POST_QUESTIONS,
   PUT_FINAL_SCORE,
   UPDATE_QUESTION,
+  FETCH_LOADING
 } from "../types/AssessmentTypes";
 
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
 
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_LOADING,
+    payload: payload
+  }
+}
+
 export const getQuestions = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.get(`/assessment/?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -22,9 +32,15 @@ export const getQuestions = (id) => (dispatch) => {
           type: GET_QUESTIONS,
           payload: response.data.result,
         });
+        let isLoading = false;
+        dispatch(fetchLoading(isLoading))
       }
     })
-    .catch((err) => alert(err));
+    .catch((err) => {
+      alert(err);
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
+    });
 };
 
 export const postAssessment = (body, id) => async (dispatch) => {
@@ -68,6 +84,8 @@ export const deleteQuestion = (courseId, questionId) => () => {
 };
 
 export const putFinalScore = (score, id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading))
   API.put(
     `/assessment/result?courseId=${id}`,
     {
@@ -85,8 +103,14 @@ export const putFinalScore = (score, id) => (dispatch) => {
         type: PUT_FINAL_SCORE,
         payload: response.data.result,
       });
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
     })
-    .catch((payload) => alert(payload.response.data.message));
+    .catch((payload) => {
+      alert(payload.response.data.message)
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading))
+    });
 };
 
 export const updateQuestion = (body, id, questionId) => async (dispatch) => {

@@ -5,7 +5,6 @@
   height: max-content;
   display: flex;
   font-size: 14px;
-  padding-bottom: 144px;
   padding-left: 150px;
   padding-top: 72px;
   padding-bottom: 174px;
@@ -229,6 +228,32 @@ form input {
 .invite-edit-btn .btn-invite:hover {
   color: white;
   background: #ef9c27;
+}
+
+.teacher-profile .edit-photo-icon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: -40px;
+  left: 50px;
+  opacity: 0.8;
+}
+
+.teacher-profile .edit-photo-icon:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.teacher-profile .back-edit {
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: underline;
+  color: rgb(49, 106, 134);
+}
+
+.teacher-profile .back-edit {
+  color: rgb(37, 76, 95);
+  cursor: pointer;
 }
 
 /* For mobile phones: */

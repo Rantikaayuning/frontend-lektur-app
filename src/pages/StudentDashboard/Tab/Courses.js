@@ -34,13 +34,13 @@ const StudentBoardCourses = () => {
         setMaterialModal(true)
     }
     
-    console.log("content", popUpContent)
+    // console.log("content", popUpContent)
     // console.log("material", popUpMaterial)
-    console.log("course", studentCourses)
+    // console.log("course", studentCourses)
     // console.log('detail', courseDetail)
     return (
         <>
-        {studentCourses.course === null || studentCourses.course === undefined ? (
+        {(studentCourses.course === null || studentCourses.course === undefined) ? (
             <div id='loader'></div>
         ) : (
             <div className="student-board">

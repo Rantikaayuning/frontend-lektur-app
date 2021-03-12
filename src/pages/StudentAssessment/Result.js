@@ -10,7 +10,7 @@ const StudentAssessmentResult = () => {
     const dispatch = useDispatch();
     const {id} = useParams()
 
-    const {assessment} = useSelector(state => state.assessment)
+    const {assessment, isAssessmentLoading} = useSelector(state => state.assessment)
     const {courseDetail} = useSelector(state => state.courses)
 
     const [selected, setSelected] = useState({})
@@ -27,7 +27,7 @@ const StudentAssessmentResult = () => {
           }
       }, [dispatch, id]);
 
-    const inputFromUser = Object.values(selected) 
+    // const inputFromUser = Object.values(selected) 
 
     // console.log('selected', selected)
     // console.log('assessment', assessment)
@@ -35,7 +35,7 @@ const StudentAssessmentResult = () => {
 
     return (
         <>
-        {(assessment === null || score === null) && (inputFromUser.length > 0 && inputFromUser) ? (
+        {isAssessmentLoading ? (
             <div id='loader'></div>
         ) : (
             <div className='student-assessment'>

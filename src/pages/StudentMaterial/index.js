@@ -20,7 +20,7 @@ export default function StudentMaterial() {
     const { id, content } = useParams()
     
     const dispatch = useDispatch()
-    const { contentDetail, courses } = useSelector(state => state.courses)
+    const { contentDetail, courses, isLoading } = useSelector(state => state.courses)
     
     useEffect(() => {
         dispatch(getContentDetail(content))
@@ -35,9 +35,9 @@ export default function StudentMaterial() {
     // console.log("find", find)
     return (
         <>
-            {contentDetail.content === undefined ? (
+            { isLoading ? (
             <div id='loader'></div>
-            ) : (
+            ) : contentDetail.content !== undefined && (
             <div className="content-material">
                 <div className="text">
                     <div>
@@ -101,7 +101,7 @@ export default function StudentMaterial() {
                             ))}
                             
                             {find !== null && find !== undefined ? (
-                            <Link to={`/course-content/${contentDetail.content.courseId}/${find.contentId._id}`}>
+                            <Link to={`/course-content/${id}/${find.contentId._id}`}>
                                 <button className={openLesson ? 'next-lesson-button' : 'next-locked-button'} onClick={handleOpenLesson}>
                                     <img src={openLesson ? logo3 : logo2} alt='next lesson'/>{" "}Next Lesson : {find.contentId.title}
                                 </button>

@@ -3,6 +3,7 @@ import {
   POST_QUESTIONS,
   PUT_FINAL_SCORE,
   UPDATE_QUESTION,
+  FETCH_LOADING
 } from "../types/AssessmentTypes";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   addAssessment: null,
   finalScore: null,
   updateCreatedQuestion: null,
+  isAssessmentLoading: false
 };
 
 const assessmentReducer = (state = initialState, action) => {
@@ -35,7 +37,11 @@ const assessmentReducer = (state = initialState, action) => {
         ...state,
         updateCreatedQuestion: payload,
       };
-
+    case FETCH_LOADING:
+      return {
+        ...state,
+        isAssessmentLoading: payload,
+      };
     default:
       return state;
   }
