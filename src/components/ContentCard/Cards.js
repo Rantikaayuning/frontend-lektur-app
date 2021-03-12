@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardImg,
@@ -7,6 +7,9 @@ import {
   CardSubtitle,
   CardBody,
 } from "reactstrap";
+import {} from "module";
+
+import { getHomepage } from "../../redux/actions/HomePage";
 
 function Cards(props) {
   const {
@@ -18,11 +21,26 @@ function Cards(props) {
     text,
     footer,
   } = props;
-  
+
+  // const { homePage, category } = useSelector((state) => state.homePage);
+
+  // useEffect(() => {
+  //   effect
+  //   return () => {
+  //     cleanup
+  //   }
+  // }, [input])
+
   return (
     <div>
       <Card className="card">
-        <CardImg top width="100%" src={image} alt={title} className='card-image'/>
+        <CardImg
+          top
+          width="100%"
+          src={image}
+          alt={title}
+          className="card-image"
+        />
         <CardBody className="p-2">
           <CardTitle tag="p" className="card-title">
             {title}

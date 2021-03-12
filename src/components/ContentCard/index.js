@@ -21,11 +21,13 @@ function Content() {
   }, [dispatch]);
 
   console.log(homePage);
+  console.log(courses);
   // console.log(category);
 
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
+    console.log(homePage);
   };
 
   return (
@@ -57,7 +59,11 @@ function Content() {
                   homePage.category.map((item) => (
                     <button
                       className="btn-home-detail"
-                      color={categoryIds === item._id ? "orange" : "red"}
+                      style={{
+                        color: categoryIds === item._id && "#FFFFFF",
+                        backgroundColor: categoryIds === item._id && "#EF9C27",
+                        opacity: categoryIds === item._id && 0.8,
+                      }}
                       onClick={() => handleCategoryById(item._id)}
                     >
                       {item.categories}
@@ -97,7 +103,36 @@ function Content() {
               </Row>
             ) : (
               <Row className="content-card-container">
-                {courses.map((item, index) => (
+                {homePage !== null &&
+                  homePage.course.map((item, index) => (
+                    <Col
+                      xl="3"
+                      md="6"
+                      sm="12"
+                      key={index}
+                      className="card-container"
+                    >
+                      <Link
+                        to={`/course-detail/${item._id}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <ContentCards
+                          image={item.image === null ? defaultImg : item.image}
+                          text={item.overview}
+                          title={item.title}
+                          lecture={item.teacherId.fullname}
+                          video_numbers={item.totalVideo}
+                          material_numbers={item.totalMaterial}
+                          footer={
+                            item.categoryId
+                              ? item.categoryId.categories
+                              : "DEFAULT"
+                          }
+                        />
+                      </Link>
+                    </Col>
+                  ))}
+                {/* {courses.map((item, index) => (
                   <Col
                     xl="3"
                     md="6"
@@ -116,11 +151,11 @@ function Content() {
                         lecture={item.teacherId.fullname}
                         video_numbers={item.totalVideo}
                         material_numbers={item.totalMaterial}
-                        footer="Business"
+                        footer={""}
                       />
                     </Link>
                   </Col>
-                ))}
+                ))} */}
               </Row>
             )}
           </div>
