@@ -18,32 +18,90 @@ import { getCourseDetail } from "../../../redux/actions/CoursesAction";
 import {
   studentAcceptance,
   putStudentApprove,
+  getSearchStudent,
 } from "../../../redux/actions/TeacherAction";
 
 const TeacherStudentsUpdate = () => {
   const [dropdownFilterOpen, setDropdownFilterOpen] = useState(false);
   const [dropdownSortOpen, setDropdownSortOpen] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
-
-  const toggleSort = () => setDropdownSortOpen((before) => !before);
-  const toggleFilter = () => setDropdownFilterOpen((prevState) => !prevState);
+  const [status, setStatus] = useState("All");
+  const dispatch = useDispatch();
+  const { studentsAccStatus, searchStudents, studentApprove } = useSelector(
+    state => state.teachers
+  );
+  const [filter, setFilter] = useState(studentsAccStatus);
+  const [sort, setSort] = useState("Name");
+  const [isSearch, setSearch] = useState(false);
+  const [srcStudent, setSrcStudent] = useState({
+    search: "",
+  });
+  const toggleSort = () => setDropdownSortOpen(before => !before);
+  const toggleFilter = () => setDropdownFilterOpen(prevState => !prevState);
   const handlePopUp = () => setPopUpOpen(!isPopUpOpen);
 
   const { id } = useParams();
-  const { studentsAccStatus, studentApprove } = useSelector(
-    (state) => state.teachers
-  );
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCourseDetail(id));
     dispatch(studentAcceptance(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, status]);
   function handleAccept(studentId) {
     dispatch(putStudentApprove(id, studentId));
   }
-  console.log(`studentsAccStatus`, studentsAccStatus);
+  function handleChange(status) {
+    setStatus(status);
+    switch (status) {
+      case "Active":
+        setFilter(studentsAccStatus.filter(student => student.status === 1));
+        setSearch(false);
+        break;
+      case "Pending":
+        setFilter(studentsAccStatus.filter(student => student.status === 0));
+        setSearch(prevState => false);
+        break;
+      case "Completed":
+        setFilter(studentsAccStatus.filter(student => student.status === 2));
+        setSearch(false);
+        break;
+      default:
+        setFilter(studentsAccStatus);
+        setSearch(false);
+        setSrcStudent({ state: "" });
+        break;
+    }
+  }
+  function handleSort(sort) {
+    setSort(sort);
+    switch (sort) {
+      case "Name":
+        return filter.sort((a, b) =>
+          a.studentId.fullname > b.studentId.fullname ? 1 : -1
+        );
+      case "Score":
+        console.log(filter);
+        return filter.sort((a, b) => a.score - b.score);
+      default:
+        return filter;
+    }
+  }
+  function changeStd(e) {
+    setSrcStudent({
+      search: e.target.value,
+    });
+  }
+  function searchStudent(e) {
+    e.preventDefault();
+    dispatch(getSearchStudent(id, srcStudent));
+    setSrcStudent("");
+
+    setSearch(true);
+  }
+  console.log(searchStudents);
+  console.log(`isSearch`, isSearch);
+  console.log(`srcStudent`, srcStudent);
   console.log(`studentApprove`, studentApprove);
+
   return (
     <>
       <div className="teacher-assessment">
@@ -59,10 +117,17 @@ const TeacherStudentsUpdate = () => {
         <div className="teacher-students-menu-box">
           <div className="student-sort-box">
             <p>
-              <input type="text" placeholder="Search" />
-              <span>
-                <img src={searchIcon} alt="icon" />
-              </span>
+              <form>
+                <input
+                  type="text"
+                  placeholder="Search Student Name"
+                  value={srcStudent.search}
+                  onChange={changeStd}
+                />
+                <span>
+                  <img src={searchIcon} alt="icon" onClick={searchStudent} />
+                </span>
+              </form>
               <hr type="solid" />
             </p>
             <div className="filter-sort-container">
@@ -77,22 +142,41 @@ const TeacherStudentsUpdate = () => {
                 >
                   <DropdownToggle className="dropdown-menu-filter" color="none">
                     <div className="sidebar-dropdown-choose">
-                      <p>Choose one</p>
+                      <p>{status}</p>
                       <p>
                         <i className="fa fa-caret-down fa-lg dropbtn"></i>
                       </p>
                     </div>
                   </DropdownToggle>
                   <DropdownMenu className="sidebar-dropdown-item">
-                    <DropdownItem>Completed</DropdownItem>
-                    <DropdownItem>Active</DropdownItem>
-                    <DropdownItem>Pending</DropdownItem>
+                    <DropdownItem
+                      onClick={() => handleChange("All")}
+                      dropDownValue="All"
+                    >
+                      All
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() => handleChange("Completed")}
+                      dropDownValue="Completed"
+                    >
+                      Completed
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() => handleChange("Active")}
+                      dropDownValue="Active"
+                    >
+                      Active
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() => handleChange("Pending")}
+                      dropDownValue="Pending"
+                    >
+                      Pending
+                    </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
               </div>
             </div>
-
-            {/* <br/><br/> */}
             <div className="filter-sort-container">
               <div>
                 <b>Sort</b>
@@ -105,16 +189,25 @@ const TeacherStudentsUpdate = () => {
                 >
                   <DropdownToggle className="dropdown-menu-filter" color="none">
                     <div className="sidebar-dropdown-choose">
-                      <p>Choose one</p>
+                      <p>{sort}</p>
                       <p>
                         <i className="fa fa-caret-down fa-lg dropbtn"></i>
                       </p>
                     </div>
                   </DropdownToggle>
                   <DropdownMenu className="sidebar-dropdown-item">
-                    <DropdownItem>Date</DropdownItem>
-                    <DropdownItem>Name</DropdownItem>
-                    <DropdownItem>Score</DropdownItem>
+                    <DropdownItem
+                      onClick={() => handleSort("Name")}
+                      dropDownValue="Name"
+                    >
+                      Name
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() => handleSort("Score")}
+                      dropDownValue="Score"
+                    >
+                      Score
+                    </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
               </div>
@@ -123,16 +216,9 @@ const TeacherStudentsUpdate = () => {
 
           <div className="student-list-box">
             <div className="student-list-header">
-              {studentsAccStatus.length === 0 ? (
-                <h5>
-                  <b>{studentsAccStatus.length} Students</b>
-                </h5>
-              ) : (
-                <h5>
-                  <b>Students</b>
-                </h5>
-              )}
-
+              <h5>
+                <b>Students</b>
+              </h5>
               <p>
                 <button onClick={handlePopUp}>Invite</button>
               </p>
@@ -143,8 +229,67 @@ const TeacherStudentsUpdate = () => {
                 setPopUpOpen={setPopUpOpen}
               />
             </div>
-            {studentsAccStatus.length !== 0 ? (
-              studentsAccStatus.map((item) => (
+            {isSearch ? (
+              searchStudents ? (
+                searchStudents.map(item => (
+                  <div className="student-list-name">
+                    <div>
+                      <p>
+                        <b>{item.fullname[0]}</b>
+                      </p>
+                      {item.status === 1 ? (
+                        <p>
+                          <img src={checklistTwo} alt="active" /> Active
+                        </p>
+                      ) : item.status === 2 ? (
+                        <p>
+                          <img src={checklistThree} alt="completed" /> Completed
+                        </p>
+                      ) : (
+                        <p>
+                          <img src={checklistOne} alt="pending" /> Pending
+                        </p>
+                      )}
+                    </div>
+                    <div className="course-status">
+                      {item.status === 1 ? (
+                        <div className="course-active">
+                          <p>
+                            <Progress
+                              color="warning"
+                              value={
+                                (item.totalSeenCourses / item.totalcourse) * 100
+                              }
+                            />
+                          </p>
+                          <p>
+                            {`${item.totalSeenCourses}/${item.totalcourse} Course Complete`}
+                          </p>
+                        </div>
+                      ) : item.status === 2 ? (
+                        <div className="course-completed">
+                          <h3>{item.score}%</h3>
+                          <p>Assessment Score</p>
+                        </div>
+                      ) : (
+                        <div className="course-pending">
+                          <p>
+                            <button
+                              onClick={() => handleAccept(item.studentId._id)}
+                            >
+                              Accept
+                            </button>
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                ""
+              )
+            ) : filter ? (
+              filter.map(item => (
                 <div className="student-list-name">
                   <div>
                     <p>
@@ -218,3 +363,121 @@ const TeacherStudentsUpdate = () => {
 };
 
 export default TeacherStudentsUpdate;
+
+/*
+
+{searchStudents
+              ? searchStudents.map(item => (
+                  <div className="student-list-name">
+                    <div>
+                      <p>
+                        <b>{item.fullname[0]}</b>
+                      </p>
+                      {item.status === 1 ? (
+                        <p>
+                          <img src={checklistTwo} alt="active" /> Active
+                        </p>
+                      ) : item.status === 2 ? (
+                        <p>
+                          <img src={checklistThree} alt="completed" /> Completed
+                        </p>
+                      ) : (
+                        <p>
+                          <img src={checklistOne} alt="pending" /> Pending
+                        </p>
+                      )}
+                    </div>
+                    <div className="course-status">
+                      {item.status === 1 ? (
+                        <div className="course-active">
+                          <p>
+                            <Progress
+                              color="warning"
+                              value={
+                                (item.totalSeenCourses / item.totalcourse) * 100
+                              }
+                            />
+                          </p>
+                          <p>
+                            {`${item.totalSeenCourses}/${item.totalcourse} Course Complete`}
+                          </p>
+                        </div>
+                      ) : item.status === 2 ? (
+                        <div className="course-completed">
+                          <h3>{item.score}%</h3>
+                          <p>Assessment Score</p>
+                        </div>
+                      ) : (
+                        <div className="course-pending">
+                          <p>
+                            <button
+                              onClick={() => handleAccept(item.studentId._id)}
+                            >
+                              Accept
+                            </button>
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              : ""}
+            {filter
+              ? filter.map(item => (
+                  <div className="student-list-name">
+                    <div>
+                      <p>
+                        <b>{item.studentId.fullname}</b>
+                      </p>
+                      {item.status === 1 ? (
+                        <p>
+                          <img src={checklistTwo} alt="active" /> Active
+                        </p>
+                      ) : item.status === 2 ? (
+                        <p>
+                          <img src={checklistThree} alt="completed" /> Completed
+                        </p>
+                      ) : (
+                        <p>
+                          <img src={checklistOne} alt="pending" /> Pending
+                        </p>
+                      )}
+                    </div>
+                    <div className="course-status">
+                      {item.status === 1 ? (
+                        <div className="course-active">
+                          <p>
+                            <Progress
+                              color="warning"
+                              value={
+                                (item.totalSeenCourses / item.totalCourse) * 100
+                              }
+                            />
+                          </p>
+                          <p>
+                            {`${item.totalSeenCourses}/${item.totalCourse} Course Complete`}
+                          </p>
+                        </div>
+                      ) : item.status === 2 ? (
+                        <div className="course-completed">
+                          <h3>{item.score}%</h3>
+                          <p>Assessment Score</p>
+                        </div>
+                      ) : (
+                        <div className="course-pending">
+                          <p>
+                            <button
+                              onClick={() => handleAccept(item.studentId._id)}
+                            >
+                              Accept
+                            </button>
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              : ""}
+
+
+*/

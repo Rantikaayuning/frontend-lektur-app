@@ -20,7 +20,9 @@
   margin-right: 150px;
   margin-top: 72px;
 }
-
+span img {
+  cursor: pointer;
+}
 .sidebar-dropdown-choose {
   display: flex;
   flex-direction: row;
