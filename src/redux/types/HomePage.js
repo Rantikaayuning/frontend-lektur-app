@@ -1,0 +1,1 @@
+export const GET_HOMEPAGE = "GET_HOMEPAGE"

@@ -18,18 +18,21 @@ import {
   GET_CONTENT_DETAIL,
   UPDATE_COURSE,
   DOWNLOAD_CERTIFICATE,
-  FETCH_LOADING
+  FETCH_LOADING,
+  GET_CATEGORY,
+  GET_CATEGORY_BY_ID,
 } from "../types/CoursesTypes";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 const token = Cookies.get("token");
 
 export const fetchLoading = (payload) => {
   return {
     type: FETCH_LOADING,
-    payload: payload
-  }
-}
+    payload: payload,
+  };
+};
 
 export const getCourses = (payload) => (dispatch) => {
   API.get("/courses/all", payload)
@@ -165,7 +168,7 @@ export const getTeacherCourses = (access_token = null) => (dispatch) => {
 
 export const getPopUpContent = (id) => (dispatch) => {
   let isLoading = true;
-  dispatch(fetchLoading(isLoading))
+  dispatch(fetchLoading(isLoading));
   API.get(`student/pop-up/course/content?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -177,12 +180,12 @@ export const getPopUpContent = (id) => (dispatch) => {
         payload: response.data.result,
       });
       let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     })
     .catch(() => {
       console.log("error");
       let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     });
 };
 
@@ -255,8 +258,8 @@ export const updateCourse = (id, title, overview) => (dispatch) => {
     });
 };
 
-export const postCourse = (title, overview, file) => (dispatch) => {
-  const form = { title, overview, file };
+export const postCourse = (title, overview, file, categoryId) => (dispatch) => {
+  const form = { title, overview, file, categoryId };
 
   const data = new FormData();
   Object.keys(form).forEach((key) => data.append(key, form[key]));
@@ -402,25 +405,59 @@ export const deleteCourse = (id) => () => {
 
 export const getCertificate = (id) => (dispatch) => {
   let isLoading = true;
-  dispatch(fetchLoading(isLoading))
+  dispatch(fetchLoading(isLoading));
   API.get(`/student/certificate?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   })
     .then((response) => {
       // console.log(response.data.result)
-        dispatch({
-          type: DOWNLOAD_CERTIFICATE,
-          payload: response.data.result
-        });
-        isLoading = false;
-        dispatch(fetchLoading(isLoading))
+      dispatch({
+        type: DOWNLOAD_CERTIFICATE,
+        payload: response.data.result,
+      });
+      isLoading = false;
+      dispatch(fetchLoading(isLoading));
     })
     .catch((err) => {
-      console.log('error')
+      console.log("error");
       isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     });
 };
 
+export const getCategory = () => (dispatch) => {
+  API.get("/courses/categories", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        console.log(response.data.result);
+        dispatch({
+          type: GET_CATEGORY,
+          payload: response.data.result,
+        });
+      }
+    })
+    .catch((error) => console.log(error));
+};
+
+export const getCategoryById = (id) => (dispatch) => {
+  return axios
+    .get(`https://lekturapp.herokuapp.com/category/course?categoryId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+      dispatch({
+        type: GET_CATEGORY_BY_ID,
+        payload: response.data.course,
+      });
+    })
+    .catch((error) => alert(error));
+};
