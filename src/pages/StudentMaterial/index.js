@@ -35,14 +35,14 @@ export default function StudentMaterial() {
     // console.log("find", find)
     return (
         <>
-            { isLoading ? (
+            {isLoading ? (
             <div id='loader'></div>
             ) : contentDetail.content !== undefined && (
             <div className="content-material">
                 <div className="text">
                     <div>
                         <Link to={`/course-detail/${id}`}>
-                            <span className="bread-crumb">{contentDetail.content.contentId.title}</span>
+                            <span className="bread-crumb">{contentDetail.content.courseId.title}</span>
                         </Link>{" "}/
                             <span className="link"> Lesson : {contentDetail.content.contentId.title}</span>
                     </div>
@@ -119,7 +119,7 @@ export default function StudentMaterial() {
                 <div className="card-content">
                     <div className="card-text-course">Related Course</div>
                     <Row className="content-card-container">
-                    {courses.map((item, index) => ( index < 4 &&
+                    {contentDetail.relatedCourse.map((item, index) => ( index < 4 &&
                     <Col xl="3" md="6" sm="12" key={index} className="card-container">
                     <Link
                         to={`/course-detail/${item._id}`}
@@ -132,7 +132,6 @@ export default function StudentMaterial() {
                         lecture={item.teacherId.fullname}
                         video_numbers={item.totalVideo}
                         material_numbers={item.totalMaterial}
-                        footer="Business"
                         />
                     </Link>
                     </Col>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { produce } from "immer";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useDispatch } from "react-redux";
@@ -21,7 +21,7 @@ function EditAssessment(props) {
     queId,
   } = props;
 
-  const history = useHistory();
+  // const history = useHistory();
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ function EditAssessment(props) {
   const [number, setNumber] = useState(numberAll);
   const [question, setQuestion] = useState(questionAll);
   const [remarks, setRemarks] = useState(remarksAll);
-  const [questionId, setQuestionId] = useState(queId);
+  // const [questionId, setQuestionId] = useState(queId);
 
   const [options, setOptions] = useState(
     optionsAll !== null
@@ -61,15 +61,15 @@ function EditAssessment(props) {
       answer: answer,
       options: options,
     };
-    dispatch(updateQuestion(body, id, questionId))
+    dispatch(updateQuestion(body, id, queId))
       .then(() => dispatch(getQuestions(id)))
       .then(() => setButtonText("Updated"));
   };
 
   const deleteCreatedQuestion = async () => {
-    dispatch(deleteQuestion(id, questionId))
+    dispatch(deleteQuestion(id, queId))
       .then(() => dispatch(getQuestions(id)))
-      .then(() => window.location.reload(false));
+      // .then(() => window.location.reload(false));
     // .then(() => history.push(`/new-created-questions/${id}`));
   };
 
@@ -202,7 +202,7 @@ function EditAssessment(props) {
               </div>
 
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <img src={trashCan} onClick={toggle} className="trash-pic" />
+                <img src={trashCan} onClick={toggle} className="trash-pic" alt='delete icon'/>
                 <p
                   type="submit"
                   className="save-per-question"

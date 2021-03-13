@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import CreateAssessment from "../../../components/CreateAssessment";
 
-const TeacherAssessmentTab = () => {
+const TeacherAssessmentTabNew = () => {
   const history = useHistory();
   const { id } = useParams();
 
@@ -15,18 +15,18 @@ const TeacherAssessmentTab = () => {
   };
 
   const handleClickSave = async () => {
-    history.push(`/new-created-questions/${id}`);
+    history.push(`/created-questions/${id}`);
   };
 
   return (
     <>
       <div className="teacher-assessment">
         <div className="teacher-dashboard-list">
-          <Link to={`/course-filled-teacher/${id}`}>
+          <Link to={`/course-teacher/course/${id}`}>
             <p>Course</p>
           </Link>
           <p className="open">Assessment</p>
-          <Link to={`/teacher-new-students/${id}`}>
+          <Link to={`/course-teacher/students/${id}`}>
             <p>Students</p>
           </Link>
         </div>
@@ -46,7 +46,7 @@ const TeacherAssessmentTab = () => {
           <div className="save-exam-question">
             <button
               onClick={() =>
-                handleClickSave().then(() => window.location.reload())
+                handleClickSave().then(() => window.location.reload(true))
               }
             >
               Save Exam
@@ -58,4 +58,4 @@ const TeacherAssessmentTab = () => {
   );
 };
 
-export default TeacherAssessmentTab;
+export default TeacherAssessmentTabNew;

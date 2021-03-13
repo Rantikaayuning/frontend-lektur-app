@@ -1,47 +1,86 @@
 import API from "../../api/index";
 import {
   GET_PROFILE_TEACHER,
-  STUDENTS_ACCEPT,
-  STUDENT_INVITE_SUCCESS,
-  STUDENT_APPROVE,
+  GET_STUDENTS_LIST,
+  POST_STUDENT_INVITE,
+  PUT_STUDENT_APPROVE,
   SEARCH_STUDENT,
+  FETCH_LOADING,
+  FETCH_ACCEPT_LOADING
 } from "../types/TeacherTypes";
 import Cookies from "js-cookie";
 
 const token = Cookies.get("token");
 
-export const getTeacherProfile = () => dispatch => {
-  API.get("/teacher/profile", {
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_LOADING,
+    payload: payload,
+  };
+};
+
+export const fetchAcceptLoading = (payload) => {
+  return {
+    type: FETCH_ACCEPT_LOADING,
+    payload: payload,
+  };
+};
+
+// let isLoading = true;
+//   dispatch(fetchLoading(isLoading));
+
+export const getTeacherCourses = (access_token = null) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading));
+  API.get(`teacher/profile`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: access_token
+        ? `Bearer ${access_token}`
+        : `Bearer ${Cookies.get("token")}`,
     },
   })
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
+        // console.log(response.data.result.dataCourse)
         dispatch({
           type: GET_PROFILE_TEACHER,
-          payload: response.data.result[1],
+          payload: response.data.result.dataCourse,
         });
+        let isLoading = false;
+        dispatch(fetchLoading(isLoading));
       }
     })
-    .catch(error => console.log(error));
+    .catch(() => {
+      console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading));
+    });
 };
-export const studentAcceptance = courseId => dispatch => {
+
+export const getStudentList = (courseId )=> dispatch => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading));
   API.get(`/teacher/courses/student?courseId=${courseId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
     .then(response => {
-      console.log(response);
+      // console.log(response);
       dispatch({
-        type: STUDENTS_ACCEPT,
+        type: GET_STUDENTS_LIST,
         payload: response.data.result,
       });
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading));
     })
-    .catch(error => console.log("USER PROFILE ERROR:", error));
+    .catch(error => {
+      console.log("Error", error)
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading));
+    });
 };
-export const studentInvite = (courseId, body) => dispatch => {
+export const postStudentInvite = (courseId, body) => dispatch => {
   API({
     method: "post",
     url: `/teacher/courses/invite?courseId=${courseId}`,
@@ -53,14 +92,18 @@ export const studentInvite = (courseId, body) => dispatch => {
     .then(response => {
       console.log(response);
       dispatch({
-        type: STUDENT_INVITE_SUCCESS,
+        type: POST_STUDENT_INVITE,
         payload: response.data.message,
       });
       alert(`${response.data.message}`);
     })
-    .catch(error => console.log("USER PROFILE ERROR:", error));
+    .catch(error => {
+      console.log("error", error)
+    });
 };
 export const putStudentApprove = (courseId, studentId) => dispatch => {
+  let isAcceptLoading = true;
+  dispatch(fetchAcceptLoading(isAcceptLoading));
   API({
     method: "put",
     url: `/teacher/courses/student/approve?courseId=${courseId}&studentId=${studentId}`,
@@ -71,11 +114,17 @@ export const putStudentApprove = (courseId, studentId) => dispatch => {
     .then(response => {
       console.log(response);
       dispatch({
-        type: STUDENT_APPROVE,
+        type: PUT_STUDENT_APPROVE,
         payload: response.data,
       });
+      let isAcceptLoading = false;
+      dispatch(fetchAcceptLoading(isAcceptLoading));
     })
-    .catch(error => console.log("USER PROFILE ERROR:", error));
+    .catch(error => {
+      console.log("error", error)
+      let isAcceptLoading = false;
+      dispatch(fetchAcceptLoading(isAcceptLoading));
+    });
 };
 export const getSearchStudent = (courseId, body) => dispatch => {
   API({
@@ -87,35 +136,12 @@ export const getSearchStudent = (courseId, body) => dispatch => {
     data: body,
   })
     .then(response => {
-      console.log(response);
-      console.log(body);
+      // console.log(response);
+      // console.log(body);
       dispatch({
         type: SEARCH_STUDENT,
         payload: response.data.result,
       });
     })
-    .catch(error => console.log("USER PROFILE ERROR:", error));
+    .catch(error => console.log("error", error));
 };
-
-// export const createCourse = ( title, overview, category) => (dispatch) => {
-//     API.post("/courses/create",
-//     {
-//         title,
-//         overview,
-//         category,
-//       },
-//     {
-//         headers: {
-//             Authorization: `Bearer ${token}`,
-//         }
-//     })
-//     .then((response) => {
-//         if(response.status === 201){
-//             dispatch({
-//                 type: CREATE_COURSE,
-//                 payload: response.data.result,
-//             })
-//         }
-//     })
-//     .catch((error) => console.log(error))
-// }

@@ -96,7 +96,7 @@ function CourseDetail() {
             </div>
           </div>
           <div className="card-content">
-            <div className="card-text-course">Related Course</div>
+            <div className="card-text-course">Other Courses</div>
             <Row className="content-card-container">
               {courses.map((item, index) => index < 4 && (
                 <Col xl="3" md="6" sm="12" key={index} className="card-container">
@@ -111,7 +111,11 @@ function CourseDetail() {
                       lecture={item.teacherId.fullname}
                       video_numbers={item.totalVideo}
                       material_numbers={item.totalMaterial}
-                      footer="Business"
+                      footer={
+                        item.categoryId
+                          ? item.categoryId.categories
+                          : "General Science"
+                      }
                     />
                   </Link>
                 </Col>

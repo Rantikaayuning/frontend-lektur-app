@@ -13,7 +13,7 @@ import { getCourseSearch } from "../../redux/actions/CoursesAction";
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 
-import profile from "../../assets/Ellipse 2.png";
+// import profile from "../../assets/Ellipse 2.png";
 import defaultPhoto from "../../assets/user.png"
 
 
@@ -86,10 +86,10 @@ function Navbar(props) {
                     <div className="vl"></div>
                     <Link>
                     {props.userProfile.image === null ? (
-                      <img src={defaultPhoto} alt="student"  alt="profile"
+                      <img src={defaultPhoto} alt="profile"
                       className="profile-img"/>
                     ) : (
-                      <img src={props.userProfile.image} alt="student"  alt="profile"
+                      <img src={props.userProfile.image} alt="profile"
                       className="profile-img" />
                     )}
                       {/* <img

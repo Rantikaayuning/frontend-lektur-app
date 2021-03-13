@@ -68,7 +68,7 @@ const coursesReducer = (state = initialState, action) => {
     overview,
     idContent,
     courseId,
-    categoryId
+    // categoryId
   } = action;
   switch (type) {
     case GET_ALL_COURSES:

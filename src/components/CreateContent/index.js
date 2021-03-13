@@ -8,7 +8,7 @@ import {postContent, uploadMaterial, uploadVideo} from "../../redux/actions/Cour
 export default function CreateContent() {
     const dispatch = useDispatch();
 
-    const {id, idContent, videoMaterial, courseId} = useSelector(state => state.courses)
+    const {id, idContent, courseId} = useSelector(state => state.courses)
 
     const [number, setNumber] = useState("");
     const [description, setDescription] = useState("");
@@ -49,11 +49,11 @@ export default function CreateContent() {
                     <h4>
                         <b>Lesson # 
                             <input className="input-number" 
-                                        type="text" 
-                                        placeholder="no." 
-                                        onChange={(e) => setNumber (e.target.value)} 
-                                        value={number}
-                                    />
+                                    type="text" 
+                                    placeholder="no." 
+                                    onChange={(e) => setNumber (e.target.value)} 
+                                    value={number}
+                                />
                         </b>
                     </h4>
                 <div className='add-new-lesson-title'>

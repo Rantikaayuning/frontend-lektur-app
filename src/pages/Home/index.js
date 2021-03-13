@@ -6,14 +6,29 @@ import Jumbo from "../../components/Header/Jumbotron";
 import {useSelector} from "react-redux"
 
 const Home = () => {
-  const {searchCourse } = useSelector(state => state.courses)
-
+  const { searchCourse } = useSelector(state => state.courses)
+  const { homePage, isHomeLoading } = useSelector((state) => state.homePage);
+  // urlMostPopuler, totalEnrolled, totalMaterial, totalVideos, courseName, teacherName, enrollButton
   return (
     <>
-      {searchCourse !== '' ? (
+      {searchCourse !== '' && isHomeLoading ? (
         <div></div>
-      ) : (
-        <Jumbo />
+      ) : homePage !== null && (
+        <Jumbo 
+        urlMostPopular={homePage.mostPopular.video}
+        totalEnrolled={homePage.mostPopular.mostPopularCourse[0].totalEnrolled}
+        totalMaterial={homePage.mostPopular.mostPopularCourse[0].totalMaterial}
+        totalVideos={homePage.mostPopular.mostPopularCourse[0].totalVideo}
+        courseName={homePage.mostPopular.mostPopularCourse[0].title}
+        teacherName={homePage.mostPopular.mostPopularCourse[0].teacherId.fullname}
+        enrollButton={
+            <Link to={`/course-detail/${homePage.mostPopular.mostPopularCourse[0]._id}`}>
+            <button>
+              <span>Enroll Now</span>
+            </button>
+            </Link>
+          }
+        />
       )}
         <Content />
         <div className="content-register">
