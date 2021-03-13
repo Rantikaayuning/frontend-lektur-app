@@ -14,7 +14,7 @@ const TeacherCourseUpdate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { courseDetail, update, detailTitle, detailOverview } = useSelector(
+  const { courseDetail, update, detailTitle, detailOverview, isLoading} = useSelector(
     (state) => state.courses
   );
 
@@ -52,11 +52,13 @@ const TeacherCourseUpdate = () => {
     history.push("/teacher-dashboard");
   };
 
-  console.log(update)
+  console.log(courseDetail, 'loading', isLoading)
 
   return (
     <>
-      {courseDetail !== null ? (
+      {courseDetail === null || isLoading ? (
+        <div id="loader"></div>
+      ) : (
         <div className="teacher-assessment">
           <div className="teacher-dashboard-list">
             <p className="open">Course</p>
@@ -158,7 +160,7 @@ const TeacherCourseUpdate = () => {
               <hr type="solid" />
             </p>
             <div className="teacher-add-new-lesson-content">
-              <h4>Content*</h4>
+              <h4>Add Content*</h4>
             </div>
             <CreateContent />
             {contentList}
@@ -177,8 +179,6 @@ const TeacherCourseUpdate = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div id="loader"></div>
       )}
     </>
   );

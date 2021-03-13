@@ -1,7 +1,16 @@
-import { GET_HOMEPAGE } from "../types/HomePage";
+import { GET_HOMEPAGE, FETCH_LOADING } from "../types/HomePage";
 import Axios from "axios";
 
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_LOADING,
+    payload: payload
+  }
+}
+
 export const getHomepage = () => (dispatch) => {
+  let isHomeLoading = true;
+  dispatch(fetchLoading(isHomeLoading))
   Axios.get("https://lekturapp.herokuapp.com/all")
     .then((response) => {
       if (response.status === 200) {
@@ -11,7 +20,13 @@ export const getHomepage = () => (dispatch) => {
           payload: response.data.data,
           category: response.data.data.category,
         });
+        let isHomeLoading = false;
+        dispatch(fetchLoading(isHomeLoading))
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error)
+      let isHomeLoading = false;
+      dispatch(fetchLoading(isHomeLoading))
+    });
 };

@@ -9,7 +9,6 @@ import {
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
-import _ from "lodash";
 
 const token = Cookies.get("token");
 
@@ -83,10 +82,14 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
         // role: jwt_decode(response.data.token).status, // try here
       });
     })
-    .catch((error) => console.log("USER PROFILE ERROR:", error));
+    .catch((error) => {
+      console.log("USER PROFILE ERROR:", error)
+    });
 };
 
 export const updateUserProfile = (fullname, email) => async (dispatch) => {
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
   API.put(
     "/users/update",
     {
@@ -103,17 +106,21 @@ export const updateUserProfile = (fullname, email) => async (dispatch) => {
       console.log("updateUserProfile=>", response);
       Cookies.set("token", response.data.token);
       let decoded;
-      if (response.data && !_.isEmpty(response.data.token)) { // or use 
+      if (response.data && response.data.token !== {}) { // or use !_.isEmpty(response.data.token)
         decoded = jwt_decode(response.data.token);
       }
       dispatch({
         type: UPDATE_USER_PROFILE,
         payload: decoded, //response.data.result
       });
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
       window.location.reload()
     })
     .catch((error) => {
       alert(`ERROR : ${error}`)
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
 

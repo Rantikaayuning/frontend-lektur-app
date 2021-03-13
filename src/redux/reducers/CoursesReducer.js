@@ -70,7 +70,6 @@ const coursesReducer = (state = initialState, action) => {
     overview,
     idContent,
     courseId,
-    categoryId,
     key
   } = action;
   switch (type) {
