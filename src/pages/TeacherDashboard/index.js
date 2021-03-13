@@ -217,23 +217,3 @@ function TeacherDashboard() {
 
 export default TeacherDashboard;
 
-
-// ) : (
-//   <div className="courses-container">
-//     <div className="courses-header">
-//       <h5>
-//         <b>{teacherCourses.length} Courses</b>
-//       </h5>
-//       <button onClick={() => window.open("/teacher-create-course", "_self")}>New Course</button>
-//     </div>
-//     <Spinner
-//       style={{
-//         width: "6rem",
-//         height: "6rem",
-//         position: "fixed",
-//         top: "50%",
-//         left: "53%",
-//       }}
-//       color="secondary"
-//     />
-//   </div>
