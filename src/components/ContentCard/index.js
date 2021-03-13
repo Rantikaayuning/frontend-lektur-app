@@ -9,10 +9,8 @@ import defaultImg from "../../assets/defaultLektur.png";
 
 function Content() {
   const dispatch = useDispatch();
-  const { courses, searchCourse, categoryById } = useSelector(
-    (state) => state.courses
-  );
-  const { homePage, category } = useSelector((state) => state.homePage);
+  const { courses, searchCourse } = useSelector((state) => state.courses);
+  const { homePage } = useSelector((state) => state.homePage);
 
   const [categoryIds, setCategoryIds] = useState(0);
 
@@ -24,9 +22,10 @@ function Content() {
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
-    // console.log(homePage);
-    // console.log(categoryById);
   };
+
+  // console.log(courses);
+  console.log(homePage);
 
   return (
     <>
@@ -95,7 +94,7 @@ function Content() {
                 ))}
               </Row>
             ) : (
-                <Row className="content-card-container">
+              <Row className="content-card-container">
                 {courses !== null &&
                   courses.map((item, index) => (
                     <Col
@@ -135,6 +134,3 @@ function Content() {
 }
 
 export default Content;
-
-
-

@@ -23,7 +23,7 @@ import {
   GET_CATEGORY_BY_ID,
 } from "../types/CoursesTypes";
 import Cookies from "js-cookie";
-import axios from "axios";
+import Axios from "axios";
 
 const token = Cookies.get("token");
 
@@ -191,7 +191,7 @@ export const getPopUpContent = (id) => (dispatch) => {
 
 export const getPopUpMaterial = (id) => (dispatch) => {
   let isLoading = true;
-  dispatch(fetchLoading(isLoading))
+  dispatch(fetchLoading(isLoading));
   API.get(`student/pop-up/course/materials?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -204,18 +204,18 @@ export const getPopUpMaterial = (id) => (dispatch) => {
         payload: response.data.result,
       });
       let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     })
     .catch(() => {
       console.log("error");
       let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     });
 };
 
 export const getContentDetail = (id) => (dispatch) => {
   let isLoading = true;
-  dispatch(fetchLoading(isLoading))
+  dispatch(fetchLoading(isLoading));
   API.get(`student/course/content?contentId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -228,12 +228,12 @@ export const getContentDetail = (id) => (dispatch) => {
         payload: response.data.result,
       });
       let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     })
     .catch(() => {
       console.log("error");
       let isLoading = false;
-      dispatch(fetchLoading(isLoading))
+      dispatch(fetchLoading(isLoading));
     });
 };
 
@@ -446,14 +446,16 @@ export const getCategory = () => (dispatch) => {
 };
 
 export const getCategoryById = (id) => (dispatch) => {
-  return axios
-    .get(`https://lekturapp.herokuapp.com/category/course?categoryId=${id}`, {
+  Axios.get(
+    `https://lekturapp.herokuapp.com/category/course?categoryId=${id}`,
+    {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
+    }
+  )
     .then((response) => {
-      console.log(response.data);
+      console.log(response.data.course);
       dispatch({
         type: GET_CATEGORY_BY_ID,
         payload: response.data.course,

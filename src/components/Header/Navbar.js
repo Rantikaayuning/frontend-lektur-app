@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../assets/LEKTUR.png";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector, connect } from "react-redux";
+import Cookies from "js-cookie";
+
+import Logo from "../../assets/LEKTUR.png";
 import garis from "../../assets/Rectangle 2.png";
 import {
   Dropdown,
@@ -9,35 +12,41 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { getUserProfile } from "../../redux/actions/UserAction";
-import { getCourseSearch } from "../../redux/actions/CoursesAction";
-import { connect } from "react-redux";
-import Cookies from "js-cookie";
-
-import profile from "../../assets/Ellipse 2.png";
-import defaultPhoto from "../../assets/user.png"
-
+import {
+  getCourseSearch,
+  getCategory,
+} from "../../redux/actions/CoursesAction";
+import defaultPhoto from "../../assets/user.png";
 
 function Navbar(props) {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.courses);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const toggle = () => setDropdownOpen(prevState => !prevState);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
   const history = useHistory();
 
   useEffect(() => {
     props.isAuthentificated && props.getUserProfile();
+    dispatch(getCategory());
   }, []);
 
-  // console.log(props.userProfile, props.isAuthentificated);
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  const submitSearch = e => {
+  const submitSearch = (e) => {
     e.preventDefault();
     props.getCourseSearch(search);
     history.push("/");
   };
+
+  const handleDropDownClick = (id) => {
+    history.push(`/category-selection/${id}`);
+    window.location.reload(false);
+  };
+
   return (
     <div className="sidebar">
       <div className="left">
@@ -66,12 +75,21 @@ function Navbar(props) {
                 </span>
               </DropdownToggle>
               <DropdownMenu className="sidebar-dropdown-menu-item">
-                <Link to="" className="dropdown-item">
-                  <DropdownItem>Bussiness</DropdownItem> {/*Student*/}
-                </Link>
-                <Link to="" className="dropdown-item">
-                  <DropdownItem>Art</DropdownItem> {/*Teacher*/}
-                </Link>
+                {categories !== null &&
+                  categories
+                    .filter((item) => item.categories.length < 12)
+                    .map((item) => (
+                      <DropdownItem
+                        className="dropdown-item"
+                        onClick={() => handleDropDownClick(item._id)}
+                      >
+                        {item.categories}
+                      </DropdownItem>
+                    ))}
+
+                <DropdownItem onClick={() => history.push(`/other-categories`)}>
+                  Other...
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </li>
@@ -80,66 +98,74 @@ function Navbar(props) {
             <div className="user-profile">
               {props.isAuthentificated ? (
                 <>
-                {props.userProfile ? (
-                <>
-                  <div className="drop-img">
-                    <div className="vl"></div>
-                    <Link>
-                    {props.userProfile.image === null ? (
-                      <img src={defaultPhoto} alt="student"  alt="profile"
-                      className="profile-img"/>
-                    ) : (
-                      <img src={props.userProfile.image} alt="student"  alt="profile"
-                      className="profile-img" />
-                    )}
-                      {/* <img
+                  {props.userProfile ? (
+                    <>
+                      <div className="drop-img">
+                        <div className="vl"></div>
+                        <Link>
+                          {props.userProfile.image === null ? (
+                            <img
+                              src={defaultPhoto}
+                              alt="student"
+                              alt="profile"
+                              className="profile-img"
+                            />
+                          ) : (
+                            <img
+                              src={props.userProfile.image}
+                              alt="student"
+                              alt="profile"
+                              className="profile-img"
+                            />
+                          )}
+                          {/* <img
                         src={profile}
                         alt="profile"
                         className="profile-img"
                       /> */}
-                    </Link>
-                    {/* <div id="small-loader"></div> */}
-                    <span> {props.userProfile.fullname}</span>
-                    {props.userProfile.status === 0 ? (
-                      <div className="dropdown-content-img">
-                        <Link to="/student-courses" className="drop">
-                          Dashboard
                         </Link>
-                        <Link to="/" className="drop">
-                          <div
-                            onClick={() => {
-                              Cookies.remove("token");
-                              window.open("/", "_self");
-                            }}
-                          >
-                            Sign Out
+                        {/* <div id="small-loader"></div> */}
+                        <span> {props.userProfile.fullname}</span>
+                        {props.userProfile.status === 0 ? (
+                          <div className="dropdown-content-img">
+                            <Link to="/student-courses" className="drop">
+                              Dashboard
+                            </Link>
+                            <Link to="/" className="drop">
+                              <div
+                                onClick={() => {
+                                  Cookies.remove("token");
+                                  window.open("/", "_self");
+                                }}
+                              >
+                                Sign Out
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="dropdown-content-img">
-                        <Link to="/teacher-dashboard" className="drop">
-                          Dashboard
-                        </Link>
-                        <Link to="/" className="drop">
-                          <div
-                            onClick={() => {
-                              // localStorage.removeItem("token");
-                              Cookies.remove("token");
-                              window.open("/", "_self");
-                            }}
-                          >
-                            Sign Out
+                        ) : (
+                          <div className="dropdown-content-img">
+                            <Link to="/teacher-dashboard" className="drop">
+                              Dashboard
+                            </Link>
+                            <Link to="/" className="drop">
+                              <div
+                                onClick={() => {
+                                  // localStorage.removeItem("token");
+                                  Cookies.remove("token");
+                                  window.open("/", "_self");
+                                }}
+                              >
+                                Sign Out
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
+                        )}
                       </div>
-                    )}
-                  </div>
-                </>
+                    </>
                   ) : (
                     <div className="drop-img">
-                    <div className="vl"></div>
-                    <div id="small-loader-navbar"></div>
+                      <div className="vl"></div>
+                      <div id="small-loader-navbar"></div>
                     </div>
                   )}
                 </>
@@ -169,7 +195,7 @@ function Navbar(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userProfile: state.users.userProfile,
     searchCourse: state.courses.searchCourse,

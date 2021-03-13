@@ -22,24 +22,6 @@ function Cards(props) {
     footer,
   } = props;
 
-  // const dispatch = useDispatch();
-
-  // const { homePage } = useSelector((state) => state.homePage);
-
-  // useEffect(() => {
-  //   dispatch(getHomepage());
-  // }, [dispatch]);
-
-  // const categories = homePage.course.map((item) =>
-  //   item.categoryId ? item.categoryId.categories : "gaada"
-  // );
-
-  // console.log(categories);
-
-  // const filterCat = categories.filter((item) =>
-  //   item === "Software Engineering" ? alert("right") : "no"
-  // );
-
   return (
     <div>
       <Card className="card">

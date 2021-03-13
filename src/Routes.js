@@ -20,6 +20,8 @@ import TeacherStudentsUpdate from "./pages/TeacherEditCourse/Tab/Students";
 import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
 import TeacherCourseUpdate from "./pages/TeacherEditCourse/Tab/CourseChange";
 import TeacherAssessmentTabEdit from "./pages/TeacherEditCourse/Tab/AssessmentEdit";
+import CategorySelection from "./pages/CategorySelection";
+import OtherCategory from "./pages/CategorySelection/OtherCategory";
 
 export const publicRoutes = [
   {
@@ -136,6 +138,16 @@ export const publicRoutes = [
   {
     component: TeacherAssessmentTabEdit,
     path: "/created-questions/:id",
+    exact: true,
+  },
+  {
+    component: CategorySelection,
+    path: "/category-selection/:id",
+    exact: true,
+  },
+  {
+    component: OtherCategory,
+    path: "/other-categories",
     exact: true,
   },
 ];
