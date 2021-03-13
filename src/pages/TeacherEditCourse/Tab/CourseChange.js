@@ -14,11 +14,11 @@ const TeacherCourseUpdate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { courseDetail, image, detailTitle, detailOverview } = useSelector(
+  const { courseDetail, detailTitle, detailOverview, isLoading } = useSelector(
     (state) => state.courses
   );
 
-  const [isAdd, setAdd] = useState(false);
+  // const [isAdd, setAdd] = useState(false);
   const [title, setTitle] = useState(`${detailTitle}`);
   const [overview, setOverview] = useState(`${detailOverview}`);
   const [imageData, setImageData] = useState("");
@@ -32,9 +32,9 @@ const TeacherCourseUpdate = () => {
     );
   };
 
-  const handleAdd = () => {
-    setAdd(true);
-  };
+  // const handleAdd = () => {
+  //   setAdd(true);
+  // };
 
   useEffect(() => {
     dispatch(getCourseDetail(id));
@@ -55,11 +55,13 @@ const TeacherCourseUpdate = () => {
     history.push("/teacher-dashboard");
   };
 
-  // console.log(courseDetail)
+  console.log(courseDetail, 'loading', isLoading)
 
   return (
     <>
-      {courseDetail !== null ? (
+      {courseDetail === null || isLoading ? (
+        <div id="loader"></div>
+      ) : (
         <div className="teacher-assessment">
           <div className="teacher-dashboard-list">
             <p className="open">Course</p>
@@ -152,7 +154,7 @@ const TeacherCourseUpdate = () => {
               <hr type="solid" />
             </p>
             <div className="teacher-add-new-lesson-content">
-              <h4>Content*</h4>
+              <h4>Add Content*</h4>
             </div>
             <CreateContent />
             <div className="teacher-add-new-lesson-button">
@@ -171,8 +173,6 @@ const TeacherCourseUpdate = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div id="loader"></div>
       )}
     </>
   );

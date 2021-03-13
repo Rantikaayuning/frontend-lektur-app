@@ -14,7 +14,7 @@ function CourseNextChange(props) {
   const { id } = useParams();
   const history = useHistory();
 
-  const { courseDetail } = useSelector((state) => state.courses);
+  const { courseDetail, isLoading } = useSelector((state) => state.courses);
 
   const { className } = props;
   const [modal, setModal] = useState(false);
@@ -28,14 +28,14 @@ function CourseNextChange(props) {
     dispatch(deleteCourse(id))
       .then(() => dispatch(getTeacherCourses))
       .then(() => history.push("/teacher-dashboard"))
-      .then(() => window.location.reload(false));
+      // .then(() => window.location.reload(false));
   };
 
   // console.log(courseDetail);
 
   return (
     <div className="teacher-assessment">
-      {courseDetail === null ? (
+      {courseDetail === null || isLoading ? (
         <div id="loader"></div>
       ) : (
         <>

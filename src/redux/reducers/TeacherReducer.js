@@ -1,17 +1,21 @@
 import {
   GET_PROFILE_TEACHER,
-  STUDENTS_ACCEPT,
-  STUDENT_INVITE_SUCCESS,
-  STUDENT_APPROVE,
+  GET_STUDENTS_LIST,
+  POST_STUDENT_INVITE,
+  PUT_STUDENT_APPROVE,
   SEARCH_STUDENT,
+  FETCH_LOADING,
+  FETCH_ACCEPT_LOADING
 } from "../types/TeacherTypes";
 
 const initialState = {
-  getCourses: [],
-  studentsAccStatus: [],
+  teacherProfile: [],
+  studentsList: [],
   studentInviteSuccess: "",
-  studentApprove: null,
+  studentAccept: null,
   searchStudents: [],
+  isLoading: false,
+  isAcceptLoading: false
 };
 
 const teacherReducer = (state = initialState, action) => {
@@ -20,27 +24,37 @@ const teacherReducer = (state = initialState, action) => {
     case GET_PROFILE_TEACHER:
       return {
         ...state,
-        getCourses: payload,
+        teacherProfile: payload,
       };
-    case STUDENTS_ACCEPT:
+    case GET_STUDENTS_LIST:
       return {
         ...state,
-        studentsAccStatus: payload,
+        studentsList: payload,
       };
-    case STUDENT_INVITE_SUCCESS:
+    case POST_STUDENT_INVITE:
       return {
         ...state,
         studentInviteSuccess: payload,
       };
-    case STUDENT_APPROVE:
+    case PUT_STUDENT_APPROVE:
       return {
         ...state,
-        studentApprove: payload,
+        studentAccept: payload,
       };
     case SEARCH_STUDENT:
       return {
         ...state,
         searchStudents: payload,
+      };
+    case FETCH_LOADING:
+      return {
+        ...state,
+        isLoading: payload,
+      };
+    case FETCH_ACCEPT_LOADING:
+      return {
+        ...state,
+        isAcceptLoading: payload,
       };
     default:
       return state;

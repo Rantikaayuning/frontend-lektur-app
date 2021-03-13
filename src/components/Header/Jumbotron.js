@@ -1,7 +1,10 @@
 import React from "react";
 import "../../styles/Jumbotron.css";
+import ReactPlayer from "react-player";
+import defaultLektur from "../../assets/defaultLektur.png"
 
-function Jumbo() {
+function Jumbo(props) {
+  const { urlMostPopular, totalEnrolled, totalMaterial, totalVideos, courseName, teacherName, enrollButton } = props
   return (
     <div className="jumbotron">
       <div className="jumbotron-left">
@@ -10,25 +13,29 @@ function Jumbo() {
           {" "}
           Bring Your Class <span> At Home </span>{" "}
         </h2>{" "}
-        <button>
-          <span> Enroll Now </span>{" "}
-        </button>{" "}
+        {enrollButton}
       </div>{" "}
       <div className="jumbotron-right">
         {" "}
         <div className="video-content">
-          <iframe
-            src="https://www.youtube.com/embed/lnrpkHbSb_Y?autoplay=0&mute=0"
+          <ReactPlayer 
+            controls url={urlMostPopular}
             title="glints"
+            className='video' 
+            width='100%' 
+            height='70%'
+            volume={0.182}
+            playing={true}
+            light={defaultLektur}
           />
           <div className="bottom">
             <div className="left">
-              <p className="p1"> 156 Enrolled </p>{" "}
-              <p className="p2"> Sales and Marketing Master Class </p>{" "}
-              <p className="p3"> Susan Sarah </p>{" "}
+              <p className="p1"> {totalEnrolled} Enrolled </p>{" "}
+              <p className="p2"> {courseName} </p>{" "}
+              <p className="p3"> {teacherName} </p>{" "}
             </div>{" "}
             <div className="right">
-              <p> 4 Study Material </p> <p> 14 Learning Videos </p>{" "}
+              <p> {totalMaterial} Study Material </p> <p> {totalVideos} Learning Videos </p>{" "}
             </div>{" "}
           </div>{" "}
         </div>{" "}

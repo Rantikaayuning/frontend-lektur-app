@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../../redux/actions/UserAction";
-import { studentInvite } from "../../redux/actions/TeacherAction";
+import { postStudentInvite } from "../../redux/actions/TeacherAction";
 import { useParams } from "react-router-dom";
 
 export const PopUpInvite = props => {
@@ -12,22 +12,27 @@ export const PopUpInvite = props => {
   const [studentList, setStudentList] = useState([]);
   const dispatch = useDispatch();
   const msgSuccess = useSelector(state => state.teachers.studentInviteSuccess);
+
   useEffect(() => {
     dispatch(getUserProfile());
   }, [dispatch, studentList]);
+
   function handleAdd(e) {
     e.preventDefault();
     setStudentList([...studentList, inputText]);
     setInputText("");
   }
+
   function handleInput(e) {
     setInputText(e.target.value);
   }
+
   function handleDelete(id) {
     setStudentList(studentList.filter((student, index) => index !== id));
   }
+  
   const handleInvite = () => {
-    dispatch(studentInvite(id, studentList));
+    dispatch(postStudentInvite(id, studentList));
     // setShowInviteModal(false);
     if (msgSuccess.length > 0) props.setPopUpOpen(false);
   };

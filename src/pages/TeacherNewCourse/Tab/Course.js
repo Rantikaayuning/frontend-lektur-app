@@ -26,7 +26,7 @@ const TeacherCourseTab = (props) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const { id, getTitle, getOverview, idContent, categories } = useSelector(
+  const { id, getTitle, getOverview, categories } = useSelector(
     (state) => state.courses
   );
 
@@ -55,14 +55,13 @@ const TeacherCourseTab = (props) => {
     dispatch(deleteCourse(id))
       .then(() => dispatch(getTeacherCourses))
       .then(() => history.push("/teacher-dashboard"))
-      .then(() => window.location.reload(false));
   };
 
   useEffect(() => {
     dispatch(getCategory())
-  }, [])
+  }, [dispatch])
 
-  console.log(categories);
+  // console.log(categories);
 
   return (
     <>
@@ -99,18 +98,6 @@ const TeacherCourseTab = (props) => {
                   <hr type="solid" />
                 </p>
               </div>
-              {/* <div className='teacher-create-course-title'>
-                        <p>
-                            <input 
-                                type="text" 
-                                placeholder="Category"  
-                                onChange={(e) => 
-                                setCategory (e.target.value)} 
-                                value={category}
-                            />
-                            <hr type="solid"/>
-                        </p>
-                    </div> */}
               <div className="teacher-add-header-image">
                 {isAdd1 === true ? (
                   <p>
@@ -132,7 +119,7 @@ const TeacherCourseTab = (props) => {
               <div>
                 {categories === null ? (
                   <select className="select-category">
-                    <option selected>...loading</option>
+                    <option selected>Loading...</option>
                   </select>
                 ) : (
                   <select className="select-category" onChange={(e) => setCategory(e.target.value)}>
@@ -157,9 +144,6 @@ const TeacherCourseTab = (props) => {
                 <>
                   <div className="course-detail-update">
                     {getTitle}
-                    <Link to="/teacher-create-course">
-                      <i class="fa fa-pencil "></i>
-                    </Link>
                     <p>{getOverview}</p>
                   </div>
                 </>

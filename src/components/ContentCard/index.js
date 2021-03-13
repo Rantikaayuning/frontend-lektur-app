@@ -10,7 +10,7 @@ import defaultImg from "../../assets/defaultLektur.png";
 function Content() {
   const dispatch = useDispatch();
   const { courses, searchCourse } = useSelector((state) => state.courses);
-  const { homePage } = useSelector((state) => state.homePage);
+  const { homePage, isHomeLoading } = useSelector((state) => state.homePage);
 
   const [categoryIds, setCategoryIds] = useState(0);
 
@@ -24,12 +24,11 @@ function Content() {
     dispatch(getCategoryById(id));
   };
 
-  // console.log(courses);
   console.log(homePage);
-
+  // console.log(categoryById);
   return (
     <>
-      {homePage === null ? (
+      {isHomeLoading ? (
         <div id="loader"></div>
       ) : (
         <div className="content">
@@ -86,7 +85,7 @@ function Content() {
                         footer={
                           item.categoryId
                             ? item.categoryId.categories
-                            : "DEFAULT"
+                            : "General Science"
                         }
                       />
                     </Link>
@@ -96,7 +95,7 @@ function Content() {
             ) : (
               <Row className="content-card-container">
                 {courses !== null &&
-                  courses.map((item, index) => (
+                  courses.map((item) => (
                     <Col
                       xl="3"
                       md="6"

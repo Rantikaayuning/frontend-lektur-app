@@ -106,14 +106,12 @@ function Navbar(props) {
                           {props.userProfile.image === null ? (
                             <img
                               src={defaultPhoto}
-                              alt="student"
                               alt="profile"
                               className="profile-img"
                             />
                           ) : (
                             <img
                               src={props.userProfile.image}
-                              alt="student"
                               alt="profile"
                               className="profile-img"
                             />
