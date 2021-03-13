@@ -14,26 +14,22 @@ const TeacherCourseUpdate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { courseDetail, image, detailTitle, detailOverview } = useSelector(
+  const { courseDetail, update, detailTitle, detailOverview } = useSelector(
     (state) => state.courses
   );
 
-  const [isAdd, setAdd] = useState(false);
   const [title, setTitle] = useState(`${detailTitle}`);
   const [overview, setOverview] = useState(`${detailOverview}`);
   const [imageData, setImageData] = useState("");
   const [buttonImage, setButtonImage] = useState("Add header image");
-  const [buttonSave, setButtonSave] = useState("Save");
   const [contentList, setContentList] = useState([]);
+  const [isAdd3, setAdd3] = useState(false);
+
 
   const addCOntent = () => {
     setContentList(
       contentList.concat(<CreateContent key={contentList.length} />)
     );
-  };
-
-  const handleAdd = () => {
-    setAdd(true);
   };
 
   useEffect(() => {
@@ -48,6 +44,7 @@ const TeacherCourseUpdate = () => {
 
   const submitUpdate = () => {
     dispatch(updateCourse(id, title, overview));
+    setAdd3(true)
   };
 
   const deleteCourseTeacher = () => {
@@ -55,7 +52,7 @@ const TeacherCourseUpdate = () => {
     history.push("/teacher-dashboard");
   };
 
-  // console.log(courseDetail)
+  console.log(update)
 
   return (
     <>
@@ -143,9 +140,18 @@ const TeacherCourseUpdate = () => {
               <hr type="solid" />
             </div>
             <div className="teacher-save-new-course">
-              <p onClick={() => setButtonSave("Saved")}>
-                {/* <Link to={`/course-teacher/lessons/${id}`}> */}
-                <button onClick={submitUpdate}>{buttonSave}</button>
+              <p>
+               {!isAdd3 ? (
+                    <button onClick={submitUpdate}>Save</button>
+                  ) : (
+                    <>
+                      {update != true ? (
+                        <div id="small-loader-navbar"></div>
+                      ) : (
+                        <button>Saved</button>
+                      )}
+                    </>
+                  )}
               </p>
             </div>
             <p>
@@ -155,8 +161,8 @@ const TeacherCourseUpdate = () => {
               <h4>Content*</h4>
             </div>
             <CreateContent />
-            <div className="teacher-add-new-lesson-button">
-              {contentList}
+            {contentList}
+            <div className="teacher-add-new-lesson-button"> 
               <p onClick={addCOntent}>Add new lesson</p>
             </div>
             <div className="publish-and-delete-course">

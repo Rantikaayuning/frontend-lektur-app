@@ -129,7 +129,7 @@ export const getStudentEnroll = (id) => (dispatch) => {
 };
 
 export const getCourseSearch = (input) => (dispatch) => {
-  API.get(`/courses/search?search=${input}`)
+  axios.get(`https://lekturapp.herokuapp.com/search?search=${input}`)
     .then((response) => {
       if (response.status === 200) {
         // console.log("response", response.data.result)
@@ -248,9 +248,10 @@ export const updateCourse = (id, title, overview) => (dispatch) => {
     }
   )
     .then((response) => {
+      console.log(response.data.code);
       dispatch({
         type: UPDATE_COURSE,
-        payload: response.data.result,
+        payload: response.data.success,
       });
     })
     .catch(() => {
@@ -338,12 +339,14 @@ export const uploadMaterial = (idContent, material) => (dispatch) => {
   API.post(
     `/content/upload/file?contentId=${idContent}`,
     material,
-    config
+    config,
+   
   ).then((response) => {
     if (response.status === 201) {
       dispatch({
         type: UPLOAD_MATERIAL,
         payload: response.data.result,
+        key: response.data.result.Key,
       });
     }
   });
@@ -358,10 +361,11 @@ export const uploadVideo = (idContent, video) => (dispatch) => {
   API.put(`/content/upload/video?contentId=${idContent}`, video, config).then(
     (response) => {
       if (response.status === 201) {
-        // console.log(response.data.result);
+        console.log(response.data.result.videoUrl);
         dispatch({
           type: UPLOAD_VIDEO,
           payload: response.data.result,
+          key: response.data.result.videoUrl,
         });
       }
     }

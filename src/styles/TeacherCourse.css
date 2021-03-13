@@ -85,6 +85,7 @@
 
 .teacher-save-new-course p{
     width: 160px;
+    margin-top: 50px;
 }
 
 .teacher-save-new-course button {
@@ -169,7 +170,13 @@
 }
 
 .input-number{
-    width: 40px;
+    width: 20px;
+    border: none;
+    border-bottom: 1px solid rgba(159, 159, 159, 1);
+}
+
+.input-number:focus{
+    outline: 0;
 }
 
 .add-new-lesson-box h4{
@@ -213,12 +220,22 @@
     font-size: 14px;
 }
 
+.video-lesson .upload{
+    margin-left: 30px;
+}
+
 .upload-new-lesson .material-lesson{
     border: 1px solid #EF9C27;
     background-color: white;
     color: #EF9C27;
     padding: 10px 24px;
+    padding-left: 30px;
     font-size: 14px;
+    display: flex;
+}
+
+.material-lesson .upload{
+    margin-left: 30px;
 }
 
 .upload-new-lesson .material-lesson:hover {
@@ -247,6 +264,10 @@
     border-radius: 2px;
     font-size: 14px;
     padding: 10px 24px;
+}
+
+.save{
+    width: 160px;
 }
 
 .save button:disabled{
