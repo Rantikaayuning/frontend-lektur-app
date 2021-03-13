@@ -34,6 +34,9 @@ export const fetchLoading = (payload) => {
   };
 };
 
+// let isLoading = true;
+//   dispatch(fetchLoading(isLoading));
+
 export const getCourses = (payload) => (dispatch) => {
   API.get("/courses/all", payload)
     .then((response) => {
@@ -50,6 +53,8 @@ export const getCourses = (payload) => (dispatch) => {
 };
 
 export const getCourseDetail = (id) => (dispatch) => {
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading));
   API.get(`/courses/detail?courseId=${id}`)
     .then((response) => {
       if (response.status === 200) {
@@ -60,10 +65,14 @@ export const getCourseDetail = (id) => (dispatch) => {
           detailTitle: response.data.result.course.title,
           detailOverview: response.data.result.course.overview,
         });
+        let isLoading = false;
+        dispatch(fetchLoading(isLoading));
       }
     })
     .catch(() => {
       console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading));
     });
 };
 
@@ -280,7 +289,9 @@ export const postCourse = (title, overview, file, categoryId) => (dispatch) => {
         });
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error)
+    });
 };
 
 export const getCourseFilled = (id) => (dispatch) => {

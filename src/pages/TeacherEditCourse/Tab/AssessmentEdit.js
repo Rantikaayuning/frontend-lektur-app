@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "reactstrap";
 
 import {
-  postAssessment,
+  // postAssessment,
   getQuestions,
 } from "../../../redux/actions/AssessmentAction";
-import CreateAssessment from "../../../components/CreateAssessment";
+// import CreateAssessment from "../../../components/CreateAssessment";
 import EditAssessment from "../../../components/EditAssessment";
 
 const TeacherAssessmentTabEdit = () => {
   const history = useHistory();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { assessment } = useSelector((state) => state.assessment);
+  const { assessment, isAssessmentLoading } = useSelector((state) => state.assessment);
 
   useEffect(() => {
     dispatch(getQuestions(id));
@@ -26,7 +26,10 @@ const TeacherAssessmentTabEdit = () => {
 
   return (
     <>
-      <div className="teacher-assessment">
+      {isAssessmentLoading ? (
+        <div id='loader'></div>
+      ) : (
+        <div className="teacher-assessment">
         <div className="teacher-dashboard-list">
           <Link to={`/course-teacher/course/${id}`}>
             <p>Course</p>
@@ -83,6 +86,17 @@ const TeacherAssessmentTabEdit = () => {
                   queId={item._id}
                 />
               ))}
+              <div
+                  style={{
+                    textDecoration: "underline",
+                    marginLeft: '16%',
+                    marginTop: '20px'
+                  }}
+                >
+                  <Link to={`/created-questions/new/${id}`}>
+                    Add New Question
+                  </Link>
+                </div>
               <div className="save-exam-question save-update-question">
                 <button
                   onClick={() =>
@@ -94,14 +108,9 @@ const TeacherAssessmentTabEdit = () => {
               </div>
             </>
           )}
-
-          {/* <div>
-            <p onClick={addQuestion} className="add-new-question">
-              Add new question
-            </p>
-          </div> */}
         </>
       </div>
+      )}
     </>
   );
 };

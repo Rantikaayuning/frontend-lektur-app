@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
-import { Spinner } from "reactstrap";
 
 import CourseCard from "./CourseCard";
 
@@ -11,7 +10,7 @@ import {
   updateUserProfile,
   updateProfileImage,
 } from "../../redux/actions/UserAction";
-import { getTeacherCourses } from "../../redux/actions/CoursesAction";
+import { getTeacherCourses } from "../../redux/actions/TeacherAction";
 import defaultPhoto from "../../assets/user.png";
 import successLogo from "../../assets/upload2.png";
 import defaultImg from "../../assets/defaultLektur.png";
@@ -28,11 +27,11 @@ function TeacherDashboard() {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
 
-  const { userProfile, profileImage, message, isUserLoading } = useSelector(
+  const { userProfile, profileImage, message, isUserLoading, token } = useSelector(
     (state) => state.users
   );
-  const teacherCourses = useSelector((state) => state.courses.teacherCourses);
-  const token = useSelector((state) => state.users.token);
+  // const teacherCourses = useSelector((state) => state.courses.teacherCourses);
+  const {isLoading, teacherProfile} = useSelector((state) => state.teachers);
 
   const handleEdit = async () => {
     setProfile(!isProfile);
@@ -62,9 +61,13 @@ function TeacherDashboard() {
     window.location.reload();
   };
 
-  // console.log(userProfile);
+  // console.log(teacherProfile);
   return (
-    <div className="teacher-dashboard-container">
+    <>
+    {isLoading ? (
+      <div id='loader'></div>
+    ) : (
+      <div className="teacher-dashboard-container">
       {isProfile && !isEditPhoto ? (
         <div>
           {userProfile  ? (
@@ -154,7 +157,7 @@ function TeacherDashboard() {
         </div>
       )}
 
-      {teacherCourses.length !== 0 ? (
+      {teacherProfile.length !== 0 && (
         <div className="courses-container">
           <div className="courses-header">
             <h5>
@@ -166,7 +169,7 @@ function TeacherDashboard() {
           </div>
           <div className="card-teacher-container overflow-auto">
             <hr />
-            {teacherCourses.map((item, index) => (
+            {teacherProfile.map((item, index) => (
               <CourseCard
                 key={index}
                 image={item.image === null ? defaultImg : item.image}
@@ -179,27 +182,6 @@ function TeacherDashboard() {
               />
             ))}
           </div>
-        </div>
-      ) : (
-        <div className="courses-container">
-          <div className="courses-header">
-            <h5>
-              <b>{teacherCourses.length} Courses</b>
-            </h5>
-            <Link to="/teacher-create-course">
-              <button>New Course</button>
-            </Link>
-          </div>
-          <Spinner
-            style={{
-              width: "6rem",
-              height: "6rem",
-              position: "fixed",
-              top: "50%",
-              left: "53%",
-            }}
-            color="secondary"
-          />
         </div>
       )}
       <Modal
@@ -230,6 +212,8 @@ function TeacherDashboard() {
         </Modal.Header>
       </Modal>
     </div>
+    )}
+    </>
   );
 }
 

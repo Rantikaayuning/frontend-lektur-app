@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { postAssessment } from "../../redux/actions/AssessmentAction";
 import { produce } from "immer";
 

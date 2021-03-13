@@ -9,10 +9,10 @@ import defaultImg from "../../assets/defaultLektur.png";
 
 function Content() {
   const dispatch = useDispatch();
-  const { courses, searchCourse, categoryById } = useSelector(
+  const { courses, searchCourse } = useSelector(
     (state) => state.courses
   );
-  const { homePage, category } = useSelector((state) => state.homePage);
+  const { homePage, isHomeLoading } = useSelector((state) => state.homePage);
 
   const [categoryIds, setCategoryIds] = useState(0);
 
@@ -24,13 +24,13 @@ function Content() {
   const handleCategoryById = (id) => {
     setCategoryIds(id);
     dispatch(getCategoryById(id));
-    // console.log(homePage);
-    // console.log(categoryById);
   };
-
+  
+  console.log(homePage);
+  // console.log(categoryById);
   return (
     <>
-      {homePage === null ? (
+      {isHomeLoading ? (
         <div id="loader"></div>
       ) : (
         <div className="content">
