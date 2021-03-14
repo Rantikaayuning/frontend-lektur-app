@@ -83,8 +83,8 @@ function Content() {
                         video_numbers={item.totalVideo}
                         material_numbers={item.totalMaterial}
                         footer={
-                          item.categoryId
-                            ? item.categoryId.categories
+                          item.category
+                            ? item.category
                             : "General Science"
                         }
                       />

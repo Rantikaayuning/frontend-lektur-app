@@ -14,27 +14,24 @@ const TeacherCourseUpdate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { courseDetail, detailTitle, detailOverview, isLoading } = useSelector(
+  const { courseDetail, update, detailTitle, detailOverview, isLoading, image} = useSelector(
     (state) => state.courses
   );
 
-  // const [isAdd, setAdd] = useState(false);
   const [title, setTitle] = useState(`${detailTitle}`);
   const [overview, setOverview] = useState(`${detailOverview}`);
   const [imageData, setImageData] = useState("");
   const [buttonImage, setButtonImage] = useState("Add header image");
-  const [buttonSave, setButtonSave] = useState("Save");
   const [contentList, setContentList] = useState([]);
+  const [isAdd3, setAdd3] = useState(false);
+  const [isAdd2, setAdd2] = useState(false);
+
 
   const addCOntent = () => {
     setContentList(
       contentList.concat(<CreateContent key={contentList.length} />)
     );
   };
-
-  // const handleAdd = () => {
-  //   setAdd(true);
-  // };
 
   useEffect(() => {
     dispatch(getCourseDetail(id));
@@ -44,10 +41,12 @@ const TeacherCourseUpdate = () => {
     const data = new FormData();
     data.append("file", imageData);
     dispatch(uploadImage(id, data));
+    setAdd2(true)
   };
 
   const submitUpdate = () => {
     dispatch(updateCourse(id, title, overview));
+    setAdd3(true)
   };
 
   const deleteCourseTeacher = () => {
@@ -55,7 +54,12 @@ const TeacherCourseUpdate = () => {
     history.push("/teacher-dashboard");
   };
 
+  const cancelImage = () => {
+    setAdd2(false)
+  }
+
   console.log(courseDetail, 'loading', isLoading)
+  console.log(image);
 
   return (
     <>
@@ -137,17 +141,45 @@ const TeacherCourseUpdate = () => {
                   }}
                 />
               </p>
-              <p onClick={() => setButtonImage("Image Saved")}>
-                <button onClick={submitImage}>{buttonImage}</button>
+              <p>
+                {!isAdd2 ? (
+                    <button onClick={submitImage}>Add header image</button>
+                  ) : (
+                    <>
+                      {image === true ? (
+                          <button>Image Saved</button>
+                      ) : (
+                        
+                        <div className="loading-dot">
+                          <div>
+                            <div className="dot-pulse"></div>
+                            <div className="upload">uploading</div>
+                          </div>
+                          <div onClick={cancelImage} className="cancel">Cancel</div>
+                        </div>  
+                       
+                      )}
+                    </>
+                  )}
               </p>
 
               <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
+
               <hr type="solid" />
             </div>
             <div className="teacher-save-new-course">
-              <p onClick={() => setButtonSave("Saved")}>
-                {/* <Link to={`/course-teacher/lessons/${id}`}> */}
-                <button onClick={submitUpdate}>{buttonSave}</button>
+              <p>
+               {!isAdd3 ? (
+                    <button onClick={submitUpdate}>Save</button>
+                  ) : (
+                    <>
+                      {update != true ? (
+                        <div id="small-loader-navbar"></div>
+                      ) : (
+                        <button>Saved</button>
+                      )}
+                    </>
+                  )}
               </p>
             </div>
             <p>
@@ -157,8 +189,8 @@ const TeacherCourseUpdate = () => {
               <h4>Add Content*</h4>
             </div>
             <CreateContent />
-            <div className="teacher-add-new-lesson-button">
-              {contentList}
+            {contentList}
+            <div className="teacher-add-new-lesson-button"> 
               <p onClick={addCOntent}>Add new lesson</p>
             </div>
             <div className="publish-and-delete-course">

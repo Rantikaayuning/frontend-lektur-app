@@ -11,7 +11,6 @@ import TeacherDashboard from "./pages/TeacherDashboard";
 import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
 import CourseFilled from "./pages/TeacherNewCourse/Tab/CourseFilled";
-import CourseUpdate from "./pages/TeacherNewCourse/Tab/CourseUpdate";
 import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
 import CourseChange from "./pages/TeacherEditCourse/Tab/CourseChange";
 import CourseNextChange from "./pages/TeacherEditCourse/Tab/CourseNextChange";
@@ -93,11 +92,6 @@ export const publicRoutes = [
   {
     component: CourseFilled,
     path: "/course-filled-teacher/:id",
-    exact: true,
-  },
-  {
-    component: CourseUpdate,
-    path: "/course-update-teacher/:id",
     exact: true,
   },
   {

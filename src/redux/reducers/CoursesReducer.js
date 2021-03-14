@@ -52,6 +52,8 @@ const initialState = {
   isLoading: false,
   categories: null,
   categoryById: [],
+  materialKey:null,
+  videoKey: null,
 };
 
 const coursesReducer = (state = initialState, action) => {
@@ -68,7 +70,7 @@ const coursesReducer = (state = initialState, action) => {
     overview,
     idContent,
     courseId,
-    // categoryId
+    key
   } = action;
   switch (type) {
     case GET_ALL_COURSES:
@@ -135,11 +137,13 @@ const coursesReducer = (state = initialState, action) => {
       return {
         ...state,
         material: payload,
+        materialKey: key,
       };
     case UPLOAD_VIDEO:
       return {
         ...state,
         videoMaterial: payload,
+        videoKey: key,
       };
     case GET_POPUP_CONTENT:
       return {

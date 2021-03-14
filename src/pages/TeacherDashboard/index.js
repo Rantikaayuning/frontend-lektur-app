@@ -163,9 +163,7 @@ function TeacherDashboard() {
             <h5>
               <b>Courses</b>
             </h5>
-            <Link to="/teacher-create-course">
-              <button>New Course</button>
-            </Link>
+              <button onClick={() => window.open("/teacher-create-course", "_self")}>New Course</button>
           </div>
           <div className="card-teacher-container overflow-auto">
             <hr />
@@ -218,3 +216,4 @@ function TeacherDashboard() {
 }
 
 export default TeacherDashboard;
+

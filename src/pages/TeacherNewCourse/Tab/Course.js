@@ -17,6 +17,7 @@ const TeacherCourseTab = (props) => {
   const dispatch = useDispatch();
 
   const [isAdd1, setAdd1] = useState(false);
+  const [isAdd2, setAdd2] = useState(false);
 
   const handleAdd1 = () => {
     setAdd1(true);
@@ -37,6 +38,7 @@ const TeacherCourseTab = (props) => {
 
   const submitCourse = () => {
     dispatch(postCourse(title, overview, imageData, category));
+    setAdd2(true)
   };
 
   //---------------CONTENT/LESSON--------------------------------------------//
@@ -132,13 +134,23 @@ const TeacherCourseTab = (props) => {
               </div>
               <div className="teacher-save-new-course">
                 <p>
-                  <button onClick={submitCourse}>Save</button>
+                  {!isAdd2 ? (
+                    <button onClick={submitCourse}>Save</button>
+                  ) : (
+                    <>
+                      {getTitle === null ? (
+                        <div id="small-loader-navbar"></div>
+                      ) : (
+                       <div></div>
+                      )}
+                    </>
+                  )}
                 </p>
               </div>
             </>
           ) : (
             <>
-              {id === null ? (
+              {getTitle === null ? (
                 <div id="loader"></div>
               ) : (
                 <>
