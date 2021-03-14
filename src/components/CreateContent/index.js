@@ -41,6 +41,10 @@ export default function CreateContent() {
         );
       };
 
+    const cancelVideo = () => {
+        setAdd2(false)
+    }
+
     console.log(videoKey);
     return (
         <div className='add-new-lesson-box'>
@@ -114,9 +118,12 @@ export default function CreateContent() {
                         <button className='video-lesson'>Video Saved</button>
                         ) : (
                             <div className="loading-dot">
-                                <div className="dot-pulse"></div>
-                                <div className="upload">uploading</div>
-                            </div>                    
+                            <div>
+                              <div className="dot-pulse"></div>
+                              <div className="upload">uploading</div>
+                            </div>
+                            <div onClick={cancelVideo} className="cancel">Cancel</div>
+                          </div>                     
                             )}
                         </>
                     )}

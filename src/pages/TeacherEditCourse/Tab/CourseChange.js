@@ -14,7 +14,7 @@ const TeacherCourseUpdate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { courseDetail, update, detailTitle, detailOverview, isLoading} = useSelector(
+  const { courseDetail, update, detailTitle, detailOverview, isLoading, image} = useSelector(
     (state) => state.courses
   );
 
@@ -24,6 +24,7 @@ const TeacherCourseUpdate = () => {
   const [buttonImage, setButtonImage] = useState("Add header image");
   const [contentList, setContentList] = useState([]);
   const [isAdd3, setAdd3] = useState(false);
+  const [isAdd2, setAdd2] = useState(false);
 
 
   const addCOntent = () => {
@@ -40,6 +41,7 @@ const TeacherCourseUpdate = () => {
     const data = new FormData();
     data.append("file", imageData);
     dispatch(uploadImage(id, data));
+    setAdd2(true)
   };
 
   const submitUpdate = () => {
@@ -52,7 +54,12 @@ const TeacherCourseUpdate = () => {
     history.push("/teacher-dashboard");
   };
 
+  const cancelImage = () => {
+    setAdd2(false)
+  }
+
   console.log(courseDetail, 'loading', isLoading)
+  console.log(image);
 
   return (
     <>
@@ -134,11 +141,30 @@ const TeacherCourseUpdate = () => {
                   }}
                 />
               </p>
-              <p onClick={() => setButtonImage("Image Saved")}>
-                <button onClick={submitImage}>{buttonImage}</button>
+              <p>
+                {!isAdd2 ? (
+                    <button onClick={submitImage}>Add header image</button>
+                  ) : (
+                    <>
+                      {image === true ? (
+                          <button>Image Saved</button>
+                      ) : (
+                        
+                        <div className="loading-dot">
+                          <div>
+                            <div className="dot-pulse"></div>
+                            <div className="upload">uploading</div>
+                          </div>
+                          <div onClick={cancelImage} className="cancel">Cancel</div>
+                        </div>  
+                       
+                      )}
+                    </>
+                  )}
               </p>
 
               <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
+
               <hr type="solid" />
             </div>
             <div className="teacher-save-new-course">

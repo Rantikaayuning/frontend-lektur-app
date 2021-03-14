@@ -17,6 +17,10 @@ export default function Material() {
         setAdd1(true)
     }
 
+    const cancelMaterial = () => {
+        setAdd1(false)
+    }
+
     return (
         <>
             <p>
@@ -37,9 +41,12 @@ export default function Material() {
                             <button className='material-lesson'>Material Saved</button>
                         ) : (
                             <div className="loading-dot">
-                                <div className="dot-pulse"></div>
-                                <div className="upload">uploading</div>
+                            <div>
+                              <div className="dot-pulse"></div>
+                              <div className="upload">uploading</div>
                             </div>
+                            <div onClick={cancelMaterial} className="cancel">Cancel</div>
+                          </div>  
                         )}
                     </>
                 )}

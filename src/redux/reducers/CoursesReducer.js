@@ -51,7 +51,7 @@ const initialState = {
   certificateData: [],
   isLoading: false,
   categories: null,
-  categoryById: null,
+  categoryById: [],
   materialKey:null,
   videoKey: null,
 };
