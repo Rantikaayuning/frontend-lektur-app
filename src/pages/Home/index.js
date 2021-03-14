@@ -8,12 +8,12 @@ import {useSelector} from "react-redux"
 const Home = () => {
   const { searchCourse } = useSelector(state => state.courses)
   const { homePage, isHomeLoading } = useSelector((state) => state.homePage);
-  // urlMostPopuler, totalEnrolled, totalMaterial, totalVideos, courseName, teacherName, enrollButton
+  
   return (
     <>
       {searchCourse !== '' && isHomeLoading ? (
         <div></div>
-      ) : homePage !== null && (
+      ) : homePage !== null && searchCourse === '' && (
         <Jumbo 
         urlMostPopular={homePage.mostPopular.video}
         totalEnrolled={homePage.mostPopular.mostPopularCourse[0].totalEnrolled}

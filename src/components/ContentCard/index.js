@@ -24,7 +24,7 @@ function Content() {
     dispatch(getCategoryById(id));
   };
 
-  console.log(homePage);
+  // console.log(homePage);
   // console.log(categoryById);
   return (
     <>
