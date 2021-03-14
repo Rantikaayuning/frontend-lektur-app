@@ -89,12 +89,11 @@ const TeacherStudentsUpdate = () => {
     setSort(sort);
     switch (sort) {
       case "Name":
-        console.log(`studnetlisa`, studentsList);
         return studentsList.sort((a, b) =>
           a.studentId.fullname > b.studentId.fullname ? 1 : -1
         );
       case "Score":
-        return studentsList.sort((a, b) => a.score - b.score);
+        return studentsList.sort((a, b) => a.score - b.totalscore);
       default:
         return studentsList;
     }
@@ -113,8 +112,9 @@ const TeacherStudentsUpdate = () => {
 
     setSearch(true);
   }
-  console.log(studentsList);
-  console.log(isFilter);
+  console.log(`list`, studentsList);
+  console.log(`isfilter`, isFilter);
+  console.log(`filter`, filter);
 
   return (
     <>
