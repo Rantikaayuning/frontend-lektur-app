@@ -1,4 +1,4 @@
-import API from "../../api/index";
+import {API} from "../../api/index";
 import {
   GET_ALL_COURSES,
   GET_COURSE_DETAIL,
@@ -23,7 +23,8 @@ import {
   GET_CATEGORY_BY_ID,
 } from "../types/CoursesTypes";
 import Cookies from "js-cookie";
-import Axios from "axios";
+import axios from "axios";
+
 
 const token = Cookies.get("token");
 
@@ -34,11 +35,8 @@ export const fetchLoading = (payload) => {
   };
 };
 
-// let isLoading = true;
-//   dispatch(fetchLoading(isLoading));
-
 export const getCourses = (payload) => (dispatch) => {
-  API.get("/courses/all", payload)
+  axios.get(`${API}/courses/all`, payload)
     .then((response) => {
       if (response.status === 200) {
         dispatch({
@@ -55,7 +53,7 @@ export const getCourses = (payload) => (dispatch) => {
 export const getCourseDetail = (id) => (dispatch) => {
   let isLoading = true;
   dispatch(fetchLoading(isLoading));
-  API.get(`/courses/detail?courseId=${id}`)
+  axios.get(`${API}/courses/detail?courseId=${id}`)
     .then((response) => {
       if (response.status === 200) {
         dispatch({
@@ -77,7 +75,7 @@ export const getCourseDetail = (id) => (dispatch) => {
 };
 
 export const postEnrollCourse = (id) => (dispatch) => {
-  API.post(`/student/course/enroll?courseId=${id}`, null, {
+  axios.post(`${API}/student/course/enroll?courseId=${id}`, null, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -97,8 +95,10 @@ export const postEnrollCourse = (id) => (dispatch) => {
 };
 
 export const getStudentCourses = (payload) => (dispatch) => {
-  API.get(
-    "/student/profile",
+  let isLoading = true;
+  dispatch(fetchLoading(isLoading));
+  axios.get(
+    `${API}/student/profile`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -107,20 +107,24 @@ export const getStudentCourses = (payload) => (dispatch) => {
     payload
   )
     .then((response) => {
-      if (response.status === 200) {
+      // if (response.status === 200) {
         dispatch({
           type: GET_COURSE_STUDENT,
           payload: response.data.result,
         });
-      }
+        let isLoading = false;
+        dispatch(fetchLoading(isLoading));
+      // }
     })
     .catch(() => {
       console.log("error");
+      let isLoading = false;
+      dispatch(fetchLoading(isLoading));
     });
 };
 
 export const getStudentEnroll = (id) => (dispatch) => {
-  API.get(`teacher/courses/student?${id}`, {
+  axios.get(`${API}/teacher/courses/student?${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -138,7 +142,7 @@ export const getStudentEnroll = (id) => (dispatch) => {
 };
 
 export const getCourseSearch = (input) => (dispatch) => {
-  Axios.get(`https://lekturapp.herokuapp.com/search?search=${input}`)
+  axios.get(`https://lekturapp.herokuapp.com/search?search=${input}`)
     .then((response) => {
       if (response.status === 200) {
         // console.log("response", response.data.result)
@@ -154,7 +158,7 @@ export const getCourseSearch = (input) => (dispatch) => {
 };
 
 export const getTeacherCourses = (access_token = null) => (dispatch) => {
-  API.get(`teacher/profile`, {
+  axios.get(`${API}/teacher/profile`, {
     headers: {
       Authorization: access_token
         ? `Bearer ${access_token}`
@@ -178,7 +182,7 @@ export const getTeacherCourses = (access_token = null) => (dispatch) => {
 export const getPopUpContent = (id) => (dispatch) => {
   let isLoading = true;
   dispatch(fetchLoading(isLoading));
-  API.get(`student/pop-up/course/content?courseId=${id}`, {
+  axios.get(`${API}/student/pop-up/course/content?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -201,7 +205,7 @@ export const getPopUpContent = (id) => (dispatch) => {
 export const getPopUpMaterial = (id) => (dispatch) => {
   let isLoading = true;
   dispatch(fetchLoading(isLoading));
-  API.get(`student/pop-up/course/materials?courseId=${id}`, {
+  axios.get(`${API}/student/pop-up/course/materials?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -225,7 +229,7 @@ export const getPopUpMaterial = (id) => (dispatch) => {
 export const getContentDetail = (id) => (dispatch) => {
   let isLoading = true;
   dispatch(fetchLoading(isLoading));
-  API.get(`student/course/content?contentId=${id}`, {
+  axios.get(`${API}/student/course/content?contentId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -247,8 +251,8 @@ export const getContentDetail = (id) => (dispatch) => {
 };
 
 export const updateCourse = (id, title, overview) => (dispatch) => {
-  API.put(
-    `/courses/update?courseId=${id}`,
+  axios.put(
+    `${API}/courses/update?courseId=${id}`,
     { title, overview },
     {
       headers: {
@@ -257,7 +261,7 @@ export const updateCourse = (id, title, overview) => (dispatch) => {
     }
   )
     .then((response) => {
-      console.log(response.data.code);
+      // console.log(response.data.code);
       dispatch({
         type: UPDATE_COURSE,
         payload: response.data.success,
@@ -274,7 +278,7 @@ export const postCourse = (title, overview, file, categoryId) => (dispatch) => {
   const data = new FormData();
   Object.keys(form).forEach((key) => data.append(key, form[key]));
 
-  API.post("/courses/create", data, {
+  axios.post(`${API}/courses/create`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -296,14 +300,14 @@ export const postCourse = (title, overview, file, categoryId) => (dispatch) => {
 };
 
 export const getCourseFilled = (id) => (dispatch) => {
-  API.get(`/courses/filled?courseId=${id}`, {
+  axios.get(`${API}/courses/filled?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result.course);
+        // console.log(response.data.result.course);
         dispatch({
           type: GET_COURSE_FILLED,
           payload: response.data.result.course,
@@ -317,8 +321,8 @@ export const getCourseFilled = (id) => (dispatch) => {
 };
 
 export const postContent = (id, title, description, number) => (dispatch) => {
-  return API.post(
-    `/content/create?courseId=${id}`,
+  return axios.post(
+    `${API}/content/create?courseId=${id}`,
     {
       title,
       description,
@@ -331,7 +335,7 @@ export const postContent = (id, title, description, number) => (dispatch) => {
     }
   ).then((response) => {
     if (response.status === 200) {
-      console.log(response.data.result);
+      // console.log(response.data.result);
       dispatch({
         type: CREATE_CONTENT,
         payload: response.data.result,
@@ -347,8 +351,8 @@ export const uploadMaterial = (idContent, material) => (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  API.post(
-    `/content/upload/file?contentId=${idContent}`,
+  axios.post(
+    `${API}/content/upload/file?contentId=${idContent}`,
     material,
     config,
    
@@ -370,10 +374,10 @@ export const uploadVideo = (idContent, video) => (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  API.put(`/content/upload/video?contentId=${idContent}`, video, config).then(
+  axios.put(`${API}/content/upload/video?contentId=${idContent}`, video, config).then(
     (response) => {
       if (response.status === 201) {
-        console.log(response.data.result.videoUrl);
+        // console.log(response.data.result.videoUrl);
         dispatch({
           type: UPLOAD_VIDEO,
           payload: response.data.result,
@@ -391,10 +395,10 @@ export const uploadImage = (id, file) => (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  API.put(`/courses/header/upload?courseId=${id}`, file, config).then(
+  axios.put(`${API}/courses/header/upload?courseId=${id}`, file, config).then(
     (response) => {
       if (response.status === 201) {
-        console.log(response.data.result.success);
+        // console.log(response.data.result.success);
         dispatch({
           type: UPLOAD_IMAGE,
           payload: response.data.success,
@@ -407,7 +411,7 @@ export const uploadImage = (id, file) => (dispatch) => {
 
 export const deleteCourse = (id) => () => {
   return new Promise((resolve) => {
-    API.delete(`/courses/delete?courseId=${id}`, {
+    axios.delete(`${API}/courses/delete?courseId=${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -424,7 +428,7 @@ export const deleteCourse = (id) => () => {
 export const getCertificate = (id) => (dispatch) => {
   let isLoading = true;
   dispatch(fetchLoading(isLoading));
-  API.get(`/student/certificate?courseId=${id}`, {
+  axios.get(`${API}/student/certificate?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -446,14 +450,14 @@ export const getCertificate = (id) => (dispatch) => {
 };
 
 export const getCategory = () => (dispatch) => {
-  API.get("/courses/categories", {
+  axios.get(`${API}/courses/categories`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.data.result);
+        // console.log(response.data.result);
         dispatch({
           type: GET_CATEGORY,
           payload: response.data.result,
@@ -464,7 +468,7 @@ export const getCategory = () => (dispatch) => {
 };
 
 export const getCategoryById = (id) => (dispatch) => {
-  Axios.get(
+  axios.get(
     `https://lekturapp.herokuapp.com/category/course?categoryId=${id}`,
     {
       headers: {
@@ -473,7 +477,7 @@ export const getCategoryById = (id) => (dispatch) => {
     }
   )
     .then((response) => {
-      console.log(response.data.course);
+      // console.log(response.data.course);
       dispatch({
         type: GET_CATEGORY_BY_ID,
         payload: response.data.course,
