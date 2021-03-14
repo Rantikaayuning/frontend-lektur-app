@@ -1,4 +1,3 @@
-// import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";

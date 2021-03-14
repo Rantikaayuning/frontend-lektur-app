@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Card,
   CardImg,
@@ -7,9 +7,6 @@ import {
   CardSubtitle,
   CardBody,
 } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
-
-import { getHomepage } from "../../redux/actions/HomePage";
 
 function Cards(props) {
   const {

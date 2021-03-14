@@ -28,8 +28,8 @@ const StudentAssessment = () => {
 
     const handleSubmit = () => {
         const calculateScore = Object.values(selected).reduce((a, b) => Number(a) + Number(b));
-        const submitScore = assessment.length !== null && (calculateScore/assessment.length)*100
-        dispatch(putFinalScore(submitScore, id))
+        const submitScore = Math.trunc(assessment.length !== null && (calculateScore/assessment.length)*100);
+        dispatch(putFinalScore(submitScore, id));
         localStorage.setItem('score', JSON.stringify(submitScore));
         handleClose()
     }
