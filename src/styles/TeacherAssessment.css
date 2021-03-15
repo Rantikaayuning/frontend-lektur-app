@@ -128,6 +128,11 @@
   justify-content: flex-start;
 }
 
+.teacher-add-more {
+  display: flex;
+  justify-content: space-between;
+}
+
 .teacher-add-more button {
   border: 1px solid #ef9c27;
   background-color: white;
@@ -146,16 +151,31 @@
 .add-new-question {
   display: flex;
   justify-content: space-between;
-  margin: 60px 250px 100px 250px;
+  margin: 20px 250px 100px 250px;
   text-decoration: underline;
   cursor: pointer;
   color: #3e89ae;
 }
 
+.trash-pic {
+  margin-top: 3px;
+  margin-right: 15px;
+  width: 30px;
+  height: 35px;
+}
+
+.trash-pic:hover {
+  cursor: pointer;
+}
+
 .save-exam-question {
   display: flex;
-  margin: 10px 250px 100px 250px;
+  margin: 0px 250px 100px 250px;
   justify-content: center;
+}
+
+.save-update-question {
+  margin-top: 50px;
 }
 
 .save-exam-question button {
@@ -209,6 +229,19 @@
 
 .question-dropdown img {
   cursor: pointer;
+}
+
+.more-option-save {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-per-question button {
+  background-color: #16213b;
+  color: white;
+  border: 1px solid #16213b;
+  border-radius: 2px;
+  padding: 10px 24px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -286,11 +319,25 @@
 
 .option-deletion-btn {
   border: none;
-  background-color: rgb(253, 251, 251);
+  background-color: white;
   padding: 10px;
-  color: gray;
-  /* padding-left: 0px; */
+  color: rgb(82, 79, 79);
 }
+
+.option-deletion {
+  border: none;
+  margin-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 2px;
+  background: whitesmoke;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.option-deletion:hover {
+  color: blue;
+}
+
 .container-answer {
   display: block;
   position: relative;

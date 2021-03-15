@@ -15,7 +15,7 @@
   height: 498px;
   right: 85px;
   top: 271px;
-  z-index: 1;
+  z-index: 0.99;
   background: white;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -155,7 +155,7 @@
   line-height: 20px;
   color: #ffffff;
 }
-.course-detail-left button {
+.course-detail-left .not-enrolled {
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
@@ -172,6 +172,23 @@
   border-radius: 2px;
   border: none;
 }
+.course-detail-left .enrolled {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #ffffff;
+
+  width: 200px;
+  height: 37px;
+
+  top: 377px;
+  background: #999;
+  border-radius: 2px;
+  border: none;
+}
 .flex {
   display: flex;
   justify-content: space-around;
@@ -179,4 +196,25 @@
   padding-top: 20px;
   flex-wrap: wrap;
   overflow: hidden;
+}
+
+/* For mobile phones: */
+@media screen and (max-width: 1040px) {
+  .main-course .center {
+    width: 100%;
+    height: 900px;
+    background: #e6e6e6;
+  }
+  .course-detail-right {
+    position: absolute;
+    width: 600px;
+    height: 498px;
+    right: 85px;
+    top: 850px;
+    z-index: 0.99;
+    background: white;
+    border: 1px solid #e6e6e6;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
 }

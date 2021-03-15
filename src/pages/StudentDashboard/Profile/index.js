@@ -1,44 +1,73 @@
 import React, { useState, useEffect } from "react";
-import imgStudent from "../../../assets/studentpicture.png";
+import { useDispatch, useSelector } from "react-redux";
+import { Modal } from "react-bootstrap";
+
+import defaultPhoto from "../../../assets/user.png";
+import successLogo from "../../../assets/upload2.png";
+import editIcon from "../../../assets/iconEdit.png";
+
 import {
   getUserProfile,
   updateUserProfile,
+  updateProfileImage,
 } from "../../../redux/actions/UserAction";
-import { useDispatch, useSelector } from "react-redux";
 
 const StudentProfile = () => {
-  const [isEdit, setEdit] = useState(true);
+  const [isProfile, setProfile] = useState(true);
+  const [isEditPhoto, setEditPhoto] = useState(false);
 
-  const {fullname, email, userProfile} = useSelector(state => state.users)
-  const dispatch = useDispatch()
+  const { userProfile, token, message, profileImage, isUserLoading } = useSelector(
+    (state) => state.users
+  );
+  const dispatch = useDispatch();
 
-  const [newFullname, setFullname] = useState(fullname);
-  const [newEmail, setEmail] = useState(email);
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [imageProfile, setImageProfile] = useState("");
+  const [PopUpProfileImage, setPopUpProfileImage] = useState(false);
 
-  const handleEdit = () => {
-    setEdit(!isEdit);
+  const handleEdit = async () => {
+    setProfile(!isProfile);
+  };
+  
+  const handleEditPhoto = async () => {
+    setEditPhoto(!isEditPhoto);
   };
 
   useEffect(() => {
-    dispatch(getUserProfile())
-  }, [dispatch]);
+    token ? dispatch(getUserProfile(token)) : dispatch(getUserProfile());
+  }, [dispatch, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(fullname, email);
-    handleEdit(dispatch(updateUserProfile(fullname, email)))
-  }
+    dispatch(updateUserProfile(fullname, email));
+  };
+
+  const updateProfile = () => {
+    dispatch(updateProfileImage(imageProfile));
+    setPopUpProfileImage(true);
+  };
+
+  const popUp = () => {
+    setPopUpProfileImage(false);
+    window.location.reload();
+  };
 
   return (
     <>
-      {isEdit ? (
+      {isProfile && !isEditPhoto ? (
         <>
-          {userProfile ? (
-            <div className="student-profile-box">
+          {userProfile && (
+            <div>
               <div className="student-profile">
                 <div className="student-profile-image">
-                  <img src={imgStudent} alt="student" />
+                {userProfile.image === null ? (
+                  <img src={defaultPhoto} alt="student" />
+                ) : (
+                  <img src={userProfile.image} alt="student" />
+                )}                
                 </div>
+                <img src={editIcon} alt='Edit Profile' className='edit-photo-icon' onClick={handleEditPhoto}/>
                 <h5>{userProfile.fullname}</h5>
                 <p>{userProfile.email}</p>
                 <br />
@@ -47,18 +76,42 @@ const StudentProfile = () => {
                 </span>
               </div>
             </div>
-          ) : (
-            <div id="regular-loader"></div>
           )}
         </>
-      ) : (
-        <div className="student-profile-box">
+      ) : isEditPhoto ? (
+        <div>
           <div className="student-profile-edit">
             <div className="student-profile-image">
-              <img src={imgStudent} alt="student" />
+              {userProfile.image === null ? (
+                <img src={defaultPhoto} alt="student" />
+              ) : (
+                <img src={userProfile.image} alt="student" />
+              )}
             </div>
-            <div className="student-profile-form">
-              <form onSubmit={handleSubmit}>
+            <input
+              className="input-profile-student"
+              type="file"
+              onChange={(e) => setImageProfile(e.target.files[0])}
+            />
+            <button className="upload-image" onClick={updateProfile}>Upload Image</button>
+            <p className="back-edit" onClick={handleEditPhoto}>Cancel</p>
+          </div>
+        </div>
+      ) : (
+        <div className="student-profile-edit">
+          <div className="student-profile-image">
+            {userProfile.image === null ? (
+              <img src={defaultPhoto} alt="student" />
+            ) : (
+              <img src={userProfile.image} alt="student" />
+            )}
+          </div>
+          <div className="student-profile-form">
+              <form
+              onSubmit={(e) =>
+                fullname && email ? handleSubmit(e) : alert("Please fill in the form correctly")
+              }
+              >
                 <p>
                   Name<span>*</span>
                 </p>
@@ -66,7 +119,8 @@ const StudentProfile = () => {
                   type="text"
                   placeholder={userProfile.fullname}
                   onChange={(e) => setFullname(e.target.value)}
-                  value={newFullname}
+                  value={fullname}
+                  required
                 />
                 <br />
                 <br />
@@ -77,18 +131,48 @@ const StudentProfile = () => {
                   type="email"
                   placeholder={userProfile.email}
                   onChange={(e) => setEmail(e.target.value)}
-                  value={newEmail}
+                  value={email}
+                  required
                 />
                 <br />
                 <br />
-                <button>Save Changes</button>
+                {isUserLoading ? (
+                  <button className="save-edit" onClick={handleSubmit}>Saving...</button>
+                ) : (
+                  <button className="save-edit" onClick={handleSubmit}>Save Changes</button>
+                )}
+                <p className="back-edit" onClick={handleEdit}>Cancel</p>
               </form>
-            </div>
           </div>
         </div>
       )}
+       <Modal
+        show={PopUpProfileImage}
+        size="md"
+        onHide={() => setPopUpProfileImage(false)}
+        className="popup-upload"
+        aria-labelledby="example-custom-modal-styling-title"
+        centered
+        >
+          <Modal.Header closeButton onClick={popUp}>
+            <div className="teacher-profile-popup">
+              {!profileImage ? (
+              <div className="popUp-loading">
+                <div id="popUp-loader"></div>
+                <p>Currently Uploading</p>
+              </div>
+              ) : (
+                <div className="upload-success">
+                <img src={successLogo} alt="logo"/>
+                <p>{message}</p>
+                <button className="upload-image-popup" onClick={popUp}>Save</button>
+                </div>
+              )}
+            </div>
+          </Modal.Header>
+        </Modal> 
     </>
   );
 };
 
-export default StudentProfile
+export default StudentProfile;

@@ -12,8 +12,9 @@
     display: flex;
     flex-direction: column;
     margin-right: 40px;
-    width: 250px;
-    height: 470px;
+    /* width: 250px; */
+    /* height: 470px; */
+    height: max-content;
     margin-bottom: 20px;
     background-color: white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -23,8 +24,10 @@
 .student-profile {
     display: flex;
     flex-direction: column;
-    width: 250px;
-    height: 470px;
+    width: 279px;
+    height: max-content;
+    padding: 20px;
+    margin-right: 40px;
     background-color: white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -42,11 +45,16 @@
 .student-profile-image {
     display: flex;
     justify-content: center;
-    padding: 20px;
 }
 
 .student-profile-image img{
+    width: 140px;
+    height: 140px;
+    top: 165px;
+    left: 192px;
     border-radius: 50%;
+    display: block;
+    margin: 15px auto 10px auto;
 }
 
 .student-profile h5 {
@@ -112,8 +120,20 @@
     cursor: pointer;
 }
 
+.course-detail-first .title-link{
+    color: #999999;
+    cursor: pointer;
+}
+
+.course-detail-first .title-link:hover{
+    color: #999999;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .course-detail-second .title {
     color: #999999;
+    cursor: default;
 }
 
 .course-detail-second {
@@ -125,11 +145,16 @@
 .course-detail-second button{
     background-color: rgba(62, 137, 174, 1);
     border: none;
-    width: 80%;
+    width: 75%;
     height: max-content;
     color: white;
     margin-top: 20px;
     padding: 10px 24px;
+    border-radius: 2px;
+}
+
+.course-detail-second button:hover{
+    background-color: rgb(49, 106, 134);
 }
 
 .assessment-detail {
@@ -183,34 +208,93 @@
     padding: 10px 24px;
 }
 
-.student-profile-edit input {
+form input {
     border: none;
     border-bottom: 1px solid black;
     outline: none;
 }
 
+.input-profile-student{
+    padding: 20px 0px;
+}
+
+.student-profile-form form{
+    margin-top: 20px;
+}
+
 .student-profile-edit p {
    text-align: left;
-   padding-left: 20px;
+   /* padding-left: 20px; */
 }
 
 .student-profile-edit {
     display: flex;
+    padding: 20px;
     flex-direction: column;
-    margin-right: 20px;
-    width: 250px;
-    height: 470px;
+    margin-right: 40px;
+    width: 279px;
+    height: max-content;
+    /* height: 470px; */
     background-color: white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.student-profile-edit button {
+/* .student-profile-edit button {
     background-color: #16213B;
     border-radius: 2px;
     color: white;
     font-size: 14px;
     padding: 10px 24px;
+} */
+
+.download-certificate span{
+    cursor: pointer;
+    color: rgb(46, 162, 201);
+    font-style: italic;
+}
+
+.download-certificate span:hover{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.button-download-certificate {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.button-download-certificate button{
+    width: max-content;
+    margin-left: 20px;
+    border-radius: 20px;
+}
+
+.edit-photo-icon {
+    width: 30px;
+    position: relative;
+    top: -40px;
+    left: 155px;
+    opacity: 0.8;
+}
+
+.edit-photo-icon:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.student-profile-edit .back-edit {
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: underline;
+    color: rgb(49, 106, 134);
+}
+
+.student-profile-edit .back-edit {
+    color: rgb(37, 76, 95);
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {

@@ -20,7 +20,7 @@ export default function StudentMaterial() {
     const { id, content } = useParams()
     
     const dispatch = useDispatch()
-    const { contentDetail, courses } = useSelector(state => state.courses)
+    const { contentDetail, isLoading } = useSelector(state => state.courses)
     
     useEffect(() => {
         dispatch(getContentDetail(content))
@@ -31,18 +31,18 @@ export default function StudentMaterial() {
         setOpenLesson(!openLesson)
     }
     const find = contentDetail.listContent && contentDetail.listContent.find((item, id) => item.contentStatus === 0)
-    console.log("content", contentDetail)
+    // console.log("content", contentDetail)
     // console.log("find", find)
     return (
         <>
-            {contentDetail.content === undefined ? (
+            {isLoading ? (
             <div id='loader'></div>
-            ) : (
+            ) : contentDetail.content !== undefined && (
             <div className="content-material">
                 <div className="text">
                     <div>
                         <Link to={`/course-detail/${id}`}>
-                            <span className="bread-crumb">{contentDetail.content.contentId.title}</span>
+                            <span className="bread-crumb">{contentDetail.content.courseId.title}</span>
                         </Link>{" "}/
                             <span className="link"> Lesson : {contentDetail.content.contentId.title}</span>
                     </div>
@@ -100,12 +100,18 @@ export default function StudentMaterial() {
                                 </p>
                             ))}
                             
-                            {find !== null && find !== undefined ? (
-                            <Link to={`/course-content/${contentDetail.content.courseId}/${find.contentId._id}`}>
+                            {find !== null && find !== undefined && contentDetail.content.contentId.video !== null ? (
+                            <Link to={`/course-content/${id}/${find.contentId._id}`}>
                                 <button className={openLesson ? 'next-lesson-button' : 'next-locked-button'} onClick={handleOpenLesson}>
                                     <img src={openLesson ? logo3 : logo2} alt='next lesson'/>{" "}Next Lesson : {find.contentId.title}
                                 </button>
                             </Link>
+                            ) : find !== null && find !== undefined && contentDetail.content.contentId.video === null ? (
+                                <Link to={`/course-content/${id}/${find.contentId._id}`}>
+                                <button className={'next-lesson-button'} onClick={handleOpenLesson}>
+                                    <img src={logo3} alt='next lesson'/>{" "}Next Lesson : {find.contentId.title}
+                                </button>
+                                </Link>
                             ) : (
                             <Link to={`/assessment/${id}`}>
                                 <button className='next-lesson-button'>
@@ -119,7 +125,7 @@ export default function StudentMaterial() {
                 <div className="card-content">
                     <div className="card-text-course">Related Course</div>
                     <Row className="content-card-container">
-                    {courses.map((item, index) => ( index < 4 &&
+                    {contentDetail.relatedCourse.map((item, index) => ( index < 4 &&
                     <Col xl="3" md="6" sm="12" key={index} className="card-container">
                     <Link
                         to={`/course-detail/${item._id}`}
@@ -132,7 +138,6 @@ export default function StudentMaterial() {
                         lecture={item.teacherId.fullname}
                         video_numbers={item.totalVideo}
                         material_numbers={item.totalMaterial}
-                        footer="Business"
                         />
                     </Link>
                     </Col>
@@ -142,7 +147,6 @@ export default function StudentMaterial() {
                 <div className="empty"></div>
             </div>
             )}
-       
         </>
     )
 }

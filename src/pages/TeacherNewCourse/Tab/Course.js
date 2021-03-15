@@ -1,132 +1,217 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
-import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import CreateContent from "../../../components/CreateContent";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
-import {getTeacherProfile} from "../../../redux/actions/TeacherAction"
-import {Tooltip} from "reactstrap"
-
-// import { teacherAssessment as assessment } from '../../assets/JSONFile/dummyData'
+import {
+  postCourse,
+  deleteCourse,
+  getTeacherCourses,
+  getCategory,
+} from "../../../redux/actions/CoursesAction";
 
 const TeacherCourseTab = (props) => {
-    const [tooltipOpen, setTooltipOpen] = useState(false);
+  const history = useHistory();
 
-    const toggle = () => setTooltipOpen(!tooltipOpen);
- 
-    const {id} = useParams();
-    const history = useHistory();
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const [isAdd1, setAdd1] = useState(false);
+  const [isAdd2, setAdd2] = useState(false);
 
-    // const [isAdd, setAdd] = useState(false)
-
-    // const handleAdd = () => {
-    //     setAdd(true)
-    // }
-    // const courses = useSelector(state => state.courses.courses)
-    // const {getCourses} = useSelector(state => state.teachers)
-
-    // const courseDetail = useSelector((state) => state.teachers.courseDetail)
-    const [title, setTitle] = useState ("")
-    const [overview, setOverview] = useState ("")
-    const [category, setCategory] = useState("")
-
-  
-
-   useEffect(() => {
-       dispatch(getTeacherProfile())
-        // dispatch(getCourseDetail(id));
-    //    dispatch(getCourses(id))
-   }, [dispatch])
-
-    // console.log(getCourses[getCourses.length-1]);
-
-    return (
-        <>
-            <div className='teacher-assessment'>
-                <div className='teacher-dashboard-list'>
-                    <p className='open'>Course</p>
-                    <Link to='/teacher-new-assessment'>
-                        <p>Assessment</p>
-                    </Link>
-                    <Link to='/teacher-new-students'>
-                        <p>Students</p>
-                    </Link>
-                </div>
-                <div className='teacher-new-course-box'>
-                    <div className='teacher-new-course-title'>
-                        <p><input type="text" placeholder="Title"  onChange={(e) => setTitle (e.target.value)} value={title}/><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-new-course-overview'>
-                        <p><textarea type="text" placeholder="Overview*" cols='45' rows='5'onChange={(e) => setOverview (e.target.value)} value={overview}/><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-new-course-title'>
-                    <p><input type="text" placeholder="Category"  onChange={(e) => setCategory (e.target.value)} value={category}/><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-add-header-image'>
-                        <p><button>Add header image</button></p> 
-                        <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
-                    </div>
-                   
-                    <div className='teacher-save-new-course'>
-                        <p><button  >Save</button></p>
-                    </div>
-                   
-                    <div>
-                        <p><hr type="solid"/></p>
-                    </div>
-                    <div className='teacher-add-new-lesson-content'>
-                        <h4>Content*</h4>
-                    </div>
-                    {/* {isAdd === true ? (
-                    <div className='add-new-lesson-box'> */}
-                        {/* <div className='add-new-lesson-input'>
-                            <h4><b>Lesson #1</b></h4>
-                            <div className='add-new-lesson-title'>
-                                <p><input type="text" placeholder="     Title*"/></p>
-                                <p><hr type="solid"/></p>
-                            </div>
-                            <div className='add-new-lesson-description'>
-                                <p><textarea type="text" placeholder="      Description*" /></p>
-                                <p><hr type="solid"/></p>
-                            </div>
-                        </div>
-                        <div className='upload-new-lesson'>
-                            <p><button className='video-lesson'>Upload Video</button></p>
-                            <p>Required. Max. size 200 MB. Supported format .mp4</p>
-                            <p><button className='material-lesson'>Add Lesson Material</button></p>
-                            <p>Max. size 20MB. Supported format .pdf</p>
-                            <p className='save'><button>save</button></p>
-                        </div> */}
-                        
-                        <Tooltip placement="top" isOpen={tooltipOpen} autohide={true} target="DisabledAutoHideExample" toggle={toggle}>
-                            You have to save first! 
-                        </Tooltip>
-                    {/* </div>
-                    ) : (
-                        <div></div>
-                    ) } */}
-                    <div className='teacher-add-new-lesson-button'>
-                        <p onClick={toggle}>
-                            <span href="#" id="DisabledAutoHideExample">Add new lesson </span>
-                        </p>
-                    </div>
-                    <div className='publish-and-delete-course'>
-                        <Link to='/course-filled-teacher'>
-                            <p><button>Publish Course</button></p>
-                        </Link>
-                        <p className='delete'>Delete Course</p>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
-}
-
-const mapStateToProps = state => {
-    return {
-        createCourses: state.teachers.createCourses
-    };
+  const handleAdd1 = () => {
+    setAdd1(true);
   };
-  
-  export default connect(mapStateToProps)(TeacherCourseTab);
+
+  const { className } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+  const { id, getTitle, getOverview, categories } = useSelector(
+    (state) => state.courses
+  );
+
+  const [title, setTitle] = useState("");
+  const [overview, setOverview] = useState("");
+  const [imageData, setImageData] = useState("");
+  const [category, setCategory] = useState("")
+
+  const submitCourse = () => {
+    dispatch(postCourse(title, overview, imageData, category));
+    setAdd2(true)
+  };
+
+  //---------------CONTENT/LESSON--------------------------------------------//
+
+  const [contentList, setContentList] = useState([]);
+
+  const addContent = () => {
+    setContentList(
+      contentList.concat(<CreateContent key={contentList.length} />)
+    );
+  };
+
+  //-----------------------DELETE-COURSE--------------------------------//
+
+  const deleteCourseTeacher = async () => {
+    dispatch(deleteCourse(id))
+      .then(() => dispatch(getTeacherCourses))
+      .then(() => history.push("/teacher-dashboard"))
+  };
+
+  useEffect(() => {
+    dispatch(getCategory())
+  }, [dispatch])
+
+  // console.log(categories);
+
+  return (
+    <>
+      <div className="teacher-assessment">
+        <div className="teacher-dashboard-list">
+          <p className="open">Course</p>
+          <p className="tab-locked">Assessment</p>
+          <p className="tab-locked">Students</p>
+        </div>
+        <div className="teacher-create-course-box">
+          {id === null ? (
+            <>
+              <div className="teacher-create-course-title">
+                <p>
+                  <input
+                    type="text"
+                    placeholder="Title*"
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                  />
+                  <hr type="solid" />
+                </p>
+              </div>
+              <div className="teacher-create-course-overview">
+                <p>
+                  <textarea
+                    type="text"
+                    placeholder="Overview*"
+                    cols="45"
+                    rows="5"
+                    onChange={(e) => setOverview(e.target.value)}
+                    value={overview}
+                  />
+                  <hr type="solid" />
+                </p>
+              </div>
+              <div className="teacher-add-header-image">
+                {isAdd1 === true ? (
+                  <p>
+                    <input
+                      type="file"
+                      placeholder="Image"
+                      id="upload"
+                      onChange={(e) => setImageData(e.target.files[0])}
+                    />
+                  </p>
+                ) : (
+                  <p>
+                    <button onClick={handleAdd1}>Add header image*</button>
+                  </p>
+                )}
+                <p>Max. size 5 MB. Supported format .png/jpg/jpeg</p>
+              </div>
+              <hr type="solid" />
+              <div>
+                {categories === null ? (
+                  <select className="select-category">
+                    <option selected>Loading...</option>
+                  </select>
+                ) : (
+                  <select className="select-category" onChange={(e) => setCategory(e.target.value)}>
+                    <option className="option-category" selected>Choose a category*</option>
+                    {categories.map((item, index) => (
+                    <option value={item._id}>{item.categories}</option>
+                  ))}
+                </select>
+                )}
+              </div>
+              <div className="teacher-save-new-course">
+                <p>
+                  {!isAdd2 ? (
+                    <button onClick={submitCourse}>Save</button>
+                  ) : (
+                    <>
+                      {getTitle === null ? (
+                        <div id="small-loader-navbar"></div>
+                      ) : (
+                       <div></div>
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              {getTitle === null ? (
+                <div id="loader"></div>
+              ) : (
+                <>
+                  <div className="course-detail-update">
+                    {getTitle}
+                    <p>{getOverview}</p>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+
+          {id === null ? (
+            <div></div>
+          ) : (
+            <>
+              <div>
+                <p>
+                  <hr type="solid" />
+                </p>
+              </div>
+              <div className="teacher-update-content">
+                <h4>Content*</h4>
+              </div>
+              <CreateContent />
+              {contentList}
+              <div className="teacher-add-new-lesson-button">
+                <p onClick={addContent}>Add new lesson</p>
+              </div>
+              <div className="publish-and-delete-course">
+                <Link to={`/course-filled-teacher/${id}`}>
+                  <p>
+                    <button>Publish Course</button>
+                  </p>
+                </Link>
+                <p className="delete" onClick={toggle}>
+                  Delete Course
+                </p>
+              </div>
+              <Modal isOpen={modal} toggle={toggle} className={className}>
+                <ModalBody>
+                  Are you sure you want to delete this course?
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="danger"
+                    onClick={() => deleteCourseTeacher().then(() => toggle())}
+                  >
+                    Delete
+                  </Button>
+                  <Button color="secondary" onClick={toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            </>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default TeacherCourseTab;

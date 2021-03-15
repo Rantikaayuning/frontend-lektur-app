@@ -3,6 +3,8 @@ import {
   LOGIN,
   SIGN_UP,
   UPDATE_USER_PROFILE,
+  UPDATE_PROFILE_IMAGE,
+  FETCH_USER_LOADING
 } from "../types/UserLogin";
 import Cookies from "js-cookie";
 
@@ -13,38 +15,53 @@ const initialState = {
   isAuthentificated: Cookies.get("token") ? true : false,
   userProfile: null,
   updateUser: null,
-  email: '',
-  password: '',
-  fullname: ''
+  email: "",
+  password: "",
+  fullname: "",
+  token: Cookies.get("token") || null,
+  profileImage: null,
+  message: null,
+  isUserLoading: false,
+  error: ""
 };
 
 const userReducer = (state = initialState, action) => {
-  const { type, payload, role } = action;
+  const { type, payload, role, token, message } = action;
   switch (type) {
     case LOGIN:
       return {
         ...state,
         login: payload,
         status: role,
-        isAuthentificated: true,
+        token: token,
+        error: payload
       };
     case SIGN_UP:
       return {
         ...state,
         signup: payload,
       };
-
     case GET_USER_PROFILE:
       return {
         ...state,
         userProfile: payload,
       };
     case UPDATE_USER_PROFILE:
-      // console.log(state.userProfile, payload);
       return {
         ...state,
         userProfile: { ...state.userProfile, ...payload },
       };
+    case UPDATE_PROFILE_IMAGE:
+      return{
+        ...state,
+        profileImage: payload,
+        message: message,
+      }
+    case FETCH_USER_LOADING:
+      return{
+        ...state,
+        isUserLoading: payload,
+      } 
     default:
       return state;
   }
