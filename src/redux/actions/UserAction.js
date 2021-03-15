@@ -1,17 +1,29 @@
-import API from "../../api/index";
+import {API} from "../../api/index";
 import {
   LOGIN,
   GET_USER_PROFILE,
   SIGN_UP,
   UPDATE_USER_PROFILE,
+  UPDATE_PROFILE_IMAGE,
+  FETCH_USER_LOADING
 } from "../types/UserLogin";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 const token = Cookies.get("token");
 
+export const fetchLoading = (payload) => {
+  return {
+    type: FETCH_USER_LOADING,
+    payload: payload
+  }
+}
+
 export const postLogin = (body) => async (dispatch) => {
-  return API.post("/users/login", body)
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
+  return axios.post(`${API}/users/login`, body)
     .then((response) => {
       dispatch({
         type: LOGIN,
@@ -19,39 +31,52 @@ export const postLogin = (body) => async (dispatch) => {
         token: response.data.token,
         role: jwt_decode(response.data.token).status,
       });
-
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
       Cookies.set("token", response.data.token);
       return response.data.token;
     })
-    .catch((payload) => {
-      alert(payload.response.data.message);
+    .catch(error => {
+      dispatch({
+        type: LOGIN,
+        payload: error.response.data.message
+      });
+      // alert(payload.response.data.message);
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
 
 export const postSignup = (role, payload) => async (dispatch) => {
-  // add async
-  API.post(`/users/register?status=${role}`, payload)
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
+  axios.post(`${API}/users/register?status=${role}`, payload)
     .then((response) => {
       if (response.status === 201) {
         dispatch({
           type: SIGN_UP,
           payload: response.data.message,
         });
+        let isUserLoading = false;
+        dispatch(fetchLoading(isUserLoading))
         alert(`${response.data.message}, please continue to login`);
       }
     })
     .catch((payload) => {
       alert(payload.response.data.message);
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
     });
 };
 
+
 export const getUserProfile = (access_token = null) => (dispatch) => {
-  console.log(access_token);
-  API.get("/users/profile", {
+  // console.log(access_token);
+  axios.get(`${API}/users/profile`, {
     headers: {
       Authorization: access_token
         ? `Bearer ${access_token}`
-        : `Bearer ${token}`,
+        : `Bearer ${Cookies.get("token")}`,
     },
   })
     .then((response) => {
@@ -62,12 +87,16 @@ export const getUserProfile = (access_token = null) => (dispatch) => {
         // role: jwt_decode(response.data.token).status, // try here
       });
     })
-    .catch((error) => console.log("USER PROFILE ERROR:", error));
+    .catch((error) => {
+      console.log("USER PROFILE ERROR:", error)
+    });
 };
 
-export const updateUserProfile = (fullname, email) => (dispatch) => {
-  API.put(
-    "/users/update",
+export const updateUserProfile = (fullname, email) => async (dispatch) => {
+  let isUserLoading = true;
+  dispatch(fetchLoading(isUserLoading))
+  axios.put(
+    `${API}/users/update`,
     {
       fullname,
       email,
@@ -77,13 +106,44 @@ export const updateUserProfile = (fullname, email) => (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  ).then((response) => {
-    // console.log(response);
-    if (response.status === 201) {
+  )
+    .then((response) => {
+      // console.log("updateUserProfile=>", response);
+      Cookies.set("token", response.data.token);
+      let decoded;
+      if (response.data && response.data.token !== {}) { // or use !_.isEmpty(response.data.token)
+        decoded = jwt_decode(response.data.token);
+      }
       dispatch({
         type: UPDATE_USER_PROFILE,
-        payload: response.data.result,
+        payload: decoded, //response.data.result
       });
-    }
-  });
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
+      window.location.reload()
+    })
+    .catch((error) => {
+      alert(`ERROR : ${error}`)
+      let isUserLoading = false;
+      dispatch(fetchLoading(isUserLoading))
+    });
+};
+
+export const updateProfileImage = (file) => async (dispatch) => {
+  const data = new FormData();
+  data.append("file", file);
+
+  axios.put(`${API}/users/update/image`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      dispatch({
+        type: UPDATE_PROFILE_IMAGE,
+        payload: response.data.result.Location,
+        message: response.data.message,
+      });
+    })
+    .catch((err) => alert("updated fail, try again!", err));
 };

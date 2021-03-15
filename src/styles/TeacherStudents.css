@@ -5,6 +5,7 @@
   width: max-content;
   /* margin-bottom: 100px; */
   height: 300px;
+  margin-bottom: 50px;
 }
 
 .student-sort-box input {
@@ -20,7 +21,9 @@
   margin-right: 150px;
   margin-top: 72px;
 }
-
+span img {
+  cursor: pointer;
+}
 .sidebar-dropdown-choose {
   display: flex;
   flex-direction: row;
@@ -68,6 +71,11 @@
   justify-content: space-between;
   margin: 10px 40px;
   border-bottom: 1px solid #e6e6e6;
+}
+
+.student-list-empty {
+  display: flex;
+  height: 200px;
 }
 
 .student-list-header button {

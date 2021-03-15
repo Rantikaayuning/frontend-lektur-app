@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../assets/LEKTUR.png";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector, connect } from "react-redux";
+import Cookies from "js-cookie";
+
+import Logo from "../../assets/LEKTUR.png";
 import garis from "../../assets/Rectangle 2.png";
 import {
   Dropdown,
@@ -9,13 +12,16 @@ import {
   DropdownItem,
 } from "reactstrap";
 import { getUserProfile } from "../../redux/actions/UserAction";
-import { getCourseSearch } from "../../redux/actions/CoursesAction";
-import { connect } from "react-redux";
-import Cookies from "js-cookie";
-
-import profile from "../../assets/Ellipse 2.png";
+import {
+  getCourseSearch,
+  getCategory,
+} from "../../redux/actions/CoursesAction";
+import defaultPhoto from "../../assets/user.png";
 
 function Navbar(props) {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.courses);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -24,18 +30,21 @@ function Navbar(props) {
 
   useEffect(() => {
     props.isAuthentificated && props.getUserProfile();
+    dispatch(getCategory());
   }, []);
 
-  // console.log(props.userProfile, props.isAuthentificated);
-
   const handleChange = (e) => {
-    // e.preventDefault()
     setSearch(e.target.value);
   };
   const submitSearch = (e) => {
     e.preventDefault();
     props.getCourseSearch(search);
     history.push("/");
+  };
+
+  const handleDropDownClick = (id) => {
+    history.push(`/category-selection/${id}`);
+    window.location.reload(false);
   };
 
   return (
@@ -54,11 +63,11 @@ function Navbar(props) {
             onChange={handleChange}
           />
         </form>
-        <i className="fa fa-search icon" onClick={submitSearch}></i>
+        <i className="fa fa-search " onClick={submitSearch}></i>
       </div>
       <div className="right">
         <ul>
-          <li className="li-1">
+          <li className={props.isAuthentificated ? "li-2" : "li-1"}>
             <Dropdown isOpen={dropdownOpen} toggle={toggle} size="md">
               <DropdownToggle className="sidebar-dropdown" color="none">
                 <span>
@@ -66,64 +75,97 @@ function Navbar(props) {
                 </span>
               </DropdownToggle>
               <DropdownMenu className="sidebar-dropdown-menu-item">
-                <Link to="" className="dropdown-item">
-                  <DropdownItem>Bussiness</DropdownItem> {/*Student*/}
-                </Link>
-                <Link to="" className="dropdown-item">
-                  <DropdownItem>Art</DropdownItem> {/*Teacher*/}
-                </Link>
+                {categories !== null &&
+                  categories
+                    .filter((item) => item.categories.length < 12)
+                    .map((item) => (
+                      <DropdownItem
+                        className="dropdown-item"
+                        onClick={() => handleDropDownClick(item._id)}
+                      >
+                        {item.categories}
+                      </DropdownItem>
+                    ))}
+
+                <DropdownItem onClick={() => history.push(`/other-categories`)}>
+                  Other...
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </li>
+
           <li>
-            <div>
-              {props.userProfile ? (
+            <div className="user-profile">
+              {props.isAuthentificated ? (
                 <>
-                  <div className="drop-img">
-                    <div className="vl"></div>
-                    <Link>
-                      <img
+                  {props.userProfile ? (
+                    <>
+                      <div className="drop-img">
+                        <div className="vl"></div>
+                        <Link>
+                          {props.userProfile.image === null ? (
+                            <img
+                              src={defaultPhoto}
+                              alt="profile"
+                              className="profile-img"
+                            />
+                          ) : (
+                            <img
+                              src={props.userProfile.image}
+                              alt="profile"
+                              className="profile-img"
+                            />
+                          )}
+                          {/* <img
                         src={profile}
                         alt="profile"
                         className="profile-img"
-                      />
-                    </Link>
-                    <span> {props.userProfile.fullname}</span>
-                    {props.userProfile.status === 0 ? (
-                      <div className="dropdown-content-img">
-                        <Link to="/student-courses" className="drop">
-                          Dashboard
+                      /> */}
                         </Link>
-                        <Link to="/" className="drop">
-                          <div
-                            onClick={() => {
-                              Cookies.remove("token");
-                              window.open("/", "_self");
-                            }}
-                          >
-                            Sign Out
+                        {/* <div id="small-loader"></div> */}
+                        <span> {props.userProfile.fullname}</span>
+                        {props.userProfile.status === 0 ? (
+                          <div className="dropdown-content-img">
+                            <Link to="/student-courses" className="drop">
+                              Dashboard
+                            </Link>
+                            <Link to="/" className="drop">
+                              <div
+                                onClick={() => {
+                                  Cookies.remove("token");
+                                  window.open("/", "_self");
+                                }}
+                              >
+                                Sign Out
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="dropdown-content-img">
-                        <Link to="/teacher-dashboard" className="drop">
-                          Dashboard
-                        </Link>
-                        <Link to="/" className="drop">
-                          <div
-                            onClick={() => {
-                              // localStorage.removeItem("token");
-                              Cookies.remove("token");
-                              window.open("/", "_self");
-                            }}
-                          >
-                            Sign Out
+                        ) : (
+                          <div className="dropdown-content-img">
+                            <Link to="/teacher-dashboard" className="drop">
+                              Dashboard
+                            </Link>
+                            <Link to="/" className="drop">
+                              <div
+                                onClick={() => {
+                                  // localStorage.removeItem("token");
+                                  Cookies.remove("token");
+                                  window.open("/", "_self");
+                                }}
+                              >
+                                Sign Out
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
+                        )}
                       </div>
-                    )}
-                  </div>
+                    </>
+                  ) : (
+                    <div className="drop-img">
+                      <div className="vl"></div>
+                      <div id="small-loader-navbar"></div>
+                    </div>
+                  )}
                 </>
               ) : (
                 <div className="form-navbar">

@@ -21,17 +21,18 @@
 .assessment-title {
     padding: 5px;
     line-height: 40px;
+    cursor: pointer;
 }
 
 .final-assessment-title{
     display: flex;
     justify-content: space-between;
-    margin-right: 100px;
     font-style: normal;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 28px;
     line-height: 50px;
     color: #000000;
+
 }
 
 .final-assessment-title .result{
@@ -41,7 +42,7 @@
     padding: 10px;
     font-style: normal;
     font-weight: lighter;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 15px;
     color: #999;
 }
@@ -74,9 +75,16 @@
     padding-right: 100px;
 }
 
-.submit-assessment button{
+.submit-assessment .button{
     border: none;
     background-color: #3E89AE;
+    padding: 12px 50px;
+    color: white;
+}
+
+.submit-assessment .disabled{
+    border: none;
+    background-color: #525f66;
     padding: 12px 50px;
     color: white;
 }
@@ -111,6 +119,26 @@
     font-weight: bold;
 }
 
+.container input[type=radio]{
+    width: 30px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.questions-answer-box .container img{
+    width: 15px;
+    margin: 0 7px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.submit-confirmation {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
 @media screen and (max-width: 1024px){
     .student-assessment {
         display: flex;
@@ -122,3 +150,4 @@
         padding-bottom: 174px;
     }
 }
+

@@ -26,6 +26,34 @@
     outline: none;
 }
 
+.teacher-create-course-box {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 72px;
+}
+
+.teacher-create-course-title {
+    display: flex;
+}
+
+.teacher-create-course-title input{
+    border: none;
+    outline: none;
+    background-color: whitesmoke;
+}
+
+.teacher-create-course-overview {
+    display: flex;
+}
+
+.teacher-create-course-overview textarea {
+    border: none;
+    background-color: whitesmoke;
+    overflow: auto;
+    resize: none;
+    outline: none;
+}
+
 .teacher-add-header-image{
     display: flex;
     flex-direction: column;
@@ -57,12 +85,27 @@
 
 .teacher-save-new-course p{
     width: 160px;
+    margin-top: 50px;
 }
 
 .teacher-save-new-course button {
     margin: 30px;
     color: white;
     background-color: #16213B;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 2px;
+    margin-right: 40px;
+}
+
+.teacher-save-new-course button:hover {
+    background-color: #304880;;
+}
+
+.teacher-save-new-course button:disabled {
+    margin: 30px;
+    color: white;
+    background-color: #536ca8;
     border: none;
     padding: 10px 24px;
     border-radius: 2px;
@@ -106,6 +149,7 @@
     cursor: pointer;
     text-decoration: underline;
     margin: 10px 26px;
+    cursor: pointer;
 }
 
 .add-new-lesson-box {
@@ -119,6 +163,20 @@
  
 .add-new-lesson-input {
     width: 50%;
+}
+
+.add-new-lesson-input h4 b{
+   color: black;
+}
+
+.input-number{
+    width: 20px;
+    border: none;
+    border-bottom: 1px solid rgba(159, 159, 159, 1);
+}
+
+.input-number:focus{
+    outline: 0;
 }
 
 .add-new-lesson-box h4{
@@ -162,12 +220,22 @@
     font-size: 14px;
 }
 
+.video-lesson .upload{
+    margin-left: 30px;
+}
+
 .upload-new-lesson .material-lesson{
     border: 1px solid #EF9C27;
     background-color: white;
     color: #EF9C27;
     padding: 10px 24px;
+    padding-left: 30px;
     font-size: 14px;
+    display: flex;
+}
+
+.material-lesson .upload{
+    margin-left: 30px;
 }
 
 .upload-new-lesson .material-lesson:hover {
@@ -189,7 +257,7 @@
     margin-top: 100px;
 }
 
-.upload-new-lesson .save button{
+.save button{
     background-color: #16213B;
     color: white;
     border: 1px solid #16213B;
@@ -198,17 +266,45 @@
     padding: 10px 24px;
 }
 
+.save{
+    width: 160px;
+}
+
+.save button:disabled{
+    background-color: #5e6f97;
+    border: 1px solid #5e6f97;
+}
+
+.upload-new-lesson input{
+    font-size: 16px;
+}
+
 .upload-new-lesson {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 50%;
     margin-top: 60px;
     margin-left: 18%;
 }
 
+.select-category{
+    width: 300px;
+    height: 50px;
+    border: 1px solid rgba(0,0,0,.1);
+    background-color: whitesmoke;
+    color: gray;
+    font-size: 18px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.option-category{
+    background-color: rgba(0, 0, 0, 0.734);
+    color:whitesmoke;
+}
+
 @media screen and (max-width: 1024px) {
-    .teacher-new-course-box {
+    .teacher-create-course-box {
         margin-left: 10%;
         margin-right: 10%;
         margin-top: 72px;

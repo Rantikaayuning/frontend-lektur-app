@@ -11,15 +11,17 @@ import TeacherDashboard from "./pages/TeacherDashboard";
 import TeacherAssessmentTab from "./pages/TeacherNewCourse/Tab/Assessment";
 import TeacherCourseTab from "./pages/TeacherNewCourse/Tab/Course";
 import CourseFilled from "./pages/TeacherNewCourse/Tab/CourseFilled";
-import CourseUpdate from "./pages/TeacherNewCourse/Tab/CourseUpdate";
 import TeacherStudentsTab from "./pages/TeacherNewCourse/Tab/Students";
 import CourseChange from "./pages/TeacherEditCourse/Tab/CourseChange";
 import CourseNextChange from "./pages/TeacherEditCourse/Tab/CourseNextChange";
 import CourseFilledEdit from "./pages/TeacherEditCourse/Tab/CourseFilled";
-import TeacherAssessmentUpdate from "./pages/TeacherEditCourse/Tab/Assessment";
 import TeacherStudentsUpdate from "./pages/TeacherEditCourse/Tab/Students";
 import CreatedQuestions from "./pages/TeacherNewCourse/Tab/CreatedQuestions";
 import TeacherCourseUpdate from "./pages/TeacherEditCourse/Tab/CourseChange";
+import TeacherAssessmentTabEdit from "./pages/TeacherEditCourse/Tab/AssessmentEdit";
+import CategorySelection from "./pages/CategorySelection";
+import OtherCategory from "./pages/CategorySelection/OtherCategory";
+import TeacherAssessmentTabNew from "./pages/TeacherEditCourse/Tab/Assessment";
 
 export const publicRoutes = [
   {
@@ -69,17 +71,17 @@ export const publicRoutes = [
   },
   {
     component: TeacherCourseTab,
-    path: "/teacher-new-course",
+    path: "/teacher-create-course",
     exact: true,
   },
   {
     component: TeacherAssessmentTab,
-    path: "/teacher-new-assessment", // should be /teacher-new-assessment/:id
+    path: "/teacher-new-assessment/:id",
     exact: true,
   },
   {
     component: TeacherStudentsTab,
-    path: "/teacher-new-students", // should be /teacher-new-students/:id
+    path: "/teacher-new-students/:id",
     exact: true,
   },
   {
@@ -90,11 +92,6 @@ export const publicRoutes = [
   {
     component: CourseFilled,
     path: "/course-filled-teacher/:id",
-    exact: true,
-  },
-  {
-    component: CourseUpdate,
-    path: "/course-update-teacher/:id",
     exact: true,
   },
   {
@@ -117,9 +114,15 @@ export const publicRoutes = [
     path: "/course-teacher/students/:id",
     exact: true,
   },
+
   {
-    component: TeacherAssessmentUpdate,
-    path: "/course-teacher/assessments/:id",
+    component: TeacherCourseUpdate,
+    path: "/course-change-teacher/:id",
+    exact: true,
+  },
+  {
+    component: CreatedQuestions,
+    path: "/new-created-questions/:id",
     exact: true,
   },
   {
@@ -128,8 +131,23 @@ export const publicRoutes = [
     exact: true,
   },
   {
-    component: CreatedQuestions,
-    path: "/created-questions", // nanti tambah id jadi /created-questions/:id
+    component: TeacherAssessmentTabEdit,
+    path: "/created-questions/:id",
+    exact: true,
+  },
+  {
+    component: CategorySelection,
+    path: "/category-selection/:id",
+    exact: true,
+  },
+  {
+    component: OtherCategory,
+    path: "/other-categories",
+    exact: true,
+  },
+  {
+    component: TeacherAssessmentTabNew,
+    path: "/created-questions/new/:id",
     exact: true,
   },
 ];

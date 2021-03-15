@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Jumbotron } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { postLogin, getUserProfile } from "../../redux/actions/UserAction";
+import Cookies from "js-cookie";
 
 function Login() {
-  const {email, password} = useSelector(state => state.users)
+  const { email, password, isUserLoading, error } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
+  useEffect(() => {
+    if (Cookies.get("token")) {
+      history.push("/");
+    }
+  }, [history]);
+
   const [userLogin, setUserLogin] = useState({
     email: email,
     password: password,
@@ -30,11 +37,16 @@ function Login() {
     };
     dispatch(postLogin(body))
       .then((token) => dispatch(getUserProfile(token)))
-      .then(() => history.push("/"));
+      // .then(() => window.location.reload());
   };
 
+  // console.log('error', error)
   return (
-    <Jumbotron className="jumbotron">
+    <>
+    {isUserLoading ? (
+      <div id='loader'></div>      
+    ) : (
+      <Jumbotron className="jumbotron">
       <div className="login-page">
         <div className="login-form">
           <div className="login-header">
@@ -83,8 +95,12 @@ function Login() {
             </div>
           </form>
         </div>
+        
       </div>
     </Jumbotron>
+    )}
+    
+    </>
   );
 }
 
