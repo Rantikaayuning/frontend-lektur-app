@@ -162,8 +162,21 @@
 
   .register-button {
     left: 15%;
+    zoom: 70%;
   }
   .register-button .own-class {
     display: block;
+  }
+  .footer-section p {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .footer-section {
+    zoom: 80%;
+  }
+  .content-register {
+    zoom: 50%;
   }
 }

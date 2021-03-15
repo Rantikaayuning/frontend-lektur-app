@@ -36,8 +36,12 @@ export const postLogin = (body) => async (dispatch) => {
       Cookies.set("token", response.data.token);
       return response.data.token;
     })
-    .catch((payload) => {
-      alert(payload.response.data.message);
+    .catch(error => {
+      dispatch({
+        type: LOGIN,
+        payload: error.response.data.message
+      });
+      // alert(payload.response.data.message);
       let isUserLoading = false;
       dispatch(fetchLoading(isUserLoading))
     });
