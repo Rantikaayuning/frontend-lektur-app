@@ -136,7 +136,7 @@ function CourseFilledEdit(props) {
                 Delete Course
               </u>
             </div>
-            <Modal isOpen={modal} toggle={toggle} className={className}>
+            <Modal isOpen={modal} toggle={toggle} className={className} backdropClassName='backdrop-content'>
               <ModalBody>
                 Are you sure you want to delete this course?
               </ModalBody>

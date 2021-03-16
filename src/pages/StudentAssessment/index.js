@@ -111,7 +111,7 @@ const StudentAssessment = () => {
         </div>
       )}
 
-      <Modal show={show} onHide={handleClose} size='lg'>
+      <Modal show={show} onHide={handleClose} size='lg' backdropClassName='backdrop-content'>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <div className='submit-confirmation'>Are you sure you want to submit ?</div>
