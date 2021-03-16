@@ -75,8 +75,8 @@ function CourseDetail() {
                 <p className="p1">{courseDetail.course.totalMaterial}</p>
                 <p className="p2">Study Material</p>
               </div>
-              <div className="course-detail-right-material">
-                <p>Content</p>
+              <div className="course-detail-right-material overflow-auto">
+                <div className="content-p">Content</div>
                 <ul>
                   <li>
                     {courseDetail.content.map((item, index) => (
