@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link,  useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Spinner } from "reactstrap";
+import { NotificationContainer } from "react-notifications";
 
 import imgEdit from "../../../assets/editicon.png";
 import imgDropdown from "../../../assets/dropdownsymbol.png";
@@ -16,6 +17,7 @@ function CreatedQuestions() {
 
   const dispatch = useDispatch();
   const allQuestions = useSelector((state) => state.assessment.assessment);
+  const {isLoading} = useSelector((state) => state.assessment);
 
   useEffect(() => {
     dispatch(getQuestions(id));
@@ -31,7 +33,11 @@ function CreatedQuestions() {
   // console.log("allQuestions: ", allQuestions);
 
   return (
-    <div className="teacher-assessment">
+    <>
+    {isLoading ? (
+      <div id='loader'></div>
+    ) : (
+      <div className="teacher-assessment">
       <div className="teacher-dashboard-list">
         <Link to={`/course-filled-teacher/${id}`}>
           <p>Course</p>
@@ -139,7 +145,10 @@ function CreatedQuestions() {
           </>
         )}
       </div>
+      <NotificationContainer />
     </div>
+    )}
+    </>
   );
 }
 
