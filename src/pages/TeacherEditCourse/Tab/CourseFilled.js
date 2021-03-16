@@ -9,6 +9,7 @@ import {
   getCourseDetail,
   getTeacherCourses,
 } from "../../../redux/actions/CoursesAction";
+import { NotificationContainer } from "react-notifications";
 
 function CourseFilledEdit(props) {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function CourseFilledEdit(props) {
     dispatch(deleteCourse(id))
       .then(() => dispatch(getTeacherCourses))
       .then(() => history.push("/teacher-dashboard"))
-      // .then(() => window.location.reload(false));
+    // .then(() => window.location.reload(false));
   };
 
   // console.log(courseDetail, 'loading', isLoading);
@@ -154,6 +155,7 @@ function CourseFilledEdit(props) {
           </div>
         </>
       )}
+      <NotificationContainer />
     </>
   );
 }
