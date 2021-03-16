@@ -13,7 +13,7 @@
 
 .login-form {
   width: 531px;
-  height: 500px;
+  height: max-content;
   background: #ffffff;
   border: 1px solid #e6e6e6;
   box-sizing: border-box;
@@ -107,6 +107,6 @@
     padding-bottom: 10px;
   }
   .forget-pass{
-    padding: 5px 0px 15px 0px;
+    padding: 5px 0px 10px 0px;
   }
 }
