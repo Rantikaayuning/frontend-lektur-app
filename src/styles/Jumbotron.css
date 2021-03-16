@@ -62,6 +62,7 @@
     padding: 15px 10px;
     display: flex;
     justify-content: space-between;
+    background-color: #ffffff;
 }
 
 .jumbotron-right .video-content iframe {
@@ -161,7 +162,7 @@
         width: 50%;
     }
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 476px) {
     .jumbotron {
         display: flex;
         flex-direction: column;
@@ -171,6 +172,7 @@
     }
     .jumbotron-right {
         width: 105%;
+        margin-bottom: 90px;
     }
     .video-content .bottom {
         display: flex;
@@ -181,5 +183,20 @@
     }
     .video-content .buttom .right{
         width: 50%;
+    }
+    .jumbotron-right .video-content {
+        width: 130%;
+        margin-left: -50px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .jumbotron {
+        display: flex;
+        flex-direction: column;
+    }
+    .jumbotron-right .video-content {
+        width: 150%;
+        margin-left: -50px;
     }
 }

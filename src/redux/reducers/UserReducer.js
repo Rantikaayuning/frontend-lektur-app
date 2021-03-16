@@ -21,8 +21,7 @@ const initialState = {
   token: Cookies.get("token") || null,
   profileImage: null,
   message: null,
-  isUserLoading: false,
-  error: ""
+  isUserLoading: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -34,13 +33,13 @@ const userReducer = (state = initialState, action) => {
         login: payload,
         status: role,
         token: token,
-        error: payload
       };
     case SIGN_UP:
       return {
         ...state,
         signup: payload,
       };
+
     case GET_USER_PROFILE:
       return {
         ...state,
