@@ -25,6 +25,7 @@
 .pop-up-course-box {
   width: 100%;
   margin: 40px;
+  zoom: 100%;
 }
 
 .pop-up-material-box {
@@ -42,6 +43,10 @@
   padding: 100px 0;
   display: flex;
   justify-content: center;
+}
+
+.backdrop-content {
+  zoom: 130%;
 }
 
 @media screen and (max-width: 1024px) {
