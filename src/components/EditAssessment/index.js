@@ -230,7 +230,7 @@ function EditAssessment(props) {
               </div>
             </div>
             <div>
-              <Modal isOpen={modal} toggle={toggle} className={className}>
+              <Modal isOpen={modal} toggle={toggle} className={className} backdropClassName='backdrop-content'>
                 <ModalBody>
                   Are you sure you want to delete this question?
                 </ModalBody>

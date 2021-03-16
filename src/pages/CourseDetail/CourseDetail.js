@@ -125,6 +125,7 @@ function CourseDetail() {
           </div>
           <Modal
             show={PopUpCourseDetail}
+            backdropClassName='backdrop-content'
             size="lg"
             onHide={() => setPopUpCourseDetail(false)}
             dialogClassName="modal-90w"

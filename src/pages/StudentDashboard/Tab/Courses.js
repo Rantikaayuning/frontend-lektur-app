@@ -141,7 +141,7 @@ const StudentBoardCourses = () => {
                                             ) : (
                                                 <p className='locked'>
                                                     <img src={logo2} alt='logo' />
-                                Lesson #{id + 1} {item.title}
+                                                    Lesson #{id + 1} {item.title}
                                                 </p>
                                             )}
                                         </div>
