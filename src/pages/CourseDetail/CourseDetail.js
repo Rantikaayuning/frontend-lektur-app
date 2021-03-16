@@ -29,10 +29,10 @@ function CourseDetail() {
     setPopUpCourseDetail(true)
   }
 
-  const find = studentCourses.course && studentCourses.course.find(item => [item.courseId._id].includes(id))
+  const find = studentCourses.course && studentCourses.course.find(item => [item.courseId !== null && item.courseId !== undefined && item.courseId._id].includes(id) )
 
   // console.log("detail", courseDetail)
-  // console.log(find)
+  console.log(find)
 
   return (
     <div className="main-course">
@@ -76,8 +76,8 @@ function CourseDetail() {
                 <p className="p1">{courseDetail.course.totalMaterial}</p>
                 <p className="p2">Study Material</p>
               </div>
-              <div className="course-detail-right-material">
-                <p>Content</p>
+              <div className="course-detail-right-material overflow-auto">
+                <div className="content-p">Content</div>
                 <ul>
                   <li>
                     {courseDetail.content.map((item, index) => (

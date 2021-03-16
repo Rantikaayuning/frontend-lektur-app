@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
-import { NotificationContainer } from "react-notifications";
+import { NotificationContainer, NotificationManager } from "react-notifications";
 
 import defaultPhoto from "../../../assets/user.png";
 import successLogo from "../../../assets/upload2.png";
@@ -123,9 +123,11 @@ const StudentProfile = () => {
           <div className="student-profile-form">
             <form
               onSubmit={(e) =>
-                fullname && email
-                  ? handleSubmit(e)
-                  : alert("Please fill in the form correctly")
+                !fullname
+                  ? NotificationManager.error("", `Please fill in your fullname`, 3000)
+                  : !email
+                    ? NotificationManager.error("", `Please fill your email`, 3000)
+                    : handleSubmit(e)
               }
             >
               <p>
@@ -170,6 +172,7 @@ const StudentProfile = () => {
       )}
       <Modal
         show={PopUpProfileImage}
+        backdropClassName='backdrop-content'
         size="md"
         onHide={() => setPopUpProfileImage(false)}
         className="popup-upload"

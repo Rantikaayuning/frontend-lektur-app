@@ -37,39 +37,45 @@ export default function SignUp(props) {
         <div className="signup-page">
           <div className="signup">
             <div>
-              <div className="form-select">
-                <div className="signup-title">Start Learning!</div>
-              </div>
+              {/* <div className="form-select"> */}
+              <div className="signup-title">Start Learning!</div>
+              {/* </div> */}
               <p className="signup-account">Create your account</p>
             </div>
             <form className="form">
               <div>
                 Name<span>*</span>
               </div>
-              <input
-                type="text"
-                placeholder="John Doe"
-                name="fullname"
-                onChange={(e) => handleSignUp(e)}
-              />
+              <div className="email-password-username-field">
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  name="fullname"
+                  onChange={(e) => handleSignUp(e)}
+                />
+              </div>
               <div>
                 Email<span>*</span>
               </div>
-              <input
-                type="email"
-                placeholder="john@gmail.com"
-                name="email"
-                onChange={(e) => handleSignUp(e)}
-              />
+              <div className="email-password-username-field">
+                <input
+                  type="email"
+                  placeholder="john@gmail.com"
+                  name="email"
+                  onChange={(e) => handleSignUp(e)}
+                />
+              </div>
               <div>
                 Password<span>*</span>
               </div>
-              <input
-                type="password"
-                placeholder="******"
-                name="password"
-                onChange={(e) => handleSignUp(e)}
-              />
+              <div className="email-password-username-field">
+                <input
+                  type="password"
+                  placeholder="******"
+                  name="password"
+                  onChange={(e) => handleSignUp(e)}
+                />
+              </div>
             </form>
             <div className="form-select">
               <select

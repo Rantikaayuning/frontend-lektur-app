@@ -28,13 +28,9 @@ function TeacherDashboard() {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
 
-  const {
-    userProfile,
-    profileImage,
-    message,
-    isUserLoading,
-    token,
-  } = useSelector((state) => state.users);
+  const { userProfile, profileImage, message, isUserLoading, token } = useSelector(
+    (state) => state.users
+  );
   // const teacherCourses = useSelector((state) => state.courses.teacherCourses);
   const { isLoading, teacherProfile } = useSelector((state) => state.teachers);
 
@@ -70,7 +66,7 @@ function TeacherDashboard() {
   return (
     <>
       {isLoading ? (
-        <div id="loader"></div>
+        <div id='loader'></div>
       ) : (
         <div className="teacher-dashboard-container">
           {isProfile && !isEditPhoto ? (
@@ -82,12 +78,7 @@ function TeacherDashboard() {
                   ) : (
                     <img src={userProfile.image} alt="student" />
                   )}
-                  <img
-                    src={editIcon}
-                    alt="Edit Profile"
-                    className="edit-photo-icon"
-                    onClick={handleEditPhoto}
-                  />
+                  <img src={editIcon} alt='Edit Profile' className='edit-photo-icon' onClick={handleEditPhoto} />
                   <div className="name-email">
                     <div>
                       <b>{userProfile.fullname}</b>
@@ -99,7 +90,7 @@ function TeacherDashboard() {
                   </span>
                 </div>
               ) : (
-                <div className="student-profile">
+                <div className='student-profile'>
                   <div id="popup-loader"></div>
                 </div>
               )}
@@ -119,10 +110,8 @@ function TeacherDashboard() {
                 />
                 <button className="upload-image" onClick={updateProfile}>
                   Upload Image
-                </button>
-                <p className="back-edit" onClick={handleEditPhoto}>
-                  Cancel
-                </p>
+            </button>
+                <p className="back-edit" onClick={handleEditPhoto}>Cancel</p>
               </div>
             </div>
           ) : (
@@ -159,17 +148,11 @@ function TeacherDashboard() {
                   <br />
                   <br />
                   {isUserLoading ? (
-                    <button className="save-edit" onClick={handleSubmit}>
-                      Saving...
-                    </button>
+                    <button className="save-edit" onClick={handleSubmit}>Saving...</button>
                   ) : (
-                    <button className="save-edit" onClick={handleSubmit}>
-                      Save Changes
-                    </button>
+                    <button className="save-edit" onClick={handleSubmit}>Save Changes</button>
                   )}
-                  <p className="back-edit" onClick={handleEdit}>
-                    Cancel
-                  </p>
+                  <p className="back-edit" onClick={handleEdit}>Cancel</p>
                 </form>
               </div>
             </div>
@@ -181,11 +164,7 @@ function TeacherDashboard() {
                 <h5>
                   <b>Courses</b>
                 </h5>
-                <button
-                  onClick={() => window.open("/teacher-create-course", "_self")}
-                >
-                  New Course
-                </button>
+                <button onClick={() => window.open("/teacher-create-course", "_self")}>New Course</button>
               </div>
               <div className="card-teacher-container overflow-auto">
                 <hr />
@@ -207,6 +186,7 @@ function TeacherDashboard() {
           <Modal
             show={PopUpProfileImage}
             size="md"
+            backdropClassName='backdrop-content'
             onHide={() => setPopUpProfileImage(false)}
             className="popup-upload"
             aria-labelledby="example-custom-modal-styling-title"
@@ -225,7 +205,7 @@ function TeacherDashboard() {
                     <p>{message}</p>
                     <button className="upload-image-popup" onClick={popUp}>
                       Save
-                    </button>
+                </button>
                   </div>
                 )}
               </div>
@@ -239,3 +219,4 @@ function TeacherDashboard() {
 }
 
 export default TeacherDashboard;
+
