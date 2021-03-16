@@ -94,9 +94,9 @@ function CourseFilledEdit(props) {
                           )}
                         </>
                         <br />
-                        {materialFilled.map((materi, index) => (
+                          {materialFilled.filter((materi) => materi.contentId === item._id)
+                          .map((materi, index) => (
                           <>
-                            {materi.contentId === item._id ? (
                               <>
                                 <Link to={`/course-change-teacher/${id}`}>
                                   <i class="fa fa-file files"></i>
@@ -107,7 +107,6 @@ function CourseFilledEdit(props) {
                                   </span>
                                 </a>
                               </>
-                            ) : null}
                             <br />
                           </>
                         ))}
@@ -116,7 +115,6 @@ function CourseFilledEdit(props) {
                         {item.video === null ? null : (
                           <iframe src={`${item.video}`} title="glints" />
                         )}
-
                       </div>
                     </div>
                   ))}

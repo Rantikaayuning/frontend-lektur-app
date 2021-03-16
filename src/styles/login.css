@@ -101,3 +101,12 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+@media screen and (max-width: 360px){
+  .btn-login{
+    padding-bottom: 10px;
+  }
+  .forget-pass{
+    padding: 5px 0px 15px 0px;
+  }
+}

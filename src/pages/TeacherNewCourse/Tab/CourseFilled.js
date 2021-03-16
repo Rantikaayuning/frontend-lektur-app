@@ -92,9 +92,8 @@ function CourseFilled(props) {
                           )}
                         </>
                         <br />
-                        {materialFilled.map((materi, index) => (
+                        {materialFilled.filter((materi) => materi.contentId === item._id).map((materi, index) => (
                           <>
-                            {materi.contentId === item._id ? (
                               <>
                                 <Link to={`/course-change-teacher/${id}`}>
                                   <i class="fa fa-file files"></i>
@@ -109,7 +108,6 @@ function CourseFilled(props) {
                                   </span>
                                 </a>
                               </>
-                            ) : null}
                             <br />
                           </>
                         ))}

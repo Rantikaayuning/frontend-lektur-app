@@ -381,7 +381,8 @@ export const uploadVideo = (idContent, video) => (dispatch) => {
         dispatch({
           type: UPLOAD_VIDEO,
           payload: response.data.result,
-          key: response.data.result.videoUrl,
+          // key: response.data.result.videoUrl,
+          key: response.data.code
         });
       }
     }

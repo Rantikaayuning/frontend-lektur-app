@@ -114,7 +114,7 @@ export default function CreateContent() {
                         <button className='video-lesson' onClick={submitVideo}>Upload Video</button>
                     ) : (
                         <>
-                        {videoKey != null ? (
+                        {videoKey === 201 ? (
                         <button className='video-lesson'>Video Saved</button>
                         ) : (
                             <div className="loading-dot">
